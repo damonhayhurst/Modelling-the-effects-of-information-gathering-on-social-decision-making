@@ -23,9 +23,36 @@ def get_combinations_of_trials(df: DataFrame) -> List[Tuple[int, int]]:
 
 
 def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
+    t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
+    t_series_trials = [trial for trial in t_series.keys()]
+    t_series_sequences = [t_series[trial] for trial in t_series_trials]
+    dtws = dtw_ndim.distance_matrix_fast(t_series_sequences, parallel=True)
+    distances = {}
+    idx = 0
+    for x in range(0, dtws):
+        for y in range(0, dtws[x]):
+            if y is not np.nan:
+                pid1, trial_id1 = t_series_trials[x]
+                pid2, trial_id2 = t_series_trials[y]
+                selected_aoi_1, selected_aoi_2 = analysis_df.loc[pid1, trial_id1][SELECTED_AOI], analysis_df.loc[pid2, trial_id2][SELECTED_AOI]
+                distances[idx] = {
+                    PID_1: pid1, TRIAL_ID_1: trial_id1,
+                    PID_2: pid2, TRIAL_ID_2: trial_id2,
+                    SELECTED_AOI_1: selected_aoi_1, SELECTED_AOI_2: selected_aoi_2,
+                    DISTANCE: dtws[x][y]
+                }
+                idx = idx + 1
+    distance_df = DataFrame.from_dict(distances, orient='index')
+    distance_df = distance_df.set_index([PID_1, TRIAL_ID_1, PID_2, TRIAL_ID_2])
+    if to_file:
+        save(distance_df, to_file)
+    return distance_df
+
+
+def get_dtw_distance_old(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
     trial_combs = get_combinations_of_trials(analysis_df)
     distances = {}
-    t_series = get_t_series_dwell_sequences_dict(dwell_df, analysis_df)
+    t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
     for idx, ((pid1, trial_id1), (pid2, trial_id2)) in enumerate(trial_combs):
         # distance = get_ndim_distance(dwell_df.loc[(pid1, trial_id1)], dwell_df.loc[(pid2, trial_id2)])
         # distance = get_multivariate_distance(dwell_df.loc[(pid1, trial_id1)], dwell_df.loc[(pid2, trial_id2)], AOIPenaltySquareEuclidean(), z_norm)
@@ -61,7 +88,7 @@ def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False
     trial2_ndim = np.array([[dwell, *aois] for dwell, *aois in trial2_tuples], dtype=object)
     return dtw_ndim.distance(trial1_ndim, trial2_ndim)
 
-def get_t_series_dwell_sequences_dict(dwell_df: DataFrame, analysis_df: DataFrame):
+def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame):
     trials = analysis_df.index.unique()
     return {trial: get_t_series_dwell_sequence(dwell_df.loc[trial]) for trial in trials}
 
