@@ -1,0 +1,22 @@
+YOUNG_ADULTS_1: str = "Data/RawData1_YoungAdults.csv"
+YOUNG_ADULTS_2: str = "Data/RawData2_YoungAdults.csv"
+OLD_ADULTS: str = "Data/RawData3_OldAdults.csv"
+
+AOIS_CSV = "Analysis/AOIs.csv"
+AOI_ANALYSIS_CSV = "Analysis/AOI_Analysis.csv"
+AVERAGE_ANALYSIS_CSV = "Analysis/Average_AOI_Analysis.csv"
+DWELL_TIMELINE_CSV = "Analysis/Dwell_Timeline.csv"
+DTW_CSV = "Analysis/DTW.csv"
+DTW_Z_CSV = "Analysis/DTW_zscore.csv"
+DTW_Z_V2_CSV = "Analysis/DTW_Z_v2.csv"
+DTW_PEN_V1_CSV = "Analysis/DTW_pen_v1.csv"
+DTW_PEN_Z_CSV = "Analysis/DTW_pen_zscore.csv"
+DTW_NDIM_CSV = "Analysis/DTW_ndim.csv"
+DTW_T_CSV = "Analysis/DTW_t.csv"
+
+TRIAL_INDEX_CSV = "Analysis/Trial_Index.csv"
+
+PID_DISTANCE_PLOT, TRIAL_DISTANCE_PLOT = "plots/PIDDistanceMatrix.png", "plots/TRIALDistanceMatrix.png"
+PID_PERCENT_LIES_PLOT, TRIAL_PERCENT_LIES_PLOT = "plots/PIDPercentLies.png", "plots/TRIALPercentLies.png"
+PID_DWELL_TIMES_PLOT, TRIAL_DWELL_TIMES_PLOT = "plots/PIDDwellTimes.png", "plots/TRIALDwellTimes.png"
+PID_N_TRANSITIONS_PLOT, TRIAL_N_TRANSITIONS_PLOT = "plots/PIDNTransitions.png", "plots/TRIALNTransitions.png"
