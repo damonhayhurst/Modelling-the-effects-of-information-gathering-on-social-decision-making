@@ -1,9 +1,9 @@
 
 from pandas import DataFrame
 
-from analysis.dtw_analysis import XKCD_COLORS_LIST, create_big_matrix, create_pid_matrix, create_trial_id_matrix, get_heirarchical_clusters_by_pid, get_heirarchical_clusters_by_trial_id, plot_pid_matrix_with_clusters, plot_trial_id_matrix_with_clusters
-from analysis.n_cluster_analysis import get_best_fit_clusters, n_cluster_analysis
-from analysis.response_analysis import *
+from analyse.dtw_analysis import XKCD_COLORS_LIST, create_big_matrix, create_pid_matrix, create_trial_id_matrix, get_heirarchical_clusters_by_pid, get_heirarchical_clusters_by_trial_id, plot_pid_matrix_with_clusters, plot_trial_id_matrix_with_clusters
+from analyse.n_cluster_analysis import get_best_fit_clusters, n_cluster_analysis
+from analyse.response_analysis import *
 from utils.columns import PID, TRIAL_ID
 from utils.display import display
 from utils.read_csv import read_from_analysis_file
