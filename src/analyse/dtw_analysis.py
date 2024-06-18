@@ -30,14 +30,17 @@ def get_overall_avg_distance(distance_df: DataFrame):
 
 def create_big_matrix(distance_df: DataFrame):
     distance_df = distance_df[DISTANCE].to_frame()
-    swapped_df = distance_df.swaplevel(PID_1, PID_2).swaplevel(TRIAL_ID_1, TRIAL_ID_2)
-    swapped_df.index.names = ([PID_1, TRIAL_ID_1, PID_2, TRIAL_ID_2])
-    double_df = concat([distance_df, swapped_df])
-    all_trial = double_df.index.droplevel([PID_2, TRIAL_ID_2]).unique().values
-    trial_trial = all_trial + all_trial
-    trial_trial_df = DataFrame(0, index=MultiIndex.from_tuples(trial_trial, names=[PID_1, TRIAL_ID_1, PID_2, TRIAL_ID_2]), columns=double_df.columns)
-    perms_of_combs_df = concat([double_df, trial_trial_df])
-    return perms_of_combs_df.unstack([PID_2, TRIAL_ID_2]).sort_values([PID_1, TRIAL_ID_1]).sort_values([PID_2, TRIAL_ID_2], axis=1)
+    distance_df.replace(np.inf, np.nan, inplace=True)
+    distance_df.loc[is_same_trial(distance_df), DISTANCE] = 0
+    swapped_df = distance_df.swaplevel(PID_1, PID_2).swaplevel(TRIAL_ID_1, TRIAL_ID_2).swaplevel(TRIAL_COUNT_1, TRIAL_COUNT_2)
+    swapped_df.index.names = ([PID_1, TRIAL_ID_1, TRIAL_COUNT_1, PID_2, TRIAL_ID_2, TRIAL_COUNT_2])
+    distance_df[DISTANCE] = distance_df[DISTANCE].fillna(swapped_df[DISTANCE])
+    return distance_df.unstack([PID_2, TRIAL_ID_2, TRIAL_COUNT_2]).sort_values([PID_1, TRIAL_ID_1, TRIAL_COUNT_1]).sort_values([PID_2, TRIAL_ID_2], axis=1)
+
+
+def is_same_trial(distance_df: DataFrame):
+    return (distance_df.index.get_level_values(0) == distance_df.index.get_level_values(2)) & \
+        (distance_df.index.get_level_values(1) == distance_df.index.get_level_values(3))
 
 
 def print_pid_stats(distance_df: DataFrame):
@@ -48,15 +51,19 @@ def print_pid_stats(distance_df: DataFrame):
     print("Mean Distance for different pids: %s" % diff_pid_distance)
 
 
-def create_pid_matrix(matrix_df: DataFrame, fill_self_distances: int | None = 0):
-    by_trial = matrix_df.T.groupby(PID_2).mean()
-    matrix_df = by_trial.T.groupby(PID_1).mean()
+def create_matrix(big_matrix_df: DataFrame, x_idx: str, y_idx: str, fill_self_distances: int | None = 0):
+    by_trial = big_matrix_df.T.groupby(y_idx).mean()
+    matrix_df = by_trial.T.groupby(x_idx).mean()
     if fill_self_distances is not None:
         matrix_df = set_diagonal(matrix_df, fill_self_distances)
     return matrix_df
 
 
-def plot_pid_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = list(XKCD_COLORS.values()), to_file: str = PID_DISTANCE_PLOT):
+def create_pid_matrix(big_matrix_df: DataFrame, fill_self_distances: int | None = 0):
+    return create_matrix(big_matrix_df, PID_1, PID_2, fill_self_distances)
+
+
+def plot_pid_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = list(XKCD_COLORS.values()), to_file: str = None):
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=PID, colors=colors, to_file=to_file)
 
 
@@ -70,12 +77,11 @@ def print_trial_id_stats(distance_df: DataFrame):
 
 
 def create_trial_id_matrix(big_matrix_df: DataFrame, fill_self_distances: int | None = 0):
-    by_trial = big_matrix_df.T.groupby(TRIAL_ID_2).mean()
-    matrix_df = by_trial.T.groupby(TRIAL_ID_1).mean()
-    if fill_self_distances is not None:
-        matrix_df = set_diagonal(matrix_df, fill_self_distances)
-    return matrix_df
+    return create_matrix(big_matrix_df, TRIAL_ID_1, TRIAL_ID_2, fill_self_distances)
 
+
+def create_trial_count_matrix(big_matrix_df: DataFrame, fill_self_distances: int | None = 0):
+    return create_matrix(big_matrix_df, TRIAL_COUNT_1, TRIAL_COUNT_2, fill_self_distances)
 
 def set_diagonal(matrix_df: DataFrame, value: int = 0) -> DataFrame:
     matrix = matrix_df.values
@@ -83,9 +89,12 @@ def set_diagonal(matrix_df: DataFrame, value: int = 0) -> DataFrame:
     return DataFrame(matrix, index=matrix_df.index, columns=matrix_df.columns)
 
 
-def plot_trial_id_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = TRIAL_DISTANCE_PLOT):
-    plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL, colors=colors, to_file=to_file)
+def plot_trial_id_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL_ID, colors=colors, to_file=to_file)
 
+
+def plot_trial_count_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL_COUNT, colors=colors, to_file=to_file)
 
 def plot_matrix_with_heirarchical_clusters(matrix_df: DataFrame, cluster_df: DataFrame, index_name: str, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     matrix_df = reorder_matrix_by_heirarchical_cluster(matrix_df, cluster_df)
@@ -123,6 +132,9 @@ def get_heirarchical_clusters_by_trial_id(matrix_df: DataFrame, n_clusters: int 
 def get_heirarchical_clusters_by_pid(matrix_df: DataFrame, n_clusters: int = 3):
     return get_heirarchical_clusters(matrix_df, PID, n_clusters)
 
+
+def get_heirarchical_clusters_by_trial_count(matrix_df: DataFrame, n_clusters: int = 3):
+    return get_heirarchical_clusters(matrix_df, TRIAL_COUNT, n_clusters)
 
 def get_heirarchical_clusters(matrix_df: DataFrame, index_name: str, n_clusters: int = 3):
     row_clusters = linkage(matrix_df, method='complete', metric='euclidean')

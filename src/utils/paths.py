@@ -13,6 +13,7 @@ DTW_PEN_V1_CSV = "Analysis/DTW_pen_v1.csv"
 DTW_PEN_Z_CSV = "Analysis/DTW_pen_zscore.csv"
 DTW_NDIM_CSV = "Analysis/DTW_ndim.csv"
 DTW_T_CSV = "Analysis/DTW_t.csv"
+DTW_T_V2_CSV = "Analysis/DTW_t_v2.csv"
 
 TRIAL_INDEX_CSV = "Analysis/Trial_Index.csv"
 
@@ -20,3 +21,8 @@ PID_DISTANCE_PLOT, TRIAL_DISTANCE_PLOT = "plots/PIDDistanceMatrix.png", "plots/T
 PID_PERCENT_LIES_PLOT, TRIAL_PERCENT_LIES_PLOT = "plots/PIDPercentLies.png", "plots/TRIALPercentLies.png"
 PID_DWELL_TIMES_PLOT, TRIAL_DWELL_TIMES_PLOT = "plots/PIDDwellTimes.png", "plots/TRIALDwellTimes.png"
 PID_N_TRANSITIONS_PLOT, TRIAL_N_TRANSITIONS_PLOT = "plots/PIDNTransitions.png", "plots/TRIALNTransitions.png"
+
+TRIAL_COUNT_DISTANCE_PLOT = "plots/TRIALCOUNTDistanceMatrix.png"
+TRIAL_COUNT_PERCENT_LIES_PLOT = "plots/TRIALCOUNTPercentLies.png"
+TRIAL_COUNT_DWELL_TIMES_PLOT = "plots/TRIALCOUNTDwellTimes.png"
+TRIAL_COUNT_N_TRANSITIONS_PLOT = "plots/TRIALCOUNTNTransitions.png"

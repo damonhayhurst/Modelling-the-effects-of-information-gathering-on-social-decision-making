@@ -17,8 +17,8 @@ def do_preprocessing(input_data_files: str = [YOUNG_ADULTS_1, YOUNG_ADULTS_2],
                      output_dwell_timeline_file: str = DWELL_TIMELINE_CSV,
                      custom_filtering: Callable[[DataFrame], DataFrame] = None,
                      bypass: bool = False):
-    if bypass:
-        return
+    if bypass: return
+    
     df = read_from_input_files(input_data_files)
     print_stats(df)
     df = do_filtering(df) if custom_filtering is None else custom_filtering(df)

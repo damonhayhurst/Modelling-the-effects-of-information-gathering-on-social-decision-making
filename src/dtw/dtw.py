@@ -16,7 +16,6 @@ from typing import List, Tuple
 
 DWELL_DICT = {column: index for index, column in enumerate([np.nan] + DWELL_COLUMNS)}
 
-
 def get_combinations_of_trials(df: DataFrame) -> List[Tuple[int, int]]:
     trials = df.index.unique()
     return list(combinations(trials, 2))
@@ -26,18 +25,19 @@ def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool =
     t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
     t_series_trials = [trial for trial in t_series.keys()]
     t_series_sequences = [t_series[trial] for trial in t_series_trials]
-    dtws = dtw_ndim.distance_matrix_fast(t_series_sequences, parallel=True)
+    dtws = dtw_ndim.distance_matrix_fast(t_series_sequences, only_triu=True)
     distances = {}
     idx = 0
-    for x in range(0, dtws):
-        for y in range(0, dtws[x]):
+    for x in range(0, len(dtws)):
+        for y in range(0, len(dtws[x])):
             if y is not np.nan:
                 pid1, trial_id1 = t_series_trials[x]
                 pid2, trial_id2 = t_series_trials[y]
                 selected_aoi_1, selected_aoi_2 = analysis_df.loc[pid1, trial_id1][SELECTED_AOI], analysis_df.loc[pid2, trial_id2][SELECTED_AOI]
+                trial_count_1, trial_count_2 = analysis_df.loc[pid1, trial_id1][TRIAL_COUNT], analysis_df.loc[pid2, trial_id2][TRIAL_COUNT]
                 distances[idx] = {
-                    PID_1: pid1, TRIAL_ID_1: trial_id1,
-                    PID_2: pid2, TRIAL_ID_2: trial_id2,
+                    PID_1: pid1, TRIAL_ID_1: trial_id1, TRIAL_COUNT_1: trial_count_1,
+                    PID_2: pid2, TRIAL_ID_2: trial_id2, TRIAL_COUNT_2: trial_count_2,
                     SELECTED_AOI_1: selected_aoi_1, SELECTED_AOI_2: selected_aoi_2,
                     DISTANCE: dtws[x][y]
                 }
@@ -60,6 +60,7 @@ def get_dtw_distance_old(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bo
         trial1, trial2 = t_series[(pid1, trial_id2)], t_series[(pid2, trial_id2)]
         distance = dtw_ndim.distance_fast(trial1, trial2)
         selected_aoi_1, selected_aoi_2 = analysis_df.loc[pid1, trial_id1][SELECTED_AOI], analysis_df.loc[pid2, trial_id2][SELECTED_AOI]
+        trial_count_1, trial_count_2 = analysis_df.loc[pid1, trial_id1][SELECTED_AOI], analysis_df.loc[pid2, trial_id2][SELECTED_AOI]
         distances[idx] = {
             PID_1: pid1, TRIAL_ID_1: trial_id1,
             PID_2: pid2, TRIAL_ID_2: trial_id2,

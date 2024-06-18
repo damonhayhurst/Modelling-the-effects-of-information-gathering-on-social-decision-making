@@ -5,7 +5,7 @@ import numpy as np
 from pandas import DataFrame
 
 from analyse.dtw_analysis import XKCD_COLORS_LIST
-from utils.columns import CLUSTER, LIE, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, OTHER_LIE, OTHER_TRUTH, PID, SELECTED_AOI, SELF_LIE, SELF_TRUE, TRIAL_ID
+from utils.columns import CLUSTER, LIE, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, OTHER_LIE, OTHER_TRUTH, PID, SELECTED_AOI, SELF_LIE, SELF_TRUE, TRIAL_COUNT, TRIAL_ID
 from utils.display import display
 
 def get_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: DataFrame, index_name: str):
@@ -41,6 +41,11 @@ def get_trial_id_response_stats_for_clusters(cluster_df: DataFrame, analysis_df:
     return get_response_stats_for_clusters(cluster_df, analysis_df, TRIAL_ID)
 
 
+def get_trial_count_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: DataFrame):
+    analysis_df = analysis_df.reset_index().set_index([PID, TRIAL_COUNT])
+    return get_response_stats_for_clusters(cluster_df, analysis_df, TRIAL_COUNT)
+
+
 def plot_percent_lies_for_clusters(responses_df: DataFrame, index_name: str, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     fig, ax = plt.subplots(figsize=(10, 6))
     plt.title('Percent of Lies per %s Cluster' % index_name)
@@ -68,10 +73,9 @@ def plot_response_stats_for_clusters(ax: Axes, responses_df: DataFrame, stats: l
     bar_width = 0.2
 
     indices = np.arange(num_categories)
-    for stat in stats:
-        for i, cluster in enumerate(responses_df.index):
-            values = [responses_df.loc[cluster][stat] for stat in stats]
-            ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[i], label=f'Cluster {cluster}')
+    for i, cluster in enumerate(responses_df.index):
+        values = [responses_df.loc[cluster][stat] for stat in stats]
+        ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[i], label=f'Cluster {cluster}')
 
     plt.xticks([])
     if len(stats) > 1:

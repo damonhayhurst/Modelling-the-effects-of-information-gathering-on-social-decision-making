@@ -9,6 +9,7 @@ import warnings
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 warnings.filterwarnings("ignore", category=pd.errors.SettingWithCopyWarning)
 
+
 def do_filtering(input_df: DataFrame):
     return input_df.pipe(
         remove_practices, bypass=False
@@ -35,14 +36,14 @@ def process(input_files: str = [YOUNG_ADULTS_1, YOUNG_ADULTS_2]):
         output_avg_aoi_analysis_file=AVERAGE_ANALYSIS_CSV,
         output_dwell_timeline_file=DWELL_TIMELINE_CSV,
         custom_filtering=do_filtering,
-        # bypass=True
+        bypass=False
     )
 
     do_dtw_processing(
-        # from_file=DTW_Z_V2_CSV,
         input_dwell_file=DWELL_TIMELINE_CSV,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
         output_dtw_file=DTW_T_CSV,
+        bypass=True
     )
 
 

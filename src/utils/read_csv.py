@@ -154,7 +154,7 @@ def read_from_dtw_file(path: str = DTW_CSV) -> DataFrame:
     df = df.pipe(
         set_data_types_for_dtw_file
     ).pipe(
-        set_index, [PID_1, TRIAL_ID_1, PID_2, TRIAL_ID_2]
+        set_index, [PID_1, TRIAL_ID_1, TRIAL_COUNT_1, PID_2, TRIAL_ID_2, TRIAL_COUNT_2]
     )
     print("\n DTW read from %s \n" % path)
     return df
