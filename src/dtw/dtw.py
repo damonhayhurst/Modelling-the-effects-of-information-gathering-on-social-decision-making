@@ -16,10 +16,6 @@ from typing import List, Tuple
 
 DWELL_DICT = {column: index for index, column in enumerate([np.nan] + DWELL_COLUMNS)}
 
-def get_combinations_of_trials(df: DataFrame) -> List[Tuple[int, int]]:
-    trials = df.index.unique()
-    return list(combinations(trials, 2))
-
 
 def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
     t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
@@ -48,31 +44,6 @@ def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool =
         save(distance_df, to_file)
     return distance_df
 
-
-def get_dtw_distance_old(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
-    trial_combs = get_combinations_of_trials(analysis_df)
-    distances = {}
-    t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
-    for idx, ((pid1, trial_id1), (pid2, trial_id2)) in enumerate(trial_combs):
-        # distance = get_ndim_distance(dwell_df.loc[(pid1, trial_id1)], dwell_df.loc[(pid2, trial_id2)])
-        # distance = get_multivariate_distance(dwell_df.loc[(pid1, trial_id1)], dwell_df.loc[(pid2, trial_id2)], AOIPenaltySquareEuclidean(), z_norm)
-        # distance = get_distance(dwell_df.loc[(pid1, trial_id1)][DWELL_TIME], dwell_df.loc[(pid2, trial_id2)][DWELL_TIME])
-        trial1, trial2 = t_series[(pid1, trial_id2)], t_series[(pid2, trial_id2)]
-        distance = dtw_ndim.distance_fast(trial1, trial2)
-        selected_aoi_1, selected_aoi_2 = analysis_df.loc[pid1, trial_id1][SELECTED_AOI], analysis_df.loc[pid2, trial_id2][SELECTED_AOI]
-        trial_count_1, trial_count_2 = analysis_df.loc[pid1, trial_id1][SELECTED_AOI], analysis_df.loc[pid2, trial_id2][SELECTED_AOI]
-        distances[idx] = {
-            PID_1: pid1, TRIAL_ID_1: trial_id1,
-            PID_2: pid2, TRIAL_ID_2: trial_id2,
-            SELECTED_AOI_1: selected_aoi_1, SELECTED_AOI_2: selected_aoi_2,
-            DISTANCE: distance
-        }
-        print("%s of %s" % (idx, len(trial_combs)))
-    distance_df = DataFrame.from_dict(distances, orient='index')
-    distance_df = distance_df.set_index([PID_1, TRIAL_ID_1, PID_2, TRIAL_ID_2])
-    if to_file:
-        save(distance_df, to_file)
-    return distance_df
 
 def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False):
     idx1, idx2 = trial1.index, trial2.index

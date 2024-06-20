@@ -26,3 +26,7 @@ TRIAL_COUNT_DISTANCE_PLOT = "plots/TRIALCOUNTDistanceMatrix.png"
 TRIAL_COUNT_PERCENT_LIES_PLOT = "plots/TRIALCOUNTPercentLies.png"
 TRIAL_COUNT_DWELL_TIMES_PLOT = "plots/TRIALCOUNTDwellTimes.png"
 TRIAL_COUNT_N_TRANSITIONS_PLOT = "plots/TRIALCOUNTNTransitions.png"
+
+KMEANS_PERCENT_LIES_PLOT = "plots/KMeansPercentLies.png"
+KMEANS_DWELL_TIMES_PLOT = "plots/KMeansDwellTimes.png"
+KMEANS_N_TRANSITIONS_PLOT = "plots/KMeansNTransitions.png"
