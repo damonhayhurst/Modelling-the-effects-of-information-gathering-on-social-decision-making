@@ -36,14 +36,12 @@ def process(input_files: str = [YOUNG_ADULTS_1, YOUNG_ADULTS_2]):
         output_avg_aoi_analysis_file=AVERAGE_ANALYSIS_CSV,
         output_dwell_timeline_file=DWELL_TIMELINE_CSV,
         custom_filtering=do_filtering,
-        bypass=False
     )
 
     do_dtw_processing(
         input_dwell_file=DWELL_TIMELINE_CSV,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
         output_dtw_file=DTW_T_CSV,
-        bypass=True
     )
 
 
