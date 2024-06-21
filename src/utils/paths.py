@@ -1,11 +1,12 @@
-YOUNG_ADULTS_1: str = "Data/RawData1_YoungAdults.csv"
-YOUNG_ADULTS_2: str = "Data/RawData2_YoungAdults.csv"
-OLD_ADULTS: str = "Data/RawData3_OldAdults.csv"
+YOUNG_ADULTS_1 = "Data/RawData1_YoungAdults.csv"
+YOUNG_ADULTS_2 = "Data/RawData2_YoungAdults.csv"
+OLD_ADULTS = "Data/RawData3_OldAdults.csv"
 
 AOIS_CSV = "Analysis/AOIs.csv"
 AOI_ANALYSIS_CSV = "Analysis/AOI_Analysis.csv"
 AVERAGE_ANALYSIS_CSV = "Analysis/Average_AOI_Analysis.csv"
 DWELL_TIMELINE_CSV = "Analysis/Dwell_Timeline.csv"
+
 DTW_CSV = "Analysis/DTW.csv"
 DTW_Z_CSV = "Analysis/DTW_zscore.csv"
 DTW_Z_V2_CSV = "Analysis/DTW_Z_v2.csv"
@@ -33,3 +34,7 @@ KMEANS_N_TRANSITIONS_PLOT = "plots/KMeans/NTransitions.png"
 
 PERCENT_LIES_BY_PID_PLOT = "plots/PID/PercentLiesByPID.png"
 PERCENT_LIES_BY_TRIAL_ID_PLOT = "plots/TRIALID/PercentLiesByTRIALID"
+
+ALL_TRIAL_PERCENT_LIES_PLOT = "plots/ALLTRIAL/PercentLies.png"
+ALL_TRIAL_DWELL_TIMES_PLOT = "plots/ALLTRIAL/DwellTimes.png"
+ALL_TRIAL_N_TRANSITIONS_PLOT = "plots/ALLTRIAL/NTransitions.png"
