@@ -10,7 +10,7 @@ import warnings
 
 warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
 
-def analyse():
+def analyse(do_dtw: bool = True, do_kmeans: bool = True):
     do_dtw_analysis(
         input_distance_file=DTW_T_V2_CSV,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
@@ -26,7 +26,7 @@ def analyse():
         trial_count_percent_lies_plot=TRIAL_COUNT_PERCENT_LIES_PLOT,
         trial_count_dwell_times_plot=TRIAL_COUNT_DWELL_TIMES_PLOT,
         trial_count_n_transitions_plot=TRIAL_COUNT_N_TRANSITIONS_PLOT,
-        # bypass=True
+        bypass=not do_dtw
     )
 
     do_kmeans_analysis(
@@ -34,9 +34,9 @@ def analyse():
         percent_lies_plot=KMEANS_PERCENT_LIES_PLOT,
         dwell_times_plot=KMEANS_DWELL_TIMES_PLOT,
         n_transitions_plot=KMEANS_N_TRANSITIONS_PLOT,
-        bypass=True
+        bypass=not do_kmeans
     )
 
 
 if __name__ == "__main__":
-    analyse()
+    analyse(do_dtw=True, do_kmeans=False)

@@ -1,8 +1,9 @@
 import os
+from typing import List
 from matplotlib.axes import Axes
 from matplotlib.patches import Rectangle
 from matplotlib.colors import XKCD_COLORS, LogNorm
-from pandas import DataFrame, MultiIndex, concat
+from pandas import DataFrame, Index, MultiIndex, concat
 from utils.display import display
 from utils.paths import PID_DISTANCE_PLOT, TRIAL_DISTANCE_PLOT
 from utils.masks import is_same_pid, is_same_trial, is_selected_aoi_same
@@ -90,12 +91,14 @@ def set_diagonal(matrix_df: DataFrame, value: int = 0) -> DataFrame:
     return DataFrame(matrix, index=matrix_df.index, columns=matrix_df.columns)
 
 
+
 def plot_trial_id_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL_ID, colors=colors, to_file=to_file)
 
 
 def plot_trial_count_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL_COUNT, colors=colors, to_file=to_file)
+
 
 def plot_matrix_with_heirarchical_clusters(matrix_df: DataFrame, cluster_df: DataFrame, index_name: str, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     matrix_df = reorder_matrix_by_heirarchical_cluster(matrix_df, cluster_df)
@@ -128,23 +131,74 @@ def plot_matrix_with_heirarchical_clusters(matrix_df: DataFrame, cluster_df: Dat
 
 
 def get_heirarchical_clusters_by_trial_id(matrix_df: DataFrame, n_clusters: int = 3):
-    return get_heirarchical_clusters(matrix_df, TRIAL_ID, n_clusters)
+    idx = matrix_df.index.set_names(TRIAL_ID)
+    return get_heirarchical_clusters(matrix_df, idx, n_clusters)
 
 
 def get_heirarchical_clusters_by_pid(matrix_df: DataFrame, n_clusters: int = 3):
-    return get_heirarchical_clusters(matrix_df, PID, n_clusters)
+    idx = matrix_df.index.set_names(PID)
+    return get_heirarchical_clusters(matrix_df, idx, n_clusters)
 
 
 def get_heirarchical_clusters_by_trial_count(matrix_df: DataFrame, n_clusters: int = 3):
-    return get_heirarchical_clusters(matrix_df, TRIAL_COUNT, n_clusters)
+    idx = matrix_df.index.set_names(TRIAL_COUNT)
+    return get_heirarchical_clusters(matrix_df, idx, n_clusters)
 
-def get_heirarchical_clusters(matrix_df: DataFrame, index_name: str, n_clusters: int = 3):
+
+def get_heirarchical_clusters_by_trial(big_matrix_df: DataFrame, n_clusters: int = 3):
+    idx = big_matrix_df.index.set_names([PID, TRIAL_ID, TRIAL_COUNT])
+    return get_heirarchical_clusters(big_matrix_df, idx, n_clusters)
+
+
+def get_heirarchical_clusters(matrix_df: DataFrame, set_index: Index, n_clusters: int = 3):
     row_clusters = linkage(matrix_df, method='complete', metric='euclidean')
     cluster_labels = fcluster(row_clusters, t=n_clusters, criterion='maxclust')
     return DataFrame({
         CLUSTER: cluster_labels
-    }, index=matrix_df.index.set_names(index_name)).sort_values(CLUSTER)
+    }, index=set_index).sort_values(CLUSTER)
 
 
 def reorder_matrix_by_heirarchical_cluster(matrix_df: DataFrame, cluster_df: DataFrame):
     return matrix_df.loc[cluster_df.index, :].loc[:, cluster_df.index]
+
+def get_proximal_and_distal_pairs(big_matrix_df: DataFrame, window_size: int = 5) -> tuple[DataFrame, DataFrame]:
+    idx = big_matrix_df.index
+    proximal_pairs, distal_pairs = [], []
+    for i in range(len(idx)):
+        for j in range(i+1, len(idx)):
+            pid1, trial_count1, trial_id1 = idx[i]
+            pid2, trial_count2, trial_id2 = idx[j]
+            if pid1 != pid2: continue
+            if trial_count1 == trial_count2: continue
+            distance = big_matrix_df.iat[i, j]
+            row = (pid1, trial_count1, trial_id1, pid2, trial_count2, trial_id2, distance)
+            if abs(trial_count1 - trial_count2) <= window_size:
+                proximal_pairs.append(row)
+            else:
+                distal_pairs.append(row)
+    proximal_df = DataFrame(proximal_pairs, columns=[PID_1, TRIAL_COUNT_1, TRIAL_ID_1, PID_2, TRIAL_COUNT_2, TRIAL_ID_2, DISTANCE])
+    proximal_df.set_index([PID_1, TRIAL_COUNT_1, TRIAL_ID_1, PID_2, TRIAL_COUNT_2, TRIAL_ID_2], inplace=True)
+    distal_df = DataFrame(distal_pairs, columns=[PID_1, TRIAL_COUNT_1, TRIAL_ID_1, PID_2, TRIAL_COUNT_2, TRIAL_ID_2, DISTANCE])
+    distal_df.set_index([PID_1, TRIAL_COUNT_1, TRIAL_ID_1, PID_2, TRIAL_COUNT_2, TRIAL_ID_2], inplace=True)
+    return proximal_df, distal_df
+
+
+def proximal_analysis(big_matrix_df: DataFrame, window_size: int = 7):
+    big_matrix_df = big_matrix_df.sort_values([PID_1, TRIAL_COUNT_1]).sort_values([PID_2, TRIAL_COUNT_2], axis=1)
+    proximal_df, distal_df = get_proximal_and_distal_pairs(big_matrix_df, window_size)
+    display(proximal_df)
+    display(distal_df)
+    display(proximal_df.mean())
+    display(distal_df.mean())
+    plot_dtw_distribution(proximal_df, 'for Proximal Pairs')
+    plot_dtw_distribution(distal_df, 'for Distal Pairs')
+    display(proximal_df[proximal_df[DISTANCE] == 0])
+    
+
+def plot_dtw_distribution(df: DataFrame, title_suffix: str = ''):
+    plt.figure(figsize=(10, 6))
+    sns.histplot(df, kde=True)
+    plt.title('Distribution of DTW Distances %s' % title_suffix)
+    plt.xlabel('DTW Distance')
+    plt.ylabel('Frequency')
+    plt.show()
