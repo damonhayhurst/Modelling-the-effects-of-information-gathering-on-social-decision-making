@@ -1,4 +1,5 @@
 
+import os
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 import numpy as np
@@ -34,6 +35,13 @@ def get_response_stats(cluster_df: DataFrame, analysis_df: DataFrame, index: Ind
     })
 
 
+def get_response_stats_by_trial_id(cluster_df: DataFrame, analysis_df: DataFrame):
+    by_pid_df = cluster_df.groupby(level=TRIAL_ID)
+    response_df = get_response_stats(by_pid_df, analysis_df, analysis_df.index.get_level_values(TRIAL_ID))
+    response_df[CLUSTER] = cluster_df[CLUSTER]
+    return response_df.sort_values(CLUSTER)
+
+
 def get_response_stats_by_pid(cluster_df: DataFrame, analysis_df: DataFrame):
     by_pid_df = cluster_df.groupby(level=PID)
     response_df = get_response_stats(by_pid_df, analysis_df, analysis_df.index.get_level_values(PID))
@@ -62,9 +70,25 @@ def get_trial_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: Da
     return get_response_stats(by_cluster_df, analysis_df, analysis_df.index)
 
 
+def plot_percent_lies_by_trial_id(responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
+    fig, ax = plt.subplots(figsize=(15, 6))
+    plt.title('%sPercent of Lies by TRIAL ID' % (title_prefix))
+    plt.ylabel('Percent')
+    plt.ylim(0, 100)
+    plot_response_stats_for_clusters(ax, responses_df, [LIE], TRIAL_ID, colors, to_file)
+
+
 def plot_percent_lies_by_pid(responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(15, 6))
     plt.title('%sPercent of Lies by PID' % (title_prefix))
+    plt.ylabel('Percent')
+    plt.ylim(0, 100)
+    plot_response_stats_for_clusters(ax, responses_df, [LIE], PID, colors, to_file)
+
+
+def plot_percent_lies_by_trial_id(responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
+    fig, ax = plt.subplots(figsize=(15, 6))
+    plt.title('%sPercent of Lies by Trial ID' % (title_prefix))
     plt.ylabel('Percent')
     plt.ylim(0, 100)
     plot_response_stats_for_clusters(ax, responses_df, [LIE], PID, colors, to_file)
@@ -101,11 +125,11 @@ def plot_response_stats_for_clusters(ax: Axes, responses_df: DataFrame, stats: l
     for i, value in enumerate(enumerable_df.index):
         values = [enumerable_df.loc[value][stat] for stat in stats]
         cluster = int(enumerable_df.loc[value][CLUSTER])
-        ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[cluster], label=f'Cluster {cluster}')
+        ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[cluster - 1], label=f'Cluster {cluster}')
 
     plt.xticks([])
     if len(stats) > 1 and index_name is CLUSTER:
-        plt.xticks((bar_width/2) + indices, stats, rotation=0)
+        plt.xticks(((bar_width/2 * len(responses_df.index)) + indices) - bar_width/2, stats, rotation=0)
     elif index_name is PID:
         plt.xticks((bar_width/2) * (np.array(range(0, len(responses_df.index))) * 2), responses_df.index, rotation=0, fontsize=8)
 
@@ -122,6 +146,7 @@ def plot_response_stats_for_clusters(ax: Axes, responses_df: DataFrame, stats: l
 
     plt.tight_layout()
     if to_file:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
         plt.savefig(to_file)
 
     plt.show()

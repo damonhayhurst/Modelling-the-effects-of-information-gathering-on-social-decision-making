@@ -26,6 +26,7 @@ def analyse():
         trial_count_percent_lies_plot=TRIAL_COUNT_PERCENT_LIES_PLOT,
         trial_count_dwell_times_plot=TRIAL_COUNT_DWELL_TIMES_PLOT,
         trial_count_n_transitions_plot=TRIAL_COUNT_N_TRANSITIONS_PLOT,
+        bypass=True
     )
 
     do_kmeans_analysis(
@@ -33,7 +34,7 @@ def analyse():
         percent_lies_plot=KMEANS_PERCENT_LIES_PLOT,
         dwell_times_plot=KMEANS_DWELL_TIMES_PLOT,
         n_transitions_plot=KMEANS_N_TRANSITIONS_PLOT,
-        bypass=True
+        # bypass=True
     )
 
 

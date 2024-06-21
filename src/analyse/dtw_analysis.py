@@ -1,3 +1,4 @@
+import os
 from matplotlib.axes import Axes
 from matplotlib.patches import Rectangle
 from matplotlib.colors import XKCD_COLORS, LogNorm
@@ -121,6 +122,7 @@ def plot_matrix_with_heirarchical_clusters(matrix_df: DataFrame, cluster_df: Dat
     plt.tick_params(left=False, bottom=False)
     plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05)
     if to_file is not None:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
         plt.savefig(to_file)
     plt.show()
 
