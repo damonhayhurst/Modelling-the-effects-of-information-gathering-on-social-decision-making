@@ -49,3 +49,7 @@ def is_same_pid(df:DataFrame, pid1: str = PID_1, pid2: str = PID_2) -> DataFrame
 def is_same_trial(df: DataFrame, trial1: str = TRIAL_1, trial2: str = TRIAL_2) -> DataFrame:
     idx = df.index
     return idx.get_level_values(trial1) == idx.get_level_values(trial2)
+
+
+def is_no_dwell_for_aois(aoi_analysis_df: DataFrame, aois: list[str] = [SELF_TRUE, SELF_LIE, OTHER_TRUTH, OTHER_LIE]) -> DataFrame:
+    return (aoi_analysis_df[[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]] == 0).any(axis=1)

@@ -1,8 +1,10 @@
 
+from typing import List
 from matplotlib import pyplot as plt
 from numpy import linspace
 import pandas as pd
 from pandas import Categorical, DataFrame
+from sklearn import preprocessing
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import StandardScaler
@@ -47,7 +49,7 @@ def print_pca_stats(input_df: DataFrame, pca: PCA):
 def kmeans(df: DataFrame, n_clusters=3, random_state=0):
     kmeans = KMeans(n_clusters=n_clusters, random_state=random_state)
     kmeans.fit(df)
-    df[CLUSTER] = kmeans.labels_
+    df.loc[df.index, CLUSTER] = kmeans.labels_
     return df
 
 
@@ -97,25 +99,32 @@ def pca_analysis(df: DataFrame):
     return by_cluster.agg(pca_summ)
 
 
-def get_kmeans_clusters(aoi_df: DataFrame, n_components: float = None, n_clusters: int = 4, columns: list[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH, PAYNE_INDEX]):
-    clustering_df = aoi_df[columns] if columns else aoi_df[aoi_df.columns]
+def get_kmeans_clusters(clustering_df: DataFrame, n_components: float = None, n_clusters: int = 4):
     if n_components:
         clustering_df = pca(clustering_df, n_components=n_components)
     kmeans_df = kmeans(clustering_df, n_clusters=n_clusters)
     return kmeans_df
 
 
-def get_best_fit_n_clusters(aoi_df: DataFrame, n_components: float = None, columns: list[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH, PAYNE_INDEX], max_clusters: int = 20) -> DataFrame:
+def get_best_fit_n_clusters(aoi_df: DataFrame, n_components: float = None, max_clusters: int = 20) -> DataFrame:
     silhouette_scores = {}
     for n in range(2, max_clusters + 1):
-        kmeans_df = get_kmeans_clusters(aoi_df, n_components, n, columns)
-        silhouette_scores[n] = {SILHOUETTE: silhouette_score(kmeans_df[columns], kmeans_df[CLUSTER])}
+        kmeans_df = get_kmeans_clusters(aoi_df, n_components, n)
+        silhouette_scores[n] = {SILHOUETTE: silhouette_score(kmeans_df, kmeans_df[CLUSTER])}
     n_cluster_df = DataFrame.from_dict(silhouette_scores, orient="index")
     n_cluster_df.index.name = N_CLUSTER
     return n_cluster_df
 
 
-def get_best_fit_kmeans_clusters(aoi_df: DataFrame, n_components: float = None, columns: list[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH, PAYNE_INDEX], max_clusters: int = 20):
-    n_clusters_df = get_best_fit_n_clusters(aoi_df, n_components, columns, max_clusters)
+def get_best_fit_kmeans_clusters(for_kmeans_df: DataFrame, n_components: float = None, max_clusters: int = 20):
+    n_clusters_df = get_best_fit_n_clusters(for_kmeans_df, n_components, max_clusters)
     n = n_clusters_df.idxmax().values[0]
-    return get_kmeans_clusters(aoi_df, n_components, n, columns)
+    return get_kmeans_clusters(for_kmeans_df, n_components, n)
+
+
+def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH, PAYNE_INDEX]):
+    aoi_df = aoi_df.reset_index()
+    filtered_df = aoi_df[columns] if columns else aoi_df[aoi_df.columns]
+    scaler = preprocessing.StandardScaler()
+    normalised_df = scaler.fit_transform(filtered_df)
+    return DataFrame(normalised_df, columns=filtered_df.columns)

@@ -85,11 +85,11 @@ def create_trial_id_matrix(big_matrix_df: DataFrame, fill_self_distances: int | 
 def create_trial_count_matrix(big_matrix_df: DataFrame, fill_self_distances: int | None = 0):
     return create_matrix(big_matrix_df, TRIAL_COUNT_1, TRIAL_COUNT_2, fill_self_distances)
 
+
 def set_diagonal(matrix_df: DataFrame, value: int = 0) -> DataFrame:
     matrix = matrix_df.values
     np.fill_diagonal(matrix, value)
     return DataFrame(matrix, index=matrix_df.index, columns=matrix_df.columns)
-
 
 
 def plot_trial_id_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
@@ -161,6 +161,7 @@ def get_heirarchical_clusters(matrix_df: DataFrame, set_index: Index, n_clusters
 def reorder_matrix_by_heirarchical_cluster(matrix_df: DataFrame, cluster_df: DataFrame):
     return matrix_df.loc[cluster_df.index, :].loc[:, cluster_df.index]
 
+
 def get_proximal_and_distal_pairs(big_matrix_df: DataFrame, window_size: int = 5) -> tuple[DataFrame, DataFrame]:
     idx = big_matrix_df.index
     proximal_pairs, distal_pairs = [], []
@@ -168,8 +169,10 @@ def get_proximal_and_distal_pairs(big_matrix_df: DataFrame, window_size: int = 5
         for j in range(i+1, len(idx)):
             pid1, trial_count1, trial_id1 = idx[i]
             pid2, trial_count2, trial_id2 = idx[j]
-            if pid1 != pid2: continue
-            if trial_count1 == trial_count2: continue
+            if pid1 != pid2:
+                continue
+            if trial_count1 == trial_count2:
+                continue
             distance = big_matrix_df.iat[i, j]
             row = (pid1, trial_count1, trial_id1, pid2, trial_count2, trial_id2, distance)
             if abs(trial_count1 - trial_count2) <= window_size:
@@ -183,19 +186,13 @@ def get_proximal_and_distal_pairs(big_matrix_df: DataFrame, window_size: int = 5
     return proximal_df, distal_df
 
 
-def proximal_analysis(big_matrix_df: DataFrame, window_size: int = 7):
+def get_proximal_and_distal_distances(big_matrix_df: DataFrame, window_size: int = 7) -> tuple[DataFrame, DataFrame]:
     big_matrix_df = big_matrix_df.sort_values([PID_1, TRIAL_COUNT_1]).sort_values([PID_2, TRIAL_COUNT_2], axis=1)
     proximal_df, distal_df = get_proximal_and_distal_pairs(big_matrix_df, window_size)
-    display(proximal_df)
-    display(distal_df)
-    display(proximal_df.mean())
-    display(distal_df.mean())
-    plot_dtw_distribution(proximal_df, 'for Proximal Pairs')
-    plot_dtw_distribution(distal_df, 'for Distal Pairs')
-    display(proximal_df[proximal_df[DISTANCE] == 0])
-    
+    return proximal_df, distal_df
 
-def plot_dtw_distribution(df: DataFrame, title_suffix: str = ''):
+
+def plot_distance_distribution(df: DataFrame, title_suffix: str = ''):
     plt.figure(figsize=(10, 6))
     sns.histplot(df, kde=True)
     plt.title('Distribution of DTW Distances %s' % title_suffix)
