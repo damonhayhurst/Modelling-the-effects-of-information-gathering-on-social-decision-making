@@ -77,15 +77,15 @@ def get_percent_lies(df: DataFrame):
     return lie_percent
 
 
-def remove_95_percent_lies(df: DataFrame, bypass: bool = False):
-    """Remove participants who lied on over 95% of trials"""
+def remove_percent_lies(df: DataFrame, percent: int = 95, bypass: bool = False):
+    """Remove participants who lied on percent of trials"""
     if bypass:
         return df
     percent_lies = get_percent_lies(df)
-    over_95_percent_lies = percent_lies[percent_lies > 95]
+    over_95_percent_lies = percent_lies[percent_lies > percent]
     filtered_df = df.drop(labels=over_95_percent_lies.index)
-    print("Over 95%% Lies Participants Removed: %s" %
-          len(get_participants(over_95_percent_lies)))
+    print("Over %s%% Lies Participants Removed: %s" %
+          (percent, len(get_participants(over_95_percent_lies))))
     return filtered_df
 
 
@@ -105,15 +105,15 @@ def get_percent_truths(df: DataFrame):
     return truth_percent
 
 
-def remove_95_percent_truths(df: DataFrame, bypass: bool = False):
-    """Remove participants who told the truth on over 95% of trials"""
+def remove_percent_truths(df: DataFrame, percent: int = 95, bypass: bool = False):
+    """Remove participants who told the truth on over a percent of trials"""
     if bypass:
         return df
     percent_truths = get_percent_truths(df)
-    over_95_percent_truths = percent_truths[percent_truths > 95]
+    over_95_percent_truths = percent_truths[percent_truths > percent]
     filtered_df = df.drop(labels=over_95_percent_truths.index)
-    print("Over 95%% Truths Participants Removed: %s" %
-          len(get_participants(over_95_percent_truths)))
+    print("Over %s%% Truths Participants Removed: %s" %
+          (percent, len(get_participants(over_95_percent_truths))))
     return filtered_df
 
 
@@ -133,15 +133,15 @@ def get_percent_others(df: DataFrame):
     return other_percent
 
 
-def remove_5_percent_others(df: DataFrame, bypass: bool = False):
+def remove_percent_others(df: DataFrame, percent: int = 5, bypass: bool = False):
     """Remove participants who picked the other box on over 5% of their trials"""
     if bypass:
         return df
     percent_others = get_percent_others(df)
-    over_5_percent_others = percent_others[percent_others > 5]
-    filtered_df = df.drop(labels=over_5_percent_others.index)
-    print("Over 5%% Other Boxes Participants Removed: %s" %
-          len(get_participants(over_5_percent_others)))
+    over_percent_others = percent_others[percent_others > percent]
+    filtered_df = df.drop(labels=over_percent_others.index)
+    print("Over %s%% Other Boxes Participants Removed: %s" %
+          (percent, len(get_participants(over_percent_others))))
     return filtered_df
 
 
@@ -171,6 +171,7 @@ def remove_over_percent_no_mouse_coords(df: DataFrame, percent: int = 95, bypass
           (percent, len(get_participants(no_mouse_coords))))
     return filtered_df
 
+
 def print_stats(df: DataFrame):
     print_n_participants(df)
     print_n_trials(df)
@@ -184,11 +185,11 @@ def do_filtering(df: DataFrame) -> DataFrame:
     ).pipe(
         remove_dnf
     ).pipe(
-        remove_95_percent_lies
+        remove_percent_lies, percent=95
     ).pipe(
-        remove_95_percent_truths
+        remove_percent_truths, percent=95
     ).pipe(
-        remove_5_percent_others
+        remove_percent_others, percent=5
     ).pipe(
         remove_no_mouse_coords, bypass=True
     ).pipe(

@@ -73,7 +73,7 @@ def read_from_analysis_file(path: str = AOI_ANALYSIS_CSV) -> DataFrame:
     ).pipe(
         set_index, [PID, TRIAL_ID]
     ).pipe(
-        dwell_columns_to_seconds, [*DWELL_COLUMNS]
+        dwell_columns_to_seconds, [*DWELL_COLUMNS, AVG_DWELL]
     )
     print("\n Analysis read from %s \n" % path)
     return df
@@ -90,6 +90,7 @@ def set_data_types_for_analysis_df(df: DataFrame) -> DataFrame:
         OTHER_LIE: "timedelta64[ns]",
         SELF_TRUE: "timedelta64[ns]",
         SELF_LIE: "timedelta64[ns]",
+        AVG_DWELL: "timedelta64[ns]",
         N_ALT_TRANSITIONS: int,
         N_ATT_TRANSITIONS: int,
         PAYNE_INDEX: float,

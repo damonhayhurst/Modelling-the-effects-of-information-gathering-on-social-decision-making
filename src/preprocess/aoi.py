@@ -1,4 +1,4 @@
-from pandas import DataFrame, to_datetime
+from pandas import DataFrame, MultiIndex, to_datetime
 from utils.columns import *
 from utils.display import display
 from utils.masks import get_is_lie, get_is_lie_or_truth, get_is_other, get_is_truth
@@ -151,6 +151,18 @@ def remove_trials_with_no_aois(df: DataFrame) -> DataFrame:
     return aois_df
 
 
+def remove_pid_with_incomplete_n_trials(df: DataFrame, n_trials: int = 80, bypass: bool = False) -> DataFrame:
+    if not bypass:
+        counts = df.groupby(PID).apply(lambda x: x.index.get_level_values(TRIAL_COUNT).nunique())
+        valid_pid = counts[counts >= n_trials].index
+        invalid_pid = counts[counts < n_trials].index
+        print("Less than %s trials Participants Removed: %s" % (n_trials, len(invalid_pid)))
+        return df[df.index.get_level_values(PID).isin(valid_pid)]
+    else:
+        return df
+
+    
+
 def print_aois_stats(df: DataFrame):
     no_aois = get_trials_has_no_aois(df)
     print("%s trials with no AOIs" % get_n_trials(no_aois))
@@ -172,6 +184,7 @@ def determine_aoi(df: DataFrame, to_file: str = None) -> DataFrame:
     print("\n")
     print_aois_stats(coord_row_df)
     aoi_df = remove_trials_with_no_aois(coord_row_df)
+    aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 80, bypass=True)
     if to_file:
         save(aoi_df, to_file)
     return aoi_df

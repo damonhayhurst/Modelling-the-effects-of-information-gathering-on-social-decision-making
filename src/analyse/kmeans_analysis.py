@@ -1,4 +1,5 @@
 
+import os
 from typing import List
 from matplotlib import pyplot as plt
 from numpy import linspace
@@ -9,7 +10,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import StandardScaler
 from sklearn.metrics import silhouette_score
-
+import seaborn as sns
 from utils.columns import CLUSTER, IS_LIE, IS_OTHER, IS_TRUTH, N_CLUSTER, OTHER_LIE, OTHER_TRUTH, PAYNE_INDEX, PID, SELECTED_AOI, SELF_LIE, SELF_TRUE, SILHOUETTE, TRIAL_COUNT, TRIAL_ID
 from utils.display import display
 from utils.masks import is_lie_selected, is_other_selected, is_truth_selected
@@ -49,7 +50,8 @@ def print_pca_stats(input_df: DataFrame, pca: PCA):
 def kmeans(df: DataFrame, n_clusters=3, random_state=0):
     kmeans = KMeans(n_clusters=n_clusters, random_state=random_state)
     kmeans.fit(df)
-    df.loc[df.index, CLUSTER] = kmeans.labels_
+    df.loc[df.index, CLUSTER] = (kmeans.labels_.astype(int) + 1).astype(int)
+    df[CLUSTER] = df[CLUSTER].astype(int)
     return df
 
 
@@ -122,9 +124,18 @@ def get_best_fit_kmeans_clusters(for_kmeans_df: DataFrame, n_components: float =
     return get_kmeans_clusters(for_kmeans_df, n_components, n)
 
 
-def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH, PAYNE_INDEX]):
+def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]):
     aoi_df = aoi_df.reset_index()
     filtered_df = aoi_df[columns] if columns else aoi_df[aoi_df.columns]
-    scaler = preprocessing.StandardScaler()
+    display(filtered_df)
+    scaler = preprocessing.RobustScaler()
     normalised_df = scaler.fit_transform(filtered_df)
     return DataFrame(normalised_df, columns=filtered_df.columns)
+
+def plot_correlation_matrix(for_kmeans_df: DataFrame, to_file: str = None):
+    correlation_matrix = for_kmeans_df.corr()
+    sns.heatmap(correlation_matrix, annot=True)
+    if to_file:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
+        plt.savefig(to_file)
+    plt.show()

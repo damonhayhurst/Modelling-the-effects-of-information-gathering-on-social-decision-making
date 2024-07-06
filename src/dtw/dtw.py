@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from utils.columns import *
-from dtaidistance import dtw, dtw_ndim
+from dtaidistance import dtw, dtw_ndim, preprocessing
 from dtaidistance.innerdistance import CustomInnerDist, SquaredEuclidean
 from itertools import combinations
 from scipy.stats import zscore
@@ -60,9 +60,13 @@ def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False
     trial2_ndim = np.array([[dwell, *aois] for dwell, *aois in trial2_tuples], dtype=object)
     return dtw_ndim.distance(trial1_ndim, trial2_ndim)
 
-def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame):
+def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, differencing: bool = True):
     trials = analysis_df.index.unique()
-    return {trial: get_t_series_dwell_sequence(dwell_df.loc[trial]) for trial in trials}
+    if differencing:
+        trial_seq_dict = {trial: preprocessing.differencing(get_t_series_dwell_sequence(dwell_df.loc[trial]), smooth=0.1) for trial in trials}
+    else:
+        trial_seq_dict = {trial: get_t_series_dwell_sequence(dwell_df.loc[trial]) for trial in trials}
+    return trial_seq_dict
 
 def get_t_series_dwell_sequence(trial: DataFrame, z_norm: bool = False):
     idx = trial.index
@@ -77,55 +81,6 @@ def get_t_series_dwell_sequence(trial: DataFrame, z_norm: bool = False):
         for t in range(time):
             t_series.append(aois)
     return np.array(t_series)
-
-
-def get_multivariate_distance(dwell_series_1: DataFrame, dwell_series_2: DataFrame, dist_method: CustomInnerDist, z_norm: bool = False):
-    dwell_series_1, dwell_series_2 = dwell_series_1[[DWELL_TIME, AOI]], dwell_series_2[[DWELL_TIME, AOI]]
-    if z_norm:
-        dwell_series_1[DWELL_TIME] = zscore(dwell_series_1[DWELL_TIME])
-        dwell_series_2[DWELL_TIME] = zscore(dwell_series_2[DWELL_TIME])
-    dwell_list_1 = np.array([(dur, DWELL_DICT[aoi]) for dur, aoi in dwell_series_1.itertuples(index=False, name=None)])
-    dwell_list_2 = np.array([(dur, DWELL_DICT[aoi]) for dur, aoi in dwell_series_2.itertuples(index=False, name=None)])
-    return dtw_ndim.distance(dwell_list_1, dwell_list_2, inner_dist=dist_method)
-
-
-def get_distance(dwell_series_1: Series, dwell_series_2: Series, z_norm: bool = True):
-    dwell_list_1, dwell_list_2 = dwell_series_1[DWELL_TIME].to_list(), dwell_series_2[DWELL_TIME].to_list()
-    if z_norm:
-        dwell_list_1, dwell_list_2 = zscore(dwell_list_1), zscore(dwell_list_2)
-    print(dwell_list_1)
-    print(type(dwell_list_1))
-    return dtw.distance_fast(dwell_list_1, dwell_list_2)
-
-
-class AOIPenaltySquareEuclidean(CustomInnerDist):
-
-
-    @staticmethod
-    def inner_dist(x, y):
-        euc = x[0] - y[0]
-        pen = x[0] - y[0] if x[1] != y[1] else 0
-        return (euc + pen) ** 2
-
-    @staticmethod
-    def result(x):
-        if np is not None and isinstance(x, np.ndarray):
-            return np.sqrt(x)
-        return math.sqrt(x)
-
-    @staticmethod
-    def inner_val(x):
-        return x*x
-
-
-def get_warping_path(dwell_series_1: Series, dwell_series_2: Series):
-    dwell_list_1, dwell_list_2 = dwell_series_1.to_list(), dwell_series_2.to_list()
-    return dtw.warping_path(dwell_list_1, dwell_list_2)
-
-
-def plot_path(path, distance, trial1, trial2, color):
-    p1, p2 = zip(*path)
-    plt.plot(p1, p2, label=f'Pair {trial1} and {trial2} (Distance: {distance:.2f})', marker='o', color=color)
 
 
 def save(distance_df: DataFrame, path: str = DTW_Z_V2_CSV):

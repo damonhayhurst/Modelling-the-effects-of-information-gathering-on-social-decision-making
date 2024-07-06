@@ -71,5 +71,6 @@ def get_overall_mean(matrix_df):
 
 def get_best_fit_heirarchical_clusters(matrix_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
     n_cluster_df = n_cluster_analysis(matrix_df, get_clusters_fn, max_clusters)
+    display(n_cluster_df)
     n_clusters = n_cluster_df.idxmax()
     return get_clusters_fn(matrix_df, n_clusters)
