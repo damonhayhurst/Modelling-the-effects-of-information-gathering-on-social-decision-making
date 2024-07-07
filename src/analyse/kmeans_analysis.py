@@ -49,11 +49,10 @@ def print_pca_stats(input_df: DataFrame, pca: PCA):
 
 def kmeans(df: DataFrame, n_clusters=3, random_state=0):
     kmeans = KMeans(n_clusters=n_clusters, random_state=random_state)
-    copy_df = df.copy()
-    kmeans.fit(copy_df)
-    copy_df.loc[copy_df.index, CLUSTER] = (kmeans.labels_.astype(int) + 1).astype(int)
-    copy_df[CLUSTER] = copy_df[CLUSTER].astype(int)
-    return copy_df
+    kmeans.fit(df)
+    df.loc[df.index, CLUSTER] = (kmeans.labels_.astype(int) + 1).astype(int)
+    df[CLUSTER] = df[CLUSTER].astype(int)
+    return df
 
 
 def plot_scatter(df: DataFrame, x, y):
@@ -110,9 +109,7 @@ def get_kmeans_clusters(clustering_df: DataFrame, n_components: float = None, n_
 
 
 def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]):
-    aoi_df = aoi_df.reset_index()
     filtered_df = aoi_df[columns] if columns else aoi_df[aoi_df.columns]
-    display(filtered_df)
     scaler = preprocessing.RobustScaler()
     normalised_df = scaler.fit_transform(filtered_df)
     return DataFrame(normalised_df, columns=filtered_df.columns)

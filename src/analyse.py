@@ -48,7 +48,7 @@ def do_dtw_analysis(do_save: bool = True):
         all_trial_percent_lies_plot=save(ALL_TRIAL_PERCENT_LIES_PLOT),
         all_trial_dwell_times_plot=save(ALL_TRIAL_DWELL_TIMES_PLOT),
         all_trial_n_transitions_plot=save(ALL_TRIAL_N_TRANSITIONS_PLOT),
-        all_trial_n_trials_plot=save(ALL_TRIAL_N_TRIALS_PLOT)
+        all_trial_n_trials_plot=save(ALL_TRIAL_N_TRIALS_PLOT),
     )
 
 
@@ -72,7 +72,12 @@ def do_kmedoids_analysis(do_save: bool = True):
 
     kmedoids_dtw_analysis(
         input_distance_file=DTW_T_V2_CSV,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV
+        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        percent_lies_plot=save(KMEDOIDS_PERCENT_LIES_PLOT),
+        dwell_times_plot=save(KMEDOIDS_DWELL_TIMES_PLOT),
+        n_transitions_plot=save(KMEDOIDS_N_TRANSITIONS_PLOT),
+        percent_lies_by_pid_plot=save(KMEDOIDS_PERCENT_LIES_BY_PID_PLOT),
+        n_trials_by_pid_plot=save(KMEDOIDS_N_TRIALS_BY_PID_PLOT)
     )
 
 
@@ -91,8 +96,8 @@ def do_response_analysis(do_save: bool = True):
     )
 
 if __name__ == "__main__":
-    SAVE = False
+    SAVE = True
     # do_dtw_analysis(SAVE)
-    do_kmeans_analysis(SAVE)
-    # do_kmedoids_analysis(SAVE)
-    # do_response_analysis()
+    # do_kmeans_analysis(SAVE)
+    do_kmedoids_analysis(SAVE)
+    # do_response_analysis(SAVE)

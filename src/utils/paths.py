@@ -51,3 +51,10 @@ OVERALL_PID_PERCENT_LIES_PLOT = "plots/RESPONSE/PIDPercentLiesPlot.png"
 KMEANS_CORRELATIONS_PLOT = "plots/KMeans/Correlations.png"
 KMEANS_PERCENT_LIES_BY_PID_PLOT = "plots/KMeans/PercentLiesByPID.png"
 KMEANS_N_TRIALS_BY_PID_PLOT = "plots/KMeans/NTrialsByPID.png"
+
+KMEDOIDS_PERCENT_LIES_PLOT = "plots/KMedoids/PercentLies.png"
+KMEDOIDS_DWELL_TIMES_PLOT = "plots/KMedoids/DwellTimes.png"
+KMEDOIDS_N_TRANSITIONS_PLOT = "plots/KMedoids/NTransitions.png"
+KMEDOIDS_PERCENT_LIES_BY_PID_PLOT = "plots/KMedoids/PercentLiesByPID.png"
+KMEDOIDS_N_TRIALS_BY_PID_PLOT = "plots/KMedoids/NTrialsByPID.png"
+

@@ -67,6 +67,7 @@ def create_pid_matrix(big_matrix_df: DataFrame, fill_self_distances: int | None 
 
 
 def plot_pid_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = list(XKCD_COLORS.values()), to_file: str = None):
+    cluster_df = cluster_df.sort_values(CLUSTER)
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=PID, colors=colors, to_file=to_file)
 
 
@@ -94,10 +95,12 @@ def set_diagonal(matrix_df: DataFrame, value: int = 0) -> DataFrame:
 
 
 def plot_trial_id_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    cluster_df = cluster_df.sort_values(CLUSTER)
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL_ID, colors=colors, to_file=to_file)
 
 
 def plot_trial_count_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    cluster_df = cluster_df.sort_values(CLUSTER)
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=TRIAL_COUNT, colors=colors, to_file=to_file)
 
 
@@ -156,7 +159,7 @@ def get_heirarchical_clusters(matrix_df: DataFrame, set_index: Index, n_clusters
     cluster_labels = fcluster(row_clusters, t=n_clusters, criterion='maxclust')
     return DataFrame({
         CLUSTER: cluster_labels
-    }, index=set_index).sort_values(CLUSTER)
+    }, index=set_index)
 
 
 def reorder_matrix_by_heirarchical_cluster(matrix_df: DataFrame, cluster_df: DataFrame):
@@ -206,7 +209,7 @@ def kmedoids(big_matrix_df: DataFrame, n_clusters: int = 2):
     kmedoids = KMedoids(n_clusters=n_clusters, metric='precomputed').fit(big_matrix_df)
     return DataFrame({
         CLUSTER: (kmedoids.labels_.astype(int) + 1).astype(int)
-    }, index=big_matrix_df.index).sort_values(CLUSTER)
+    }, index=big_matrix_df.index)
 
 
 def get_kmedoids_clusters(big_matrix_df: DataFrame, n_clusters: int = 2):
