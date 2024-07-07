@@ -12,6 +12,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.cluster.hierarchy import linkage, fcluster
+from sklearn_extra.cluster import KMedoids
 
 XKCD_COLORS_LIST = list(XKCD_COLORS.values())
 
@@ -199,3 +200,14 @@ def plot_distance_distribution(df: DataFrame, title_suffix: str = ''):
     plt.xlabel('DTW Distance')
     plt.ylabel('Frequency')
     plt.show()
+
+
+def kmedoids(big_matrix_df: DataFrame, n_clusters: int = 2):
+    kmedoids = KMedoids(n_clusters=n_clusters, metric='precomputed').fit(big_matrix_df)
+    return DataFrame({
+        CLUSTER: (kmedoids.labels_.astype(int) + 1).astype(int)
+    }, index=big_matrix_df.index).sort_values(CLUSTER)
+
+
+def get_kmedoids_clusters(big_matrix_df: DataFrame, n_clusters: int = 2):
+    return kmedoids(big_matrix_df, n_clusters)

@@ -49,10 +49,11 @@ def print_pca_stats(input_df: DataFrame, pca: PCA):
 
 def kmeans(df: DataFrame, n_clusters=3, random_state=0):
     kmeans = KMeans(n_clusters=n_clusters, random_state=random_state)
-    kmeans.fit(df)
-    df.loc[df.index, CLUSTER] = (kmeans.labels_.astype(int) + 1).astype(int)
-    df[CLUSTER] = df[CLUSTER].astype(int)
-    return df
+    copy_df = df.copy()
+    kmeans.fit(copy_df)
+    copy_df.loc[copy_df.index, CLUSTER] = (kmeans.labels_.astype(int) + 1).astype(int)
+    copy_df[CLUSTER] = copy_df[CLUSTER].astype(int)
+    return copy_df
 
 
 def plot_scatter(df: DataFrame, x, y):
@@ -106,22 +107,6 @@ def get_kmeans_clusters(clustering_df: DataFrame, n_components: float = None, n_
         clustering_df = pca(clustering_df, n_components=n_components)
     kmeans_df = kmeans(clustering_df, n_clusters=n_clusters)
     return kmeans_df
-
-
-def get_best_fit_n_clusters(aoi_df: DataFrame, n_components: float = None, max_clusters: int = 20) -> DataFrame:
-    silhouette_scores = {}
-    for n in range(2, max_clusters + 1):
-        kmeans_df = get_kmeans_clusters(aoi_df, n_components, n)
-        silhouette_scores[n] = {SILHOUETTE: silhouette_score(kmeans_df, kmeans_df[CLUSTER])}
-    n_cluster_df = DataFrame.from_dict(silhouette_scores, orient="index")
-    n_cluster_df.index.name = N_CLUSTER
-    return n_cluster_df
-
-
-def get_best_fit_kmeans_clusters(for_kmeans_df: DataFrame, n_components: float = None, max_clusters: int = 20):
-    n_clusters_df = get_best_fit_n_clusters(for_kmeans_df, n_components, max_clusters)
-    n = n_clusters_df.idxmax().values[0]
-    return get_kmeans_clusters(for_kmeans_df, n_components, n)
 
 
 def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]):
