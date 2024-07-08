@@ -4,6 +4,8 @@ from matplotlib.axes import Axes
 from matplotlib.patches import Rectangle
 from matplotlib.colors import XKCD_COLORS, LogNorm
 from pandas import DataFrame, Index, MultiIndex, concat
+from sklearn.cluster import DBSCAN
+from sklearn.neighbors import NearestNeighbors
 from utils.display import display
 from utils.paths import PID_DISTANCE_PLOT, TRIAL_DISTANCE_PLOT
 from utils.masks import is_same_pid, is_same_trial, is_selected_aoi_same
@@ -214,3 +216,29 @@ def kmedoids(big_matrix_df: DataFrame, n_clusters: int = 2):
 
 def get_kmedoids_clusters(big_matrix_df: DataFrame, n_clusters: int = 2):
     return kmedoids(big_matrix_df, n_clusters)
+
+
+def dbscan(big_matrix_df: DataFrame, min_pts: int = 100, eps: float = 51.5):
+    dbscan = DBSCAN(eps=eps, min_samples=min_pts).fit(big_matrix_df)
+    display(dbscan.labels_)
+    return DataFrame({
+        CLUSTER: (dbscan.labels_.astype(int) + 1).astype(int)
+    }, index=big_matrix_df.index)
+
+
+def get_dbscan_clusters(big_matrix_df: DataFrame, n_neighbours: int = 100, eps: float = 51.5):
+    return dbscan(big_matrix_df, n_neighbours, eps)
+
+
+def plot_nearest_neighbour_points(big_matrix_df: DataFrame, n_neighbours: int = 100):
+
+    nbrs = NearestNeighbors(n_neighbors=n_neighbours).fit(big_matrix_df)
+    distances, indices = nbrs.kneighbors(big_matrix_df)
+
+    # Sort and plot distances
+    sorted_distances = np.sort(distances[:, n_neighbours-1], axis=0)  # the 3rd column has the distance to the 4th nearest neighbor
+    plt.plot(sorted_distances)
+    plt.xlabel('Points sorted by distance')
+    plt.ylabel('Nearest neighbor distance')
+    plt.title('Nearest Neighbor Distance vs. Points')
+    plt.show()

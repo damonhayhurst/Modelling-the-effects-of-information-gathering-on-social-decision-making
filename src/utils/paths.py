@@ -58,3 +58,8 @@ KMEDOIDS_N_TRANSITIONS_PLOT = "plots/KMedoids/NTransitions.png"
 KMEDOIDS_PERCENT_LIES_BY_PID_PLOT = "plots/KMedoids/PercentLiesByPID.png"
 KMEDOIDS_N_TRIALS_BY_PID_PLOT = "plots/KMedoids/NTrialsByPID.png"
 
+DBSCAN_PERCENT_LIES_PLOT = "plots/DBScan/PercentLies.png"
+DBSCAN_DWELL_TIMES_PLOT = "plots/DBScan/DwellTimes.png"
+DBSCAN_N_TRANSITIONS_PLOT = "plots/DBScan/NTransitions.png"
+DBSCAN_PERCENT_LIES_BY_PID_PLOT = "plots/DBScan/PercentLiesByPID.png"
+DBSCAN_N_TRIALS_BY_PID_PLOT = "plots/DBScan/NTrialsByPID.png"

@@ -94,7 +94,8 @@ def set_data_types_for_analysis_df(df: DataFrame) -> DataFrame:
         N_ALT_TRANSITIONS: int,
         N_ATT_TRANSITIONS: int,
         PAYNE_INDEX: float,
-        TRIAL_ID: int
+        TRIAL_ID: int,
+        RT: int
     })
 
 

@@ -130,6 +130,7 @@ def plot_percent_lies_by_pid(responses_df: DataFrame, colors: list[str] = XKCD_C
     plt.title('%sPercent of Lies by PID' % (title_prefix))
     plt.ylabel('Percent')
     plt.ylim(0, 100)
+    display(responses_df[LIE], max_rows=None)
     plot_response_stats_for_clusters_by_pid(ax, responses_df, [LIE], colors, to_file)
 
 
@@ -218,37 +219,52 @@ def plot_response_stats_for_clusters(ax: Axes, responses_df: DataFrame, stats: l
 
 
 def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, stats: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
-    display(responses_df)
-
     bar_width = 0.3
+    gap_width = 0.45  # Width of the gap between different PIDs
     responses_df = responses_df.reset_index()
+    num_categories = len(stats)
+    is_clustered = CLUSTER in responses_df.columns
 
-    unique_pids = responses_df[PID].unique()
-    indices = []
-    current_pos = 0
+    pids = responses_df[PID].unique()
+    current_position = 0
 
-    for pid in unique_pids:
-        pid_indices = responses_df[responses_df[PID] == pid].index
-        for _ in pid_indices:
-            indices.append(current_pos)
-            current_pos += bar_width
+    for pid in pids:
+        pid_df = responses_df[responses_df[PID] == pid]
+        indices = np.arange(num_categories)
 
-    for i, (index, row) in enumerate(responses_df.iterrows()):
-        values = [row[stat][0] for stat in stats]
-        cluster = int(row[CLUSTER]) if CLUSTER in row else 0
-        ax.bar(indices[i], values, width=bar_width, color=colors[cluster - 1], label=f'Cluster {cluster}' if i == 0 else "")
-        errors = [row[stat][1] for stat in stats]
-        errors_y = create_error_bars_y(values, errors)
-        ax.errorbar(indices[i], values, yerr=[errors_y[0], errors_y[1]], fmt='none', ecolor='black', capsize=5)
+        for i, value in enumerate(pid_df.index):
+            values = [pid_df.loc[value][stat][0] for stat in stats]
+            cluster = int(pid_df.loc[value][CLUSTER]) if is_clustered else 0
+            ax.bar(indices + current_position, values, width=bar_width, color=colors[cluster - 1], label=f'Cluster {cluster}')
+            errors = [pid_df.loc[value][stat][1] for stat in stats]
+            errors_y = create_error_bars_y(values, errors)
+            ax.errorbar(indices + current_position, values, errors_y, ecolor='black', capsize=5)
+            current_position += bar_width
 
-    unique_indices = np.arange(0, current_pos, bar_width * len(responses_df[responses_df[PID] == unique_pids[0]].index))
-    ax.set_xticks(unique_indices + (bar_width * (len(responses_df[responses_df[PID] == unique_pids[0]].index) - 1) / 2))
-    # ax.set_xticklabels(unique_pids, rotation=0, fontsize=8)
+        current_position += gap_width  # Add a gap after each PID
 
-    if CLUSTER in responses_df.columns:
+    plt.xticks([])
+    if len(stats) > 1:
+        plt.xticks(((bar_width/2 * len(responses_df.index)) + np.arange(len(pids) * (num_categories + 1))) - bar_width/2, stats, rotation=0)
+
+    if is_clustered:
+        plt.legend(title='Cluster', bbox_to_anchor=(1.05, 1), loc='upper left')
         handles, labels = ax.get_legend_handles_labels()
         unique_labels = dict(zip(labels, handles))
         ax.legend(unique_labels.values(), unique_labels.keys(), title='Cluster', bbox_to_anchor=(1.05, 1), loc='upper left')
+
+    # Adding PID labels
+    current_position = 0
+    pid_positions = []
+    for pid in pids:
+        pid_df = responses_df[responses_df[PID] == pid]
+        pid_positions.append(current_position + (len(pid_df) / 2 * bar_width) / 2)
+        current_position += (len(pid_df) * bar_width) + gap_width
+
+    ax.set_xticks(pid_positions)
+    ax.set_xticklabels(pids)
+
+    ax.tick_params(axis='both', which='both', length=0)
 
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
