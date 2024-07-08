@@ -116,6 +116,9 @@ def get_trials_by_cluster(cluster: int, cluster_df: DataFrame, analysis_df: Data
     idx = by_cluster_df.get_group(cluster).index
     return analysis_df.loc[analysis_df.index.isin(idx)]
 
+def sort_response_df_by_pid_lie_percent(response_df: DataFrame, analysis_df: DataFrame):
+    lie_idx = get_response_stats(analysis_df.groupby(PID), analysis_df, analysis_df.index).sort_values(LIE).index
+    return response_df.reindex(index=lie_idx, level=PID)
 
 def plot_percent_lies_by_trial_id(responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
     fig, ax = plt.subplots(figsize=(15, 6))
@@ -130,7 +133,6 @@ def plot_percent_lies_by_pid(responses_df: DataFrame, colors: list[str] = XKCD_C
     plt.title('%sPercent of Lies by PID' % (title_prefix))
     plt.ylabel('Percent')
     plt.ylim(0, 100)
-    display(responses_df[LIE], max_rows=None)
     plot_response_stats_for_clusters_by_pid(ax, responses_df, [LIE], colors, to_file)
 
 
@@ -156,10 +158,12 @@ def plot_n_transitions_for_clusters(response_df: DataFrame, cluster_by: str, col
     plot_response_stats_for_clusters(ax, response_df, [N_TRANSITIONS], colors, to_file)
 
 
-def plot_n_trials_for_clusters(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
+def plot_n_trials_for_clusters(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', sort_by: str = None, to_file: str = None):
     fig, ax = plt.subplots(figsize=(10, 6))
     plt.title('%sQuantity per %s Cluster' % (title_prefix, cluster_by))
     plt.ylabel('N Trials')
+    display(response_df)
+    response_df = response_df.sort_values(sort_by) if sort_by else response_df
     plot_response_stats_for_clusters(ax, response_df, [TRIAL_COUNT], colors, to_file)
 
 
@@ -168,6 +172,10 @@ def plot_n_trials_for_clusters_by_pid(response_df: DataFrame, cluster_by: str, c
     plt.title('%sQuantity per %s Cluster' % (title_prefix, cluster_by))
     plt.ylabel('N Trials')
     plot_response_stats_for_clusters_by_pid(ax, response_df, [TRIAL_COUNT], colors, to_file)
+
+
+def plot_n_trials_for_clusters_by_pid_sort_by_lie(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
+    plot_n_trials_for_clusters_by_pid(response_df, cluster_by, colors=colors, title_prefix=title_prefix, sort_by=LIE, to_file=to_file)
 
 def create_error_bars_y(values, errors):
     error_bars = []
@@ -220,11 +228,11 @@ def plot_response_stats_for_clusters(ax: Axes, responses_df: DataFrame, stats: l
 
 def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, stats: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     bar_width = 0.3
-    gap_width = 0.45  # Width of the gap between different PIDs
+    gap_width = 0.4  # Width of the gap between different PIDs
     responses_df = responses_df.reset_index()
     num_categories = len(stats)
     is_clustered = CLUSTER in responses_df.columns
-
+    display(responses_df)
     pids = responses_df[PID].unique()
     current_position = 0
 
@@ -262,7 +270,7 @@ def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, s
         current_position += (len(pid_df) * bar_width) + gap_width
 
     ax.set_xticks(pid_positions)
-    ax.set_xticklabels(pids)
+    ax.set_xticklabels(pids, fontsize=7)
 
     ax.tick_params(axis='both', which='both', length=0)
 

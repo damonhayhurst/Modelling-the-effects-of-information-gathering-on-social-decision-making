@@ -219,8 +219,7 @@ def get_kmedoids_clusters(big_matrix_df: DataFrame, n_clusters: int = 2):
 
 
 def dbscan(big_matrix_df: DataFrame, min_pts: int = 100, eps: float = 51.5):
-    dbscan = DBSCAN(eps=eps, min_samples=min_pts).fit(big_matrix_df)
-    display(dbscan.labels_)
+    dbscan = DBSCAN(eps=eps, min_samples=min_pts, metric="precomputed").fit(big_matrix_df)
     return DataFrame({
         CLUSTER: (dbscan.labels_.astype(int) + 1).astype(int)
     }, index=big_matrix_df.index)
@@ -232,7 +231,7 @@ def get_dbscan_clusters(big_matrix_df: DataFrame, n_neighbours: int = 100, eps: 
 
 def plot_nearest_neighbour_points(big_matrix_df: DataFrame, n_neighbours: int = 100):
 
-    nbrs = NearestNeighbors(n_neighbors=n_neighbours).fit(big_matrix_df)
+    nbrs = NearestNeighbors(n_neighbors=n_neighbours, metric="precomputed").fit(big_matrix_df)
     distances, indices = nbrs.kneighbors(big_matrix_df)
 
     # Sort and plot distances

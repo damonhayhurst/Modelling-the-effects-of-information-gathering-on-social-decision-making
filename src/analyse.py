@@ -88,7 +88,7 @@ def do_dbscan_analysis(save: bool = True):
     dbscan_dtw_analysis(
         input_distance_file=DTW_T_V2_CSV,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        percent_lies_by_pid_plot=save(DBSCAN_PERCENT_LIES_PLOT),
+        percent_lies_plot=save(DBSCAN_PERCENT_LIES_PLOT),
         dwell_times_plot=save(DBSCAN_DWELL_TIMES_PLOT),
         n_transitions_plot=save(DBSCAN_N_TRANSITIONS_PLOT),
         n_trials_plot=save(DBSCAN_N_TRIALS_BY_PID_PLOT),
@@ -112,7 +112,7 @@ def do_response_analysis(save: bool = True):
 
 if __name__ == "__main__":
     # do_dtw_analysis(save=False)
-    # do_kmeans_analysis(save=False)
+    do_kmeans_analysis(save=True)
     # do_kmedoids_analysis(save=True)
     # do_response_analysis(save=True)
-    do_dbscan_analysis(save=False)
+    do_dbscan_analysis(save=True)
