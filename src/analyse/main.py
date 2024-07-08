@@ -32,6 +32,8 @@ def response_analysis(input_aoi_analysis_file: str = None,
     response_df = get_response_stats_no_clusters(aoi_analysis_df)
     sorted_responses_by_pid_df = sort_response_df_by_pid_lie_percent(response_df, aoi_analysis_df)
     plot_percent_lies_by_pid(sorted_responses_by_pid_df, colors, to_file=percent_lies_by_pid_plot)
+    plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, PID)
+
 
 
 

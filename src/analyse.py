@@ -112,7 +112,7 @@ def do_response_analysis(save: bool = True):
 
 if __name__ == "__main__":
     # do_dtw_analysis(save=False)
-    do_kmeans_analysis(save=True)
+    # do_kmeans_analysis(save=True)
     # do_kmedoids_analysis(save=True)
-    # do_response_analysis(save=True)
-    do_dbscan_analysis(save=True)
+    do_response_analysis(save=True)
+    # do_dbscan_analysis(save=True)
