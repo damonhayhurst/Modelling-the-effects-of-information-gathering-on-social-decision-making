@@ -47,6 +47,7 @@ SELF_TRUE_DISTRIBUTION_PLOT = "plots/RESPONSE/SELFTRUEDistPlot.png"
 OTHER_LIE_DISTRIBUTION_PLOT = "plots/RESPONSE/OTHERLIEDistPlot.png"
 OTHER_TRUTH_DISTRIBUTION_PLOT = "plots/RESPONSE/OTHERTRUTHDistPlot.png"
 OVERALL_PID_PERCENT_LIES_PLOT = "plots/RESPONSE/PIDPercentLiesPlot.png"
+OVERALL_TRIAL_ID_PERCENT_LIES_PLOT = "plots/RESPONSE/TRIALIDPercentLies.png"
 
 KMEANS_CORRELATIONS_PLOT = "plots/KMeans/Correlations.png"
 KMEANS_PERCENT_LIES_BY_PID_PLOT = "plots/KMeans/PercentLiesByPID.png"
@@ -63,3 +64,8 @@ DBSCAN_DWELL_TIMES_PLOT = "plots/DBScan/DwellTimes.png"
 DBSCAN_N_TRANSITIONS_PLOT = "plots/DBScan/NTransitions.png"
 DBSCAN_PERCENT_LIES_BY_PID_PLOT = "plots/DBScan/PercentLiesByPID.png"
 DBSCAN_N_TRIALS_BY_PID_PLOT = "plots/DBScan/NTrialsByPID.png"
+
+TRIAL_INDEX_GAINS_PLOT = "plots/TrialIndex/Gains.png"
+NET_GAIN_LIE_PLOT = "plots/RESPONSE/NetGainLie.png"
+
+TIME_SERIES_KMEANS_3_CLUSTER_JSON = "Analysis/TimeSeriesKmeans_3_cluster.json"

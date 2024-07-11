@@ -157,7 +157,7 @@ def get_heirarchical_clusters_by_trial(big_matrix_df: DataFrame, n_clusters: int
 
 
 def get_heirarchical_clusters(matrix_df: DataFrame, set_index: Index, n_clusters: int = 3):
-    row_clusters = linkage(matrix_df, method='complete', metric='euclidean')
+    row_clusters = linkage(matrix_df, method='complete')
     cluster_labels = fcluster(row_clusters, t=n_clusters, criterion='maxclust')
     return DataFrame({
         CLUSTER: cluster_labels

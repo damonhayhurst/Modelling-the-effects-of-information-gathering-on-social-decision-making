@@ -180,6 +180,8 @@ def create_aoi_analysis(aoi_df: DataFrame, to_file: str = None) -> DataFrame:
     payne_index = ((n_alt_transitions - n_att_transitions) / (n_alt_transitions + n_att_transitions))
     analysis_df[PAYNE_INDEX] = payne_index.fillna(0)
     analysis_df[RT] = aoi_df[RT]
+    analysis_df[SELF_GAIN] = aoi_df[SELF_GAIN]
+    analysis_df[OTHER_LOSS] = aoi_df[OTHER_LOSS]
     analysis_df = analysis_df.reset_index()
     analysis_df = analysis_df.drop_duplicates(subset=[PID, TRIAL_COUNT])
     analysis_df = analysis_df.drop(columns=MOUSE_TIMESTAMP)

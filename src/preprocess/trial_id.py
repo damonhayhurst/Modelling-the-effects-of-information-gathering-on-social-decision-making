@@ -1,3 +1,5 @@
+import os
+from matplotlib import pyplot as plt
 from pandas import DataFrame
 from utils.display import display
 from utils.paths import TRIAL_INDEX_CSV
@@ -22,8 +24,32 @@ def add_trial_id(df: DataFrame, from_index: DataFrame = None):
     return df
 
 
+def add_gains(df: DataFrame, gains_df: DataFrame):
+    df[SELF_GAIN] = df[TRIAL_ID].map(gains_df[SELF_GAIN])
+    df[OTHER_LOSS] = df[TRIAL_ID].map(gains_df[OTHER_LOSS])
+    return df
+
 def save(trial_index_df: DataFrame, path: str = TRIAL_INDEX_CSV):
     trial_index_df.to_csv(path)
     print("Trial Index saved to %s" % path)
 
 
+def calculate_gains(trial_index_df: DataFrame):
+    df = trial_index_df.reset_index().set_index([TRIAL_ID])
+    df[SELF_GAIN] = df[SELF_LIE] - df[SELF_TRUE]
+    df[OTHER_LOSS] = df[OTHER_TRUTH] - df[OTHER_LIE]
+    return df
+
+def plot_gains_by_trial_id(gains_df, to_file: str = None):
+    fig, ax = plt.subplots(figsize=(20, 6))
+    plt.title('Net Gain To Sender by Trial Id')
+    plt.ylabel('Net Gain to Sender')
+    plt.bar(gains_df.index, gains_df[SELF_GAIN])
+    plt.xticks(gains_df.index, fontsize=7)
+    plt.tight_layout()
+    if to_file:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
+        plt.savefig(to_file)
+    plt.show()
+
+    

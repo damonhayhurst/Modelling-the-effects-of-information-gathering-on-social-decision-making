@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from numpy import linspace
 import pandas as pd
 from pandas import Categorical, DataFrame
-from sklearn import preprocessing
+from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import StandardScaler
@@ -108,10 +108,9 @@ def get_kmeans_clusters(clustering_df: DataFrame, n_components: float = None, n_
     return kmeans_df
 
 
-def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]):
+def prepare_data(aoi_df: DataFrame, columns: List[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH], scaler=RobustScaler):
     filtered_df = aoi_df[columns] if columns else aoi_df[aoi_df.columns]
-    scaler = preprocessing.RobustScaler()
-    normalised_df = scaler.fit_transform(filtered_df)
+    normalised_df = scaler().fit_transform(filtered_df)
     return DataFrame(normalised_df, columns=filtered_df.columns)
 
 def plot_correlation_matrix(for_kmeans_df: DataFrame, to_file: str = None):

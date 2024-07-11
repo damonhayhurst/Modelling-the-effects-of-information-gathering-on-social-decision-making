@@ -170,6 +170,25 @@ def set_data_types_for_dtw_file(df: DataFrame) -> DataFrame:
         DISTANCE: float
     })
 
+def read_from_trial_index_file(path: str = TRIAL_INDEX_CSV) -> DataFrame:
+    df = read_csv(path)
+    df = df.pipe(
+        set_data_types_for_trial_index_file
+    ).pipe(
+        set_index, [TRIAL_ID]
+    )
+    print("\n Trial Index read from %s \n" % path)
+    return df
+
+def set_data_types_for_trial_index_file(df: DataFrame) -> DataFrame:
+    return df.astype({
+        SELF_LIE: int, 
+        SELF_TRUE: int, 
+        OTHER_LIE: int, 
+        OTHER_TRUTH: int, 
+        TRIAL_ID: int
+    })
+
 if __name__ == "__main__":
     read_from_input_files([YOUNG_ADULTS_1, YOUNG_ADULTS_2])
     read_from_aois_file()

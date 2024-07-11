@@ -7,6 +7,16 @@ from utils.paths import DTW_Z_V2_CSV
 from utils.columns import *
 
 
+def n_cluster_silhouette_analysis(aoi_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
+    silhouette_scores = {}
+    for n in range(2, max_clusters + 1):
+        cluster_df = get_clusters_fn(aoi_df, n_clusters=n)
+        silhouette_scores[n] = {SILHOUETTE: silhouette_score(aoi_df, cluster_df[CLUSTER])}
+    n_cluster_df = DataFrame.from_dict(silhouette_scores, orient="index")
+    n_cluster_df.index.name = N_CLUSTER
+    return n_cluster_df
+
+
 def n_cluster_f_statistic_analysis(matrix_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
     n_cluster_start = 2
     pseudo_f = {}
@@ -17,15 +27,6 @@ def n_cluster_f_statistic_analysis(matrix_df: DataFrame, get_clusters_fn: Callab
     n_cluster_df.index.name = N_CLUSTER
     return n_cluster_df
 
-
-def n_cluster_silhouette_analysis(aoi_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
-    silhouette_scores = {}
-    for n in range(2, max_clusters + 1):
-        cluster_df = get_clusters_fn(aoi_df, n_clusters=n)
-        silhouette_scores[n] = {SILHOUETTE: silhouette_score(aoi_df, cluster_df[CLUSTER])}
-    n_cluster_df = DataFrame.from_dict(silhouette_scores, orient="index")
-    n_cluster_df.index.name = N_CLUSTER
-    return n_cluster_df
 
 def get_within_cluster_matrix(cluster, matrix_df, cluster_df):
     trial_1, trial_2 = matrix_df.index, matrix_df.columns
@@ -75,18 +76,13 @@ def get_triangle_values(matrix_df: DataFrame, exclude_self_distances: bool = Tru
     return matrix_df.values[np.triu_indices_from(matrix_df.values, k=k)]
 
 
-def get_overall_mean(matrix_df):
-    return get_triangle_values(matrix_df).mean()
-
-
 def get_best_fit_heirarchical_clusters(matrix_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
     n_cluster_df = n_cluster_f_statistic_analysis(matrix_df, get_clusters_fn, max_clusters)
-    n_clusters = n_cluster_df.idxmax()
+    n_clusters = n_cluster_df.idxmax().values[0]
     return get_clusters_fn(matrix_df, n_clusters)
 
 
 def get_best_fit_partitional_clusters(matrix_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
     n_cluster_df = n_cluster_silhouette_analysis(matrix_df, get_clusters_fn, max_clusters)
-    display(n_cluster_df)
     n_clusters = n_cluster_df.idxmax().values[0]
     return get_clusters_fn(matrix_df, n_clusters=n_clusters)

@@ -68,6 +68,32 @@ def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, di
         trial_seq_dict = {trial: get_t_series_dwell_sequence(dwell_df.loc[trial]) for trial in trials}
     return trial_seq_dict
 
+
+def get_t_series_df(dwell_df: DataFrame, analysis_df: DataFrame):
+    trials = analysis_df.index.unique()
+    t_series_df = DataFrame()
+    for trial in trials:
+        t_series_df[trial] = get_t_series_row(dwell_df.loc[trial])
+    return t_series_df
+
+def get_t_series_row(trial: DataFrame):
+    idx = trial.index
+    trial[DWELL_TIME] = pd.to_timedelta(trial[DWELL_TIME], "ms")
+    trial[DWELL_TIME_MS] = (trial[DWELL_TIME].dt.microseconds).astype(int)
+    trial.loc[idx, SELF_LIE] = get_is_aoi(trial, SELF_LIE).astype(int)
+    trial.loc[idx, SELF_TRUE] = get_is_aoi(trial, SELF_TRUE).astype(int)
+    trial.loc[idx, OTHER_LIE] = get_is_aoi(trial, OTHER_LIE).astype(int)
+    trial.loc[idx, OTHER_TRUTH] = get_is_aoi(trial, OTHER_TRUTH).astype(int)
+    self_lie_seq, self_true_seq, other_lie_seq, other_truth_seq = [], [], [], []
+    for time, self_lie, self_true, other_lie, other_truth in trial.loc[idx][[DWELL_TIME_MS, SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]].itertuples(index=False, name=None):
+        for t in range(time):
+            self_lie_seq.append(self_lie)
+            self_true_seq.append(self_true)
+            other_lie_seq.append(other_lie)
+            other_truth_seq.append(other_truth)
+    return self_lie_seq, self_true_seq, other_lie_seq, other_truth_seq
+
+
 def get_t_series_dwell_sequence(trial: DataFrame, z_norm: bool = False):
     idx = trial.index
     trial[DWELL_TIME] = pd.to_timedelta(trial[DWELL_TIME], "ms")
