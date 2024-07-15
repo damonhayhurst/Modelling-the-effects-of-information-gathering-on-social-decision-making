@@ -67,5 +67,25 @@ DBSCAN_N_TRIALS_BY_PID_PLOT = "plots/DBScan/NTrialsByPID.png"
 
 TRIAL_INDEX_GAINS_PLOT = "plots/TrialIndex/Gains.png"
 NET_GAIN_LIE_PLOT = "plots/RESPONSE/NetGainLie.png"
+NET_LOSS_LIE_PLOT = "plots/RESPONSE/NetLossLie.png"
 
-TIME_SERIES_KMEANS_3_CLUSTER_JSON = "Analysis/TimeSeriesKmeans_3_cluster.json"
+TIME_SERIES_KMEANS_2_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_2_cluster.csv"
+TIME_SERIES_KMEANS_3_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_3_cluster.csv"
+TIME_SERIES_KMEANS_4_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_4_cluster.csv"
+TIME_SERIES_KMEANS_5_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_5_cluster.csv"
+TIME_SERIES_KMEANS_6_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_6_cluster.csv"
+TIME_SERIES_KMEANS_7_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_7_cluster.csv"
+TIME_SERIES_KMEANS_8_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_8_cluster.csv"
+TIME_SERIES_KMEANS_9_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_9_cluster.csv"
+TIME_SERIES_KMEANS_10_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_7_cluster.csv"
+
+N_TRIALS_BY_PID_PLOT = "plots/RESPONSE/NTrialsByPID.png"
+
+TS_KMEANS_PERCENT_LIES_PLOT = "plots/TSKMeans/PercentLies.png"
+TS_KMEANS_DWELL_TIMES_PLOT = "plots/TSKMeans/DwellTimes.png"
+TS_KMEANS_N_TRANSITIONS_PLOT = "plots/TSKMeans/NTransitions.png"
+TS_KMEANS_PERCENT_LIES_BY_PID_PLOT = "plots/TSKMeans/PercentLiesByPID.png"
+TS_KMEANS_N_TRIALS_BY_PID_PLOT = "plots/TSKMeans/NTrialsByPID.png"
+
+TS_KMEANS_N_TRIALS_PLOT = "plots/TSKMeans/NTrials.png"
+KMEANS_N_TRIALS_PLOT = "plots/KMeans/NTrials.png"

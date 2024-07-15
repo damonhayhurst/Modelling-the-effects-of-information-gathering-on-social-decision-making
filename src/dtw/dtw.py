@@ -17,10 +17,15 @@ from typing import List, Tuple
 DWELL_DICT = {column: index for index, column in enumerate([np.nan] + DWELL_COLUMNS)}
 
 
-def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
+def get_t_series_trials_and_sequences(dwell_df:DataFrame, analysis_df: DataFrame) -> Tuple[List, List]:
     t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
     t_series_trials = [trial for trial in t_series.keys()]
     t_series_sequences = [t_series[trial] for trial in t_series_trials]
+    return t_series_trials, t_series_sequences
+
+
+def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
+    t_series_trials, t_series_sequences = get_t_series_trials_and_sequences(dwell_df, analysis_df)
     dtws = dtw_ndim.distance_matrix_fast(t_series_sequences, only_triu=True)
     distances = {}
     idx = 0
@@ -60,7 +65,7 @@ def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False
     trial2_ndim = np.array([[dwell, *aois] for dwell, *aois in trial2_tuples], dtype=object)
     return dtw_ndim.distance(trial1_ndim, trial2_ndim)
 
-def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, differencing: bool = True):
+def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, differencing: bool = False):
     trials = analysis_df.index.unique()
     if differencing:
         trial_seq_dict = {trial: preprocessing.differencing(get_t_series_dwell_sequence(dwell_df.loc[trial]), smooth=0.1) for trial in trials}

@@ -1,3 +1,4 @@
+from typing import Dict, List
 from utils.columns import *
 from pandas import DataFrame, read_csv, concat
 from utils.paths import *
@@ -66,16 +67,16 @@ def read_from_input_files(paths: list[str] = [YOUNG_ADULTS_1, YOUNG_ADULTS_2]) -
     return df
 
 
-def read_from_analysis_file(path: str = AOI_ANALYSIS_CSV) -> DataFrame:
+def read_from_analysis_file(path: str = AOI_ANALYSIS_CSV, index: List[str] = [PID, TRIAL_ID]) -> DataFrame:
     df = read_csv(path)
     df = df.pipe(
         set_data_types_for_analysis_df
     ).pipe(
-        set_index, [PID, TRIAL_ID]
+        set_index, index
     ).pipe(
         dwell_columns_to_seconds, [*DWELL_COLUMNS, AVG_DWELL]
     )
-    print("\n Analysis read from %s \n" % path)
+    print("Analysis read from %s \n" % path)
     return df
 
 
@@ -108,7 +109,7 @@ def read_from_aois_file(path: str = AOIS_CSV) -> DataFrame:
     ).pipe(
         set_index, [PID, TRIAL_COUNT, MOUSE_TIMESTAMP]
     )
-    print("\n AOIs read from %s \n" % path)
+    print("AOIs read from %s \n" % path)
     return df
 
 
@@ -133,7 +134,7 @@ def read_from_dwell_file(path: str = DWELL_TIMELINE_CSV) -> DataFrame:
     ).pipe(
         dwell_columns_to_seconds, [DWELL_TIME]
     )
-    print("\n Dwell Timeline from %s \n" % path)
+    print("Dwell Timeline from %s \n" % path)
     return df
 
 
@@ -158,7 +159,7 @@ def read_from_dtw_file(path: str = DTW_CSV) -> DataFrame:
     ).pipe(
         set_index, [PID_1, TRIAL_ID_1, TRIAL_COUNT_1, PID_2, TRIAL_ID_2, TRIAL_COUNT_2]
     )
-    print("\n DTW read from %s \n" % path)
+    print("DTW read from %s \n" % path)
     return df
 
 def set_data_types_for_dtw_file(df: DataFrame) -> DataFrame:
@@ -177,7 +178,7 @@ def read_from_trial_index_file(path: str = TRIAL_INDEX_CSV) -> DataFrame:
     ).pipe(
         set_index, [TRIAL_ID]
     )
-    print("\n Trial Index read from %s \n" % path)
+    print("Trial Index read from %s \n" % path)
     return df
 
 def set_data_types_for_trial_index_file(df: DataFrame) -> DataFrame:
@@ -189,8 +190,32 @@ def set_data_types_for_trial_index_file(df: DataFrame) -> DataFrame:
         TRIAL_ID: int
     })
 
-if __name__ == "__main__":
-    read_from_input_files([YOUNG_ADULTS_1, YOUNG_ADULTS_2])
-    read_from_aois_file()
-    read_from_analysis_file()
-    read_from_dwell_file()
+
+def set_data_types_for_cluster_file(df: DataFrame) -> DataFrame:
+    return df.astype({
+        PID: int,
+        TRIAL_ID: int,
+        CLUSTER: int
+    })
+
+def read_from_cluster_file(path: str = TIME_SERIES_KMEANS_2_CLUSTER_CSV) -> DataFrame:
+    df = read_csv(path)
+    df = df.pipe(
+        set_data_types_for_cluster_file
+    ).pipe(
+        set_index, [PID, TRIAL_ID]
+    )
+    print('Cluster file read from %s \n' % path)
+    return df
+
+def read_friom_cluster_files_to_dict(paths: List[str]) -> Dict[int, DataFrame]:
+    cluster_dict = {}
+    for path in paths:
+        df = read_from_cluster_file(path)
+        n_cluster = df[CLUSTER].max()
+        if n_cluster in cluster_dict:
+            print('Error: Cluster file already exists for n_cluster %s' % n_cluster)
+        else:
+            cluster_dict[n_cluster] = df
+    return cluster_dict
+

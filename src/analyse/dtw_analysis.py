@@ -4,7 +4,7 @@ from matplotlib.axes import Axes
 from matplotlib.patches import Rectangle
 from matplotlib.colors import XKCD_COLORS, LogNorm
 from pandas import DataFrame, Index, MultiIndex, concat
-from sklearn.cluster import DBSCAN
+from sklearn.cluster import DBSCAN, AgglomerativeClustering
 from sklearn.neighbors import NearestNeighbors
 from utils.display import display
 from utils.paths import PID_DISTANCE_PLOT, TRIAL_DISTANCE_PLOT
@@ -40,7 +40,11 @@ def create_big_matrix(distance_df: DataFrame):
     swapped_df = distance_df.swaplevel(PID_1, PID_2).swaplevel(TRIAL_ID_1, TRIAL_ID_2).swaplevel(TRIAL_COUNT_1, TRIAL_COUNT_2)
     swapped_df.index.names = ([PID_1, TRIAL_ID_1, TRIAL_COUNT_1, PID_2, TRIAL_ID_2, TRIAL_COUNT_2])
     distance_df[DISTANCE] = distance_df[DISTANCE].fillna(swapped_df[DISTANCE])
-    return distance_df.unstack([PID_2, TRIAL_ID_2, TRIAL_COUNT_2]).sort_values([PID_1, TRIAL_ID_1, TRIAL_COUNT_1]).sort_values([PID_2, TRIAL_ID_2], axis=1)
+    matrix_df = distance_df.unstack([PID_2, TRIAL_ID_2, TRIAL_COUNT_2]).sort_values([PID_1, TRIAL_ID_1, TRIAL_COUNT_1]).sort_values([PID_2, TRIAL_ID_2], axis=1)
+    matrix_df.columns = matrix_df.columns.droplevel()
+    matrix_df = set_diagonal(matrix_df)
+    return matrix_df
+
 
 
 def is_same_trial(distance_df: DataFrame):
@@ -157,10 +161,9 @@ def get_heirarchical_clusters_by_trial(big_matrix_df: DataFrame, n_clusters: int
 
 
 def get_heirarchical_clusters(matrix_df: DataFrame, set_index: Index, n_clusters: int = 3):
-    row_clusters = linkage(matrix_df, method='complete')
-    cluster_labels = fcluster(row_clusters, t=n_clusters, criterion='maxclust')
+    agg_cluster = AgglomerativeClustering(n_clusters=n_clusters, metric="precomputed", linkage="complete").fit(matrix_df)
     return DataFrame({
-        CLUSTER: cluster_labels
+        CLUSTER: (agg_cluster.labels_.astype(int) + 1).astype(int)
     }, index=set_index)
 
 

@@ -7,11 +7,11 @@ from utils.paths import DTW_Z_V2_CSV
 from utils.columns import *
 
 
-def n_cluster_silhouette_analysis(aoi_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
+def n_cluster_silhouette_analysis(aoi_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], metric: str = "euclidean", max_clusters: int = 20) -> DataFrame:
     silhouette_scores = {}
     for n in range(2, max_clusters + 1):
         cluster_df = get_clusters_fn(aoi_df, n_clusters=n)
-        silhouette_scores[n] = {SILHOUETTE: silhouette_score(aoi_df, cluster_df[CLUSTER])}
+        silhouette_scores[n] = {SILHOUETTE: silhouette_score(aoi_df, cluster_df[CLUSTER], metric=metric)}
     n_cluster_df = DataFrame.from_dict(silhouette_scores, orient="index")
     n_cluster_df.index.name = N_CLUSTER
     return n_cluster_df
@@ -82,7 +82,15 @@ def get_best_fit_heirarchical_clusters(matrix_df: DataFrame, get_clusters_fn: Ca
     return get_clusters_fn(matrix_df, n_clusters)
 
 
-def get_best_fit_partitional_clusters(matrix_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
-    n_cluster_df = n_cluster_silhouette_analysis(matrix_df, get_clusters_fn, max_clusters)
+def get_best_fit_partitional_clusters(matrix_or_analysis_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], metric: str = 'euclidean', max_clusters: int = 20) -> DataFrame:
+    n_cluster_df = n_cluster_silhouette_analysis(matrix_or_analysis_df, get_clusters_fn, metric, max_clusters)
     n_clusters = n_cluster_df.idxmax().values[0]
-    return get_clusters_fn(matrix_df, n_clusters=n_clusters)
+    return get_clusters_fn(matrix_or_analysis_df, n_clusters=n_clusters)
+
+
+def get_best_fit_partitional_clusters_from_matrix(matrix_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], max_clusters: int = 20) -> DataFrame:
+    return get_best_fit_partitional_clusters(matrix_df, get_clusters_fn, "precomputed", max_clusters)
+
+
+def get_best_fit_partitional_clusters_from_features(analysis_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], metric: str = 'euclidean', max_clusters: int = 20) -> DataFrame:
+    return get_best_fit_partitional_clusters(analysis_df, get_clusters_fn, "euclidean", max_clusters)

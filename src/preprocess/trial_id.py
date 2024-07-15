@@ -29,16 +29,18 @@ def add_gains(df: DataFrame, gains_df: DataFrame):
     df[OTHER_LOSS] = df[TRIAL_ID].map(gains_df[OTHER_LOSS])
     return df
 
+
 def save(trial_index_df: DataFrame, path: str = TRIAL_INDEX_CSV):
     trial_index_df.to_csv(path)
     print("Trial Index saved to %s" % path)
 
 
-def calculate_gains(trial_index_df: DataFrame):
+def calculate_gains_losses(trial_index_df: DataFrame):
     df = trial_index_df.reset_index().set_index([TRIAL_ID])
     df[SELF_GAIN] = df[SELF_LIE] - df[SELF_TRUE]
     df[OTHER_LOSS] = df[OTHER_TRUTH] - df[OTHER_LIE]
     return df
+
 
 def plot_gains_by_trial_id(gains_df, to_file: str = None):
     fig, ax = plt.subplots(figsize=(20, 6))
@@ -51,5 +53,3 @@ def plot_gains_by_trial_id(gains_df, to_file: str = None):
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
         plt.savefig(to_file)
     plt.show()
-
-    

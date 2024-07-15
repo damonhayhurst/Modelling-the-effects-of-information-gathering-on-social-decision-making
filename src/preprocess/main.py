@@ -4,7 +4,7 @@ from preprocess.aoi import determine_aoi
 from preprocess.aoi_analysis import create_aoi_analysis, create_average_analysis
 from preprocess.dwell import create_dwell_timeline
 from preprocess.filtering import do_filtering, print_stats
-from preprocess.trial_id import add_gains, add_trial_id, calculate_gains, create_trial_id_index, plot_gains_by_trial_id
+from preprocess.trial_id import add_gains, add_trial_id, calculate_gains_losses, create_trial_id_index, plot_gains_by_trial_id
 from utils.paths import AOI_ANALYSIS_CSV, AOIS_CSV, AVERAGE_ANALYSIS_CSV, DWELL_TIMELINE_CSV, TRIAL_INDEX_CSV, YOUNG_ADULTS_1, YOUNG_ADULTS_2
 from utils.read_csv import read_from_input_files
 
@@ -18,14 +18,15 @@ def do_preprocessing(input_data_files: str = [YOUNG_ADULTS_1, YOUNG_ADULTS_2],
                      output_dwell_timeline_file: str = DWELL_TIMELINE_CSV,
                      custom_filtering: Callable[[DataFrame], DataFrame] = None,
                      bypass: bool = False):
-    if bypass: return
-    
+    if bypass:
+        return
+
     df = read_from_input_files(input_data_files)
     print_stats(df)
     df = do_filtering(df) if custom_filtering is None else custom_filtering(df)
     print_stats(df)
     trial_index = create_trial_id_index(df, to_file=output_trial_index_file)
-    gains_df = calculate_gains(trial_index)
+    gains_df = calculate_gains_losses(trial_index)
     plot_gains_by_trial_id(gains_df, to_file=output_trial_index_gains_plot)
     df = add_trial_id(df, trial_index)
     df = add_gains(df, gains_df)
@@ -34,4 +35,3 @@ def do_preprocessing(input_data_files: str = [YOUNG_ADULTS_1, YOUNG_ADULTS_2],
     analysis_df = create_aoi_analysis(aoi_df, to_file=output_aoi_analysis_file)
     create_average_analysis(analysis_df, to_file=output_avg_aoi_analysis_file)
     create_dwell_timeline(aoi_df, to_file=output_dwell_timeline_file)
-
