@@ -84,6 +84,7 @@ def get_best_fit_heirarchical_clusters(matrix_df: DataFrame, get_clusters_fn: Ca
 
 def get_best_fit_partitional_clusters(matrix_or_analysis_df: DataFrame, get_clusters_fn: Callable[[DataFrame, int], DataFrame], metric: str = 'euclidean', max_clusters: int = 20) -> DataFrame:
     n_cluster_df = n_cluster_silhouette_analysis(matrix_or_analysis_df, get_clusters_fn, metric, max_clusters)
+    display(n_cluster_df)
     n_clusters = n_cluster_df.idxmax().values[0]
     return get_clusters_fn(matrix_or_analysis_df, n_clusters=n_clusters)
 

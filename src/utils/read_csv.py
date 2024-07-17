@@ -162,6 +162,7 @@ def read_from_dtw_file(path: str = DTW_CSV) -> DataFrame:
     print("DTW read from %s \n" % path)
     return df
 
+
 def set_data_types_for_dtw_file(df: DataFrame) -> DataFrame:
     return df.astype({
         PID_1: int,

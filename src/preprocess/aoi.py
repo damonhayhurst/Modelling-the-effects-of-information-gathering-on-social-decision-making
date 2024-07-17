@@ -139,6 +139,38 @@ def get_trials_has_no_aois(df: DataFrame) -> DataFrame:
     return df.loc[has_no_aois]
 
 
+def get_trials_has_less_than_3std_rt(df: DataFrame) -> DataFrame:
+    df_by_trial = df.groupby(level=[PID, TRIAL_COUNT]).first()
+    mean_rt, std_rt = df_by_trial[RT].mean(), df_by_trial[RT].std()
+    min_rt = mean_rt - 3 * std_rt
+    less_than_rt = df[RT] < min_rt
+    return df.loc[less_than_rt]
+
+
+def get_trials_has_more_than_3std_rt(df: DataFrame) -> DataFrame:
+    df_by_trial = df.groupby(level=[PID, TRIAL_COUNT]).first()
+    mean_rt, std_rt = df_by_trial[RT].mean(), df_by_trial[RT].std()
+    max_rt = mean_rt + 3 * std_rt
+    more_than_rt = df[RT] > max_rt
+    return df.loc[more_than_rt]
+
+
+def remove_trials_with_less_than_3std_rt(df: DataFrame, bypass: bool = False) -> DataFrame:
+    if bypass: return df
+    less_than_rt = get_trials_has_less_than_3std_rt(df)
+    filtered_df = df.drop(labels=less_than_rt.index)
+    print("Trials removed with less than 3 standard deviation away from mean RT: %s" % (len(less_than_rt.groupby(level=[PID, TRIAL_COUNT]).groups)))
+    return filtered_df
+
+
+def remove_trials_with_more_than_3std_rt(df: DataFrame, bypass: bool = False) -> DataFrame:
+    if bypass: return df
+    more_than_rt = get_trials_has_more_than_3std_rt(df)
+    filtered_df = df.drop(labels=more_than_rt.index)
+    print("Trials removed with more than 3 standard deviation away from mean RT: %s" % (len(more_than_rt.groupby(level=[PID, TRIAL_COUNT]).groups)))
+    return filtered_df
+
+
 def get_trials_has_aois(df: DataFrame) -> DataFrame:
     df_by_trial = df.groupby(level=[PID, TRIAL_COUNT])
     has_aois = df_by_trial[AOI].apply(lambda aoi: aoi.notnull().any())
@@ -185,6 +217,8 @@ def determine_aoi(df: DataFrame, to_file: str = None) -> DataFrame:
     print_aois_stats(coord_row_df)
     aoi_df = remove_trials_with_no_aois(coord_row_df)
     aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 80, bypass=True)
+    aoi_df = remove_trials_with_less_than_3std_rt(aoi_df)
+    aoi_df = remove_trials_with_more_than_3std_rt(aoi_df)
     if to_file:
         save(aoi_df, to_file)
     return aoi_df

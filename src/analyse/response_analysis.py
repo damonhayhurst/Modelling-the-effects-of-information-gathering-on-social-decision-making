@@ -7,7 +7,7 @@ from pandas import DataFrame, Index
 import seaborn as sns
 
 from analyse.dtw_analysis import XKCD_COLORS_LIST
-from utils.columns import CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_UNDER_TEN, LIE, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PID, SELECTED_AOI, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL_COUNT, TRIAL_ID
+from utils.columns import CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_UNDER_TEN, LIE, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PID, RT, SELECTED_AOI, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL_COUNT, TRIAL_ID
 from utils.display import display
 
 
@@ -349,6 +349,17 @@ def plot_dwell_time_distributions(aoi_analysis_df: DataFrame, aoi: str, to_file:
         plt.savefig(to_file)
     plt.show()
 
+
+def plot_rt_distributions(aoi_analysis_df: DataFrame, to_file: str = None):
+    plt.figure(figsize=(10, 6))
+    sns.histplot(aoi_analysis_df[RT], kde=True)
+    plt.title('Distribution of Reaction Times')
+    plt.xlabel('Duration')
+    plt.ylabel('Frequency')
+    if to_file is not None:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
+        plt.savefig(to_file)
+    plt.show()
 
 def plot_distance_distributions(distance_df: DataFrame, to_file: str = None):
     plt.figure(figsize=(10, 6))

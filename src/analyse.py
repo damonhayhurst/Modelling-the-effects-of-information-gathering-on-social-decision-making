@@ -3,6 +3,7 @@ from pandas.errors import SettingWithCopyWarning
 from analyse.main import *
 from analyse.response_analysis import *
 from dtw.main import do_time_series_kmeans_processing
+from utils.columns import N_AOIS
 from utils.paths import *
 import warnings
 
@@ -43,6 +44,10 @@ def do_dtw_analysis(save: bool = True):
         all_trial_dwell_times_plot=save(ALL_TRIAL_DWELL_TIMES_PLOT),
         all_trial_n_transitions_plot=save(ALL_TRIAL_N_TRANSITIONS_PLOT),
         all_trial_n_trials_plot=save(ALL_TRIAL_N_TRIALS_PLOT),
+        all_trial_percent_lie_by_pid_plot=save(ALL_TRIAL_PERCENT_LIES_BY_PID_PLOT),
+        all_trial_n_trials_by_pid_plot=save(ALL_TRIAL_N_TRIALS_BY_PID_PLOT),
+        all_trial_gain_of_ten_by_pid_plot=save(ALL_TRIAL_GAIN_OF_TEN_BY_PID_PLOT),
+        all_trial_gain_under_ten_by_pid_plot=save(ALL_TRIAL_GAIN_UNDER_TEN_BY_PID_PLOT)
         # max_clusters=2
         # n_clusters=10
     )
@@ -61,18 +66,16 @@ def do_kmeans_analysis(save: bool = True):
         correlations_plot=save(KMEANS_CORRELATIONS_PLOT),
         percent_lies_by_pid_plot=save(KMEANS_PERCENT_LIES_BY_PID_PLOT),
         n_trials_by_pid_plot=save(KMEANS_N_TRIALS_BY_PID_PLOT),
-        columns=[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH, N_TRANSITIONS, SELF_GAIN, OTHER_LOSS, UNIQUE_AOIS, RT]
+        gain_of_ten_by_pid_plot=save(KMEANS_GAIN_OF_TEN_BY_PID_PLOT),
+        gain_under_ten_by_pid_plot=save(KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT),
+        columns=[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH, N_ALT_TRANSITIONS ,SELF_GAIN, OTHER_LOSS, UNIQUE_AOIS, ]
     )
 
 def do_time_series_kmeans_analysis(save: bool = True):
      
     save = save_to_file(save)
 
-    input_cluster_files = [TIME_SERIES_KMEANS_2_CLUSTER_CSV, 
-                           TIME_SERIES_KMEANS_3_CLUSTER_CSV, 
-                           TIME_SERIES_KMEANS_4_CLUSTER_CSV, 
-                           TIME_SERIES_KMEANS_5_CLUSTER_CSV,
-                           TIME_SERIES_KMEANS_6_CLUSTER_CSV]
+    input_cluster_files = [TIME_SERIES_KMEANS_2_CLUSTER_CSV]
 
     time_series_kmeans_analysis(
         input_cluster_files=input_cluster_files,
@@ -84,6 +87,8 @@ def do_time_series_kmeans_analysis(save: bool = True):
         n_trials_plot=save(TS_KMEANS_N_TRIALS_PLOT),
         percent_lies_by_pid_plot=save(TS_KMEANS_PERCENT_LIES_BY_PID_PLOT),
         n_trials_by_pid_plot=save(TS_KMEANS_N_TRIALS_BY_PID_PLOT),
+        gain_of_ten_by_pid_plot=save(TS_KMEANS_GAIN_OF_TEN_BY_PID_PLOT),
+        gain_under_ten_by_pid_plot=save(TS_KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT)
     )
 
 def do_kmedoids_analysis(save: bool = True):
@@ -113,7 +118,8 @@ def do_dbscan_analysis(save: bool = True):
         n_transitions_plot=save(DBSCAN_N_TRANSITIONS_PLOT),
         n_trials_plot=save(DBSCAN_N_TRIALS_BY_PID_PLOT),
         percent_lies_by_pid_plot=save(DBSCAN_PERCENT_LIES_BY_PID_PLOT),
-        n_trials_by_pid_plot=save(DBSCAN_N_TRIALS_BY_PID_PLOT)
+        n_trials_by_pid_plot=save(DBSCAN_N_TRIALS_BY_PID_PLOT),
+        eps=52.1
     )
 
 
@@ -124,10 +130,6 @@ def do_response_analysis(save: bool = True):
     response_analysis(
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
         input_trial_index_file=TRIAL_INDEX_CSV,
-        self_lie_distribution_plot=save(SELF_LIE_DISTRIBUTION_PLOT),
-        self_true_distribution_plot=save(SELF_TRUE_DISTRIBUTION_PLOT),
-        other_lie_distribution_plot=save(OTHER_LIE_DISTRIBUTION_PLOT),
-        other_true_distribution_plot=save(OTHER_TRUTH_DISTRIBUTION_PLOT),
         n_trials_by_pid_plot=save(N_TRIALS_BY_PID_PLOT),
         percent_lies_by_pid_plot=save(OVERALL_PID_PERCENT_LIES_PLOT),
         percent_lies_by_trial_id_plot=save(OVERALL_TRIAL_ID_PERCENT_LIES_PLOT),
@@ -136,18 +138,34 @@ def do_response_analysis(save: bool = True):
 
 def do_proximal_analysis(save: bool = True):
 
+    save = save_to_file(save)
+
     proximal_analysis(
-        input_distance_file=distance_file,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV
+        input_distance_file=distance_file
     )
+
+def do_dwell_analysis(save: bool = True):
+
+    save = save_to_file(save)
+
+    dwell_analysis(
+        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        self_lie_distribution_plot=save(SELF_LIE_DISTRIBUTION_PLOT),
+        self_true_distribution_plot=save(SELF_TRUE_DISTRIBUTION_PLOT),
+        other_lie_distribution_plot=save(OTHER_LIE_DISTRIBUTION_PLOT),
+        other_true_distribution_plot=save(OTHER_TRUTH_DISTRIBUTION_PLOT),
+        rt_distribution_plot=save(RT_DISTRIBUTION_PLOT)
+    ) 
+
 
 if __name__ == "__main__":
     # with plt.ioff():
     # with plt.ion():
-        do_dtw_analysis(save=True)
-        # do_kmeans_analysis(save=False)
+        # do_dtw_analysis(save=True)
+        do_kmeans_analysis(save=True)
         # do_kmedoids_analysis(save=False)
         # do_response_analysis(save=True)
         # do_dbscan_analysis(save=False)
         # do_proximal_analysis(save=False)
-        # do_time_series_kmeans_analysis(save=False)
+        # do_time_series_kmeans_analysis(save=True)
+        # do_dwell_analysis(save=True)

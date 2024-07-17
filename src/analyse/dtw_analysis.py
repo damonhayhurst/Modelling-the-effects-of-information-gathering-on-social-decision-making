@@ -33,7 +33,7 @@ def get_overall_avg_distance(distance_df: DataFrame):
     return distance_df[DISTANCE].mean()
 
 
-def create_big_matrix(distance_df: DataFrame):
+def create_big_matrix(distance_df: DataFrame, filter_by_df: DataFrame = None):
     distance_df = distance_df[DISTANCE].to_frame()
     distance_df.replace(np.inf, np.nan, inplace=True)
     distance_df.loc[is_same_trial(distance_df), DISTANCE] = 0
@@ -43,8 +43,13 @@ def create_big_matrix(distance_df: DataFrame):
     matrix_df = distance_df.unstack([PID_2, TRIAL_ID_2, TRIAL_COUNT_2]).sort_values([PID_1, TRIAL_ID_1, TRIAL_COUNT_1]).sort_values([PID_2, TRIAL_ID_2], axis=1)
     matrix_df.columns = matrix_df.columns.droplevel()
     matrix_df = set_diagonal(matrix_df)
+    if filter_by_df is not None:
+        filter_by_df = filter_by_df.copy()
+        filter_by_df.index.names = [PID_1, TRIAL_ID_1, TRIAL_COUNT_1]
+        matrix_df = matrix_df.loc[filter_by_df.index]
+        filter_by_df.index.names = [PID_2, TRIAL_ID_2, TRIAL_COUNT_2]
+        matrix_df = matrix_df.loc[matrix_df.index][filter_by_df.index]
     return matrix_df
-
 
 
 def is_same_trial(distance_df: DataFrame):
