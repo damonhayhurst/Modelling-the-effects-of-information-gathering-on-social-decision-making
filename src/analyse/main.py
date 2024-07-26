@@ -1,17 +1,17 @@
 from typing import List
 from pandas import DataFrame
-from analyse.dtw_analysis import XKCD_COLORS_LIST, create_big_matrix, create_pid_matrix, create_trial_count_matrix, create_trial_id_matrix, get_dbscan_clusters, get_heirarchical_clusters_by_pid, get_heirarchical_clusters_by_trial, get_heirarchical_clusters_by_trial_count, get_heirarchical_clusters_by_trial_id, get_kmedoids_clusters, kmedoids, plot_distance_distribution, plot_nearest_neighbour_points, plot_pid_matrix_with_clusters, plot_trial_count_matrix_with_clusters, plot_trial_id_matrix_with_clusters, get_proximal_and_distal_distances, set_diagonal
+from analyse.dtw_analysis import create_big_matrix, create_pid_matrix, create_trial_count_matrix, create_trial_id_matrix, get_dbscan_clusters, get_heirarchical_clusters_by_pid, get_heirarchical_clusters_by_trial, get_heirarchical_clusters_by_trial_count, get_heirarchical_clusters_by_trial_id, get_kmedoids_clusters, kmedoids, plot_distance_distribution, plot_nearest_neighbour_points, plot_pid_matrix_with_clusters, plot_trial_count_matrix_with_clusters, plot_trial_id_matrix_with_clusters, get_proximal_and_distal_distances, set_diagonal
 from analyse.kmeans_analysis import cluster_analysis, get_kmeans_clusters, merge_components, plot_correlation_matrix, prepare_data
 from analyse.n_cluster_analysis import get_best_fit_heirarchical_clusters, get_best_fit_partitional_clusters, get_best_fit_partitional_clusters_from_features, get_best_fit_partitional_clusters_from_matrix
-from analyse.response_analysis import calculate_mean_response_stat, get_gain_of_ten, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trials_by_cluster, plot_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_mean_percent_lie, plot_losses_mean_percent_lie, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent
-from dtw.dtw import get_t_series_trials_and_sequences
+from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_clustered_pid_t_test, do_gains_t_test, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trials_by_cluster, plot_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_mean_percent_lie, plot_losses_n_transitions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
 from preprocess.trial_id import calculate_gains_losses
-from utils.columns import AVG_DWELL, CLUSTER, DISTANCE, LIE, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PAYNE_INDEX, PID, RT, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL, TRIAL_COUNT, TRIAL_ID, UNIQUE_AOIS
+from utils.columns import AVG_DWELL, CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PAYNE_INDEX, PID, POSITIVE_GAIN, RT, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL, TRIAL_COUNT, TRIAL_ID, UNIQUE_AOIS
 from utils.display import display
-from utils.masks import is_no_dwell_for_aois
+from utils.masks import get_gain_of_ten, is_no_dwell_for_aois
 from utils.paths import *
 from utils.read_csv import read_friom_cluster_files_to_dict, read_from_analysis_file, read_from_cluster_file, read_from_dtw_file, read_from_dwell_file, read_from_trial_index_file
 from sklearn.preprocessing import StandardScaler, RobustScaler
+from matplotlib.colors import XKCD_COLORS
 
 COLORS = XKCD_COLORS_LIST
 
@@ -23,18 +23,34 @@ def response_analysis(input_aoi_analysis_file: str = None,
                       percent_lies_by_trial_id_plot: str = None,
                       net_gain_lie_plot: str = None,
                       net_loss_lie_plot: str = None,
+                      avg_dwell_per_gain_plot: str = None,
+                      avg_n_transition_per_gain_plot: str = None,
+                      avg_dwell_per_negative_gain_plot: str = None,
+                      avg_dwell_per_loss_plot: str = None,
+                      avg_n_transition_per_loss_plot: str = None,
                       colors: List[str] = XKCD_COLORS_LIST):
+    med_purple, purple, sand = XKCD_COLORS["xkcd:pinkish purple"], XKCD_COLORS["xkcd:purple"], XKCD_COLORS["xkcd:light tan"]
+    med_blue, blue = XKCD_COLORS["xkcd:light blue"], XKCD_COLORS["xkcd:medium blue"]
+
     aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file)
     response_df = get_pid_response_stats_no_clusters(aoi_analysis_df)
     sorted_responses_by_pid_df = sort_response_df_by_pid_lie_percent(response_df, aoi_analysis_df)
     plot_percent_lies_by_pid(sorted_responses_by_pid_df, colors, to_file=percent_lies_by_pid_plot)
     plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, PID, colors, to_file=n_trials_by_pid_plot)
-    trial_response_df = get_trial_id_response_stats_no_clusters(aoi_analysis_df).sort_values(LIE)
-    plot_percent_lies_by_trial_id(trial_response_df, to_file=percent_lies_by_trial_id_plot)
+    trial_id_response_df = get_trial_id_response_stats_no_clusters(aoi_analysis_df).sort_values(LIE)
+    plot_percent_lies_by_trial_id(trial_id_response_df, to_file=percent_lies_by_trial_id_plot)
     trial_index_df = read_from_trial_index_file(input_trial_index_file)
     gains_df = calculate_gains_losses(trial_index_df)
-    plot_gains_mean_percent_lie(gains_df, trial_response_df, to_file=net_gain_lie_plot)
-    plot_losses_mean_percent_lie(gains_df, trial_response_df, to_file=net_loss_lie_plot)
+    display(gains_df.median())
+    plot_gains_mean_percent_lie(aoi_analysis_df, [NEGATIVE_GAIN, GAIN_UNDER_TEN, GAIN_OF_TEN, GAIN_OF_TWENTY, GAIN_OF_THIRTY], [sand, med_purple, purple, purple, purple], to_file=net_gain_lie_plot)
+    plot_losses_mean_percent_lie(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN, LOSS_OF_TWENTY, LOSS_OF_THIRTY], [med_blue, blue, blue, blue], to_file=net_loss_lie_plot)
+    plot_gains_avg_dwell_time(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN], [med_purple, purple], to_file=avg_dwell_per_gain_plot)
+    plot_gains_avg_dwell_time(aoi_analysis_df, [NEGATIVE_GAIN, POSITIVE_GAIN], [sand, purple], to_file=avg_dwell_per_negative_gain_plot)
+    plot_gains_n_transitions(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN], [med_purple, purple], to_file=avg_n_transition_per_gain_plot)
+    plot_gains_n_transitions(aoi_analysis_df, [NEGATIVE_GAIN, POSITIVE_GAIN], [sand, purple], to_file=avg_n_transition_per_gain_plot)
+    plot_losses_avg_dwell_time(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN], [med_blue, blue], to_file=avg_dwell_per_loss_plot)
+    plot_losses_n_transitions(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN], [med_blue, blue], to_file=avg_n_transition_per_loss_plot)
+    do_gains_t_test(aoi_analysis_df)
 
 
 def pid_dtw_analysis(input_distance_file: str = None,
@@ -45,20 +61,33 @@ def pid_dtw_analysis(input_distance_file: str = None,
                      pid_n_transitions_plot: str = None,
                      percent_lies_by_pid_plot: str = None,
                      max_clusters: int = 20,
+                     n_clusters: int = None,
                      colors: List[str] = XKCD_COLORS_LIST):
 
     distance_df = read_from_dtw_file(input_distance_file)
-    aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file)
-    big_matrix_df = create_big_matrix(distance_df)
+    aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file, [PID, TRIAL_ID, TRIAL_COUNT])
+    big_matrix_df = create_big_matrix(distance_df, filter_by_df=aoi_analysis_df)
     matrix_df = create_pid_matrix(big_matrix_df, fill_self_distances=None)
-    cluster_df = get_best_fit_heirarchical_clusters(matrix_df, get_heirarchical_clusters_by_pid, max_clusters=max_clusters)
+    cluster_df = get_best_fit_heirarchical_clusters(matrix_df, get_heirarchical_clusters_by_pid,
+                                                    max_clusters=max_clusters) if not n_clusters else get_heirarchical_clusters_by_pid(matrix_df, n_clusters)
     plot_pid_matrix_with_clusters(matrix_df, cluster_df, colors=colors, to_file=pid_matrix_plot)
     responses_df = get_pid_response_stats_for_clusters(cluster_df, aoi_analysis_df)
     plot_percent_lies_for_clusters(responses_df, PID, colors, to_file=pid_percent_lies_plot)
     plot_dwell_times_for_clusters(responses_df, PID, colors, to_file=pid_dwell_times_plot)
     plot_n_transitions_for_clusters(responses_df, PID, colors, to_file=pid_n_transitions_plot)
     responses_df_by_pid = get_response_stats_by_pid(cluster_df, aoi_analysis_df)
-    plot_percent_lies_by_pid(responses_df_by_pid, colors, to_file=percent_lies_by_pid_plot)
+    sorted_df = sort_response_df_by_pid_lie_percent_in_cluster(responses_df_by_pid, aoi_analysis_df)
+    plot_percent_lies_by_pid(sorted_df, colors, to_file=percent_lies_by_pid_plot)
+    gain_under_ten_responses_df = get_pid_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_UNDER_TEN, aoi_analysis_df)
+    gain_of_ten_responses_df = get_pid_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_OF_TEN, aoi_analysis_df)
+    plot_percent_lies_for_clusters(gain_under_ten_responses_df, PID, colors, title_prefix=f"{GAIN_UNDER_TEN}: ", to_file=None)
+    plot_percent_lies_for_clusters(gain_of_ten_responses_df, PID, colors, title_prefix=f"{GAIN_OF_TEN}: ", to_file=None)
+    plot_dwell_times_for_clusters(gain_under_ten_responses_df, PID, colors, title_prefix=f"{GAIN_UNDER_TEN}: ", to_file=None)
+    plot_dwell_times_for_clusters(gain_of_ten_responses_df, PID, colors, title_prefix=f"{GAIN_OF_TEN}: ", to_file=None)
+    plot_n_transitions_for_clusters(gain_under_ten_responses_df, PID, colors, title_prefix=f"{GAIN_UNDER_TEN}: ", to_file=None)
+    plot_n_transitions_for_clusters(gain_of_ten_responses_df, PID, colors, title_prefix=f"{GAIN_OF_TEN}: ", to_file=None)
+    do_clustered_pid_t_test(aoi_analysis_df, cluster_df)
+    
 
 
 def trial_id_dtw_analysis(input_distance_file: str = None,
@@ -190,9 +219,10 @@ def time_series_kmeans_analysis(input_cluster_files: List[str] = None,
 
     def get_ts_kmeans_clusters(_: DataFrame, n_clusters: int):
         return cluster_df_dict[n_clusters]
-
+    display(cluster_df_dict)
     big_matrix_df = create_big_matrix(distance_df, filter_by_df=aoi_analysis_df)
-    cluster_df = get_best_fit_partitional_clusters_from_matrix(big_matrix_df, get_ts_kmeans_clusters, max(cluster_df_dict))
+    k_cluster = cluster_df_dict.keys()
+    cluster_df = get_best_fit_partitional_clusters_from_matrix(big_matrix_df, get_ts_kmeans_clusters, k_cluster)
     responses_df = get_trial_response_stats_for_clusters(cluster_df, aoi_analysis_df)
     responses_by_pid_df = get_trial_response_stats_by_pid(cluster_df, aoi_analysis_df)
     plot_n_trials_for_clusters(responses_df, TRIAL, colors, title_prefix, to_file=n_trials_plot)
@@ -234,7 +264,7 @@ def kmedoids_dtw_analysis(input_distance_file: str = None,
     distance_df = read_from_dtw_file(input_distance_file)
     aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file, index=[PID, TRIAL_ID, TRIAL_COUNT])
     big_matrix_df = create_big_matrix(distance_df, filter_by_df=aoi_analysis_df)
-    cluster_df = get_best_fit_partitional_clusters_from_matrix(big_matrix_df, get_kmedoids_clusters, max_clusters) if not n_clusters else get_kmedoids_clusters(big_matrix_df, n_clusters)
+    cluster_df = get_best_fit_partitional_clusters_from_matrix(big_matrix_df, get_kmedoids_clusters, range(2, max_clusters + 1)) if not n_clusters else get_kmedoids_clusters(big_matrix_df, n_clusters)
     responses_df = get_trial_response_stats_for_clusters(cluster_df, aoi_analysis_df)
     plot_n_trials_for_clusters(responses_df, TRIAL, colors, title_prefix, to_file=n_trials_plot)
     plot_percent_lies_for_clusters(responses_df, TRIAL, colors, title_prefix, to_file=percent_lies_plot)

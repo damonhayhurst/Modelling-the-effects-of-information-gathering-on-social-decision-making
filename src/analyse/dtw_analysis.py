@@ -6,6 +6,7 @@ from matplotlib.colors import XKCD_COLORS, LogNorm
 from pandas import DataFrame, Index, MultiIndex, concat
 from sklearn.cluster import DBSCAN, AgglomerativeClustering
 from sklearn.neighbors import NearestNeighbors
+from analyse.response_analysis import XKCD_COLORS_LIST
 from utils.display import display
 from utils.paths import PID_DISTANCE_PLOT, TRIAL_DISTANCE_PLOT
 from utils.masks import is_same_pid, is_same_trial, is_selected_aoi_same
@@ -15,8 +16,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.cluster.hierarchy import linkage, fcluster
 from sklearn_extra.cluster import KMedoids
-
-XKCD_COLORS_LIST = list(XKCD_COLORS.values())
 
 
 def print_aoi_stats(distance_df: DataFrame):
@@ -77,7 +76,7 @@ def create_pid_matrix(big_matrix_df: DataFrame, fill_self_distances: int | None 
     return create_matrix(big_matrix_df, PID_1, PID_2, fill_self_distances)
 
 
-def plot_pid_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = list(XKCD_COLORS.values()), to_file: str = None):
+def plot_pid_matrix_with_clusters(matrix_df: DataFrame, cluster_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     cluster_df = cluster_df.sort_values(CLUSTER)
     plot_matrix_with_heirarchical_clusters(matrix_df, cluster_df, index_name=PID, colors=colors, to_file=to_file)
 

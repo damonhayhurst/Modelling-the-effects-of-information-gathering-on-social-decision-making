@@ -73,7 +73,7 @@ TIME_SERIES_KMEANS_6_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_6_cluster.csv"
 TIME_SERIES_KMEANS_7_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_7_cluster.csv"
 TIME_SERIES_KMEANS_8_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_8_cluster.csv"
 TIME_SERIES_KMEANS_9_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_9_cluster.csv"
-TIME_SERIES_KMEANS_10_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_7_cluster.csv"
+TIME_SERIES_KMEANS_10_CLUSTER_CSV = "Analysis/TimeSeriesKmeans_10_cluster.csv"
 
 N_TRIALS_BY_PID_PLOT = "plots/RESPONSE/NTrialsByPID.png"
 
@@ -101,3 +101,9 @@ SELF_LIE_DISTRIBUTION_PLOT = "plots/Dwell/SELFLIEDistPlot.png"
 SELF_TRUE_DISTRIBUTION_PLOT = "plots/Dwell/SELFTRUEDistPlot.png"
 OTHER_LIE_DISTRIBUTION_PLOT = "plots/Dwell/OTHERLIEDistPlot.png"
 OTHER_TRUTH_DISTRIBUTION_PLOT = "plots/Dwell/OTHERTRUTHDistPlot.png"
+
+AVG_DWELL_PER_GAIN_PLOT = "plots/RESPONSE/AvgDwellPerGain.png"
+N_TRANSITION_PER_GAIN_PLOT = "plots/RESPONSE/AvgDwellPerGain.png"
+AVG_DWELL_PER_NEGATIVE_GAIN_PLOT = "plots/RESPONSE/AvgDwellPerNegativeGain.png"
+AVG_DWELL_PER_LOSS_PLOT = "plots/RESPONSE/AvgDwellPerLossPlot.png"
+N_TRANSITION_PER_LOSS_PLOT = "plots/RESPONSE/AvgDwellPerLossPlot.png"

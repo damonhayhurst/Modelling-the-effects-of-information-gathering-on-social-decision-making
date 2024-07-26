@@ -152,12 +152,13 @@ def dwell_columns_to_seconds(df: DataFrame, cols: list[str]):
         df[column] = df[column].apply(lambda timedelta: timedelta.total_seconds())
     return df
 
-def read_from_dtw_file(path: str = DTW_CSV) -> DataFrame:
+
+def read_from_dtw_file(path: str = DTW_CSV, index=[PID_1, TRIAL_ID_1, TRIAL_COUNT_1, PID_2, TRIAL_ID_2, TRIAL_COUNT_2]) -> DataFrame:
     df = read_csv(path)
     df = df.pipe(
         set_data_types_for_dtw_file
     ).pipe(
-        set_index, [PID_1, TRIAL_ID_1, TRIAL_COUNT_1, PID_2, TRIAL_ID_2, TRIAL_COUNT_2]
+        set_index, index
     )
     print("DTW read from %s \n" % path)
     return df
@@ -206,14 +207,14 @@ def read_from_cluster_file(path: str = TIME_SERIES_KMEANS_2_CLUSTER_CSV) -> Data
     ).pipe(
         set_index, [PID, TRIAL_ID]
     )
-    print('Cluster file read from %s \n' % path)
-    return df
+    n_cluster = df[CLUSTER].max()
+    print('Cluster file read from %s for %s cluster\n' % (path, n_cluster))
+    return df, n_cluster
 
 def read_friom_cluster_files_to_dict(paths: List[str]) -> Dict[int, DataFrame]:
     cluster_dict = {}
     for path in paths:
-        df = read_from_cluster_file(path)
-        n_cluster = df[CLUSTER].max()
+        df, n_cluster = read_from_cluster_file(path)
         if n_cluster in cluster_dict:
             print('Error: Cluster file already exists for n_cluster %s' % n_cluster)
         else:
