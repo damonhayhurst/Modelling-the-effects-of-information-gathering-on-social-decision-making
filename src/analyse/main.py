@@ -50,7 +50,7 @@ def response_analysis(input_aoi_analysis_file: str = None,
     plot_gains_n_transitions(aoi_analysis_df, [NEGATIVE_GAIN, POSITIVE_GAIN], [sand, purple], to_file=avg_n_transition_per_gain_plot)
     plot_losses_avg_dwell_time(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN], [med_blue, blue], to_file=avg_dwell_per_loss_plot)
     plot_losses_n_transitions(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN], [med_blue, blue], to_file=avg_n_transition_per_loss_plot)
-    do_gains_t_test(aoi_analysis_df)
+    do_gains_t_test(aoi_analysis_df).pipe(display, max_cols=None)
 
 
 def pid_dtw_analysis(input_distance_file: str = None,

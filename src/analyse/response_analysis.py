@@ -7,7 +7,7 @@ import numpy as np
 from pandas import DataFrame, Index
 import seaborn as sns
 
-from analyse.get_response_stats import get_aggregate_cluster_t_test_response_stats, get_combination_t_test_response_stats, get_t_test_response_stats, get_response_stats, get_response_stats_for_clusters, get_response_stats_for_group_by
+from analyse.get_response_stats import correct_p_values, get_aggregate_cluster_t_test_response_stats, get_combination_t_test_response_stats, get_t_test_response_stats, get_response_stats, get_response_stats_for_clusters, get_response_stats_for_group_by
 from utils.columns import CLUSTER, CLUSTER_1, CLUSTER_2, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GROUP, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, PID, PID_1, PID_2, POSITIVE_GAIN, RT, SELF_LIE, SELF_TRUE, TRIAL_COUNT, TRIAL_ID
 from utils.display import display
 from utils.masks import get_gain_of_between_ten_and_twenty, get_gain_of_between_twenty_and_thirty, get_gain_of_thirty, get_positive_gain
@@ -502,20 +502,19 @@ def do_gains_t_test(analysis_df: DataFrame):
     positive_gain_trials = analysis_df.loc[get_positive_gain(analysis_df)]
     negative_gain_trials = analysis_df.loc[get_negative_gain(analysis_df)]
 
-    result = get_t_test_response_stats(gain_of_ten_trials, gain_under_ten_trials)
-    display(result, title="Gain of ten, Gain under ten t test")
+    ps_to_correct = {}
 
-    result = get_t_test_response_stats(positive_gain_trials, negative_gain_trials)
-    display(result, title="Positive gain, Negative gain t test")
+    ps_to_correct[(GAIN_OF_TEN, GAIN_UNDER_TEN)] = get_t_test_response_stats(gain_of_ten_trials, gain_under_ten_trials)
 
-    result = get_t_test_response_stats(gain_of_twenty_trials, gain_of_thirty_trials)
-    display(result, title="Gain of twenty, gain of thirty t test")
+    ps_to_correct[(POSITIVE_GAIN, NEGATIVE_GAIN)] = get_t_test_response_stats(positive_gain_trials, negative_gain_trials)
 
-    result = get_t_test_response_stats(between_ten_twenty, between_twenty_thirty)
-    display(result, title="Gain of between ten and twenty, gain of between twenty and thirty t test")
+    get_t_test_response_stats(gain_of_twenty_trials, gain_of_thirty_trials)
+    get_t_test_response_stats(between_ten_twenty, between_twenty_thirty)
+    get_t_test_response_stats(gain_under_ten_trials, between_ten_twenty)
 
-    result = get_t_test_response_stats(gain_under_ten_trials, between_ten_twenty)
-    display(result, title="Gain of under ten, gain of between ten and twenty t test")
+    t_test_df = correct_p_values(DataFrame.from_dict(ps_to_correct, orient='index'))
+
+    return t_test_df
 
 def do_clustered_pid_t_test(analysis_df: DataFrame, cluster_df: DataFrame):
 
