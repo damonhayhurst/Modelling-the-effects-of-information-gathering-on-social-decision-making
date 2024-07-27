@@ -55,5 +55,5 @@ def dtw_process():
 
 
 if __name__ == '__main__':
-    # process()
-    dtw_process()
+    process()
+    # dtw_process()

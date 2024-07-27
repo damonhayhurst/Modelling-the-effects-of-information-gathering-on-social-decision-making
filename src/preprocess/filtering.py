@@ -142,6 +142,7 @@ def remove_percent_others(df: DataFrame, percent: int = 5, bypass: bool = False)
     filtered_df = df.drop(labels=over_percent_others.index)
     print("Over %s%% Other Boxes Participants Removed: %s" %
           (percent, len(get_participants(over_percent_others))))
+    print_stats(filtered_df)
     return filtered_df
 
 

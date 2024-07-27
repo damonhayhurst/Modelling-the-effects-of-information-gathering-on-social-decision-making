@@ -1,6 +1,7 @@
 
 from pandas.errors import SettingWithCopyWarning
-from analyse.main import *
+import analyse
+from analyse.main import do_analyses
 from analyse.response_analysis import *
 from dtw.main import do_time_series_kmeans_processing
 from utils.columns import N_AOIS
@@ -10,71 +11,83 @@ import argparse
 
 warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
 
-distance_file = DTW_T_V2_CSV
+distance_file = DTW_T_WITH_DIFF_CSV
 
-def save_to_file(do_save): return lambda path: path if do_save else None
 
-def do_dtw_analysis(save: bool = True):
-    
-    save = save_to_file(save)
+def get_pid_dtw_analysis_params(save: bool = False):
 
-    pid_dtw_analysis(
+    return dict(
         input_distance_file=distance_file,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        pid_matrix_plot=save(PID_DISTANCE_PLOT),
-        pid_percent_lies_plot=save(PID_PERCENT_LIES_PLOT),
-        pid_dwell_times_plot=save(PID_DWELL_TIMES_PLOT),
-        pid_n_transitions_plot=save(PID_N_TRANSITIONS_PLOT),
-        percent_lies_by_pid_plot=save(PERCENT_LIES_BY_PID_PLOT),
+        pid_matrix_plot=PID_DISTANCE_PLOT if save else None,
+        pid_percent_lies_plot=PID_PERCENT_LIES_PLOT if save else None,
+        pid_dwell_times_plot=PID_DWELL_TIMES_PLOT if save else None,
+        pid_n_transitions_plot=PID_N_TRANSITIONS_PLOT if save else None,
+        percent_lies_by_pid_plot=PERCENT_LIES_BY_PID_PLOT if save else None
     )
 
-    # trial_id_dtw_analysis(
-    #     input_distance_file=distance_file,
-    #     input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-    #     trial_id_matrix_plot=save(TRIAL_DISTANCE_PLOT),
-    #     trial_id_percent_lies_plot=save(TRIAL_PERCENT_LIES_PLOT),
-    #     trial_id_dwell_times_plot=save(TRIAL_DWELL_TIMES_PLOT),
-    #     trial_id_n_transitions_plot=save(TRIAL_N_TRANSITIONS_PLOT),
-    #     percent_lies_by_trial_id_plot=save(PERCENT_LIES_BY_TRIAL_ID_PLOT)
-    # )
-
-    # all_trial_dtw_analysis(
-    #     input_distance_file=distance_file,
-    #     input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-    #     all_trial_percent_lies_plot=save(ALL_TRIAL_PERCENT_LIES_PLOT),
-    #     all_trial_dwell_times_plot=save(ALL_TRIAL_DWELL_TIMES_PLOT),
-    #     all_trial_n_transitions_plot=save(ALL_TRIAL_N_TRANSITIONS_PLOT),
-    #     all_trial_n_trials_plot=save(ALL_TRIAL_N_TRIALS_PLOT),
-    #     all_trial_percent_lie_by_pid_plot=save(ALL_TRIAL_PERCENT_LIES_BY_PID_PLOT),
-    #     all_trial_n_trials_by_pid_plot=save(ALL_TRIAL_N_TRIALS_BY_PID_PLOT),
-    #     all_trial_gain_of_ten_by_pid_plot=save(ALL_TRIAL_GAIN_OF_TEN_BY_PID_PLOT),
-    #     all_trial_gain_under_ten_by_pid_plot=save(ALL_TRIAL_GAIN_UNDER_TEN_BY_PID_PLOT)
-    #     # max_clusters=2
-    #     # n_clusters=10
-    # )
-
-
-def do_kmeans_analysis(save: bool = True):
-
-    save = save_to_file(save)
-
-    kmeans_analysis(
+def get_response_analysis_params(save: bool = False):
+    return dict(
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        percent_lies_plot=save(KMEANS_PERCENT_LIES_PLOT),
-        n_trials_plot=save(KMEANS_N_TRIALS_PLOT),
-        dwell_times_plot=save(KMEANS_DWELL_TIMES_PLOT),
-        n_transitions_plot=save(KMEANS_N_TRANSITIONS_PLOT),
-        correlations_plot=save(KMEANS_CORRELATIONS_PLOT),
-        percent_lies_by_pid_plot=save(KMEANS_PERCENT_LIES_BY_PID_PLOT),
-        n_trials_by_pid_plot=save(KMEANS_N_TRIALS_BY_PID_PLOT),
-        gain_of_ten_by_pid_plot=save(KMEANS_GAIN_OF_TEN_BY_PID_PLOT),
-        gain_under_ten_by_pid_plot=save(KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT),
+        input_trial_index_file=TRIAL_INDEX_CSV,
+        n_trials_by_pid_plot=N_TRIALS_BY_PID_PLOT if save else None,
+        percent_lies_by_pid_plot=OVERALL_PID_PERCENT_LIES_PLOT if save else None,
+        percent_lies_by_trial_id_plot=OVERALL_TRIAL_ID_PERCENT_LIES_PLOT if save else None,
+        net_gain_lie_plot=NET_GAIN_LIE_PLOT if save else None,
+        avg_dwell_per_gain_plot=AVG_DWELL_PER_GAIN_PLOT if save else None,
+        avg_n_transition_per_gain_plot=N_TRANSITION_PER_GAIN_PLOT if save else None,
+        avg_dwell_per_negative_gain_plot=AVG_DWELL_PER_NEGATIVE_GAIN_PLOT if save else None,
+        avg_dwell_per_loss_plot=AVG_DWELL_PER_LOSS_PLOT if save else None,
+        avg_n_transition_per_loss_plot=N_TRANSITION_PER_LOSS_PLOT if save else None
+    )
+
+
+def get_trial_id_dtw_analysis_params(save: bool = False):
+    return dict(
+        input_distance_file=distance_file,
+        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        trial_id_matrix_plot=TRIAL_DISTANCE_PLOT if save else None,
+        trial_id_percent_lies_plot=TRIAL_PERCENT_LIES_PLOT if save else None,
+        trial_id_dwell_times_plot=TRIAL_DWELL_TIMES_PLOT if save else None,
+        trial_id_n_transitions_plot=TRIAL_N_TRANSITIONS_PLOT if save else None,
+        percent_lies_by_trial_id_plot=PERCENT_LIES_BY_TRIAL_ID_PLOT if save else None
+    )
+
+def get_all_trial_dtw_analysis_params(save: bool = False):
+    return dict(
+        input_distance_file=distance_file,
+        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        all_trial_percent_lies_plot=ALL_TRIAL_PERCENT_LIES_PLOT if save else None,
+        all_trial_dwell_times_plot=ALL_TRIAL_DWELL_TIMES_PLOT if save else None,
+        all_trial_n_transitions_plot=ALL_TRIAL_N_TRANSITIONS_PLOT if save else None,
+        all_trial_n_trials_plot=ALL_TRIAL_N_TRIALS_PLOT if save else None,
+        all_trial_percent_lie_by_pid_plot=ALL_TRIAL_PERCENT_LIES_BY_PID_PLOT if save else None,
+        all_trial_n_trials_by_pid_plot=ALL_TRIAL_N_TRIALS_BY_PID_PLOT if save else None,
+        all_trial_gain_of_ten_by_pid_plot=ALL_TRIAL_GAIN_OF_TEN_BY_PID_PLOT if save else None,
+        all_trial_gain_under_ten_by_pid_plot=ALL_TRIAL_GAIN_UNDER_TEN_BY_PID_PLOT if save else None
+        # max_clusters=2
+        # n_clusters=10
+    )
+
+
+def get_kmeans_analysis_params(save: bool = True):
+
+    return dict(
+        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        percent_lies_plot=KMEANS_PERCENT_LIES_PLOT if save else None,
+        n_trials_plot=KMEANS_N_TRIALS_PLOT if save else None,
+        dwell_times_plot=KMEANS_DWELL_TIMES_PLOT if save else None,
+        n_transitions_plot=KMEANS_N_TRANSITIONS_PLOT if save else None,
+        correlations_plot=KMEANS_CORRELATIONS_PLOT if save else None,
+        percent_lies_by_pid_plot=KMEANS_PERCENT_LIES_BY_PID_PLOT if save else None,
+        n_trials_by_pid_plot=KMEANS_N_TRIALS_BY_PID_PLOT if save else None,
+        gain_of_ten_by_pid_plot=KMEANS_GAIN_OF_TEN_BY_PID_PLOT if save else None,
+        gain_under_ten_by_pid_plot=KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT if save else None,
         columns=[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH, N_TRANSITIONS]
     )
 
-def do_time_series_kmeans_analysis(save: bool = True):
+def get_time_series_kmeans_params(save: bool = False):
      
-    save = save_to_file(save)
 
     input_cluster_files = [TIME_SERIES_KMEANS_2_CLUSTER_CSV,
                            TIME_SERIES_KMEANS_3_CLUSTER_CSV,
@@ -86,107 +99,91 @@ def do_time_series_kmeans_analysis(save: bool = True):
                            TIME_SERIES_KMEANS_9_CLUSTER_CSV,
                            TIME_SERIES_KMEANS_10_CLUSTER_CSV]
 
-    time_series_kmeans_analysis(
+    return dict(
         input_cluster_files=input_cluster_files,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
         input_distance_file=distance_file,
-        percent_lies_plot=save(TS_KMEANS_PERCENT_LIES_PLOT),
-        dwell_times_plot=save(TS_KMEANS_DWELL_TIMES_PLOT),
-        n_transitions_plot=save(TS_KMEANS_N_TRANSITIONS_PLOT),
-        n_trials_plot=save(TS_KMEANS_N_TRIALS_PLOT),
-        percent_lies_by_pid_plot=save(TS_KMEANS_PERCENT_LIES_BY_PID_PLOT),
-        n_trials_by_pid_plot=save(TS_KMEANS_N_TRIALS_BY_PID_PLOT),
-        gain_of_ten_by_pid_plot=save(TS_KMEANS_GAIN_OF_TEN_BY_PID_PLOT),
-        gain_under_ten_by_pid_plot=save(TS_KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT)
+        percent_lies_plot=TS_KMEANS_PERCENT_LIES_PLOT if save else None,
+        dwell_times_plot=TS_KMEANS_DWELL_TIMES_PLOT if save else None,
+        n_transitions_plot=TS_KMEANS_N_TRANSITIONS_PLOT if save else None,
+        n_trials_plot=TS_KMEANS_N_TRIALS_PLOT if save else None,
+        percent_lies_by_pid_plot=TS_KMEANS_PERCENT_LIES_BY_PID_PLOT if save else None,
+        n_trials_by_pid_plot=TS_KMEANS_N_TRIALS_BY_PID_PLOT if save else None,
+        gain_of_ten_by_pid_plot=TS_KMEANS_GAIN_OF_TEN_BY_PID_PLOT if save else None,
+        gain_under_ten_by_pid_plot=TS_KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT if save else None
     )
 
-def do_kmedoids_analysis(save: bool = True):
+def get_kmedoids_analysis_params(save: bool = True):
 
-    save = save_to_file(save)
 
-    kmedoids_dtw_analysis(
+    return dict(
         input_distance_file=distance_file,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        percent_lies_plot=save(KMEDOIDS_PERCENT_LIES_PLOT),
-        dwell_times_plot=save(KMEDOIDS_DWELL_TIMES_PLOT),
-        n_transitions_plot=save(KMEDOIDS_N_TRANSITIONS_PLOT),
-        percent_lies_by_pid_plot=save(KMEDOIDS_PERCENT_LIES_BY_PID_PLOT),
-        n_trials_by_pid_plot=save(KMEDOIDS_N_TRIALS_BY_PID_PLOT)
+        percent_lies_plot=KMEDOIDS_PERCENT_LIES_PLOT if save else None,
+        dwell_times_plot=KMEDOIDS_DWELL_TIMES_PLOT if save else None,
+        n_transitions_plot=KMEDOIDS_N_TRANSITIONS_PLOT if save else None,
+        percent_lies_by_pid_plot=KMEDOIDS_PERCENT_LIES_BY_PID_PLOT if save else None,
+        n_trials_by_pid_plot=KMEDOIDS_N_TRIALS_BY_PID_PLOT if save else None
     )
 
 
-def do_dbscan_analysis(save: bool = True):
+def get_dbscan_analysis_params(save: bool = True):
 
-    save = save_to_file(save)
 
-    dbscan_dtw_analysis(
+    return dict(
         input_distance_file=distance_file,
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        percent_lies_plot=save(DBSCAN_PERCENT_LIES_PLOT),
-        dwell_times_plot=save(DBSCAN_DWELL_TIMES_PLOT),
-        n_transitions_plot=save(DBSCAN_N_TRANSITIONS_PLOT),
-        n_trials_plot=save(DBSCAN_N_TRIALS_BY_PID_PLOT),
-        percent_lies_by_pid_plot=save(DBSCAN_PERCENT_LIES_BY_PID_PLOT),
-        n_trials_by_pid_plot=save(DBSCAN_N_TRIALS_BY_PID_PLOT),
+        percent_lies_plot=DBSCAN_PERCENT_LIES_PLOT if save else None,
+        dwell_times_plot=DBSCAN_DWELL_TIMES_PLOT if save else None,
+        n_transitions_plot=DBSCAN_N_TRANSITIONS_PLOT if save else None,
+        n_trials_plot=DBSCAN_N_TRIALS_BY_PID_PLOT if save else None,
+        percent_lies_by_pid_plot=DBSCAN_PERCENT_LIES_BY_PID_PLOT if save else None,
+        n_trials_by_pid_plot=DBSCAN_N_TRIALS_BY_PID_PLOT if save else None,
         eps=52.1
     )
 
 
-def do_response_analysis(save: bool = True):
+    
 
-    save = save_to_file(save)
-
-    response_analysis(
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        input_trial_index_file=TRIAL_INDEX_CSV,
-        n_trials_by_pid_plot=save(N_TRIALS_BY_PID_PLOT),
-        percent_lies_by_pid_plot=save(OVERALL_PID_PERCENT_LIES_PLOT),
-        percent_lies_by_trial_id_plot=save(OVERALL_TRIAL_ID_PERCENT_LIES_PLOT),
-        net_gain_lie_plot=save(NET_GAIN_LIE_PLOT),
-        avg_dwell_per_gain_plot=save(AVG_DWELL_PER_GAIN_PLOT),
-        avg_n_transition_per_gain_plot=save(N_TRANSITION_PER_GAIN_PLOT),
-        avg_dwell_per_negative_gain_plot=save(AVG_DWELL_PER_NEGATIVE_GAIN_PLOT),
-        avg_dwell_per_loss_plot=save(AVG_DWELL_PER_LOSS_PLOT),
-        avg_n_transition_per_loss_plot=save(N_TRANSITION_PER_LOSS_PLOT)
-    )
-
-def do_proximal_analysis(save: bool = True):
-
-    save = save_to_file(save)
-
-    proximal_analysis(
+def get_proximal_analysis_params(save: bool = False):
+    return dict(
         input_distance_file=distance_file
     )
 
-def do_dwell_analysis(save: bool = True):
 
-    save = save_to_file(save)
-
-    dwell_analysis(
+def get_distribution_analysis_params(save: bool = False):
+    return dict(
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        self_lie_distribution_plot=save(SELF_LIE_DISTRIBUTION_PLOT),
-        self_true_distribution_plot=save(SELF_TRUE_DISTRIBUTION_PLOT),
-        other_lie_distribution_plot=save(OTHER_LIE_DISTRIBUTION_PLOT),
-        other_true_distribution_plot=save(OTHER_TRUTH_DISTRIBUTION_PLOT),
-        rt_distribution_plot=save(RT_DISTRIBUTION_PLOT)
+        self_lie_distribution_plot=SELF_LIE_DISTRIBUTION_PLOT if save else None,
+        self_true_distribution_plot=SELF_TRUE_DISTRIBUTION_PLOT if save else None,
+        other_lie_distribution_plot=OTHER_LIE_DISTRIBUTION_PLOT if save else None,
+        other_true_distribution_plot=OTHER_TRUTH_DISTRIBUTION_PLOT if save else None,
+        rt_distribution_plot=RT_DISTRIBUTION_PLOT if save else None,
+        n_transition_distribution_plot=N_TRANSITIONS_DISTRIBUTION_PLOT
     ) 
 
 
 def main(args):
-    plt_fn = plt.ioff if args.no_plt else plt.ion
-    with plt_fn():
-        # do_dtw_analysis(save=False)
-        # do_kmeans_analysis(save=True)
-        # do_kmedoids_analysis(save=False)
-        do_response_analysis(save=True)
-        # do_dbscan_analysis(save=False)
-        # do_proximal_analysis(save=False)
-        # do_time_series_kmeans_analysis(save=True)
-        # do_dwell_analysis(save=True)
+    plt.ioff() if args.no_plt else plt.ion()
+
+    do_analyses(
+        do_save=args.save,
+        pid_dtw=get_pid_dtw_analysis_params,
+        response=get_response_analysis_params,
+        distribution=get_distribution_analysis_params,
+        proximal=get_proximal_analysis_params,
+        trial_id_dtw=get_trial_id_dtw_analysis_params,
+        all_trials_dtw=get_all_trial_dtw_analysis_params,
+        kmeans=get_kmeans_analysis_params,
+        ts_kmeans=get_time_series_kmeans_params,
+        kmedoids=get_kmedoids_analysis_params,
+        dbscan=get_dbscan_analysis_params
+    )
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--no-plt", action="store_false",  help="Don't plot")
+    parser.add_argument("--save", action="store_true",  help="Save plots to file")
     args = parser.parse_args()
     main(args)

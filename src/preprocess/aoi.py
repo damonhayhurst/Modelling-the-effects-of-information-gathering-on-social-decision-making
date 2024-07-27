@@ -216,9 +216,9 @@ def determine_aoi(df: DataFrame, to_file: str = None) -> DataFrame:
     print("\n")
     print_aois_stats(coord_row_df)
     aoi_df = remove_trials_with_no_aois(coord_row_df)
-    aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 80, bypass=True)
     aoi_df = remove_trials_with_less_than_3std_rt(aoi_df)
     aoi_df = remove_trials_with_more_than_3std_rt(aoi_df)
+    aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 60, bypass=False)
     if to_file:
         save(aoi_df, to_file)
     return aoi_df

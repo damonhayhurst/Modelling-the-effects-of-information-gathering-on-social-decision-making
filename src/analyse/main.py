@@ -3,7 +3,7 @@ from pandas import DataFrame
 from analyse.dtw_analysis import create_big_matrix, create_pid_matrix, create_trial_count_matrix, create_trial_id_matrix, get_dbscan_clusters, get_heirarchical_clusters_by_pid, get_heirarchical_clusters_by_trial, get_heirarchical_clusters_by_trial_count, get_heirarchical_clusters_by_trial_id, get_kmedoids_clusters, kmedoids, plot_distance_distribution, plot_nearest_neighbour_points, plot_pid_matrix_with_clusters, plot_trial_count_matrix_with_clusters, plot_trial_id_matrix_with_clusters, get_proximal_and_distal_distances, set_diagonal
 from analyse.kmeans_analysis import cluster_analysis, get_kmeans_clusters, merge_components, plot_correlation_matrix, prepare_data
 from analyse.n_cluster_analysis import get_best_fit_heirarchical_clusters, get_best_fit_partitional_clusters, get_best_fit_partitional_clusters_from_features, get_best_fit_partitional_clusters_from_matrix
-from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_clustered_pid_t_test, do_gains_t_test, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trials_by_cluster, plot_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_mean_percent_lie, plot_losses_n_transitions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
+from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_clustered_pid_t_test, do_gains_t_test, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trials_by_cluster, plot_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_mean_percent_lie, plot_losses_n_transitions, plot_n_transitions_distributions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
 from preprocess.trial_id import calculate_gains_losses
 from utils.columns import AVG_DWELL, CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PAYNE_INDEX, PID, POSITIVE_GAIN, RT, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL, TRIAL_COUNT, TRIAL_ID, UNIQUE_AOIS
 from utils.display import display
@@ -12,6 +12,7 @@ from utils.paths import *
 from utils.read_csv import read_friom_cluster_files_to_dict, read_from_analysis_file, read_from_cluster_file, read_from_dtw_file, read_from_dwell_file, read_from_trial_index_file
 from sklearn.preprocessing import StandardScaler, RobustScaler
 from matplotlib.colors import XKCD_COLORS
+from contextlib import contextmanager
 
 COLORS = XKCD_COLORS_LIST
 
@@ -36,7 +37,7 @@ def response_analysis(input_aoi_analysis_file: str = None,
     response_df = get_pid_response_stats_no_clusters(aoi_analysis_df)
     sorted_responses_by_pid_df = sort_response_df_by_pid_lie_percent(response_df, aoi_analysis_df)
     plot_percent_lies_by_pid(sorted_responses_by_pid_df, colors, to_file=percent_lies_by_pid_plot)
-    plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, PID, colors, to_file=n_trials_by_pid_plot)
+    plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, PID, [XKCD_COLORS["xkcd:crimson"]], title_override="Valid Trials per Participant", to_file=n_trials_by_pid_plot)
     trial_id_response_df = get_trial_id_response_stats_no_clusters(aoi_analysis_df).sort_values(LIE)
     plot_percent_lies_by_trial_id(trial_id_response_df, to_file=percent_lies_by_trial_id_plot)
     trial_index_df = read_from_trial_index_file(input_trial_index_file)
@@ -63,7 +64,7 @@ def pid_dtw_analysis(input_distance_file: str = None,
                      max_clusters: int = 20,
                      n_clusters: int = None,
                      colors: List[str] = XKCD_COLORS_LIST):
-
+    display(input_distance_file)
     distance_df = read_from_dtw_file(input_distance_file)
     aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file, [PID, TRIAL_ID, TRIAL_COUNT])
     big_matrix_df = create_big_matrix(distance_df, filter_by_df=aoi_analysis_df)
@@ -86,7 +87,7 @@ def pid_dtw_analysis(input_distance_file: str = None,
     plot_dwell_times_for_clusters(gain_of_ten_responses_df, PID, colors, title_prefix=f"{GAIN_OF_TEN}: ", to_file=None)
     plot_n_transitions_for_clusters(gain_under_ten_responses_df, PID, colors, title_prefix=f"{GAIN_UNDER_TEN}: ", to_file=None)
     plot_n_transitions_for_clusters(gain_of_ten_responses_df, PID, colors, title_prefix=f"{GAIN_OF_TEN}: ", to_file=None)
-    do_clustered_pid_t_test(aoi_analysis_df, cluster_df)
+    display(do_clustered_pid_t_test(aoi_analysis_df, cluster_df), max_cols=None)
     
 
 
@@ -306,12 +307,13 @@ def dbscan_dtw_analysis(input_distance_file: str = None,
     plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, TRIAL, colors, title_prefix, to_file=n_trials_by_pid_plot)
 
 
-def dwell_analysis(input_aoi_analysis_file: str = None,
+def distribution_analysis(input_aoi_analysis_file: str = None,
                    self_lie_distribution_plot: str = None,
                    self_true_distribution_plot: str = None,
                    other_lie_distribution_plot: str = None,
                    other_true_distribution_plot: str = None,
-                   rt_distribution_plot: str = None):
+                   rt_distribution_plot: str = None,
+                   n_transition_distribution_plot: str = None):
     aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file)
     # is_no_dwell = is_no_dwell_for_aois(aoi_analysis_df, [SELF_TRUE, SELF_LIE, OTHER_TRUTH, OTHER_LIE])
     # display(aoi_analysis_df.loc[is_no_dwell])
@@ -321,3 +323,22 @@ def dwell_analysis(input_aoi_analysis_file: str = None,
     plot_dwell_time_distributions(aoi_analysis_df, SELF_TRUE, to_file=self_true_distribution_plot)
     plot_dwell_time_distributions(aoi_analysis_df, OTHER_LIE, to_file=other_lie_distribution_plot)
     plot_dwell_time_distributions(aoi_analysis_df, OTHER_TRUTH, to_file=other_true_distribution_plot)
+    plot_n_transitions_distributions(aoi_analysis_df, to_file=n_transition_distribution_plot)
+
+
+class SaveToFileFn:
+    def __init__(self, save):
+        self.save = save
+
+    def __enter__(self):
+        return lambda f: f(self.save)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        return
+
+def do_analyses(do_save: bool = False, **params):
+    with SaveToFileFn(do_save) as save:
+        # pid_dtw_analysis(**save(params['pid_dtw']))
+        response_analysis(**save(params["response"]))
+        # distribution_analysis(**save(params["distribution"]))
+        # proximal_analysis(**save(params["proximal"]))

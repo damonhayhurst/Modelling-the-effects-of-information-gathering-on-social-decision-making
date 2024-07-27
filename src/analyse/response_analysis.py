@@ -179,10 +179,13 @@ def plot_n_trials_for_clusters(response_df: DataFrame, cluster_by: str, colors: 
     plot_response_stats_for_clusters(ax, response_df, [TRIAL_COUNT], colors, to_file)
 
 
-def plot_n_trials_for_clusters_by_pid(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
+def plot_n_trials_for_clusters_by_pid(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', title_override: str = None, to_file: str = None):
     fig, ax = plt.subplots(figsize=(20, 6))
     plt.title('%sQuantity per %s Cluster' % (title_prefix, cluster_by))
+    if title_override:
+        plt.title(title_override)
     plt.ylabel('N Trials')
+    plt.xlabel('PID')
     plot_response_stats_for_clusters_by_pid(ax, response_df, [TRIAL_COUNT], colors, to_file)
 
 
@@ -338,6 +341,17 @@ def plot_dwell_time_distributions(aoi_analysis_df: DataFrame, aoi: str, to_file:
         plt.savefig(to_file)
     plt.show()
 
+
+def plot_n_transitions_distributions(aoi_analysis_df: DataFrame, to_file: str = None):
+    plt.figure(figsize=(10, 6))
+    sns.histplot(aoi_analysis_df[N_TRANSITIONS], kde=True)
+    plt.title('Distribution of N Transitions')
+    plt.xlabel('Duration')
+    plt.ylabel('Frequency')
+    if to_file is not None:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
+        plt.savefig(to_file)
+    plt.show()
 
 def plot_rt_distributions(aoi_analysis_df: DataFrame, to_file: str = None):
     plt.figure(figsize=(10, 6))

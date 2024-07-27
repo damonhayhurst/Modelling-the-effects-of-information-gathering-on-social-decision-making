@@ -107,3 +107,5 @@ N_TRANSITION_PER_GAIN_PLOT = "plots/RESPONSE/AvgDwellPerGain.png"
 AVG_DWELL_PER_NEGATIVE_GAIN_PLOT = "plots/RESPONSE/AvgDwellPerNegativeGain.png"
 AVG_DWELL_PER_LOSS_PLOT = "plots/RESPONSE/AvgDwellPerLossPlot.png"
 N_TRANSITION_PER_LOSS_PLOT = "plots/RESPONSE/AvgDwellPerLossPlot.png"
+
+N_TRANSITIONS_DISTRIBUTION_PLOT = "plots/Dwell/N_TransitionsDistPlot.png"
