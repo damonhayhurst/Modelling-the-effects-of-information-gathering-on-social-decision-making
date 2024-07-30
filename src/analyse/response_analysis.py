@@ -1,16 +1,18 @@
 
+import matplotlib.pyplot as plt
 import os
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.colors import XKCD_COLORS
+from matplotlib.ticker import FuncFormatter, LogLocator
 import numpy as np
-from pandas import DataFrame, Index
+from pandas import DataFrame, Index, MultiIndex, Series, concat
 import seaborn as sns
-
-from analyse.get_response_stats import correct_p_values, get_aggregate_cluster_t_test_response_stats, get_combination_t_test_response_stats, get_t_test_response_stats, get_response_stats, get_response_stats_for_clusters, get_response_stats_for_group_by
-from utils.columns import CLUSTER, CLUSTER_1, CLUSTER_2, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GROUP, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, PID, PID_1, PID_2, POSITIVE_GAIN, RT, SELF_LIE, SELF_TRUE, TRIAL_COUNT, TRIAL_ID
+from scipy import stats
+from analyse.get_response_stats import correct_p_values, get_aggregate_cluster_t_test_response_stats, get_combination_t_test_response_stats, get_gains_response_stats, get_is_lie, get_t_test_response_stats, get_response_stats, get_response_stats_for_clusters, get_response_stats_for_group_by
+from utils.columns import CLUSTER, CLUSTER_1, CLUSTER_2, CONDITION, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GROUP, IS_LIE, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, PID, PID_1, PID_2, POSITIVE_GAIN, RT, SELECTED_AOI, SELF_LIE, SELF_TRUE, TRIAL_COUNT, TRIAL_ID
 from utils.display import display
-from utils.masks import get_gain_of_between_ten_and_twenty, get_gain_of_between_twenty_and_thirty, get_gain_of_thirty, get_positive_gain
+from utils.masks import get_gain_of_between_ten_and_twenty, get_gain_of_between_twenty_and_thirty, get_gain_of_thirty, get_loss_of_twenty, get_positive_gain
 from utils.masks import get_gain_of_ten
 from utils.masks import get_gain_of_twenty
 from utils.masks import get_positive_gain_of_less_than_ten
@@ -19,17 +21,59 @@ from utils.masks import get_negative_gain
 from utils.masks import get_loss_of_ten
 from utils.masks import get_loss_of_less_than_ten
 from utils.masks import get_loss_of_thirty
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.multivariate.manova import MANOVA
+from scipy.stats import levene
+
 
 XKCD_COLORS_LIST = list(XKCD_COLORS.values())
 
 
-def calculate_mean_response_stat(df: DataFrame):
-    mean = df.apply(lambda x: x[0]).mean()
+def calculate_mean_response_stat(df: DataFrame, stat: str, with_error_bounds: bool = True):
+    display(df)
+    mean = df[stat].apply(lambda x: x[0]).mean()
 
-    mean_lower_error = df.apply(lambda x: x[1][0]).mean()
-    mean_upper_error = df.apply(lambda x: x[1][1]).mean()
+    if with_error_bounds:
+        mean_lower_error = df.apply(lambda x: x[1][0]).mean()
+        mean_upper_error = df.apply(lambda x: x[1][1]).mean()
+        return mean, (mean_lower_error, mean_upper_error)
+    else:
+        agg_std = get_aggregate_std(df, stat)
+        return mean, agg_std
 
-    return mean, (mean_lower_error, mean_upper_error)
+
+def get_aggregate_std(df, stat: str):
+    means = df[stat].apply(lambda x: x[0])
+    stds = df[stat].apply(lambda x: x[1])
+    counts = df[TRIAL_COUNT]
+
+    # Overall mean calculation
+    total_samples = np.sum(counts)
+    overall_mean = np.sum(means * counts) / total_samples
+
+    # Within-group variance contribution
+    within_variance = np.sum((counts - 1) * stds**2)
+
+    # Between-group variance contribution
+    between_variance = np.sum(counts * (means - overall_mean)**2)
+
+    # Aggregate standard deviation calculation
+    aggregate_variance = (within_variance + between_variance) / (total_samples - 1)
+    aggregate_std_dev = np.sqrt(aggregate_variance)
+
+    return aggregate_std_dev
+
+
+def get_confidence_intervals(df: DataFrame):
+    val = df.apply(lambda x: x[0])
+    confidence_level = 0.95
+    n = len(df)
+    mean = np.mean(val)
+    std_err = stats.sem(val)
+    margin_of_error = std_err * stats.t.ppf((1 + confidence_level) / 2., n-1)
+    confidence_interval = (mean - margin_of_error, mean + margin_of_error)
+    return confidence_interval
 
 
 def get_trial_response_stats_by_pid(cluster_df: DataFrame, analysis_df: DataFrame):
@@ -45,16 +89,20 @@ def get_response_stats_by_trial_id(cluster_df: DataFrame, analysis_df: DataFrame
     return response_df.sort_values(CLUSTER)
 
 
-def get_response_stats_by_pid(cluster_df: DataFrame, analysis_df: DataFrame):
+def get_response_stats_by_pid(cluster_df: DataFrame, analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = False):
     by_pid_df = analysis_df.groupby(PID)
-    response_df = get_response_stats_for_group_by(by_pid_df)
+    response_df = get_response_stats_for_group_by(by_pid_df, with_error_bounds, val_only)
     response_df[CLUSTER] = cluster_df[CLUSTER]
     return response_df.sort_values(CLUSTER)
 
 
-def get_pid_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: DataFrame):
+def get_trial_response_stats_no_clusters(analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = True):
+    return get_response_stats(analysis_df, with_error_bounds, val_only)
+
+
+def get_pid_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = False):
     by_cluster_df = cluster_df.groupby(CLUSTER)
-    return get_response_stats_for_clusters(by_cluster_df, analysis_df, analysis_df.index.get_level_values(PID))
+    return get_response_stats_for_clusters(by_cluster_df, analysis_df, analysis_df.index.get_level_values(PID), with_error_bounds, val_only)
 
 
 def get_trial_id_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: DataFrame):
@@ -74,20 +122,20 @@ def get_trial_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: Da
     return get_response_stats_for_clusters(by_cluster_df, analysis_df, analysis_df.index)
 
 
-def get_trial_id_response_stats_no_clusters(analysis_df: DataFrame):
-    return get_response_stats_for_group_by(analysis_df.groupby(TRIAL_ID))
+def get_trial_id_response_stats_no_clusters(analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = False):
+    return get_response_stats_for_group_by(analysis_df.groupby(TRIAL_ID), with_error_bounds, val_only)
 
 
-def get_pid_response_stats_for_clusters_by_gain_label(cluster_df: DataFrame, gain_label: str, analysis_df: DataFrame):
+def get_pid_response_stats_for_clusters_by_gain_label(cluster_df: DataFrame, gain_label: str, analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = False):
     if gain_label == GAIN_UNDER_TEN:
         filtered_analysis_df = analysis_df.loc[get_gain_of_less_than_ten(analysis_df)]
     if gain_label == GAIN_OF_TEN:
         filtered_analysis_df = analysis_df.loc[get_gain_of_ten(analysis_df)]
-    return get_pid_response_stats_for_clusters(cluster_df, filtered_analysis_df)
+    return get_pid_response_stats_for_clusters(cluster_df, filtered_analysis_df, with_error_bounds, val_only)
 
 
-def get_pid_response_stats_no_clusters(analysis_df: DataFrame):
-    return get_response_stats_for_group_by(analysis_df.groupby(PID))
+def get_pid_response_stats_no_clusters(analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = False):
+    return get_response_stats_for_group_by(analysis_df.groupby(PID), with_error_bounds, val_only)
 
 
 def get_trials_by_cluster(cluster: int, cluster_df: DataFrame, analysis_df: DataFrame):
@@ -111,23 +159,25 @@ def sort_response_df_by_pid_lie_percent_in_cluster(response_df: DataFrame, analy
 
 def plot_percent_lies_by_trial_id(responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
     fig, ax = plt.subplots(figsize=(15, 6))
-    plt.title('%sPercent of Lies by TRIAL ID' % (title_prefix))
+    # plt.title('%sPercent of Lies by TRIAL ID' % (title_prefix))
     plt.ylabel('Percent')
+    plt.xlabel('Trial ID')
     plt.ylim(0, 100)
     plot_response_stats(ax, responses_df, [LIE], colors=colors, to_file=to_file)
 
 
 def plot_percent_lies_by_pid(responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
     fig, ax = plt.subplots(figsize=(20, 6))
-    plt.title('%sPercent of Lies by PID' % (title_prefix))
+    # plt.title('%sPercent of Lies by Participant ID' % (title_prefix))
     plt.ylabel('Percent')
+    plt.xlabel('Participant ID')
     plt.ylim(0, 100)
     plot_response_stats_for_clusters_by_pid(ax, responses_df, [LIE], colors, to_file)
 
 
 def plot_percent_lies_for_clusters(responses_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
     fig, ax = plt.subplots(figsize=(10, 6))
-    plt.title('%sPercent of Lies per %s Cluster' % (title_prefix, cluster_by))
+    # plt.title('%sPercent of Lies per %s Cluster' % (title_prefix, cluster_by))
     plt.ylabel('Percent')
     plt.ylim(0, 100)
     plot_response_stats_for_clusters(ax, responses_df, [LIE], colors, to_file)
@@ -157,17 +207,45 @@ def plot_gain_for_clusters(responses_df: DataFrame, cluster_by: str, colors: lis
     plot_response_stats_for_clusters(ax, responses_df, [GAIN_OF_TEN, GAIN_UNDER_TEN], colors, to_file)
 
 
+def plot_percent_lie_by_gain_for_clusters(gain_under_ten_responses_df: DataFrame, gain_of_ten_responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    gain_under_ten_responses_df[GAIN_OF_TEN] = gain_of_ten_responses_df[LIE]
+    gain_under_ten_responses_df[GAIN_UNDER_TEN] = gain_under_ten_responses_df[LIE]
+    fig, ax = plt.subplots(figsize=(10, 6))
+    plt.ylabel('Percent')
+    plt.ylim(0, 100)
+    plot_response_stats_for_clusters(ax, gain_under_ten_responses_df, [GAIN_OF_TEN, GAIN_UNDER_TEN], colors, to_file)
+
+
+def plot_n_transitions_by_gain_for_clusters(gain_under_ten_responses_df: DataFrame, gain_of_ten_responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    gain_under_ten_responses_df[GAIN_OF_TEN] = gain_of_ten_responses_df[N_TRANSITIONS]
+    gain_under_ten_responses_df[GAIN_UNDER_TEN] = gain_under_ten_responses_df[N_TRANSITIONS]
+    fig, ax = plt.subplots(figsize=(10, 6))
+    plt.ylabel('Count')
+    plot_response_stats_for_clusters(ax, gain_under_ten_responses_df, [GAIN_OF_TEN, GAIN_UNDER_TEN], colors, to_file)
+
+
+def plot_dwell_time_by_gain_for_clusters(gain_under_ten_responses_df: DataFrame, gain_of_ten_responses_df: DataFrame, aoi: str, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+    gain_under_ten_responses_df[GAIN_OF_TEN] = gain_of_ten_responses_df[aoi]
+    gain_under_ten_responses_df[GAIN_UNDER_TEN] = gain_under_ten_responses_df[aoi]
+    fig, ax = plt.subplots(figsize=(12, 9))
+    plt.title('%s' % aoi)
+    plt.ylabel('Dwell Time (ms)')
+    plt.ylim(0, 0.7)
+    plt.yticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8])
+    plot_response_stats_for_clusters(ax, gain_under_ten_responses_df, [GAIN_OF_TEN, GAIN_UNDER_TEN], colors, to_file)
+
+
 def plot_dwell_times_for_clusters(responses_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
-    fig, ax = plt.subplots(figsize=(20, 6))
-    plt.title('%sAverage Dwell Time for each AOI per %s Cluster' % (title_prefix, cluster_by))
+    fig, ax = plt.subplots(figsize=(10, 6))
+    # plt.title('%sAverage Dwell Time for each AOI per %s Cluster' % (title_prefix, cluster_by))
     plt.ylabel('Dwell Time (ms)')
     plot_response_stats_for_clusters(ax, responses_df, [SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH], colors, to_file)
 
 
 def plot_n_transitions_for_clusters(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', to_file: str = None):
     fig, ax = plt.subplots(figsize=(10, 6))
-    plt.title('%sNumber of Transitions per %s Cluster' % (title_prefix, cluster_by))
-    plt.ylabel('N Transitions')
+    # plt.title('%sNumber of Transitions per %s Cluster' % (title_prefix, cluster_by))
+    plt.ylabel('Count')
     plot_response_stats_for_clusters(ax, response_df, [N_TRANSITIONS], colors, to_file)
 
 
@@ -181,7 +259,7 @@ def plot_n_trials_for_clusters(response_df: DataFrame, cluster_by: str, colors: 
 
 def plot_n_trials_for_clusters_by_pid(response_df: DataFrame, cluster_by: str, colors: list[str] = XKCD_COLORS_LIST, title_prefix: str = '', title_override: str = None, to_file: str = None):
     fig, ax = plt.subplots(figsize=(20, 6))
-    plt.title('%sQuantity per %s Cluster' % (title_prefix, cluster_by))
+    # plt.title('%sQuantity per %s Cluster' % (title_prefix, cluster_by))
     if title_override:
         plt.title(title_override)
     plt.ylabel('N Trials')
@@ -217,15 +295,15 @@ def plot_response_stats(ax: Axes, responses_df: DataFrame, stats: list[str], gro
         values = [enumerable_df.loc[value][stat][0] for stat in stats]
         if group_col == GROUP:
             group = enumerable_df.loc[value][GROUP]
-            ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[groups[group]], label=f'{group}')
+            ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[groups[group]], label=f'{group}', ecolor="black")
         elif group_col == CLUSTER:
             cluster = int(enumerable_df.loc[value][CLUSTER])
-            ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[cluster - 1], label=f'Cluster {cluster}')
+            ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[cluster - 1], label=f'Cluster {cluster}', ecolor="black")
         else:
             ax.bar(indices + i * bar_width, values, width=bar_width, color=colors[0])
         errors = [enumerable_df.loc[value][stat][1] for stat in stats]
         errors_y = create_error_bars_y(values, errors)
-        ax.errorbar(indices + i * bar_width, values, errors_y, ecolor='black', capsize=5)
+        ax.errorbar(indices + i * bar_width, values, errors_y, ecolor="black", capsize=5)
 
     plt.xticks([])
     if len(stats) > 1:
@@ -245,10 +323,10 @@ def plot_response_stats(ax: Axes, responses_df: DataFrame, stats: list[str], gro
         unique_labels = dict(zip(labels, handles))
         ax.legend(unique_labels.values(), unique_labels.keys(), title='Cluster', bbox_to_anchor=(1.05, 1), loc='upper left')
 
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_linewidth(1.2)
-    ax.spines['bottom'].set_linewidth(1.2)
+    ax.spines['top'].set_visible(True)
+    ax.spines['right'].set_visible(True)
+    # ax.spines['left'].set_linewidth(1.2)
+    # ax.spines['bottom'].set_linewidth(1.2)
     ax.tick_params(width=1.2)
 
     plt.tight_layout()
@@ -314,10 +392,10 @@ def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, s
 
     ax.tick_params(axis='both', which='both', length=0)
 
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_linewidth(1.2)
-    ax.spines['bottom'].set_linewidth(1.2)
+    # ax.spines['top'].set_visible(False)
+    # ax.spines['right'].set_visible(False)
+    # ax.spines['left'].set_linewidth(1.2)
+    # ax.spines['bottom'].set_linewidth(1.2)
     ax.tick_params(width=1.2)
 
     plt.tight_layout()
@@ -328,36 +406,55 @@ def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, s
     plt.show()
 
 
-def plot_dwell_time_distributions(aoi_analysis_df: DataFrame, aoi: str, to_file: str = None):
-    plt.figure(figsize=(10, 6))
-    sns.histplot(aoi_analysis_df[aoi], kde=True)
-    plt.title('Distribution of %s Dwell Times' % aoi)
-    plt.xlabel('Duration')
-    plt.xticks([0, 1, 2, 3, 4, 5, 6, 7])
-    plt.ylabel('Frequency')
-    plt.yticks([100, 200, 300, 400, 500])
+def plot_dwell_time_distributions(aoi_analysis_df: DataFrame, to_file: str = None):
+    fig, axs = plt.subplots(2, 2, figsize=(12, 9))
+    # fig.suptitle("Frequency of Average Dwell Time (ms) for each AOI per Trial < 1000ms")
+    all_data = aoi_analysis_df[[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]]
+    min_x, max_x = np.min(all_data.values), np.max(all_data.values)
+
+    max_y = 0
+    axes = [axs[0, 0], axs[0, 1], axs[1, 0], axs[1, 1]]
+    titles = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]
+    for ax, title in zip(axes, titles):
+        col = aoi_analysis_df[title]
+        sns.histplot(col[col != 0], kde=True, ax=ax, bins=300, color=XKCD_COLORS["xkcd:light blue"], edgecolor="black")
+        ax.set_title(title)
+        ax.set_xlabel("")
+
+        # Update maximum y-value for uniform scaling
+        current_max_y = ax.get_ylim()[1]
+        max_y = max(max_y, current_max_y)
+
+    for ax in axs.flat:
+        ax.set_xlim(0, 1000)
+        ax.set_ylim(0, max_y)
+
+    # Save the plot to a file if a path is provided
     if to_file is not None:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
         plt.savefig(to_file)
+
+    plt.tight_layout()
     plt.show()
 
 
 def plot_n_transitions_distributions(aoi_analysis_df: DataFrame, to_file: str = None):
     plt.figure(figsize=(10, 6))
-    sns.histplot(aoi_analysis_df[N_TRANSITIONS], kde=True)
-    plt.title('Distribution of N Transitions')
-    plt.xlabel('Duration')
+    # plt.title("Frequency of Number of Transitions per Trial")
+    plt.xlabel('Count')
     plt.ylabel('Frequency')
+    sns.barplot(aoi_analysis_df[N_TRANSITIONS].value_counts(), capsize=5, color=XKCD_COLORS["xkcd:light blue"], edgecolor="black")
     if to_file is not None:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
         plt.savefig(to_file)
     plt.show()
 
+
 def plot_rt_distributions(aoi_analysis_df: DataFrame, to_file: str = None):
     plt.figure(figsize=(10, 6))
-    sns.histplot(aoi_analysis_df[RT], kde=True)
-    plt.title('Distribution of Reaction Times')
-    plt.xlabel('Duration')
+    sns.histplot(aoi_analysis_df[RT], kde=True, color=XKCD_COLORS["xkcd:light blue"], bins=200, edgecolor="black")
+    # plt.title('Distribution of Reaction Times')
+    plt.xlabel('Duration (ms)')
     plt.ylabel('Frequency')
     if to_file is not None:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
@@ -377,40 +474,19 @@ def plot_distance_distributions(distance_df: DataFrame, to_file: str = None):
     plt.show()
 
 
-def plot_gains_mean_percent_lie(aoi_analysis_df, gain_labels: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file=None):
-    gains_to_show = []
-    for gain in gain_labels:
-        if gain == GAIN_OF_TEN:
-            gain_of_ten_trials = aoi_analysis_df.loc[get_gain_of_ten(aoi_analysis_df)]
-            response_df = get_response_stats(gain_of_ten_trials)
-            gains_to_show.append(response_df[LIE])
-        if gain == GAIN_UNDER_TEN:
-            gain_under_ten_trials = aoi_analysis_df.loc[get_positive_gain_of_less_than_ten(aoi_analysis_df)]
-            response_df = get_response_stats(gain_under_ten_trials)
-            gains_to_show.append(response_df[LIE])
-        if gain == GAIN_OF_TWENTY in gain_labels:
-            gain_of_twenty_trials = aoi_analysis_df.loc[get_gain_of_twenty(aoi_analysis_df)]
-            response_df = get_response_stats(gain_of_twenty_trials)
-            gains_to_show.append(response_df[LIE])
-        if gain == GAIN_OF_THIRTY:
-            gain_of_thirty_trials = aoi_analysis_df.loc[get_gain_of_thirty(aoi_analysis_df)]
-            response_df = get_response_stats(gain_of_thirty_trials)
-            gains_to_show.append(response_df[LIE])
-        if gain == NEGATIVE_GAIN:
-            negative_gain_trials = aoi_analysis_df.loc[get_negative_gain(aoi_analysis_df)]
-            response_df = get_response_stats(negative_gain_trials)
-            gains_to_show.append(response_df[LIE])
-        if gain == POSITIVE_GAIN:
-            positive_gain_trials = aoi_analysis_df.loc[get_positive_gain(aoi_analysis_df)]
-            response_df = get_response_stats(positive_gain_trials)
-            gains_to_show.append(response_df[LIE])
-    simple_plot(gains_to_show, gain_labels, title="Percent of Lie based on Net Gain to Sender", ylabel="Percent Lie", colors=colors, to_file=to_file)
+def plot_gains_mean_percent_lie(aoi_analysis_df, gain_labels: list[str], title: str, colors: list[str] = XKCD_COLORS_LIST, to_file=None):
+    gains = get_gains_response_stats(aoi_analysis_df, gain_labels)
+    gains_to_show = gains[gains.index.isin(gain_labels)]
+
+    display(gain_labels)
+    display(gains)
+    simple_plot(gains_to_show[LIE], gain_labels, title=title, ylabel="Percent Lie", colors=colors, to_file=to_file)
 
 
 def plot_gains_avg_dwell_time(analysis_df: DataFrame, gain_labels: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file=None):
     gains_df = DataFrame(index=Index([GAIN_UNDER_TEN, GAIN_OF_TEN, POSITIVE_GAIN, NEGATIVE_GAIN], name=GROUP), columns=[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH])
     gain_of_ten_trials = analysis_df.loc[get_gain_of_ten(analysis_df)]
-    gain_under_ten_trials = analysis_df.loc[get_positive_gain_of_less_than_ten(analysis_df)]
+    gain_under_ten_trials = analysis_df.loc[get_gain_of_less_than_ten(analysis_df)]
     positive_gain_trials = analysis_df.loc[get_positive_gain(analysis_df)]
     negative_gain_trials = analysis_df.loc[get_negative_gain(analysis_df)]
     gains_df.loc[GAIN_OF_TEN, [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]] = get_response_stats(gain_of_ten_trials)[[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]]
@@ -419,7 +495,7 @@ def plot_gains_avg_dwell_time(analysis_df: DataFrame, gain_labels: list[str], co
     gains_df.loc[NEGATIVE_GAIN, [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]] = get_response_stats(negative_gain_trials)[[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]]
 
     fig, ax = plt.subplots(figsize=(25, 6))
-    plt.title('Average Dwell Time for each AOI per differing quantities of net gain to sender')
+    # plt.title('Average Dwell Time for each AOI per differing quantities of net gain to sender')
     plt.ylabel('Dwell Time (ms)')
     plot_response_stats_for_groups(ax, gains_df.loc[gain_labels], [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH], colors, to_file)
 
@@ -427,7 +503,7 @@ def plot_gains_avg_dwell_time(analysis_df: DataFrame, gain_labels: list[str], co
 def plot_gains_n_transitions(analysis_df: DataFrame, gain_labels: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file=None):
     gains_df = DataFrame(index=Index([GAIN_UNDER_TEN, GAIN_OF_TEN, POSITIVE_GAIN, NEGATIVE_GAIN], name=GROUP), columns=[N_TRANSITIONS])
     gain_of_ten_trials = analysis_df.loc[get_gain_of_ten(analysis_df)]
-    gain_under_ten_trials = analysis_df.loc[get_positive_gain_of_less_than_ten(analysis_df)]
+    gain_under_ten_trials = analysis_df.loc[get_gain_of_less_than_ten(analysis_df)]
     positive_gain_trials = analysis_df.loc[get_positive_gain(analysis_df)]
     negative_gain_trials = analysis_df.loc[get_negative_gain(analysis_df)]
     gains_df = DataFrame(index=Index([GAIN_UNDER_TEN, GAIN_OF_TEN], name=GROUP), columns=[N_TRANSITIONS])
@@ -437,57 +513,43 @@ def plot_gains_n_transitions(analysis_df: DataFrame, gain_labels: list[str], col
     gains_df.loc[NEGATIVE_GAIN, N_TRANSITIONS] = get_response_stats(negative_gain_trials)[N_TRANSITIONS]
 
     fig, ax = plt.subplots(figsize=(25, 6))
-    plt.title('Average N Transitions per differing quantities of net gain to sender')
+    # plt.title('Average N Transitions per differing quantities of net gain to sender')
     plt.ylabel('N Transitions')
     plot_response_stats_for_groups(ax, gains_df.loc[gain_labels], [N_TRANSITIONS], colors, to_file)
 
 
 def plot_losses_avg_dwell_time(analysis_df: DataFrame, loss_labels: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file=None):
-    gains_df = DataFrame(index=Index([LOSS_UNDER_TEN, LOSS_OF_TEN], name=GROUP), columns=[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH])
+    gains_df = DataFrame(index=Index([LOSS_UNDER_TEN, LOSS_OF_TEN, LOSS_OF_TWENTY, LOSS_OF_THIRTY], name=GROUP), columns=[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH])
     loss_of_ten_trials = analysis_df.loc[get_loss_of_ten(analysis_df)]
     loss_under_ten_trials = analysis_df.loc[get_loss_of_less_than_ten(analysis_df)]
+    loss_of_twenty_trials = analysis_df.loc[get_loss_of_twenty(analysis_df)]
+    loss_of_thirty_trials = analysis_df.loc[get_loss_of_thirty(analysis_df)]
     gains_df.loc[LOSS_OF_TEN, [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]] = get_response_stats(loss_of_ten_trials)[[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]]
     gains_df.loc[LOSS_UNDER_TEN, [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]] = get_response_stats(loss_under_ten_trials)[[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]]
+    gains_df.loc[LOSS_OF_TWENTY, [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]] = get_response_stats(loss_of_twenty_trials)[[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]]
+    gains_df.loc[LOSS_OF_THIRTY, [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]] = get_response_stats(loss_of_thirty_trials)[[SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]]
 
     fig, ax = plt.subplots(figsize=(25, 6))
-    plt.title('Average Dwell Time for each AOI per differing quantities of net loss to reciever')
+    # plt.title('Average Dwell Time for each AOI per differing quantities of net loss to reciever')
     plt.ylabel('Dwell Time (ms)')
     plot_response_stats_for_groups(ax, gains_df.loc[loss_labels], [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH], colors, to_file)
 
 
 def plot_losses_n_transitions(analysis_df: DataFrame, loss_labels: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file=None):
-    gains_df = DataFrame(index=Index([LOSS_UNDER_TEN, LOSS_OF_TEN], name=GROUP), columns=[N_TRANSITIONS])
+    gains_df = DataFrame(index=Index([LOSS_UNDER_TEN, LOSS_OF_TEN, LOSS_OF_TWENTY, LOSS_OF_THIRTY], name=GROUP), columns=[N_TRANSITIONS])
     loss_of_ten_trials = analysis_df.loc[get_loss_of_ten(analysis_df)]
     loss_under_ten_trials = analysis_df.loc[get_loss_of_less_than_ten(analysis_df)]
+    loss_of_twenty_trials = analysis_df.loc[get_loss_of_twenty(analysis_df)]
+    loss_of_thirty_trials = analysis_df.loc[get_loss_of_thirty(analysis_df)]
     gains_df.loc[LOSS_OF_TEN, N_TRANSITIONS] = get_response_stats(loss_of_ten_trials)[N_TRANSITIONS]
     gains_df.loc[LOSS_UNDER_TEN, N_TRANSITIONS] = get_response_stats(loss_under_ten_trials)[N_TRANSITIONS]
+    gains_df.loc[LOSS_OF_TWENTY, N_TRANSITIONS] = get_response_stats(loss_of_twenty_trials)[N_TRANSITIONS]
+    gains_df.loc[LOSS_OF_THIRTY, N_TRANSITIONS] = get_response_stats(loss_of_thirty_trials)[N_TRANSITIONS]
 
     fig, ax = plt.subplots(figsize=(25, 6))
-    plt.title('Average N Transitions per differing quantities of net loss to reciever')
+    # plt.title('Average N Transitions per differing quantities of net loss to reciever')
     plt.ylabel('N Transitions')
     plot_response_stats_for_groups(ax, gains_df.loc[loss_labels], [N_TRANSITIONS], colors, to_file)
-
-
-def plot_losses_mean_percent_lie(aoi_analysis_df: DataFrame, loss_labels: list[str], colors: list[str] = XKCD_COLORS_LIST, to_file=None):
-    losses_to_show = []
-    for loss in loss_labels:
-        if loss == LOSS_OF_TEN:
-            loss_of_ten_trials = aoi_analysis_df.loc[get_gain_of_ten(aoi_analysis_df)]
-            response_df = get_response_stats(loss_of_ten_trials)
-            losses_to_show.append(response_df[LIE])
-        if loss == LOSS_UNDER_TEN:
-            loss_under_ten = aoi_analysis_df.loc[get_loss_of_less_than_ten(aoi_analysis_df)]
-            response_df = get_response_stats(loss_under_ten)
-            losses_to_show.append(response_df[LIE])
-        if loss == LOSS_OF_TWENTY:
-            loss_of_twenty = aoi_analysis_df.loc[get_gain_of_twenty(aoi_analysis_df)]
-            response_df = get_response_stats(loss_of_twenty)
-            losses_to_show.append(response_df[LIE])
-        if loss == LOSS_OF_THIRTY:
-            loss_of_thirty = aoi_analysis_df.loc[get_loss_of_thirty(aoi_analysis_df)]
-            response_df = get_response_stats(loss_of_thirty)
-            losses_to_show.append(response_df[LIE])
-    simple_plot(losses_to_show, loss_labels, title="Percent of Lie based on Net Loss to Receiver", ylabel="Percent Lie", colors=colors, to_file=to_file)
 
 
 def simple_plot(x, xlabel, title, ylabel, yticks=[], colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
@@ -508,27 +570,48 @@ def simple_plot(x, xlabel, title, ylabel, yticks=[], colors: list[str] = XKCD_CO
 
 def do_gains_t_test(analysis_df: DataFrame):
     gain_of_ten_trials = analysis_df.loc[get_gain_of_ten(analysis_df)]
-    gain_under_ten_trials = analysis_df.loc[get_positive_gain_of_less_than_ten(analysis_df)]
+    gain_under_ten_trials = analysis_df.loc[get_gain_of_less_than_ten(analysis_df)]
     between_ten_twenty = analysis_df.loc[get_gain_of_between_ten_and_twenty(analysis_df)]
     gain_of_twenty_trials = analysis_df.loc[get_gain_of_twenty(analysis_df)]
     gain_of_thirty_trials = analysis_df.loc[get_gain_of_thirty(analysis_df)]
     between_twenty_thirty = analysis_df.loc[get_gain_of_between_twenty_and_thirty(analysis_df)]
     positive_gain_trials = analysis_df.loc[get_positive_gain(analysis_df)]
     negative_gain_trials = analysis_df.loc[get_negative_gain(analysis_df)]
+    loss_of_ten_trials = analysis_df.loc[get_loss_of_ten(analysis_df)]
+    loss_under_ten_trials = analysis_df.loc[get_loss_of_less_than_ten(analysis_df)]
+    loss_of_thirty_trials = analysis_df.loc[get_loss_of_thirty(analysis_df)]
+
+    gains = [GAIN_OF_TEN, GAIN_UNDER_TEN,  GAIN_OF_TWENTY, GAIN_OF_THIRTY, POSITIVE_GAIN, NEGATIVE_GAIN, LOSS_OF_TEN, LOSS_UNDER_TEN, LOSS_OF_TWENTY, LOSS_OF_THIRTY]
+
+    gains_response_stats = get_gains_response_stats(analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN, LOSS_UNDER_TEN, LOSS_OF_TEN], with_error_bounds=False)
+    display(gains_response_stats, max_cols=None)
 
     ps_to_correct = {}
+    display(levene(get_is_lie(gain_of_ten_trials), get_is_lie(gain_under_ten_trials)))
+    display(levene(gain_of_ten_trials[SELF_LIE], gain_under_ten_trials[SELF_LIE]))
+    display(levene(gain_of_ten_trials[SELF_TRUE], gain_under_ten_trials[SELF_TRUE]))
+    display(levene(gain_of_ten_trials[OTHER_LIE], gain_under_ten_trials[OTHER_LIE]))
+    display(levene(gain_of_ten_trials[OTHER_TRUTH], gain_under_ten_trials[OTHER_TRUTH]))
+    display(levene(gain_of_ten_trials[N_TRANSITIONS], gain_under_ten_trials[N_TRANSITIONS]))
+    ps_to_correct[(GAIN_UNDER_TEN, GAIN_OF_TEN)] = get_t_test_response_stats(gain_of_ten_trials, gain_under_ten_trials)
+    display(ps_to_correct[(GAIN_UNDER_TEN, GAIN_OF_TEN)][LIE].df)
+    # ps_to_correct[(POSITIVE_GAIN, NEGATIVE_GAIN)] = get_t_test_response_stats(positive_gain_trials, negative_gain_trials)
 
-    ps_to_correct[(GAIN_OF_TEN, GAIN_UNDER_TEN)] = get_t_test_response_stats(gain_of_ten_trials, gain_under_ten_trials)
+    # ps_to_correct[(LOSS_UNDER_TEN, LOSS_OF_TEN)] = get_t_test_response_stats(loss_under_ten_trials, loss_of_thirty_trials)
+    # display(get_t_test_response_stats(loss_under_ten_trials, loss_of_thirty_trials)[LIE].df)
+    # display(get_t_test_response_stats(gain_of_ten_trials, gain_under_ten_trials)[LIE].df)
+    # display(get_t_test_response_stats(positive_gain_trials, negative_gain_trials)[LIE].df)
 
-    ps_to_correct[(POSITIVE_GAIN, NEGATIVE_GAIN)] = get_t_test_response_stats(positive_gain_trials, negative_gain_trials)
-
-    get_t_test_response_stats(gain_of_twenty_trials, gain_of_thirty_trials)
-    get_t_test_response_stats(between_ten_twenty, between_twenty_thirty)
-    get_t_test_response_stats(gain_under_ten_trials, between_ten_twenty)
+    ps_to_correct[(LOSS_OF_TEN, LOSS_UNDER_TEN)] = get_t_test_response_stats(loss_of_ten_trials, loss_under_ten_trials)
+    display(ps_to_correct[(LOSS_OF_TEN, LOSS_UNDER_TEN)][LIE].df)
+    # ps_to_correct[(GAIN_OF_TWENTY, GAIN_OF_THIRTY)] = get_t_test_response_stats(gain_of_twenty_trials, gain_of_thirty_trials)
+    # ps_to_correct[(GAIN_OF_TEN, GAIN_OF_TWENTY)] = get_t_test_response_stats(gain_of_ten_trials, gain_of_twenty_trials)
+    # get_t_test_response_stats(gain_under_ten_trials, between_ten_twenty)
 
     t_test_df = correct_p_values(DataFrame.from_dict(ps_to_correct, orient='index'))
-
+    display(t_test_df, max_cols=None)
     return t_test_df
+
 
 def do_clustered_pid_t_test(analysis_df: DataFrame, cluster_df: DataFrame):
 
@@ -538,5 +621,53 @@ def do_clustered_pid_t_test(analysis_df: DataFrame, cluster_df: DataFrame):
     comb_t_tests.index.set_names([PID_1, PID_2], inplace=True)
     comb_t_tests[CLUSTER_1] = cluster_df.loc[comb_t_tests.index.get_level_values(PID_1), CLUSTER].values
     comb_t_tests[CLUSTER_2] = cluster_df.loc[comb_t_tests.index.get_level_values(PID_2), CLUSTER].values
-    
+
     return get_aggregate_cluster_t_test_response_stats(comb_t_tests)
+
+
+def do_anova(analysis_df: DataFrame, cluster_df: DataFrame):
+
+    gain_of_ten_df = get_pid_response_stats_no_clusters(analysis_df.loc[get_gain_of_ten(analysis_df)], with_error_bounds=False, val_only=True).reset_index()
+    gain_of_less_than_ten_df = get_pid_response_stats_no_clusters(analysis_df.loc[get_gain_of_less_than_ten(analysis_df)], with_error_bounds=False, val_only=True).reset_index()
+    
+    gain_of_ten_df[CLUSTER] = gain_of_ten_df[PID].map(cluster_df[CLUSTER])
+    gain_of_ten_df[CONDITION] = GAIN_OF_TEN
+    gain_of_less_than_ten_df[CLUSTER] = gain_of_ten_df[PID].map(cluster_df[CLUSTER])
+    gain_of_less_than_ten_df[CONDITION] = GAIN_UNDER_TEN
+
+    anova_df = concat([gain_of_ten_df, gain_of_less_than_ten_df])
+
+    model = ols(f'{LIE} ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
+    anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
+    print(anova_results)
+
+    anova_df["SELFLIE"] = anova_df[SELF_LIE]
+    anova_df["SELFTRUE"] = anova_df[SELF_TRUE]
+    anova_df["OTHERLIE"] = anova_df[OTHER_LIE]
+    anova_df["OTHERTRUTH"] = anova_df[OTHER_TRUTH]
+
+    model = ols(f'SELFLIE ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
+    anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
+    print(anova_results)
+
+    model = ols(f'SELFTRUE ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
+    anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
+    print(anova_results)
+
+    model = ols(f'OTHERLIE ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
+    anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
+    print(anova_results)
+
+    model = ols(f'OTHERTRUTH ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
+    anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
+    print(anova_results)
+
+    anova_df["NTRANSITIONS"] = anova_df[N_TRANSITIONS]
+
+    model = ols(f'NTRANSITIONS ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
+    anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
+    print(anova_results)
+    # ps_to_correct[GAIN_UNDER_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_gain_of_less_than_ten(aoi_analysis_df)], cluster_df).iloc[0]
+    # ps_to_correct[GAIN_OF_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_gain_of_ten(aoi_analysis_df)], cluster_df).iloc[0]
+    # ps_to_correct[LOSS_UNDER_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_loss_of_less_than_ten(aoi_analysis_df)], cluster_df).iloc[0]
+    # ps_to_correct[LOSS_OF_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_loss_of_ten(aoi_analysis_df)], cluster_df).iloc[0]

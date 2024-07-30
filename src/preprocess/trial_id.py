@@ -44,7 +44,7 @@ def calculate_gains_losses(trial_index_df: DataFrame):
 
 def plot_gains_by_trial_id(gains_df, to_file: str = None):
     fig, ax = plt.subplots(figsize=(20, 6))
-    plt.title('Net Gain To Sender by Trial Id')
+    # plt.title('Net Gain to Sender by Trial ID')
     plt.ylabel('Net Gain to Sender')
     plt.bar(gains_df.index, gains_df[SELF_GAIN])
     plt.xticks(gains_df.index, fontsize=7)

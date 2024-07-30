@@ -1,0 +1,270 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/global//global/global}
+    \entry{brandstatterPriorityHeuristicMaking2006}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=892b788b8b3cedcced1385cfa6c0ceac}{%
+           family={Brandstätter},
+           familyi={B\bibinitperiod},
+           given={Eduard},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b48d2c7ac3f28cdcd52b92c3c2953a61}{%
+           family={Gigerenzer},
+           familyi={G\bibinitperiod},
+           given={Gerd},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cee6d5714f3a1251e9aed4b888a4d4d9}{%
+           family={Hertwig},
+           familyi={H\bibinitperiod},
+           given={Ralph},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{304a677fcef4b7d95815922f446f665a}
+      \strng{fullhash}{ba45096a027cc2db5d1b6ea1dec0a345}
+      \strng{bibnamehash}{ba45096a027cc2db5d1b6ea1dec0a345}
+      \strng{authorbibnamehash}{ba45096a027cc2db5d1b6ea1dec0a345}
+      \strng{authornamehash}{304a677fcef4b7d95815922f446f665a}
+      \strng{authorfullhash}{ba45096a027cc2db5d1b6ea1dec0a345}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Bernoulli's framework of expected utility serves as a model for various psychological processes, including motivation, moral sense, attitudes, and decision making. To account for evidence at variance with expected utility, the authors generalize the framework of fast and frugal heuristics from inferences to preferences. The priority heuristic predicts (a) the Allais paradox, (b) risk aversion for gains if probabilities are high, (c) risk seeking for gains if probabilities are low (e.g., lottery tickets), (d) risk aversion for losses if probabilities are low (e.g., buying insurance), (e) risk seeking for losses if probabilities are high, (f) the certainty effect, (g) the possibility effect, and (h) intransitivities. The authors test how accurately the heuristic predicts people's choices, compared with previously proposed heuristics and 3 modifications of expected utility theory: security-potential/aspiration theory, transfer-of-attention-exchange model, and cumulative prospect theory.}
+      \field{day}{1}
+      \field{journaltitle}{Psychological review}
+      \field{month}{4}
+      \field{shortjournal}{Psychological review}
+      \field{shorttitle}{The Priority Heuristic}
+      \field{title}{The Priority Heuristic: {{Making}} Choices without Tradeoffs. {{Psychological Review}}, 113, 409-432}
+      \field{volume}{113}
+      \field{year}{2006}
+      \field{dateera}{ce}
+      \field{pages}{409\bibrangedash 32}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1037/0033-295X.113.2.409
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/G6LBB7EQ/Brandstätter et al. - 2006 - The priority heuristic Making choices without tra.pdf
+      \endverb
+    \endentry
+    \entry{payneTaskComplexityContingent1976}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dcfa76e26fef1aa7758ec7d579a35a2e}{%
+           family={Payne},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{dcfa76e26fef1aa7758ec7d579a35a2e}
+      \strng{fullhash}{dcfa76e26fef1aa7758ec7d579a35a2e}
+      \strng{bibnamehash}{dcfa76e26fef1aa7758ec7d579a35a2e}
+      \strng{authorbibnamehash}{dcfa76e26fef1aa7758ec7d579a35a2e}
+      \strng{authornamehash}{dcfa76e26fef1aa7758ec7d579a35a2e}
+      \strng{authorfullhash}{dcfa76e26fef1aa7758ec7d579a35a2e}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Two process tracing techniques, explicit information search and verbal protocols, were used to examine the information processing strategies subjects use in reaching a decision. Subjects indicated preferences among apartments. The number of alternatives available and number of dimensions of information available was varied across sets of apartments. When faced with a two alternative situation, the subjects employed search strategies consistent with a compensatory decision process. In contrast, when faced with a more complex (multialternative) decision task, the subjects employed decision strategies designed to eliminate some of the available alternatives as quickly as possible and on the basis of a limited amount of information search and evaluation. The results demonstrate that the information processing leading to choice will vary as a function of task complexity. An integration of research in decision behavior with the methodology and theory of more established areas of cognitive psychology, such as human problem solving, is advocated.}
+      \field{day}{1}
+      \field{issn}{0030-5073}
+      \field{journaltitle}{Organizational Behavior and Human Performance}
+      \field{month}{8}
+      \field{number}{2}
+      \field{shortjournal}{Organizational Behavior and Human Performance}
+      \field{shorttitle}{Task Complexity and Contingent Processing in Decision Making}
+      \field{title}{Task Complexity and Contingent Processing in Decision Making: {{An}} Information Search and Protocol Analysis}
+      \field{urlday}{23}
+      \field{urlmonth}{5}
+      \field{urlyear}{2024}
+      \field{volume}{16}
+      \field{year}{1976}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{366\bibrangedash 387}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1016/0030-5073(76)90022-2
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/MGIHP8AZ/Payne - 1976 - Task complexity and contingent processing in decis.pdf;/Users/damon/Zotero/storage/XQPINRAW/0030507376900222.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0030507376900222
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0030507376900222
+      \endverb
+    \endentry
+    \entry{payneWalkingScarecrowInformation2004}{inbook}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=dcfa76e26fef1aa7758ec7d579a35a2e}{%
+           family={Payne},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=540f307a38e6db04ca5ace9932b5452b}{%
+           family={Bettman},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=0e639fca52f584de0c2a4cff5f8ee480}{%
+           family={Koehler},
+           familyi={K\bibinitperiod},
+           given={Derek\bibnamedelima J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=72abd4bb1bedb56bfaf5cafbc16d8101}{%
+           family={Harvey},
+           familyi={H\bibinitperiod},
+           given={Nigel},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{e0156e0b1f44c80b5698cd6d08ea4925}
+      \strng{fullhash}{e0156e0b1f44c80b5698cd6d08ea4925}
+      \strng{bibnamehash}{e0156e0b1f44c80b5698cd6d08ea4925}
+      \strng{authorbibnamehash}{e0156e0b1f44c80b5698cd6d08ea4925}
+      \strng{authornamehash}{e0156e0b1f44c80b5698cd6d08ea4925}
+      \strng{authorfullhash}{e0156e0b1f44c80b5698cd6d08ea4925}
+      \strng{editorbibnamehash}{2772f2610cfb65e65a56ee10c818a038}
+      \strng{editornamehash}{2772f2610cfb65e65a56ee10c818a038}
+      \strng{editorfullhash}{2772f2610cfb65e65a56ee10c818a038}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{booktitle}{Blackwell {{Handbook}} of {{Judgment}} and {{Decision Making}}}
+      \field{edition}{1}
+      \field{isbn}{978-1-4051-0746-4 978-0-470-75293-7}
+      \field{langid}{english}
+      \field{month}{1}
+      \field{shorttitle}{Walking with the {{Scarecrow}}}
+      \field{title}{Walking with the {{Scarecrow}}: {{The Information}}‐{{Processing Approach}} to {{Decision Research}}}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2024}
+      \field{year}{2004}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{110\bibrangedash 132}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1002/9780470752937.ch6
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/LYEZ2RIE/Payne and Bettman - 2004 - Walking with the Scarecrow The Information‐Proces.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/10.1002/9780470752937.ch6
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/10.1002/9780470752937.ch6
+      \endverb
+    \endentry
+    \entry{reeckSearchPredictsChanges2017b}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=d0c1a4b06aad15b3eb5e9ae732b805a0}{%
+           family={Reeck},
+           familyi={R\bibinitperiod},
+           given={Crystal},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cbc977e12576b03900f97d58c7aaaa40}{%
+           family={Wall},
+           familyi={W\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=239a4ad32577704b3dac943c8ecf5463}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Eric\bibnamedelima J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{058f2463c27ba1a561d339a5e66621ea}
+      \strng{fullhash}{dbbe5a2ad3332f0940e996f34b45d732}
+      \strng{bibnamehash}{dbbe5a2ad3332f0940e996f34b45d732}
+      \strng{authorbibnamehash}{dbbe5a2ad3332f0940e996f34b45d732}
+      \strng{authornamehash}{058f2463c27ba1a561d339a5e66621ea}
+      \strng{authorfullhash}{dbbe5a2ad3332f0940e996f34b45d732}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Significance People often make decisions with consequences that unfold over time. When facing such intertemporal choices, people use different search strategies. We examine how these search strategies differ and how they relate to patience in intertemporal choice. We demonstrate that search varies substantially across individuals and identify two main search strategies—comparative or integrative search. Importantly, comparative search correlates with greater patience and higher susceptibility to contextual influences on choice. We manipulated search using an unobtrusive technique, revealing a causal relationship between strategy and choice. Comparative searchers make more patient choices and exhibit larger framing effects than integrative searchers. An understanding of how differences in psychological processes change discounting can inform the design of behavioral interventions to improve consumer welfare. , Intertemporal choice impacts many important outcomes, such as decisions about health, education, wealth, and the environment. However, the psychological processes underlying decisions involving outcomes at different points in time remain unclear, limiting opportunities to intervene and improve people’s patience. This research examines information-search strategies used during intertemporal choice and their impact on decisions. In experiment 1, we demonstrate that search strategies vary substantially across individuals. We subsequently identify two distinct search strategies across individuals. Comparative searchers, who compare features across options, discount future options less and are more susceptible to acceleration versus delay framing than integrative searchers, who integrate the features of an option. Experiment 2 manipulates search using an unobtrusive method to establish a causal relationship between strategy and choice, randomly assigning participants to conditions promoting either comparative or integrative search. Again, comparative search promotes greater patience than integrative search. Additionally, when participants adopt a comparative search strategy, they also exhibit greater effects of acceleration versus delay framing. Although most participants reported that the manipulation did not change their behavior, promoting comparative search decreased discounting of future rewards substantially and speeded patient choices. These findings highlight the central role that heterogeneity in psychological processes plays in shaping intertemporal choice. Importantly, these results indicate that theories that ignore variability in search strategies may be inadvertently aggregating over different subpopulations that use very different processes. The findings also inform interventions in choice architecture to increase patience and improve consumer welfare.}
+      \field{day}{7}
+      \field{issn}{0027-8424, 1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{number}{45}
+      \field{shortjournal}{Proc. Natl. Acad. Sci. U.S.A.}
+      \field{title}{Search Predicts and Changes Patience in Intertemporal Choice}
+      \field{urlday}{6}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{volume}{114}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{11890\bibrangedash 11895}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.1707040114
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/R2VU95XG/Reeck et al. - 2017 - Search predicts and changes patience in intertempo.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://pnas.org/doi/full/10.1073/pnas.1707040114
+      \endverb
+      \verb{url}
+      \verb https://pnas.org/doi/full/10.1073/pnas.1707040114
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

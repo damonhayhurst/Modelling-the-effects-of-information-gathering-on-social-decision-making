@@ -1,15 +1,15 @@
 
 from pandas.errors import SettingWithCopyWarning
-import analyse
 from analyse.main import do_analyses
 from analyse.response_analysis import *
 from dtw.main import do_time_series_kmeans_processing
-from utils.columns import N_AOIS
 from utils.paths import *
 import warnings
 import argparse
 
 warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 distance_file = DTW_T_WITH_DIFF_CSV
 
@@ -23,7 +23,13 @@ def get_pid_dtw_analysis_params(save: bool = False):
         pid_percent_lies_plot=PID_PERCENT_LIES_PLOT if save else None,
         pid_dwell_times_plot=PID_DWELL_TIMES_PLOT if save else None,
         pid_n_transitions_plot=PID_N_TRANSITIONS_PLOT if save else None,
-        percent_lies_by_pid_plot=PERCENT_LIES_BY_PID_PLOT if save else None
+        percent_lies_by_pid_plot=PERCENT_LIES_BY_PID_PLOT if save else None,
+        percent_lies_gain_cluster_plot=PERCENT_LIES_GAIN_CLUSTER_PLOT if save else None,
+        n_transitions_gain_cluster_plot=N_TRANSITION_GAIN_CLUSTER_PLOT if save else None,
+        self_lie_gain_cluster_plot=SELF_LIE_GAIN_CLUSTER_PLOT if save else None,
+        self_true_gain_cluster_plot=SELF_TRUE_GAIN_CLUSTER_PLOT if save else None,
+        other_lie_gain_cluster_plot=OTHER_LIE_GAIN_CLUSTER_PLOT if save else None,
+        other_truth_gain_cluster_plot=OTHER_TRUTH_GAIN_CLUSTER_PLOT if save else None,
     )
 
 def get_response_analysis_params(save: bool = False):
@@ -34,9 +40,10 @@ def get_response_analysis_params(save: bool = False):
         percent_lies_by_pid_plot=OVERALL_PID_PERCENT_LIES_PLOT if save else None,
         percent_lies_by_trial_id_plot=OVERALL_TRIAL_ID_PERCENT_LIES_PLOT if save else None,
         net_gain_lie_plot=NET_GAIN_LIE_PLOT if save else None,
+        net_loss_lie_plot=NET_LOSS_LIE_PLOT if save else None,
+        net_gain_loss_lie_plot=NET_GAIN_LOSS_LIE_PLOT if save else None,
         avg_dwell_per_gain_plot=AVG_DWELL_PER_GAIN_PLOT if save else None,
         avg_n_transition_per_gain_plot=N_TRANSITION_PER_GAIN_PLOT if save else None,
-        avg_dwell_per_negative_gain_plot=AVG_DWELL_PER_NEGATIVE_GAIN_PLOT if save else None,
         avg_dwell_per_loss_plot=AVG_DWELL_PER_LOSS_PLOT if save else None,
         avg_n_transition_per_loss_plot=N_TRANSITION_PER_LOSS_PLOT if save else None
     )
@@ -154,14 +161,16 @@ def get_proximal_analysis_params(save: bool = False):
 def get_distribution_analysis_params(save: bool = False):
     return dict(
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        self_lie_distribution_plot=SELF_LIE_DISTRIBUTION_PLOT if save else None,
-        self_true_distribution_plot=SELF_TRUE_DISTRIBUTION_PLOT if save else None,
-        other_lie_distribution_plot=OTHER_LIE_DISTRIBUTION_PLOT if save else None,
-        other_true_distribution_plot=OTHER_TRUTH_DISTRIBUTION_PLOT if save else None,
+        dwell_distribution_plot=DWELL_DISTRIBUTION_PLOT if save else None,
         rt_distribution_plot=RT_DISTRIBUTION_PLOT if save else None,
-        n_transition_distribution_plot=N_TRANSITIONS_DISTRIBUTION_PLOT
+        n_transition_distribution_plot=N_TRANSITIONS_DISTRIBUTION_PLOT if save else None
     ) 
 
+
+def get_descriptives_params(save: bool = False):
+    return dict(
+        input_aoi_analysis_file=AOI_ANALYSIS_CSV
+    )
 
 def main(args):
     plt.ioff() if args.no_plt else plt.ion()
@@ -177,7 +186,8 @@ def main(args):
         kmeans=get_kmeans_analysis_params,
         ts_kmeans=get_time_series_kmeans_params,
         kmedoids=get_kmedoids_analysis_params,
-        dbscan=get_dbscan_analysis_params
+        dbscan=get_dbscan_analysis_params,
+        descriptives=get_descriptives_params
     )
 
 

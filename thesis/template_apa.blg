@@ -1,0 +1,17 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'template_apa.blg'
+[58] biber-darwin:340> INFO - === Sun Jul 28, 2024, 10:48:13
+[71] Biber.pm:418> INFO - Reading 'template_apa.bcf'
+[153] Biber.pm:972> INFO - Found 4 citekeys in bib section 0
+[166] Biber.pm:4383> INFO - Processing section 0
+[174] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[175] bibtex.pm:1713> INFO - LaTeX decoding ...
+[188] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
+[248] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[248] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[248] Biber.pm:4203> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[248] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[255] bbl.pm:654> INFO - Writing 'template_apa.bbl' with encoding 'UTF-8'
+[259] bbl.pm:757> INFO - Output to template_apa.bbl
+[259] Biber.pm:130> WARN - ISBN '978-1-4051-0746-4 978-0-470-75293-7' in entry 'payneWalkingScarecrowInformation2004' is invalid - run biber with '--validate_datamodel' for details.
+[259] Biber.pm:132> INFO - WARNINGS: 1
