@@ -3,3 +3,5 @@
 .DS_Store
 Analysis/
 plots/
+
+!Analysis/AOIs.csv

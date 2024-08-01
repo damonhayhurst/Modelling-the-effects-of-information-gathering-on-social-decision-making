@@ -1,5 +1,5 @@
 from datetime import timedelta
-from pandas import DataFrame, MultiIndex, concat, to_datetime
+from pandas import DataFrame, MultiIndex, Series, concat, to_datetime
 from preprocess.dwell import get_dwell_spans_for_aoi
 from utils.columns import *
 from utils.display import display
@@ -197,20 +197,36 @@ def remove_pid_with_incomplete_n_trials(df: DataFrame, n_trials: int = 80, bypas
 
 def smoothing(df: DataFrame):
 
-    trial_df = df.groupby(level=[PID, TRIAL_COUNT])
+    trials_df = df.groupby(level=[PID, TRIAL_COUNT], group_keys=False)
 
-    def avg_dwell_time(df: DataFrame, aoi):
-        timespans = get_dwell_spans_for_aoi(df, aoi)
-        less_than = timespans[DWELL_TIME] < timedelta(milliseconds=200)
-        min_ts, max_ts = timespans[less_than]['min'], timespans[less_than]['max']
-        filtered_df = df.loc[(df.index.get_level_values(MOUSE_TIMESTAMP) < min_ts) | (df.index.get_level_values(MOUSE_TIMESTAMP) > max_ts)]
-        return filtered_df
+    def smooth(trial_df: DataFrame):
+        to_remove = []
+        # Get mouse timestamp index for filtering
+        mouse_timestamps = trial_df.index.get_level_values(MOUSE_TIMESTAMP)
 
-    smoothed_aoi_dfs = []
-    for aoi in [SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH, None]:
-        smoothed_aoi_dfs.append(trial_df.apply(avg_dwell_time, aoi))
+        # Initialize a boolean mask for rows to remove
+        to_remove_mask = Series(False, index=trial_df.index)
+        for aoi in [SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH, None]:
+            timespans = get_dwell_spans_for_aoi(trial_df, aoi)
+            # Create a boolean mask for dwell times less than 200 milliseconds
+            less_than_200ms_mask = timespans[DWELL_TIME] < timedelta(milliseconds=200)
+
+            # Get 'min' and 'max' for rows where dwell time is less than 200ms
+            min_times = timespans.loc[less_than_200ms_mask, 'min']
+            max_times = timespans.loc[less_than_200ms_mask, 'max']
+
+            # Create a mask for rows in trial_df that fall within these time ranges
+            for min_time, max_time in zip(min_times, max_times):
+                # Update to_remove_mask for this time range
+                to_remove_mask |= (mouse_timestamps >= min_time) & (mouse_timestamps <= max_time)
+
+        # Drop rows where to_remove_mask is True
+        filtered_trial_df = trial_df.loc[~to_remove_mask]
+
+        return filtered_trial_df
+
     
-    display(concat(smoothed_aoi_dfs).sort_values(by=MOUSE_TIMESTAMP))
+    return trials_df.apply(smooth)
 
     
 
@@ -226,7 +242,7 @@ def print_aois_stats(df: DataFrame):
     return df
 
 
-def determine_aoi(df: DataFrame, to_file: str = None) -> DataFrame:
+def determine_aoi(df: DataFrame, smoothing: bool = False, to_file: str = None) -> DataFrame:
     df = add_selected_aoi(df)
     coord_row_df = separate_mouse_coords(df)
     coord_row_df = remove_screen_width_zero(coord_row_df)
@@ -238,7 +254,8 @@ def determine_aoi(df: DataFrame, to_file: str = None) -> DataFrame:
     aoi_df = remove_trials_with_less_than_3std_rt(aoi_df)
     aoi_df = remove_trials_with_more_than_3std_rt(aoi_df)
     aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 60, bypass=False)
-    aoi_df = smoothing(aoi_df)
+    aoi_df = smoothing(aoi_df) if smoothing else aoi_df
+    display(aoi_df)
     if to_file:
         save(aoi_df, to_file)
     return aoi_df

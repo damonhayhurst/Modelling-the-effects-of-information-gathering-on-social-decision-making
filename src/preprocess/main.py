@@ -5,6 +5,7 @@ from preprocess.aoi_analysis import create_aoi_analysis, create_average_analysis
 from preprocess.dwell import create_dwell_timeline
 from preprocess.filtering import do_filtering, print_stats
 from preprocess.trial_id import add_gains, add_trial_id, calculate_gains_losses, create_trial_id_index, plot_gains_by_trial_id
+from utils.display import display
 from utils.paths import AOI_ANALYSIS_CSV, AOIS_CSV, AVERAGE_ANALYSIS_CSV, DWELL_TIMELINE_CSV, TRIAL_INDEX_CSV, YOUNG_ADULTS_1, YOUNG_ADULTS_2
 from utils.read_csv import read_from_aois_file, read_from_input_files
 
@@ -31,6 +32,7 @@ def do_preprocessing(input_data_files: str = [YOUNG_ADULTS_1, YOUNG_ADULTS_2],
     df = add_trial_id(df, trial_index)
     df = add_gains(df, gains_df)
     aoi_df = determine_aoi(df, to_file=output_aois_file)
+    display(aoi_df)
     print_stats(aoi_df)
     analysis_df = create_aoi_analysis(aoi_df, to_file=output_aoi_analysis_file)
     create_average_analysis(analysis_df, to_file=output_avg_aoi_analysis_file)
