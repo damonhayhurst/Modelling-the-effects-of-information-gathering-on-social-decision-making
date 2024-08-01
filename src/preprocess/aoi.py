@@ -1,4 +1,6 @@
-from pandas import DataFrame, MultiIndex, to_datetime
+from datetime import timedelta
+from pandas import DataFrame, MultiIndex, concat, to_datetime
+from preprocess.dwell import get_dwell_spans_for_aoi
 from utils.columns import *
 from utils.display import display
 from utils.masks import get_is_lie, get_is_lie_or_truth, get_is_other, get_is_truth
@@ -193,6 +195,23 @@ def remove_pid_with_incomplete_n_trials(df: DataFrame, n_trials: int = 80, bypas
     else:
         return df
 
+def smoothing(df: DataFrame):
+
+    trial_df = df.groupby(level=[PID, TRIAL_COUNT])
+
+    def avg_dwell_time(df: DataFrame, aoi):
+        timespans = get_dwell_spans_for_aoi(df, aoi)
+        less_than = timespans[DWELL_TIME] < timedelta(milliseconds=200)
+        min_ts, max_ts = timespans[less_than]['min'], timespans[less_than]['max']
+        filtered_df = df.loc[(df.index.get_level_values(MOUSE_TIMESTAMP) < min_ts) | (df.index.get_level_values(MOUSE_TIMESTAMP) > max_ts)]
+        return filtered_df
+
+    smoothed_aoi_dfs = []
+    for aoi in [SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH, None]:
+        smoothed_aoi_dfs.append(trial_df.apply(avg_dwell_time, aoi))
+    
+    display(concat(smoothed_aoi_dfs).sort_values(by=MOUSE_TIMESTAMP))
+
     
 
 def print_aois_stats(df: DataFrame):
@@ -219,6 +238,7 @@ def determine_aoi(df: DataFrame, to_file: str = None) -> DataFrame:
     aoi_df = remove_trials_with_less_than_3std_rt(aoi_df)
     aoi_df = remove_trials_with_more_than_3std_rt(aoi_df)
     aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 60, bypass=False)
+    aoi_df = smoothing(aoi_df)
     if to_file:
         save(aoi_df, to_file)
     return aoi_df

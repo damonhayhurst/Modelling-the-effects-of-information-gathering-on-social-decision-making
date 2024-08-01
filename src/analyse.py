@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-distance_file = DTW_T_WITH_DIFF_CSV
+distance_file = DTW_T_V2_CSV
 
 
 def get_pid_dtw_analysis_params(save: bool = False):
@@ -161,6 +161,7 @@ def get_proximal_analysis_params(save: bool = False):
 def get_distribution_analysis_params(save: bool = False):
     return dict(
         input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_dwell_timeline_file=DWELL_TIMELINE_CSV,
         dwell_distribution_plot=DWELL_DISTRIBUTION_PLOT if save else None,
         rt_distribution_plot=RT_DISTRIBUTION_PLOT if save else None,
         n_transition_distribution_plot=N_TRANSITIONS_DISTRIBUTION_PLOT if save else None

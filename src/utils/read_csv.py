@@ -5,7 +5,7 @@ from utils.paths import *
 from utils.display import display
 
 INPUT_COLUMNS_IGNORE = [PROLIFIC_ID, GAME, BLOCK, TRIAL_INDEX]
-AOI_COLUMNS_IGNORE = [SELF_LIE, SELF_TRUE, OTHER_LIE,  OTHER_TRUTH, RT, YOU_ON_TOP, LIE_POSITION, TRUTH_POSITION, SELECTION, SCREEN_WIDTH]
+AOI_COLUMNS_IGNORE = [SELF_LIE, SELF_TRUE, OTHER_LIE,  OTHER_TRUTH, YOU_ON_TOP, LIE_POSITION, TRUTH_POSITION, SELECTION, SCREEN_WIDTH]
 
 set_index = DataFrame.set_index
 drop = DataFrame.drop
@@ -120,8 +120,7 @@ def set_data_types_for_aois_df(df: DataFrame) -> DataFrame:
         MOUSE_X: int,
         MOUSE_Y: int,
         SELECTED_AOI: str,
-        AOI: str,
-        MOUSE_TIMESTAMP: "datetime64[ns]"
+        MOUSE_TIMESTAMP: "datetime64[ns]",
     })
 
 

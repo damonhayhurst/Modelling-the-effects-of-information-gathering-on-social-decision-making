@@ -1,6 +1,6 @@
 import math
 from pandas import DataFrame, Series
-from utils.masks import get_is_aoi
+from utils.masks import get_is_in_aois
 from utils.paths import DTW_Z_V2_CSV
 from utils.display import display
 from utils.read_csv import read_from_analysis_file, read_from_dwell_file
@@ -52,10 +52,10 @@ def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool =
 
 def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False):
     idx1, idx2 = trial1.index, trial2.index
-    trial1.loc[idx1, SELF_LIE], trial2.loc[idx2, SELF_LIE] = get_is_aoi(trial1, SELF_LIE).astype(int), get_is_aoi(trial2, SELF_LIE).astype(int)
-    trial1.loc[idx1, SELF_TRUE], trial2.loc[idx2, SELF_TRUE] = get_is_aoi(trial1, SELF_TRUE).astype(int), get_is_aoi(trial2, SELF_TRUE).astype(int)
-    trial1.loc[idx1, OTHER_LIE], trial2.loc[idx2, OTHER_LIE] = get_is_aoi(trial1, OTHER_LIE).astype(int), get_is_aoi(trial2, OTHER_LIE).astype(int)
-    trial1.loc[idx1, OTHER_TRUTH], trial2.loc[idx2, OTHER_TRUTH] = get_is_aoi(trial1, OTHER_TRUTH).astype(int), get_is_aoi(trial2, OTHER_TRUTH).astype(int)
+    trial1.loc[idx1, SELF_LIE], trial2.loc[idx2, SELF_LIE] = get_is_in_aois(trial1, SELF_LIE).astype(int), get_is_in_aois(trial2, SELF_LIE).astype(int)
+    trial1.loc[idx1, SELF_TRUE], trial2.loc[idx2, SELF_TRUE] = get_is_in_aois(trial1, SELF_TRUE).astype(int), get_is_in_aois(trial2, SELF_TRUE).astype(int)
+    trial1.loc[idx1, OTHER_LIE], trial2.loc[idx2, OTHER_LIE] = get_is_in_aois(trial1, OTHER_LIE).astype(int), get_is_in_aois(trial2, OTHER_LIE).astype(int)
+    trial1.loc[idx1, OTHER_TRUTH], trial2.loc[idx2, OTHER_TRUTH] = get_is_in_aois(trial1, OTHER_TRUTH).astype(int), get_is_in_aois(trial2, OTHER_TRUTH).astype(int)
     if z_norm:
         trial1[DWELL_TIME] = zscore(trial1[DWELL_TIME])
         trial2[DWELL_TIME] = zscore(trial2[DWELL_TIME])
@@ -66,10 +66,10 @@ def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False
     return dtw_ndim.distance(trial1_ndim, trial2_ndim)
 
 
-def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, differencing: bool = False):
+def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, differencing: bool = False, smoothing: float = None):
     trials = analysis_df.index.unique()
     if differencing:
-        trial_seq_dict = {trial: preprocessing.differencing(get_t_series_dwell_sequence(dwell_df.loc[trial]), smooth=0.1) for trial in trials}
+        trial_seq_dict = {trial: preprocessing.differencing(get_t_series_dwell_sequence(dwell_df.loc[trial]), smooth=smoothing) for trial in trials}
     else:
         trial_seq_dict = {trial: get_t_series_dwell_sequence(dwell_df.loc[trial]) for trial in trials}
     return trial_seq_dict
@@ -87,10 +87,10 @@ def get_t_series_row(trial: DataFrame):
     idx = trial.index
     trial[DWELL_TIME] = pd.to_timedelta(trial[DWELL_TIME], "ms")
     trial[DWELL_TIME_MS] = (trial[DWELL_TIME].dt.microseconds).astype(int)
-    trial.loc[idx, SELF_LIE] = get_is_aoi(trial, SELF_LIE).astype(int)
-    trial.loc[idx, SELF_TRUE] = get_is_aoi(trial, SELF_TRUE).astype(int)
-    trial.loc[idx, OTHER_LIE] = get_is_aoi(trial, OTHER_LIE).astype(int)
-    trial.loc[idx, OTHER_TRUTH] = get_is_aoi(trial, OTHER_TRUTH).astype(int)
+    trial.loc[idx, SELF_LIE] = get_is_in_aois(trial, SELF_LIE).astype(int)
+    trial.loc[idx, SELF_TRUE] = get_is_in_aois(trial, SELF_TRUE).astype(int)
+    trial.loc[idx, OTHER_LIE] = get_is_in_aois(trial, OTHER_LIE).astype(int)
+    trial.loc[idx, OTHER_TRUTH] = get_is_in_aois(trial, OTHER_TRUTH).astype(int)
     self_lie_seq, self_true_seq, other_lie_seq, other_truth_seq = [], [], [], []
     for time, self_lie, self_true, other_lie, other_truth in trial.loc[idx][[DWELL_TIME_MS, SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]].itertuples(index=False, name=None):
         for t in range(time):
@@ -105,10 +105,10 @@ def get_t_series_dwell_sequence(trial: DataFrame, z_norm: bool = False):
     idx = trial.index
     trial[DWELL_TIME] = pd.to_timedelta(trial[DWELL_TIME], "ms")
     trial[DWELL_TIME_MS] = (trial[DWELL_TIME].dt.microseconds).astype(int)
-    trial.loc[idx, SELF_LIE] = get_is_aoi(trial, SELF_LIE).astype(int)
-    trial.loc[idx, SELF_TRUE] = get_is_aoi(trial, SELF_TRUE).astype(int)
-    trial.loc[idx, OTHER_LIE] = get_is_aoi(trial, OTHER_LIE).astype(int)
-    trial.loc[idx, OTHER_TRUTH] = get_is_aoi(trial, OTHER_TRUTH).astype(int)
+    trial.loc[idx, SELF_LIE] = get_is_in_aois(trial, SELF_LIE).astype(int)
+    trial.loc[idx, SELF_TRUE] = get_is_in_aois(trial, SELF_TRUE).astype(int)
+    trial.loc[idx, OTHER_LIE] = get_is_in_aois(trial, OTHER_LIE).astype(int)
+    trial.loc[idx, OTHER_TRUTH] = get_is_in_aois(trial, OTHER_TRUTH).astype(int)
     t_series = []
     for time, *aois in trial.loc[idx][[DWELL_TIME_MS, SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]].itertuples(index=False, name=None):
         for t in range(time):

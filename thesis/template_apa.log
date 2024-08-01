@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.25)  30 JUL 2024 11:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.25)  30 JUL 2024 18:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1480,7 +1480,7 @@ Package pdftex.def Info: ../plots/TrialIndex/Gains.png  used on input line 246.
 
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2503) has occurred while \output is active []
 
 
 
@@ -1498,12 +1498,6 @@ File: ../plots/RESPONSE/NetGainLie.png Graphic file (type png)
 Package pdftex.def Info: ../plots/RESPONSE/NetGainLie.png  used on input line 2
 54.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
-<../plots/RESPONSE/NetLossLie.png, id=233, 1445.4pt x 433.62pt>
-File: ../plots/RESPONSE/NetLossLie.png Graphic file (type png)
-<use ../plots/RESPONSE/NetLossLie.png>
-Package pdftex.def Info: ../plots/RESPONSE/NetLossLie.png  used on input line 2
-63.
-(pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
@@ -1514,16 +1508,21 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [13 <../plots/TrialIndex/Gains.png> <../plots/RESPONSE/NetGainLie.png>]
+<../plots/RESPONSE/NetLossLie.png, id=242, 1445.4pt x 433.62pt>
+File: ../plots/RESPONSE/NetLossLie.png Graphic file (type png)
+<use ../plots/RESPONSE/NetLossLie.png>
+Package pdftex.def Info: ../plots/RESPONSE/NetLossLie.png  used on input line 2
+63.
+(pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 <../plots/RESPONSE/AvgDwellPerGain.png, id=243, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/AvgDwellPerGain.png Graphic file (type png)
 <use ../plots/RESPONSE/AvgDwellPerGain.png>
 Package pdftex.def Info: ../plots/RESPONSE/AvgDwellPerGain.png  used on input l
-ine 274.
+ine 276.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
 
-Overfull \hbox (2.89853pt too wide) in paragraph at lines 282--292
- [][] 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
@@ -1533,59 +1532,40 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[14 <../plots/RESPONSE/NetLossLie.png> <../plots/RESPONSE/AvgDwellPerGain.png>]
-<../plots/RESPONSE/AvgDwellPerLossPlot.png, id=253, 1806.75pt x 433.62pt>
+[14 <../plots/RESPONSE/NetLossLie.png>]
+Overfull \hbox (2.89853pt too wide) in paragraph at lines 284--294
+ [][] 
+ []
+
+<../plots/RESPONSE/AvgDwellPerLossPlot.png, id=252, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/AvgDwellPerLossPlot.png Graphic file (type png)
 <use ../plots/RESPONSE/AvgDwellPerLossPlot.png>
 Package pdftex.def Info: ../plots/RESPONSE/AvgDwellPerLossPlot.png  used on inp
-ut line 299.
+ut line 301.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
 
-Overfull \hbox (2.89853pt too wide) in paragraph at lines 307--317
+Underfull \vbox (badness 4479) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[15 <../plots/RESPONSE/AvgDwellPerGain.png>]
+Overfull \hbox (2.89853pt too wide) in paragraph at lines 309--319
  [][] 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (15.2pt): 
-(fancyhdr)                Make it at least 27.11652pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11652pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
-
-[15 <../plots/RESPONSE/AvgDwellPerLossPlot.png>]
-<../plots/RESPONSE/NTransitionPerGain.png, id=262, 1806.75pt x 433.62pt>
+<../plots/RESPONSE/NTransitionPerGain.png, id=261, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/NTransitionPerGain.png Graphic file (type png)
 <use ../plots/RESPONSE/NTransitionPerGain.png>
 Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerGain.png  used on inpu
-t line 326.
+t line 328.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
-<../plots/RESPONSE/NTransitionPerLossPlot.png, id=263, 1806.75pt x 433.62pt>
-File: ../plots/RESPONSE/NTransitionPerLossPlot.png Graphic file (type png)
-<use ../plots/RESPONSE/NTransitionPerLossPlot.png>
-Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerLossPlot.png  used on 
-input line 335.
-(pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
-
-
-Package fancyhdr Warning: \headheight is too small (15.2pt): 
-(fancyhdr)                Make it at least 27.11652pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11652pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
-
-[16 <../plots/RESPONSE/NTransitionPerGain.png>]
-<../plots/PID/DistanceMatrix.png, id=271, 867.24pt x 722.7pt>
-File: ../plots/PID/DistanceMatrix.png Graphic file (type png)
-<use ../plots/PID/DistanceMatrix.png>
-Package pdftex.def Info: ../plots/PID/DistanceMatrix.png  used on input line 35
-3.
-(pdftex.def)             Requested size: 469.75502pt x 391.46521pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1598,12 +1578,38 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[17 <../plots/RESPONSE/NTransitionPerLossPlot.png>]
-<../plots/PID/PercentLiesByPID.png, id=279, 1445.4pt x 433.62pt>
+[16 <../plots/RESPONSE/AvgDwellPerLossPlot.png>]
+<../plots/RESPONSE/NTransitionPerLossPlot.png, id=269, 1806.75pt x 433.62pt>
+File: ../plots/RESPONSE/NTransitionPerLossPlot.png Graphic file (type png)
+<use ../plots/RESPONSE/NTransitionPerLossPlot.png>
+Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerLossPlot.png  used on 
+input line 337.
+(pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
+
+Underfull \vbox (badness 2269) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[17 <../plots/RESPONSE/NTransitionPerGain.png> <../plots/RESPONSE/NTransitionPe
+rLossPlot.png>]
+<../plots/PID/DistanceMatrix.png, id=279, 867.24pt x 722.7pt>
+File: ../plots/PID/DistanceMatrix.png Graphic file (type png)
+<use ../plots/PID/DistanceMatrix.png>
+Package pdftex.def Info: ../plots/PID/DistanceMatrix.png  used on input line 35
+5.
+(pdftex.def)             Requested size: 469.75502pt x 391.46521pt.
+<../plots/PID/PercentLiesByPID.png, id=280, 1445.4pt x 433.62pt>
 File: ../plots/PID/PercentLiesByPID.png Graphic file (type png)
 <use ../plots/PID/PercentLiesByPID.png>
 Package pdftex.def Info: ../plots/PID/PercentLiesByPID.png  used on input line 
-362.
+364.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1618,10 +1624,10 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [18 <../plots/PID/DistanceMatrix.png>]
-<../plots/PID/DwellTimes.png, id=286, 722.7pt x 433.62pt>
+<../plots/PID/DwellTimes.png, id=287, 722.7pt x 433.62pt>
 File: ../plots/PID/DwellTimes.png Graphic file (type png)
 <use ../plots/PID/DwellTimes.png>
-Package pdftex.def Info: ../plots/PID/DwellTimes.png  used on input line 373.
+Package pdftex.def Info: ../plots/PID/DwellTimes.png  used on input line 375.
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1636,32 +1642,32 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [19 <../plots/PID/PercentLiesByPID.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 384--384
+Underfull \hbox (badness 10000) in paragraph at lines 386--386
 []$\OML/lmm/m/it/12 M$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 384--384
-[]$\OML/lmm/m/it/12 SD$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 384--384
-[]$\OML/lmm/m/it/12 M$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 384--384
-[]$\OML/lmm/m/it/12 SD$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 385--385
-[]\T1/lmr/m/n/10.95 SELF
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 386--386
+[]$\OML/lmm/m/it/12 SD$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 386--386
+[]$\OML/lmm/m/it/12 M$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 386--386
+[]$\OML/lmm/m/it/12 SD$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--387
+[]\T1/lmr/m/n/10.95 SELF
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
 []\T1/lmr/m/n/10.95 SELF
  []
 
@@ -1678,10 +1684,10 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [20 <../plots/PID/DwellTimes.png>]
-<../plots/PID/NTransitions.png, id=301, 722.7pt x 433.62pt>
+<../plots/PID/NTransitions.png, id=302, 722.7pt x 433.62pt>
 File: ../plots/PID/NTransitions.png Graphic file (type png)
 <use ../plots/PID/NTransitions.png>
-Package pdftex.def Info: ../plots/PID/NTransitions.png  used on input line 401.
+Package pdftex.def Info: ../plots/PID/NTransitions.png  used on input line 403.
 
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
 
@@ -1697,11 +1703,11 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [21]
-<../plots/GainCluster/PercentLies.png, id=308, 722.7pt x 433.62pt>
+<../plots/GainCluster/PercentLies.png, id=309, 722.7pt x 433.62pt>
 File: ../plots/GainCluster/PercentLies.png Graphic file (type png)
 <use ../plots/GainCluster/PercentLies.png>
 Package pdftex.def Info: ../plots/GainCluster/PercentLies.png  used on input li
-ne 414.
+ne 416.
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1716,10 +1722,10 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [22 <../plots/PID/NTransitions.png>]
-<figures/GainClusterTiles.png, id=315, 2409.0pt x 1806.75pt>
+<figures/GainClusterTiles.png, id=316, 2409.0pt x 1806.75pt>
 File: figures/GainClusterTiles.png Graphic file (type png)
 <use figures/GainClusterTiles.png>
-Package pdftex.def Info: figures/GainClusterTiles.png  used on input line 439.
+Package pdftex.def Info: figures/GainClusterTiles.png  used on input line 441.
 (pdftex.def)             Requested size: 469.75502pt x 352.30106pt.
 
 
@@ -1731,247 +1737,247 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [23 <../plots/GainCluster/PercentLies.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 M$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 SD$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 M$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 SD$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 M$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 SD$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 M$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--451
+Underfull \hbox (badness 10000) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 SD$
  []
 
 
-Overfull \hbox (3.64851pt too wide) in paragraph at lines 451--451
+Overfull \hbox (3.64851pt too wide) in paragraph at lines 453--453
 \T1/lmr/m/n/12 (ms)| 
  []
 
 
-Overfull \hbox (2.36937pt too wide) in paragraph at lines 451--451
+Overfull \hbox (2.36937pt too wide) in paragraph at lines 453--453
 []$\OML/lmm/m/it/12 t\OT1/lmr/m/n/12 (34)$| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.49| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.38| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.24| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.34| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.38| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.24| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 0.34| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 452--452
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
 []\T1/lmr/m/n/12 .126| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.44| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.30| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.23| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.33| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.38| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.24| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 0.34| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 453--453
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
 []\T1/lmr/m/n/12 .081| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.51| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.32| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.39| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.49| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.38| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.24| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 0.34| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 454--454
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 456--456
 []\T1/lmr/m/n/12 .211| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.54| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.35| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.40| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.48| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.38| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.24| 
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 0.34| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 455--455
+Underfull \hbox (badness 10000) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 -
  []
 
 
-Overfull \hbox (0.9721pt too wide) in paragraph at lines 455--455
+Overfull \hbox (0.9721pt too wide) in paragraph at lines 457--457
 []\T1/lmr/m/n/12 .184| 
  []
 
@@ -1988,11 +1994,11 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [24 <./figures/GainClusterTiles.png>]
-<../plots/GainCluster/NTransitions.png, id=329, 722.7pt x 433.62pt>
+<../plots/GainCluster/NTransitions.png, id=330, 722.7pt x 433.62pt>
 File: ../plots/GainCluster/NTransitions.png Graphic file (type png)
 <use ../plots/GainCluster/NTransitions.png>
 Package pdftex.def Info: ../plots/GainCluster/NTransitions.png  used on input l
-ine 466.
+ine 468.
 (pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2030,11 +2036,6 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 ] (./template_apa.aux)
 Package rerunfilecheck Info: File `template_apa.out' has not changed.
 (rerunfilecheck)             Checksum: 411DBD8C93A638687426A11AD0528C0C;5075.
-
-
-Package biblatex Warning: Please rerun LaTeX.
-(biblatex)                Page breaks have changed.
-
 Package logreq Info: Writing requests to 'template_apa.run.xml'.
 \openout1 = `template_apa.run.xml'.
 
@@ -2049,20 +2050,21 @@ Here is how much of TeX's memory you used:
  99i,12n,103p,2950b,5221s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/20
-22/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2022/texmf-d
-ist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/
+22/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/
+fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/
 dvips/lm/lm-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/l
 mbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb
 ></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/loc
 al/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/
 2022/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2022/texmf-
 dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/
-type1/public/lm/lmri12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/publ
-ic/lm/lmsy10.pfb>
-Output written on template_apa.pdf (27 pages, 814411 bytes).
+type1/public/lm/lmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public
+/lm/lmri12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmsy10
+.pfb>
+Output written on template_apa.pdf (27 pages, 837478 bytes).
 PDF statistics:
- 415 PDF objects out of 1000 (max. 8388607)
- 325 compressed objects within 4 object streams
+ 420 PDF objects out of 1000 (max. 8388607)
+ 328 compressed objects within 4 object streams
  93 named destinations out of 1000 (max. 500000)
  393 words of extra memory for PDF output out of 10000 (max. 10000000)
 

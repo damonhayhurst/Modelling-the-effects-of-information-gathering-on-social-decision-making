@@ -26,12 +26,17 @@ def get_is_lie_or_truth(df: DataFrame) -> DataFrame:
     return get_is_truth(df) | get_is_lie(df)
 
 
-def get_is_aoi(df: DataFrame, aois: str | list[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]) -> DataFrame:
+def get_is_in_aois(df: DataFrame, aois: list[str] = [SELF_LIE, OTHER_LIE, SELF_TRUE, OTHER_TRUTH]) -> DataFrame:
     idx = df.index
     if not isinstance(aois, list):
         aois = [aois]
     return df.loc[idx][AOI].isin(aois)
 
+def get_is_aoi(df: DataFrame, aoi: str) -> DataFrame:
+    idx = df.index
+    if aoi == None:
+        return df.loc[idx][AOI].isna()
+    return df.loc[idx][AOI] == aoi
 
 def is_lie_selected(df: DataFrame, column: str = SELECTED_AOI) -> DataFrame:
     idx = df.index
@@ -74,20 +79,29 @@ def get_positive_gain(gains_df: DataFrame):
 def get_gain_of_ten(gains_df: DataFrame):
     return gains_df[SELF_GAIN] > 9
 
+
 def get_gain_of_between_ten_and_twenty(gains_df: DataFrame):
-    return (gains_df[SELF_GAIN] > 9) & (gains_df[SELF_GAIN] < 21)
+    return (gains_df[SELF_GAIN] > 9) & (gains_df[SELF_GAIN] < 20)
+
 
 def get_gain_of_twenty(gains_df: DataFrame):
     return gains_df[SELF_GAIN] > 19
 
 
 def get_gain_of_between_twenty_and_thirty(gains_df: DataFrame):
-    return (gains_df[SELF_GAIN] > 19) & (gains_df[SELF_GAIN] < 31)
+    return (gains_df[SELF_GAIN] > 19) & (gains_df[SELF_GAIN] < 30)
+
+
+def get_gain_of_between_ten_and_thirty(gains_df: DataFrame):
+    return (gains_df[SELF_GAIN] > 9) & (gains_df[SELF_GAIN] < 30)
 
 
 def get_gain_of_thirty(gains_df: DataFrame):
     return gains_df[SELF_GAIN] > 29
 
+
+def get_gain_under_thirty(gains_df: DataFrame):
+    return gains_df[SELF_GAIN] < 30
 
 
 def get_positive_gain_of_less_than_ten(gains_df: DataFrame):
@@ -120,3 +134,15 @@ def get_loss_of_twenty(gains_df: DataFrame):
 
 def get_loss_of_thirty(gains_df: DataFrame):
     return gains_df[OTHER_LOSS] > 29
+
+
+def get_loss_under_thirty(gain_df: DataFrame):
+    return gain_df[OTHER_LOSS] < 30
+
+
+def get_loss_of_between_ten_and_thirty(gains_df: DataFrame):
+    return (gains_df[OTHER_LOSS] > 9) & (gains_df[OTHER_LOSS] < 30)
+
+
+def get_loss_of_between_twenty_and_thirty(gains_df: DataFrame):
+    return (gains_df[OTHER_LOSS] > 19) & (gains_df[OTHER_LOSS] < 30)

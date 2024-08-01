@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pandas import Index
 from utils.columns import *
 from utils.display import *
@@ -31,21 +32,30 @@ def create_dwell_timeline(df: DataFrame, to_file: str = None):
     dwell_df = get_all_dwell_spans(df)
     dwell_df[MOUSE_TIMESTAMP] = dwell_df["min"]
     dwell_df = dwell_df.drop(columns=["min", "max"])
-    add_trial_id(dwell_df, df)
+    dwell_df = add_trial_id(dwell_df, df)
     dwell_df.set_index([dwell_df.index, MOUSE_TIMESTAMP])
     dwell_df = dwell_df.sort_index()
+    # dwell_df = smoothing(dwell_df)
     if to_file:
         save(dwell_df, to_file)
     return dwell_df
 
-def add_trial_id(dwell_df: DataFrame, aoi_df: DataFrame):
 
+
+# def smoothing(dwell_df, less_than=200):
+#     less_than_duration = dwell_df[DWELL_TIME] < timedelta(milliseconds=less_than)
+#     display(dwell_df[less_than_duration])
+#     return dwell_df.drop(index=less_than_duration)
+
+
+def add_trial_id(dwell_df: DataFrame, aoi_df: DataFrame):
     def get_trial_id(row):
         return aoi_df.loc[(row.name[0], row.name[1])][TRIAL_ID].values[0]
-    
-    dwell_df[TRIAL_ID] = dwell_df.apply(get_trial_id, axis=1) 
+
+    dwell_df[TRIAL_ID] = dwell_df.apply(get_trial_id, axis=1)
     return dwell_df
- 
+
+
 def save(dwell_df: DataFrame, path: str = DWELL_TIMELINE_CSV):
     dwell_df.to_csv(path, na_rep='None')
     print("Dwell Timeline saved to %s" % path)
@@ -56,5 +66,3 @@ def get_start_and_end_of_trial(df: DataFrame):
     trial_df = df.groupby(level=[PID, TRIAL_COUNT])
     start, end = trial_df.first()[MOUSE_TIMESTAMP], trial_df.last()[MOUSE_TIMESTAMP]
     return start, end
-
-

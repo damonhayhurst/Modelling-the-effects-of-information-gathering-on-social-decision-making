@@ -4,9 +4,9 @@ from analyse.dtw_analysis import create_big_matrix, create_pid_matrix, create_tr
 from analyse.get_response_stats import get_gains_response_stats
 from analyse.kmeans_analysis import cluster_analysis, get_kmeans_clusters, merge_components, plot_correlation_matrix, prepare_data
 from analyse.n_cluster_analysis import get_best_fit_heirarchical_clusters, get_best_fit_partitional_clusters, get_best_fit_partitional_clusters_from_features, get_best_fit_partitional_clusters_from_matrix
-from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_anova, do_clustered_pid_t_test, do_gains_t_test, get_confidence_intervals, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trial_response_stats_no_clusters, get_trials_by_cluster, plot_dwell_time_by_gain_for_clusters, plot_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_n_transitions, plot_n_transitions_by_gain_for_clusters, plot_n_transitions_distributions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lie_by_gain_for_clusters, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
+from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_anova, do_clustered_pid_t_test, do_gains_t_test, do_lie_percentage_chi_squared_tests, do_clustered_by_pid_mean_t_test, get_confidence_intervals, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trial_response_stats_no_clusters, get_trials_by_cluster, plot_aoi_by_pid, plot_dwell_time_by_gain_for_clusters, plot_avg_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_time_distribution, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_n_transitions, plot_n_transitions_by_gain_for_clusters, plot_n_transitions_by_pid, plot_n_transitions_distributions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lie_by_gain_for_clusters, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
 from preprocess.trial_id import calculate_gains_losses
-from utils.columns import AVG_DWELL, CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PAYNE_INDEX, PID, POSITIVE_GAIN, RT, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL, TRIAL_COUNT, TRIAL_ID, UNIQUE_AOIS
+from utils.columns import AVG_DWELL, CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PAYNE_INDEX, PID, POSITIVE_GAIN, RT, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL, TRIAL_COUNT, TRIAL_ID, UNIQUE_AOIS
 from utils.display import display
 from utils.masks import get_gain_of_less_than_ten, get_gain_of_ten, get_loss_of_less_than_ten, get_loss_of_ten, is_no_dwell_for_aois
 from utils.paths import *
@@ -38,7 +38,7 @@ def descriptives_analysis(input_aoi_analysis_file: str = None):
     gains_response_df = get_gains_response_stats(aoi_analysis_df, [NEGATIVE_GAIN, GAIN_UNDER_TEN, GAIN_OF_TEN, GAIN_OF_TWENTY, GAIN_OF_THIRTY], with_error_bounds=False)
     display(gains_response_df)
     gains_response_df = get_gains_response_stats(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN, LOSS_OF_TWENTY, LOSS_OF_THIRTY], with_error_bounds=False)
-    gains_response_df = get_gains_response_stats(aoi_analysis_df, [f"{LOSS_OF_THIRTY}, {GAIN_OF_TEN}", f"{LOSS_OF_THIRTY},{GAIN_UNDER_TEN} "], with_error_bounds=False)
+    gains_response_df = get_gains_response_stats(aoi_analysis_df, [f"{LOSS_OF_THIRTY}, {GAIN_OF_TEN}", f"{LOSS_OF_THIRTY}, {GAIN_UNDER_TEN}"], with_error_bounds=False)
     display(gains_response_df)
     # trial_id_response_df = get_trial_id_response_stats_no_clusters(aoi_analysis_df, with_error_bounds=False, val_only=True)
     # display(DataFrame([trial_id_response_df.min(), trial_id_response_df.max()]))
@@ -61,7 +61,7 @@ def response_analysis(input_aoi_analysis_file: str = None,
                       avg_dwell_per_loss_plot: str = None,
                       avg_n_transition_per_loss_plot: str = None,
                       colors: List[str] = XKCD_COLORS_LIST):
-    med_purple, purple, sand = XKCD_COLORS["xkcd:pinkish purple"], XKCD_COLORS["xkcd:purple"], XKCD_COLORS["xkcd:light tan"]
+    purple = XKCD_COLORS["xkcd:purple"]
     med_blue, blue = XKCD_COLORS["xkcd:light blue"], XKCD_COLORS["xkcd:medium blue"]
     green, med_green = XKCD_COLORS["xkcd:medium green"], XKCD_COLORS["xkcd:greenish"]
 
@@ -75,28 +75,29 @@ def response_analysis(input_aoi_analysis_file: str = None,
     trial_index_df = read_from_trial_index_file(input_trial_index_file)
     gains_df = calculate_gains_losses(trial_index_df)
     display(gains_df.median())
+    display(gains_df.quantile(0.25))
+    display(gains_df.quantile(0.75))
     display(gains_df.mean())
     display(gains_df.std())
     title = ""
     # title = "Percent of Lie based on Net Gain to Sender from lying in Trial"
-    plot_gains_mean_percent_lie(aoi_analysis_df, [NEGATIVE_GAIN, GAIN_UNDER_TEN, GAIN_OF_TEN, GAIN_OF_TWENTY, GAIN_OF_THIRTY],
-                                title=title, colors=[sand, med_purple, purple, purple, purple], to_file=net_gain_lie_plot)
+    plot_gains_mean_percent_lie(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN, GAIN_OF_TWENTY, GAIN_OF_THIRTY],
+                                title=title, colors=[XKCD_COLORS["xkcd:pinkish purple"], XKCD_COLORS["xkcd:purply"], purple, XKCD_COLORS["xkcd:darkish purple"]], to_file=net_gain_lie_plot)
     # title = "Percent of Lie based on Net Loss to Receiver from lying in Trial"
     plot_gains_mean_percent_lie(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN, LOSS_OF_TWENTY, LOSS_OF_THIRTY],
-                                title=title, colors=[med_blue, blue, blue, blue], to_file=net_loss_lie_plot)
-    # title = "Percent of Lie based on Net Gain to Receiver and Net Loss to Sender"
-    plot_gains_mean_percent_lie(aoi_analysis_df, [f"{GAIN_UNDER_TEN}, {LOSS_UNDER_TEN}", f"{GAIN_UNDER_TEN}, {LOSS_OF_TEN}"],
-                                title=title, colors=[med_green, green], to_file=net_gain_loss_lie_plot)
-    # title = "Percent of Lie based on Net Gain to Receiver and Net Loss to Sender"
-    plot_gains_mean_percent_lie(aoi_analysis_df, [f"{LOSS_OF_THIRTY}, {GAIN_OF_TEN}", f"{LOSS_OF_THIRTY}, {GAIN_UNDER_TEN}"],
-                                title=title, colors=[med_green, green], to_file=net_gain_loss_lie_plot)
-    plot_gains_avg_dwell_time(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN], [med_purple, purple], to_file=avg_dwell_per_gain_plot)
-    # plot_gains_avg_dwell_time(aoi_analysis_df, [NEGATIVE_GAIN, POSITIVE_GAIN], [sand, purple], to_file=avg_dwell_per_negative_gain_plot)
-    plot_gains_n_transitions(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN], [med_purple, purple], to_file=avg_n_transition_per_gain_plot)
+                                title=title, colors=[med_blue, blue, XKCD_COLORS["xkcd:dusk blue"], XKCD_COLORS["xkcd:darkish blue"]], to_file=net_loss_lie_plot)
+    plot_gains_avg_dwell_time(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN], [XKCD_COLORS["xkcd:pinkish purple"], XKCD_COLORS["xkcd:purply"]], to_file=avg_dwell_per_gain_plot)
+    plot_gains_avg_dwell_time(aoi_analysis_df, [GAIN_UNDER_THIRTY, GAIN_OF_THIRTY], [purple, XKCD_COLORS["xkcd:darkish purple"]], to_file=avg_dwell_per_gain_plot)
+    plot_gains_n_transitions(aoi_analysis_df, [GAIN_UNDER_TEN, GAIN_OF_TEN], [purple, XKCD_COLORS["xkcd:darkish purple"]], to_file=avg_n_transition_per_gain_plot)
+    plot_gains_n_transitions(aoi_analysis_df, [GAIN_UNDER_THIRTY, GAIN_OF_THIRTY], [purple, XKCD_COLORS["xkcd:darkish purple"]], to_file=avg_dwell_per_gain_plot)
     # plot_gains_n_transitions(aoi_analysis_df, [NEGATIVE_GAIN, POSITIVE_GAIN], [sand, purple], to_file=avg_n_transition_per_gain_plot)
     plot_losses_avg_dwell_time(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN], [med_blue, blue], to_file=avg_dwell_per_loss_plot)
     plot_losses_n_transitions(aoi_analysis_df, [LOSS_UNDER_TEN, LOSS_OF_TEN], [med_blue, blue], to_file=avg_n_transition_per_loss_plot)
-    do_gains_t_test(aoi_analysis_df)
+
+    for_test = [(GAIN_OF_TEN, GAIN_UNDER_TEN), (LOSS_OF_TEN, LOSS_UNDER_TEN), (GAIN_UNDER_THIRTY, GAIN_OF_THIRTY), (LOSS_UNDER_THIRTY, LOSS_OF_THIRTY)]
+    do_lie_percentage_chi_squared_tests(aoi_analysis_df, for_test)
+    for_test = [(GAIN_OF_TEN, GAIN_UNDER_TEN), (LOSS_OF_TEN, LOSS_UNDER_TEN), (GAIN_UNDER_THIRTY, GAIN_OF_THIRTY)]
+    do_gains_t_test(aoi_analysis_df, for_test).pipe(display)
 
 
 def pid_dtw_analysis(input_distance_file: str = None,
@@ -131,6 +132,11 @@ def pid_dtw_analysis(input_distance_file: str = None,
     responses_df_by_pid = get_response_stats_by_pid(cluster_df, aoi_analysis_df)
     sorted_df = sort_response_df_by_pid_lie_percent_in_cluster(responses_df_by_pid, aoi_analysis_df)
     plot_percent_lies_by_pid(sorted_df, colors, to_file=percent_lies_by_pid_plot)
+    plot_aoi_by_pid(sorted_df, SELF_LIE, colors)
+    plot_aoi_by_pid(sorted_df, SELF_TRUE, colors)
+    plot_aoi_by_pid(sorted_df, OTHER_LIE, colors)
+    plot_aoi_by_pid(sorted_df, OTHER_TRUTH, colors)
+    plot_n_transitions_by_pid(sorted_df, colors)
 
     gain_under_ten_responses_df = get_pid_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_UNDER_TEN, aoi_analysis_df)
     display(get_pid_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_UNDER_TEN, aoi_analysis_df, with_error_bounds=False), max_cols=None, title=GAIN_UNDER_TEN)
@@ -153,7 +159,8 @@ def pid_dtw_analysis(input_distance_file: str = None,
 
     display(cluster_df.value_counts())
     display(do_clustered_pid_t_test(aoi_analysis_df, cluster_df), max_cols=None)
-    do_anova(aoi_analysis_df, cluster_df)
+    display(do_clustered_by_pid_mean_t_test(aoi_analysis_df, cluster_df, [LIE, SELF_TRUE, N_TRANSITIONS]))
+    # do_anova(aoi_analysis_df, cluster_df)
 
 
 def trial_id_dtw_analysis(input_distance_file: str = None,
@@ -373,16 +380,19 @@ def dbscan_dtw_analysis(input_distance_file: str = None,
 
 
 def distribution_analysis(input_aoi_analysis_file: str = None,
+                          input_dwell_timeline_file: str = None,
                           dwell_distribution_plot: str = None,
                           rt_distribution_plot: str = None,
                           n_transition_distribution_plot: str = None):
     aoi_analysis_df = read_from_analysis_file(input_aoi_analysis_file)
     aoi_analysis_df[[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]] = aoi_analysis_df[[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH]] * 1000
+    dwell_df = read_from_dwell_file(input_dwell_timeline_file)
     # is_no_dwell = is_no_dwell_for_aois(aoi_analysis_df, [SELF_TRUE, SELF_LIE, OTHER_TRUTH, OTHER_LIE])
     # display(aoi_analysis_df.loc[is_no_dwell])
     # display(aoi_analysis_df.loc[~is_no_dwell])
+    plot_dwell_time_distribution(dwell_df, to_file=None)
     plot_rt_distributions(aoi_analysis_df, to_file=rt_distribution_plot)
-    plot_dwell_time_distributions(aoi_analysis_df, to_file=dwell_distribution_plot)
+    plot_avg_dwell_time_distributions(aoi_analysis_df, to_file=dwell_distribution_plot)
     plot_n_transitions_distributions(aoi_analysis_df, to_file=n_transition_distribution_plot)
 
 
@@ -400,8 +410,8 @@ class SaveToFileFn:
 def do_analyses(do_save: bool = False, **params):
     with SaveToFileFn(do_save) as save:
         # pid_dtw_analysis(**save(params['pid_dtw']))
-        response_analysis(**save(params["response"]))
-        # distribution_analysis(**save(params["distribution"]))
+        # response_analysis(**save(params["response"]))
+        distribution_analysis(**save(params["distribution"]))
         # proximal_analysis(**save(params["proximal"]))
         # trial_id_dtw_analysis(**save(params["trial_id_dtw"]))
         # descriptives_analysis(**save(params["descriptives"]))
