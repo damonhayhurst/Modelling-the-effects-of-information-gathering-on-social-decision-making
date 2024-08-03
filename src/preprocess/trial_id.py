@@ -1,5 +1,3 @@
-import os
-from matplotlib import pyplot as plt
 from pandas import DataFrame
 from utils.display import display
 from utils.paths import TRIAL_INDEX_CSV
@@ -40,16 +38,3 @@ def calculate_gains_losses(trial_index_df: DataFrame):
     df[SELF_GAIN] = df[SELF_LIE] - df[SELF_TRUE]
     df[OTHER_LOSS] = df[OTHER_TRUTH] - df[OTHER_LIE]
     return df
-
-
-def plot_gains_by_trial_id(gains_df, to_file: str = None):
-    fig, ax = plt.subplots(figsize=(20, 6))
-    # plt.title('Net Gain to Sender by Trial ID')
-    plt.ylabel('Net Gain to Sender')
-    plt.bar(gains_df.index, gains_df[SELF_GAIN])
-    plt.xticks(gains_df.index, fontsize=7)
-    plt.tight_layout()
-    if to_file:
-        os.makedirs(os.path.dirname(to_file), exist_ok=True)
-        plt.savefig(to_file)
-    plt.show()

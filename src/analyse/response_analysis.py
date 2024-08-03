@@ -12,7 +12,7 @@ from pandas import DataFrame, Index, MultiIndex, Series, concat
 import seaborn as sns
 from scipy import stats
 from analyse.get_response_stats import get_gains_response_stats, get_is_lie, get_t_test_response_stats, get_response_stats, get_response_stats_for_clusters, get_response_stats_for_group_by, get_trials_by_condition, t_test
-from utils.columns import AOI, CHI_SQUARED, CLUSTER, CLUSTER_1, CLUSTER_2, CONDITION, CONDITION_1, CONDITION_2, DISTANCE, DOF, DWELL_TIME, FREQUENCIES, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, GROUP, IS_LIE, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, N, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, P_VALUE, PID, PID_1, PID_2, POSITIVE_GAIN, RT, SELECTED_AOI, SELF_LIE, SELF_TRUE, T_STATISTIC, TRIAL_COUNT, TRIAL_ID, TRUTH
+from utils.columns import AOI, CHI_SQUARED, CLUSTER, CLUSTER_1, CLUSTER_2, CONDITION, CONDITION_1, CONDITION_2, DISTANCE, DOF, DWELL_TIME, FREQUENCIES, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, GROUP, IS_LIE, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, N, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, P_VALUE, PID, PID_1, PID_2, POSITIVE_GAIN, RT, SELECTED_AOI, SELF_GAIN, SELF_LIE, SELF_TRUE, T_STATISTIC, TRIAL_COUNT, TRIAL_ID, TRUTH
 from utils.display import display
 from utils.masks import get_gain_of_between_ten_and_thirty, get_gain_of_between_ten_and_twenty, get_gain_of_between_twenty_and_thirty, get_gain_of_thirty, get_gain_under_thirty, get_loss_of_between_ten_and_thirty, get_loss_of_between_twenty_and_thirty, get_loss_of_twenty, get_loss_under_thirty, get_positive_gain
 from utils.masks import get_gain_of_ten
@@ -788,6 +788,19 @@ def do_anova(analysis_df: DataFrame, cluster_df: DataFrame):
     model = ols(f'NTRANSITIONS ~ C({CONDITION}) * C({CLUSTER})', data=anova_df).fit()
     anova_results = sm.stats.anova_lm(model, typ=2)  # Type 2 ANOVA DataFrame
     print(anova_results)
+
+
+def plot_gains_by_trial_id(gains_df, to_file: str = None):
+    fig, ax = plt.subplots(figsize=(20, 6))
+    # plt.title('Net Gain to Sender by Trial ID')
+    plt.ylabel('Net Gain to Sender')
+    plt.bar(gains_df.index, gains_df[SELF_GAIN])
+    plt.xticks(gains_df.index, fontsize=7)
+    plt.tight_layout()
+    if to_file:
+        os.makedirs(os.path.dirname(to_file), exist_ok=True)
+        plt.savefig(to_file)
+    plt.show()
     # ps_to_correct[GAIN_UNDER_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_gain_of_less_than_ten(aoi_analysis_df)], cluster_df).iloc[0]
     # ps_to_correct[GAIN_OF_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_gain_of_ten(aoi_analysis_df)], cluster_df).iloc[0]
     # ps_to_correct[LOSS_UNDER_TEN] = do_clustered_pid_t_test(aoi_analysis_df[get_loss_of_less_than_ten(aoi_analysis_df)], cluster_df).iloc[0]

@@ -11,14 +11,14 @@ warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-distance_file = DTW_T_V2_CSV
-
+distance_file = DTW_T_WITH_DIFF_WITH_SMOOTH_CSV
+analysis_file = AOI_ANALYSIS_V2_CSV
 
 def get_pid_dtw_analysis_params(save: bool = False):
 
     return dict(
         input_distance_file=distance_file,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=analysis_file,
         pid_matrix_plot=PID_DISTANCE_PLOT if save else None,
         pid_percent_lies_plot=PID_PERCENT_LIES_PLOT if save else None,
         pid_dwell_times_plot=PID_DWELL_TIMES_PLOT if save else None,
@@ -34,7 +34,7 @@ def get_pid_dtw_analysis_params(save: bool = False):
 
 def get_response_analysis_params(save: bool = False):
     return dict(
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=AOI_ANALYSIS_V2_CSV,
         input_trial_index_file=TRIAL_INDEX_CSV,
         n_trials_by_pid_plot=N_TRIALS_BY_PID_PLOT if save else None,
         percent_lies_by_pid_plot=OVERALL_PID_PERCENT_LIES_PLOT if save else None,
@@ -45,7 +45,8 @@ def get_response_analysis_params(save: bool = False):
         avg_dwell_per_gain_plot=AVG_DWELL_PER_GAIN_PLOT if save else None,
         avg_n_transition_per_gain_plot=N_TRANSITION_PER_GAIN_PLOT if save else None,
         avg_dwell_per_loss_plot=AVG_DWELL_PER_LOSS_PLOT if save else None,
-        avg_n_transition_per_loss_plot=N_TRANSITION_PER_LOSS_PLOT if save else None
+        avg_n_transition_per_loss_plot=N_TRANSITION_PER_LOSS_PLOT if save else None,
+        output_trial_index_gains_plot=TRIAL_INDEX_GAINS_PLOT if save else None
     )
 
 

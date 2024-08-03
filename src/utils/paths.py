@@ -3,6 +3,7 @@ YOUNG_ADULTS_2 = "Data/RawData2_YoungAdults.csv"
 OLD_ADULTS = "Data/RawData3_OldAdults.csv"
 
 AOIS_CSV = "Analysis/AOIs.csv"
+AOIS_V2_CSV = "Analysis/AOIs_v2.csv"
 AOI_ANALYSIS_CSV = "Analysis/AOI_Analysis.csv"
 AOI_ANALYSIS_V2_CSV = "Analysis/AOI_Analysis_v2.csv"
 AVERAGE_ANALYSIS_CSV = "Analysis/Average_AOI_Analysis.csv"
@@ -18,7 +19,7 @@ DTW_NDIM_CSV = "Analysis/DTW_ndim.csv"
 DTW_T_CSV = "Analysis/DTW_t.csv"
 DTW_T_V2_CSV = "Analysis/DTW_t_v2.csv"
 DTW_T_WITH_DIFF_CSV = "Analysis/DTW_t_with_diff.csv"
-DTW_T_WITH_DIFF_NO_SMOOTH_CSV = "Analysis/DTW_t_with_diff_no_smooth.csv"
+DTW_T_WITH_DIFF_WITH_SMOOTH_CSV = "Analysis/DTW_t_with_diff_with_smooth.csv"
 
 TRIAL_INDEX_CSV = "Analysis/Trial_Index.csv"
 

@@ -132,7 +132,6 @@ def get_response_stats_for_group_by(group_by_df: DataFrame, with_error_bounds: b
 
 
 def get_response_stats(analysis_df: DataFrame, with_error_bounds: bool = True, val_only: bool = False):
-
     calc_error_bounds = get_calc_error_bounds_fn(with_error_bounds, val_only)
 
     return Series({

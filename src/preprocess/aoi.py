@@ -242,7 +242,7 @@ def print_aois_stats(df: DataFrame):
     return df
 
 
-def determine_aoi(df: DataFrame, smoothing: bool = False, to_file: str = None) -> DataFrame:
+def determine_aoi(df: DataFrame, do_smoothing: bool = True, to_file: str = None) -> DataFrame:
     df = add_selected_aoi(df)
     coord_row_df = separate_mouse_coords(df)
     coord_row_df = remove_screen_width_zero(coord_row_df)
@@ -250,11 +250,12 @@ def determine_aoi(df: DataFrame, smoothing: bool = False, to_file: str = None) -
     print_n_trials(coord_row_df)
     print("\n")
     print_aois_stats(coord_row_df)
+    aoi_df = smoothing(coord_row_df) if do_smoothing else coord_row_df
     aoi_df = remove_trials_with_no_aois(coord_row_df)
     aoi_df = remove_trials_with_less_than_3std_rt(aoi_df)
     aoi_df = remove_trials_with_more_than_3std_rt(aoi_df)
     aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 60, bypass=False)
-    aoi_df = smoothing(aoi_df) if smoothing else aoi_df
+    
     display(aoi_df)
     if to_file:
         save(aoi_df, to_file)

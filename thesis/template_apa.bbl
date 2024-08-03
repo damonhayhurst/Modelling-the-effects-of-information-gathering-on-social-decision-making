@@ -72,6 +72,26 @@
       \verb /Users/damon/Zotero/storage/G6LBB7EQ/Brandstätter et al. - 2006 - The priority heuristic Making choices without tra.pdf
       \endverb
     \endentry
+    \entry{MouselabWEBa}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeldatesource}{nodate}
+      \field{labeltitlesource}{title}
+      \field{title}{Mouselab {{WEB}}}
+      \field{urlday}{2}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/42IXL5NE/www.mouselabweb.org.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mouselabweb.org/
+      \endverb
+      \verb{url}
+      \verb https://www.mouselabweb.org/
+      \endverb
+    \endentry
     \entry{payneTaskComplexityContingent1976}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=dcfa76e26fef1aa7758ec7d579a35a2e}{%
@@ -123,80 +143,6 @@
       \endverb
       \verb{url}
       \verb https://www.sciencedirect.com/science/article/pii/0030507376900222
-      \endverb
-    \endentry
-    \entry{payneWalkingScarecrowInformation2004}{inbook}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=dcfa76e26fef1aa7758ec7d579a35a2e}{%
-           family={Payne},
-           familyi={P\bibinitperiod},
-           given={John\bibnamedelima W.},
-           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=540f307a38e6db04ca5ace9932b5452b}{%
-           family={Bettman},
-           familyi={B\bibinitperiod},
-           given={James\bibnamedelima R.},
-           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod},
-           givenun=0}}%
-      }
-      \name{editor}{2}{}{%
-        {{hash=0e639fca52f584de0c2a4cff5f8ee480}{%
-           family={Koehler},
-           familyi={K\bibinitperiod},
-           given={Derek\bibnamedelima J.},
-           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=72abd4bb1bedb56bfaf5cafbc16d8101}{%
-           family={Harvey},
-           familyi={H\bibinitperiod},
-           given={Nigel},
-           giveni={N\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Wiley}%
-      }
-      \strng{namehash}{e0156e0b1f44c80b5698cd6d08ea4925}
-      \strng{fullhash}{e0156e0b1f44c80b5698cd6d08ea4925}
-      \strng{bibnamehash}{e0156e0b1f44c80b5698cd6d08ea4925}
-      \strng{authorbibnamehash}{e0156e0b1f44c80b5698cd6d08ea4925}
-      \strng{authornamehash}{e0156e0b1f44c80b5698cd6d08ea4925}
-      \strng{authorfullhash}{e0156e0b1f44c80b5698cd6d08ea4925}
-      \strng{editorbibnamehash}{2772f2610cfb65e65a56ee10c818a038}
-      \strng{editornamehash}{2772f2610cfb65e65a56ee10c818a038}
-      \strng{editorfullhash}{2772f2610cfb65e65a56ee10c818a038}
-      \field{sortinit}{P}
-      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{booktitle}{Blackwell {{Handbook}} of {{Judgment}} and {{Decision Making}}}
-      \field{edition}{1}
-      \field{isbn}{978-1-4051-0746-4 978-0-470-75293-7}
-      \field{langid}{english}
-      \field{month}{1}
-      \field{shorttitle}{Walking with the {{Scarecrow}}}
-      \field{title}{Walking with the {{Scarecrow}}: {{The Information}}‐{{Processing Approach}} to {{Decision Research}}}
-      \field{urlday}{16}
-      \field{urlmonth}{7}
-      \field{urlyear}{2024}
-      \field{year}{2004}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{110\bibrangedash 132}
-      \range{pages}{23}
-      \verb{doi}
-      \verb 10.1002/9780470752937.ch6
-      \endverb
-      \verb{file}
-      \verb /Users/damon/Zotero/storage/LYEZ2RIE/Payne and Bettman - 2004 - Walking with the Scarecrow The Information‐Proces.pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/10.1002/9780470752937.ch6
-      \endverb
-      \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/10.1002/9780470752937.ch6
       \endverb
     \endentry
     \entry{reeckSearchPredictsChanges2017b}{article}{}
@@ -262,6 +208,155 @@
       \endverb
       \verb{url}
       \verb https://pnas.org/doi/full/10.1073/pnas.1707040114
+      \endverb
+    \endentry
+    \entry{simonRationalChoiceStructure1956d}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7196e626d3f0d71a36b2d95d761a3506}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={H.\bibnamedelimi A.},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7196e626d3f0d71a36b2d95d761a3506}
+      \strng{fullhash}{7196e626d3f0d71a36b2d95d761a3506}
+      \strng{bibnamehash}{7196e626d3f0d71a36b2d95d761a3506}
+      \strng{authorbibnamehash}{7196e626d3f0d71a36b2d95d761a3506}
+      \strng{authornamehash}{7196e626d3f0d71a36b2d95d761a3506}
+      \strng{authorfullhash}{7196e626d3f0d71a36b2d95d761a3506}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1939-1471, 0033-295X}
+      \field{journaltitle}{Psychological Review}
+      \field{langid}{english}
+      \field{number}{2}
+      \field{shortjournal}{Psychological Review}
+      \field{title}{Rational Choice and the Structure of the Environment.}
+      \field{urlday}{2}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{volume}{63}
+      \field{year}{1956}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{129\bibrangedash 138}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1037/h0042769
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/EAGB8GKP/Simon - 1956 - Rational choice and the structure of the environme.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.apa.org/doi/10.1037/h0042769
+      \endverb
+      \verb{url}
+      \verb https://doi.apa.org/doi/10.1037/h0042769
+      \endverb
+    \endentry
+    \entry{simonBehavioralModelRational1955}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=09c462602325128c408aa39c70c6ae62}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Herbert\bibnamedelima A.},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{09c462602325128c408aa39c70c6ae62}
+      \strng{fullhash}{09c462602325128c408aa39c70c6ae62}
+      \strng{bibnamehash}{09c462602325128c408aa39c70c6ae62}
+      \strng{authorbibnamehash}{09c462602325128c408aa39c70c6ae62}
+      \strng{authornamehash}{09c462602325128c408aa39c70c6ae62}
+      \strng{authorfullhash}{09c462602325128c408aa39c70c6ae62}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Introduction, 99.--I. Some general features of rational choice, 100.--II. The essential simplifications, 103.--III. Existence and uniqueness of solutions, 111.--IV. Further comments on dynamics, 113.--V. Conclusion, 114.--Appendix, 115.}
+      \field{eprinttype}{jstor}
+      \field{issn}{0033-5533}
+      \field{journaltitle}{The Quarterly Journal of Economics}
+      \field{number}{1}
+      \field{title}{A {{Behavioral Model}} of {{Rational Choice}}}
+      \field{urlday}{16}
+      \field{urlmonth}{7}
+      \field{urlyear}{2024}
+      \field{volume}{69}
+      \field{year}{1955}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{99\bibrangedash 118}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.2307/1884852
+      \endverb
+      \verb{eprint}
+      \verb 1884852
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/NB6XWKSD/Simon - 1955 - A Behavioral Model of Rational Choice.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.jstor.org/stable/1884852
+      \endverb
+      \verb{url}
+      \verb https://www.jstor.org/stable/1884852
+      \endverb
+    \endentry
+    \entry{willemsenVisitingDecisionFactory2011}{inbook}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=c2c7dee223dbdd705cf00eb1bf6b33d0}{%
+           family={Willemsen},
+           familyi={W\bibinitperiod},
+           given={Martijn},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=062227064112b1d2f766429b8d08086a}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5771e7c9f45d3264cb5e8510efb3461d}
+      \strng{fullhash}{5771e7c9f45d3264cb5e8510efb3461d}
+      \strng{bibnamehash}{5771e7c9f45d3264cb5e8510efb3461d}
+      \strng{authorbibnamehash}{5771e7c9f45d3264cb5e8510efb3461d}
+      \strng{authornamehash}{5771e7c9f45d3264cb5e8510efb3461d}
+      \strng{authorfullhash}{5771e7c9f45d3264cb5e8510efb3461d}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This handbook provides a critical review and user’s guide to conducting and reporting process tracing studies of decision making. Each chapter covers a specific method that is presented and reviewed by authors who are experts in the method’s application to decision research. The book ultimately illustrates and presents a multi-method approach and is essential reading for graduate students and researchers wishing to undertake such studies on decision making.}
+      \field{booktitle}{European {{Urology}} - {{EUR UROL}}}
+      \field{day}{1}
+      \field{isbn}{978-1-84872-864-6}
+      \field{month}{1}
+      \field{shorttitle}{Visiting the Decision Factory}
+      \field{title}{Visiting the Decision Factory: Observing Cognition with {{MouselabWEB}} and Other Information Acquisition {{Methods}}}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{pages}{19\bibrangedash 42}
+      \range{pages}{24}
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/4MI47XSR/Willemsen and Johnson - 2011 - Visiting the decision factory observing cognition.pdf
       \endverb
     \endentry
   \enddatalist

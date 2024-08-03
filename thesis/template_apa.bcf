@@ -2792,13 +2792,19 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">payneTaskComplexityContingent1976</bcf:citekey>
-    <bcf:citekey order="2">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
-    <bcf:citekey order="3">payneWalkingScarecrowInformation2004</bcf:citekey>
-    <bcf:citekey order="4">reeckSearchPredictsChanges2017b</bcf:citekey>
-    <bcf:citekey order="5">payneTaskComplexityContingent1976</bcf:citekey>
-    <bcf:citekey order="6">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
-    <bcf:citekey order="7">payneWalkingScarecrowInformation2004</bcf:citekey>
-    <bcf:citekey order="8">reeckSearchPredictsChanges2017b</bcf:citekey>
+    <bcf:citekey order="2">simonRationalChoiceStructure1956d</bcf:citekey>
+    <bcf:citekey order="3">simonBehavioralModelRational1955</bcf:citekey>
+    <bcf:citekey order="4">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
+    <bcf:citekey order="5">willemsenVisitingDecisionFactory2011</bcf:citekey>
+    <bcf:citekey order="6">MouselabWEBa</bcf:citekey>
+    <bcf:citekey order="7">reeckSearchPredictsChanges2017b</bcf:citekey>
+    <bcf:citekey order="8">payneTaskComplexityContingent1976</bcf:citekey>
+    <bcf:citekey order="9">simonRationalChoiceStructure1956d</bcf:citekey>
+    <bcf:citekey order="10">simonBehavioralModelRational1955</bcf:citekey>
+    <bcf:citekey order="11">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
+    <bcf:citekey order="12">willemsenVisitingDecisionFactory2011</bcf:citekey>
+    <bcf:citekey order="13">MouselabWEBa</bcf:citekey>
+    <bcf:citekey order="14">reeckSearchPredictsChanges2017b</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

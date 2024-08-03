@@ -4,7 +4,7 @@ from analyse.dtw_analysis import create_big_matrix, create_pid_matrix, create_tr
 from analyse.get_response_stats import get_gains_response_stats
 from analyse.kmeans_analysis import cluster_analysis, get_kmeans_clusters, merge_components, plot_correlation_matrix, prepare_data
 from analyse.n_cluster_analysis import get_best_fit_heirarchical_clusters, get_best_fit_partitional_clusters, get_best_fit_partitional_clusters_from_features, get_best_fit_partitional_clusters_from_matrix
-from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_anova, do_clustered_pid_t_test, do_gains_t_test, do_lie_percentage_chi_squared_tests, do_clustered_by_pid_mean_t_test, get_confidence_intervals, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trial_response_stats_no_clusters, get_trials_by_cluster, plot_aoi_by_pid, plot_dwell_time_by_gain_for_clusters, plot_avg_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_time_distribution, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_n_transitions, plot_n_transitions_by_gain_for_clusters, plot_n_transitions_by_pid, plot_n_transitions_distributions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lie_by_gain_for_clusters, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
+from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_anova, do_clustered_pid_t_test, do_gains_t_test, do_lie_percentage_chi_squared_tests, do_clustered_by_pid_mean_t_test, get_confidence_intervals, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trial_response_stats_no_clusters, get_trials_by_cluster, plot_aoi_by_pid, plot_dwell_time_by_gain_for_clusters, plot_avg_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_time_distribution, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_by_trial_id, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_n_transitions, plot_n_transitions_by_gain_for_clusters, plot_n_transitions_by_pid, plot_n_transitions_distributions, plot_n_transitions_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lie_by_gain_for_clusters, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
 from preprocess.trial_id import calculate_gains_losses
 from utils.columns import AVG_DWELL, CLUSTER, DISTANCE, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_LOSS, OTHER_TRUTH, PAYNE_INDEX, PID, POSITIVE_GAIN, RT, SELF_GAIN, SELF_LIE, SELF_TRUE, TRIAL, TRIAL_COUNT, TRIAL_ID, UNIQUE_AOIS
 from utils.display import display
@@ -60,6 +60,7 @@ def response_analysis(input_aoi_analysis_file: str = None,
                       avg_n_transition_per_gain_plot: str = None,
                       avg_dwell_per_loss_plot: str = None,
                       avg_n_transition_per_loss_plot: str = None,
+                      output_trial_index_gains_plot: str = None,
                       colors: List[str] = XKCD_COLORS_LIST):
     purple = XKCD_COLORS["xkcd:purple"]
     med_blue, blue = XKCD_COLORS["xkcd:light blue"], XKCD_COLORS["xkcd:medium blue"]
@@ -74,6 +75,7 @@ def response_analysis(input_aoi_analysis_file: str = None,
     plot_percent_lies_by_trial_id(trial_id_response_df.sort_values(LIE), colors=[purple], to_file=percent_lies_by_trial_id_plot)
     trial_index_df = read_from_trial_index_file(input_trial_index_file)
     gains_df = calculate_gains_losses(trial_index_df)
+    plot_gains_by_trial_id(gains_df, to_file=output_trial_index_gains_plot)
     display(gains_df.median())
     display(gains_df.quantile(0.25))
     display(gains_df.quantile(0.75))
@@ -344,6 +346,7 @@ def kmedoids_dtw_analysis(input_distance_file: str = None,
     plot_dwell_times_for_clusters(responses_df, TRIAL, colors, title_prefix, to_file=dwell_times_plot)
     plot_n_transitions_for_clusters(responses_df, TRIAL, colors, title_prefix, to_file=n_transitions_plot)
     responses_by_pid_df = get_trial_response_stats_by_pid(cluster_df, aoi_analysis_df)
+    display(responses_by_pid_df)
     sorted_responses_by_pid_df = sort_response_df_by_pid_lie_percent(responses_by_pid_df, aoi_analysis_df)
     plot_percent_lies_by_pid(sorted_responses_by_pid_df, colors, title_prefix, to_file=percent_lies_by_pid_plot)
     plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, TRIAL, colors, title_prefix, to_file=n_trials_by_pid_plot)
@@ -411,7 +414,8 @@ def do_analyses(do_save: bool = False, **params):
     with SaveToFileFn(do_save) as save:
         # pid_dtw_analysis(**save(params['pid_dtw']))
         # response_analysis(**save(params["response"]))
-        distribution_analysis(**save(params["distribution"]))
+        # distribution_analysis(**save(params["distribution"]))
         # proximal_analysis(**save(params["proximal"]))
         # trial_id_dtw_analysis(**save(params["trial_id_dtw"]))
         # descriptives_analysis(**save(params["descriptives"]))
+        kmedoids_dtw_analysis(**save(params["kmedoids"]))
