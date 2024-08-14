@@ -1,5 +1,6 @@
 import math
 from pandas import DataFrame, Series
+from scipy import stats
 from utils.masks import get_is_in_aois
 from utils.paths import DTW_Z_V2_CSV
 from utils.display import display
@@ -17,15 +18,15 @@ from typing import List, Tuple
 DWELL_DICT = {column: index for index, column in enumerate([np.nan] + DWELL_COLUMNS)}
 
 
-def get_t_series_sequences_and_trials(dwell_df: DataFrame, analysis_df: DataFrame) -> Tuple[List, List]:
-    t_series = get_t_series_dwell_sequences(dwell_df, analysis_df)
+def get_t_series_sequences_and_trials(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = False) -> Tuple[List, List]:
+    t_series = get_t_series_dwell_sequences(dwell_df, analysis_df, z_norm)
     t_series_trials = [trial for trial in t_series.keys()]
     t_series_sequences = [t_series[trial] for trial in t_series_trials]
     return t_series_sequences, t_series_trials
 
 
-def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = True, to_file: str = None) -> DataFrame:
-    t_series_sequences, t_series_trials = get_t_series_sequences_and_trials(dwell_df, analysis_df)
+def get_dtw_distance(dwell_df: DataFrame, analysis_df: DataFrame, to_file: str = None) -> DataFrame:
+    t_series_sequences, t_series_trials = get_t_series_sequences_and_trials(dwell_df, analysis_df, z_norm=True)
     dtws = dtw_ndim.distance_matrix_fast(t_series_sequences, only_triu=True)
     distances = {}
     idx = 0
@@ -66,12 +67,13 @@ def get_ndim_distance(trial1: DataFrame, trial2: DataFrame, z_norm: bool = False
     return dtw_ndim.distance(trial1_ndim, trial2_ndim)
 
 
-def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, differencing: bool = False, smoothing: float = None):
+def get_t_series_dwell_sequences(dwell_df: DataFrame, analysis_df: DataFrame, z_norm: bool = False):
     trials = analysis_df.index.unique()
-    if differencing:
-        trial_seq_dict = {trial: preprocessing.differencing(get_t_series_dwell_sequence(dwell_df.loc[trial]), smooth=smoothing) for trial in trials}
+    if z_norm:
+        trial_seq_dict = {trial: stats.zscore(get_t_series_dwell_sequence(dwell_df.loc[trial]), axis=None) for trial in trials}
     else:
         trial_seq_dict = {trial: get_t_series_dwell_sequence(dwell_df.loc[trial]) for trial in trials}
+    print("Trial sequence complete")
     return trial_seq_dict
 
 

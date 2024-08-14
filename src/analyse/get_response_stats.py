@@ -6,7 +6,7 @@ from pandas import DataFrame, Index, MultiIndex, Series, concat
 from scipy.stats import ttest_ind, false_discovery_control
 from utils.display import display
 from utils.masks import get_gain_of_less_than_ten, get_gain_of_thirty, get_gain_of_twenty, get_gain_under_thirty, get_loss_of_less_than_ten, get_loss_of_ten, get_loss_of_thirty, get_loss_under_thirty, get_negative_gain, get_positive_gain, get_positive_gain_of_less_than_ten
-from utils.columns import CLUSTER, CLUSTER_1, CLUSTER_2, DOF, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, P_VALUE, POSITIVE_GAIN, RT, SELECTED_AOI, SELF_LIE, SELF_TRUE, T_STATISTIC, TRIAL_COUNT
+from utils.columns import CLUSTER, CLUSTER_1, CLUSTER_2, DOF, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_OF_TWENTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_OF_TWENTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, N_ALT_TRANSITIONS, N_ATT_TRANSITIONS, N_TRANSITIONS, NEGATIVE_GAIN, OTHER_LIE, OTHER_TRUTH, P_VALUE, PID, POSITIVE_GAIN, RT, SELECTED_AOI, SELF_LIE, SELF_TRUE, T_STATISTIC, TRIAL_COUNT, TRIAL_ID
 from utils.masks import get_gain_of_ten
 from statsmodels.stats.multitest import multipletests
 from scipy.stats._result_classes import TtestResult
@@ -47,13 +47,12 @@ def n_trials(df: DataFrame):
 
 def gain_of_ten(df: DataFrame):
     is_gain_of_ten = get_gain_of_ten(df)
-    return is_gain_of_ten.mean() * 100, is_gain_of_ten.std() * 100
+    return is_gain_of_ten.sum()
 
 
 def gain_under_ten(df: DataFrame):
     is_gain_under_ten = get_gain_of_less_than_ten(df)
-    return is_gain_under_ten.mean() * 100, is_gain_under_ten.std() * 100
-
+    return is_gain_under_ten.sum()
 
 def calc_percent_error_bounds(df: DataFrame):
     val, err = df
@@ -89,10 +88,46 @@ def get_calc_error_bounds_fn(calc_error_bounds: bool = True, val_only: bool = Fa
         OTHER_LIE: calc_duration_error_bounds if calc_error_bounds else no_calc,
         OTHER_TRUTH: calc_duration_error_bounds if calc_error_bounds else no_calc,
         TRIAL_COUNT: no_error_bounds if calc_error_bounds else no_calc,
-        GAIN_OF_TEN: calc_percent_error_bounds if calc_error_bounds else no_calc,
-        GAIN_UNDER_TEN: calc_percent_error_bounds if calc_error_bounds else no_calc,
+        GAIN_OF_TEN: no_error_bounds if calc_error_bounds else no_calc,
+        GAIN_UNDER_TEN: no_error_bounds if calc_error_bounds else no_calc,
         RT: calc_duration_error_bounds if calc_error_bounds else no_calc
     }
+
+
+def get_response_stats_for_clusters_by_pid(cluster_df: DataFrame, analysis_df: DataFrame, index: Index, with_error_bounds: bool = True, val_only: bool = False):
+
+    cluster_trials: DataFrame = cluster_df.apply(lambda cluster: get_cluster_trials(cluster, analysis_df, index)).groupby([PID, CLUSTER])
+    calc_error_bounds = get_calc_error_bounds_fn(with_error_bounds, val_only)
+
+    return DataFrame({
+        LIE: cluster_trials.apply(percent_lie).apply(calc_error_bounds[LIE]),
+        N_TRANSITIONS: cluster_trials.apply(n_transitions).apply(calc_error_bounds[N_TRANSITIONS]),
+        SELF_LIE: cluster_trials.apply(avg_dwell_time, aoi=SELF_LIE).apply(calc_error_bounds[SELF_LIE]),
+        SELF_TRUE: cluster_trials.apply(avg_dwell_time, aoi=SELF_TRUE).apply(calc_error_bounds[SELF_TRUE]),
+        OTHER_LIE: cluster_trials.apply(avg_dwell_time, aoi=OTHER_LIE).apply(calc_error_bounds[OTHER_LIE]),
+        OTHER_TRUTH: cluster_trials.apply(avg_dwell_time, aoi=OTHER_TRUTH).apply(calc_error_bounds[OTHER_TRUTH]),
+        TRIAL_COUNT: cluster_trials.apply(n_trials).apply(calc_error_bounds[TRIAL_COUNT]),
+        GAIN_OF_TEN: cluster_trials.apply(gain_of_ten).apply(calc_error_bounds[GAIN_OF_TEN]),
+        GAIN_UNDER_TEN: cluster_trials.apply(gain_under_ten).apply(calc_error_bounds[GAIN_UNDER_TEN]),
+    })
+
+
+def get_response_stats_for_clusters_by_trial_id(cluster_df: DataFrame, analysis_df: DataFrame, index: Index, with_error_bounds: bool = True, val_only: bool = False):
+
+    cluster_trials: DataFrame = cluster_df.apply(lambda cluster: get_cluster_trials(cluster, analysis_df, index)).groupby([TRIAL_ID, CLUSTER])
+    calc_error_bounds = get_calc_error_bounds_fn(with_error_bounds, val_only)
+
+    return DataFrame({
+        LIE: cluster_trials.apply(percent_lie).apply(calc_error_bounds[LIE]),
+        N_TRANSITIONS: cluster_trials.apply(n_transitions).apply(calc_error_bounds[N_TRANSITIONS]),
+        SELF_LIE: cluster_trials.apply(avg_dwell_time, aoi=SELF_LIE).apply(calc_error_bounds[SELF_LIE]),
+        SELF_TRUE: cluster_trials.apply(avg_dwell_time, aoi=SELF_TRUE).apply(calc_error_bounds[SELF_TRUE]),
+        OTHER_LIE: cluster_trials.apply(avg_dwell_time, aoi=OTHER_LIE).apply(calc_error_bounds[OTHER_LIE]),
+        OTHER_TRUTH: cluster_trials.apply(avg_dwell_time, aoi=OTHER_TRUTH).apply(calc_error_bounds[OTHER_TRUTH]),
+        TRIAL_COUNT: cluster_trials.apply(n_trials).apply(calc_error_bounds[TRIAL_COUNT]),
+        GAIN_OF_TEN: cluster_trials.apply(gain_of_ten).apply(calc_error_bounds[GAIN_OF_TEN]),
+        GAIN_UNDER_TEN: cluster_trials.apply(gain_under_ten).apply(calc_error_bounds[GAIN_UNDER_TEN]),
+    })
 
 
 def get_response_stats_for_clusters(cluster_df: DataFrame, analysis_df: DataFrame, index: Index, with_error_bounds: bool = True, val_only: bool = False):

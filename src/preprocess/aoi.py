@@ -1,5 +1,6 @@
 from datetime import timedelta
 from pandas import DataFrame, MultiIndex, Series, concat, to_datetime
+from preprocess.aoi_analysis import get_n_alt_transitions
 from preprocess.dwell import get_dwell_spans_for_aoi
 from utils.columns import *
 from utils.display import display
@@ -185,6 +186,13 @@ def remove_trials_with_no_aois(df: DataFrame) -> DataFrame:
     return aois_df
 
 
+def remove_trials_with_no_adjacency(df: DataFrame, bypass: bool = False) -> DataFrame:
+    if bypass: return df
+    no_comparison = get_n_alt_transitions(df) == 0
+    aois_df = df.drop(labels=no_comparison.index)
+    print("Trials with no adjacency: %s" % no_comparison.index)
+    return aois_df
+
 def remove_pid_with_incomplete_n_trials(df: DataFrame, n_trials: int = 80, bypass: bool = False) -> DataFrame:
     if not bypass:
         counts = df.groupby(PID).apply(lambda x: x.index.get_level_values(TRIAL_COUNT).nunique())
@@ -210,7 +218,6 @@ def smoothing(df: DataFrame):
             timespans = get_dwell_spans_for_aoi(trial_df, aoi)
             # Create a boolean mask for dwell times less than 200 milliseconds
             less_than_200ms_mask = timespans[DWELL_TIME] < timedelta(milliseconds=200)
-
             # Get 'min' and 'max' for rows where dwell time is less than 200ms
             min_times = timespans.loc[less_than_200ms_mask, 'min']
             max_times = timespans.loc[less_than_200ms_mask, 'max']
@@ -222,7 +229,6 @@ def smoothing(df: DataFrame):
 
         # Drop rows where to_remove_mask is True
         filtered_trial_df = trial_df.loc[~to_remove_mask]
-
         return filtered_trial_df
 
     
@@ -250,13 +256,16 @@ def determine_aoi(df: DataFrame, do_smoothing: bool = True, to_file: str = None)
     print_n_trials(coord_row_df)
     print("\n")
     print_aois_stats(coord_row_df)
-    aoi_df = smoothing(coord_row_df) if do_smoothing else coord_row_df
+    coord_row_df = remove_trials_with_no_aois(coord_row_df)
+    coord_row_df = smoothing(coord_row_df) if do_smoothing else coord_row_df
+    print_n_trials(coord_row_df)
+    print("\n")
+    print_aois_stats(coord_row_df)
     aoi_df = remove_trials_with_no_aois(coord_row_df)
     aoi_df = remove_trials_with_less_than_3std_rt(aoi_df)
     aoi_df = remove_trials_with_more_than_3std_rt(aoi_df)
     aoi_df = remove_pid_with_incomplete_n_trials(aoi_df, 60, bypass=False)
-    
-    display(aoi_df)
+    aoi_df = remove_trials_with_no_adjacency(aoi_df, bypass=True)
     if to_file:
         save(aoi_df, to_file)
     return aoi_df

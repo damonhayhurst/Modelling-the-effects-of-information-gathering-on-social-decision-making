@@ -10,6 +10,7 @@ AOI_COLUMNS_IGNORE = [SELF_LIE, SELF_TRUE, OTHER_LIE,  OTHER_TRUTH, YOU_ON_TOP, 
 set_index = DataFrame.set_index
 drop = DataFrame.drop
 
+
 def n_rows(df) -> int:
     """Get number of rows"""
     return len(df)
@@ -32,20 +33,27 @@ def print_csv_stats(df):
 def set_data_types_from_csv(df: DataFrame) -> DataFrame:
     """Set data types of columns in data frame from csv"""
 
-    return df.astype({
-        PID: int,
-        TRIAL_COUNT: int,
-        SELF_LIE: int,
-        SELF_TRUE: int,
-        OTHER_LIE: int,
-        OTHER_TRUTH: int,
-        RT: int,
-        YOU_ON_TOP: int,
-        LIE_POSITION: int,
-        TRUTH_POSITION: int,
-        SELECTION: int,
-        SCREEN_WIDTH: int,
-    })
+    columns_to_check = [
+        (PID, int),
+        (TRIAL_COUNT, int),
+        (SELF_LIE, int),
+        (SELF_TRUE, int),
+        (OTHER_LIE, int),
+        (OTHER_TRUTH, int),
+        (RT, int),
+        (YOU_ON_TOP, int),
+        (LIE_POSITION, int),
+        (TRUTH_POSITION, int),
+        (SELECTION, int),
+        (SCREEN_WIDTH, int),
+    ]
+
+
+    # Construct the dictionary with only existing columns   
+    dtypes = {col: dtype for col, dtype in columns_to_check if col in df.columns}
+    # Apply astype with the constructed dictionary
+    return df.astype(dtypes)
+
 
 
 def set_index_from_csv(df: DataFrame) -> DataFrame:
@@ -61,22 +69,32 @@ def read_from_input_files(paths: list[str] = [YOUNG_ADULTS_1, YOUNG_ADULTS_2]) -
     ).pipe(
         set_index, [PID, TRIAL_COUNT]
     ).pipe(
-        drop, INPUT_COLUMNS_IGNORE, axis=1
+        drop, INPUT_COLUMNS_IGNORE, axis=1, errors='ignore'
     )
     print_csv_stats(df)
     return df
 
 
-def read_from_analysis_file(path: str = AOI_ANALYSIS_CSV, index: List[str] = [PID, TRIAL_ID]) -> DataFrame:
+def read_from_analysis_file(path: str = AOI_ANALYSIS_CSV, index: List[str] = [PID, TRIAL_ID], dwell_in_ms: bool = False, dwell_as_a_proportion: bool = False) -> DataFrame:
     df = read_csv(path)
     df = df.pipe(
         set_data_types_for_analysis_df
     ).pipe(
         set_index, index
     ).pipe(
-        dwell_columns_to_seconds, [*DWELL_COLUMNS, AVG_DWELL]
+        dwell_columns_to_seconds, [*DWELL_COLUMNS, AVG_DWELL], dwell_as_a_proportion or dwell_in_ms
+    ).pipe(
+        dwell_to_proportion_of_rt, [*DWELL_COLUMNS, AVG_DWELL], bypass=not dwell_as_a_proportion
     )
     print("Analysis read from %s \n" % path)
+    return df
+
+
+def dwell_to_proportion_of_rt(df: DataFrame, columns: list[str], bypass: bool = False):
+    if bypass:
+        return df
+    for aoi_column in columns:
+        df[aoi_column] = df[aoi_column] / df[RT]
     return df
 
 
@@ -146,9 +164,12 @@ def set_data_types_for_dwell_df(df: DataFrame) -> DataFrame:
     })
 
 
-def dwell_columns_to_seconds(df: DataFrame, cols: list[str]):
+def dwell_columns_to_seconds(df: DataFrame, cols: list[str], in_ms: bool = False):
     for column in cols:
-        df[column] = df[column].apply(lambda timedelta: timedelta.total_seconds())
+        if in_ms:
+            df[column] = df[column].apply(lambda timedelta: timedelta.total_seconds() * 1000)
+        else:
+            df[column] = df[column].apply(lambda timedelta: timedelta.total_seconds())
     return df
 
 
@@ -172,6 +193,7 @@ def set_data_types_for_dtw_file(df: DataFrame) -> DataFrame:
         DISTANCE: float
     })
 
+
 def read_from_trial_index_file(path: str = TRIAL_INDEX_CSV) -> DataFrame:
     df = read_csv(path)
     df = df.pipe(
@@ -182,12 +204,13 @@ def read_from_trial_index_file(path: str = TRIAL_INDEX_CSV) -> DataFrame:
     print("Trial Index read from %s \n" % path)
     return df
 
+
 def set_data_types_for_trial_index_file(df: DataFrame) -> DataFrame:
     return df.astype({
-        SELF_LIE: int, 
-        SELF_TRUE: int, 
-        OTHER_LIE: int, 
-        OTHER_TRUTH: int, 
+        SELF_LIE: int,
+        SELF_TRUE: int,
+        OTHER_LIE: int,
+        OTHER_TRUTH: int,
         TRIAL_ID: int
     })
 
@@ -198,6 +221,7 @@ def set_data_types_for_cluster_file(df: DataFrame) -> DataFrame:
         TRIAL_ID: int,
         CLUSTER: int
     })
+
 
 def read_from_cluster_file(path: str = TIME_SERIES_KMEANS_2_CLUSTER_CSV) -> DataFrame:
     df = read_csv(path)
@@ -210,6 +234,7 @@ def read_from_cluster_file(path: str = TIME_SERIES_KMEANS_2_CLUSTER_CSV) -> Data
     print('Cluster file read from %s for %s cluster\n' % (path, n_cluster))
     return df, n_cluster
 
+
 def read_friom_cluster_files_to_dict(paths: List[str]) -> Dict[int, DataFrame]:
     cluster_dict = {}
     for path in paths:
@@ -219,4 +244,3 @@ def read_friom_cluster_files_to_dict(paths: List[str]) -> Dict[int, DataFrame]:
         else:
             cluster_dict[n_cluster] = df
     return cluster_dict
-

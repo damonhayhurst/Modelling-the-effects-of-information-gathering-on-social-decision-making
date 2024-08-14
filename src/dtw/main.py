@@ -14,8 +14,7 @@ from dtaidistance.clustering import KMeans
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 
 
-def do_dtw_processing(from_file: str = None,
-                      input_dwell_file: str = DWELL_TIMELINE_CSV,
+def do_dtw_processing(input_dwell_file: str = DWELL_TIMELINE_CSV,
                       input_aoi_analysis_file: str = AOI_ANALYSIS_CSV,
                       output_dtw_file: str = DTW_Z_V2_CSV,
                       bypass: bool = False):
@@ -23,12 +22,9 @@ def do_dtw_processing(from_file: str = None,
     if bypass:
         return
 
-    if from_file is not None:
-        distance_df = read_from_dtw_file(from_file)
-    else:
-        analysis_df = read_from_analysis_file(input_aoi_analysis_file)
-        dwell_df = read_from_dwell_file(input_dwell_file)
-        distance_df = get_dtw_distance(dwell_df, analysis_df, to_file=output_dtw_file)
+    analysis_df = read_from_analysis_file(input_aoi_analysis_file)
+    dwell_df = read_from_dwell_file(input_dwell_file)
+    distance_df = get_dtw_distance(dwell_df, analysis_df, to_file=output_dtw_file)
     return distance_df
 
 

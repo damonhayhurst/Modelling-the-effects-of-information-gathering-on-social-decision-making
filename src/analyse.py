@@ -11,8 +11,9 @@ warnings.filterwarnings("ignore", category=SettingWithCopyWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-distance_file = DTW_T_WITH_DIFF_WITH_SMOOTH_CSV
+distance_file = DTW_T_WITH_Z_WITH_SMOOTH_CSV
 analysis_file = AOI_ANALYSIS_V2_CSV
+
 
 def get_pid_dtw_analysis_params(save: bool = False):
 
@@ -32,6 +33,15 @@ def get_pid_dtw_analysis_params(save: bool = False):
         other_truth_gain_cluster_plot=OTHER_TRUTH_GAIN_CLUSTER_PLOT if save else None,
     )
 
+
+def get_pid_dtw_per_gain_analysis_params(save: bool = False):
+
+    return dict(
+        input_distance_file=distance_file,
+        input_aoi_analysis_file=analysis_file,
+    )
+
+
 def get_response_analysis_params(save: bool = False):
     return dict(
         input_aoi_analysis_file=AOI_ANALYSIS_V2_CSV,
@@ -46,14 +56,19 @@ def get_response_analysis_params(save: bool = False):
         avg_n_transition_per_gain_plot=N_TRANSITION_PER_GAIN_PLOT if save else None,
         avg_dwell_per_loss_plot=AVG_DWELL_PER_LOSS_PLOT if save else None,
         avg_n_transition_per_loss_plot=N_TRANSITION_PER_LOSS_PLOT if save else None,
-        output_trial_index_gains_plot=TRIAL_INDEX_GAINS_PLOT if save else None
+        output_trial_index_gains_plot=TRIAL_INDEX_GAINS_PLOT if save else None,
+        avg_dwell_per_gain_30_plot=AVG_DWELL_PER_GAIN_30_PLOT if save else None,
+        avg_n_transition_per_gain_30_plot=N_TRANSITION_PER_GAIN_30_PLOT if save else None,
+        avg_dwell_per_loss_30_plot=AVG_DWELL_PER_LOSS_30_PLOT if save else None,
+        avg_n_transition_per_loss_30_plot=N_TRANSITION_PER_LOSS_30_PLOT if save else None,
+        output_trial_index_losses_plot=TRIAL_INDEX_LOSSES_PLOT if save else None,
     )
 
 
 def get_trial_id_dtw_analysis_params(save: bool = False):
     return dict(
         input_distance_file=distance_file,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=analysis_file,
         trial_id_matrix_plot=TRIAL_DISTANCE_PLOT if save else None,
         trial_id_percent_lies_plot=TRIAL_PERCENT_LIES_PLOT if save else None,
         trial_id_dwell_times_plot=TRIAL_DWELL_TIMES_PLOT if save else None,
@@ -61,10 +76,11 @@ def get_trial_id_dtw_analysis_params(save: bool = False):
         percent_lies_by_trial_id_plot=PERCENT_LIES_BY_TRIAL_ID_PLOT if save else None
     )
 
+
 def get_all_trial_dtw_analysis_params(save: bool = False):
     return dict(
         input_distance_file=distance_file,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=analysis_file,
         all_trial_percent_lies_plot=ALL_TRIAL_PERCENT_LIES_PLOT if save else None,
         all_trial_dwell_times_plot=ALL_TRIAL_DWELL_TIMES_PLOT if save else None,
         all_trial_n_transitions_plot=ALL_TRIAL_N_TRANSITIONS_PLOT if save else None,
@@ -72,7 +88,8 @@ def get_all_trial_dtw_analysis_params(save: bool = False):
         all_trial_percent_lie_by_pid_plot=ALL_TRIAL_PERCENT_LIES_BY_PID_PLOT if save else None,
         all_trial_n_trials_by_pid_plot=ALL_TRIAL_N_TRIALS_BY_PID_PLOT if save else None,
         all_trial_gain_of_ten_by_pid_plot=ALL_TRIAL_GAIN_OF_TEN_BY_PID_PLOT if save else None,
-        all_trial_gain_under_ten_by_pid_plot=ALL_TRIAL_GAIN_UNDER_TEN_BY_PID_PLOT if save else None
+        all_trial_gain_under_ten_by_pid_plot=ALL_TRIAL_GAIN_UNDER_TEN_BY_PID_PLOT if save else None,
+        percent_lies_gain_cluster_plot=ALL_TRIAL_PERCENT_LIES_GAIN_CLUSTER_PLOT if save else None,
         # max_clusters=2
         # n_clusters=10
     )
@@ -94,8 +111,8 @@ def get_kmeans_analysis_params(save: bool = True):
         columns=[SELF_LIE, SELF_TRUE, OTHER_LIE, OTHER_TRUTH, N_TRANSITIONS]
     )
 
+
 def get_time_series_kmeans_params(save: bool = False):
-     
 
     input_cluster_files = [TIME_SERIES_KMEANS_2_CLUSTER_CSV,
                            TIME_SERIES_KMEANS_3_CLUSTER_CSV,
@@ -109,7 +126,7 @@ def get_time_series_kmeans_params(save: bool = False):
 
     return dict(
         input_cluster_files=input_cluster_files,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=analysis_file,
         input_distance_file=distance_file,
         percent_lies_plot=TS_KMEANS_PERCENT_LIES_PLOT if save else None,
         dwell_times_plot=TS_KMEANS_DWELL_TIMES_PLOT if save else None,
@@ -121,12 +138,12 @@ def get_time_series_kmeans_params(save: bool = False):
         gain_under_ten_by_pid_plot=TS_KMEANS_GAIN_UNDER_TEN_BY_PID_PLOT if save else None
     )
 
-def get_kmedoids_analysis_params(save: bool = True):
 
+def get_kmedoids_analysis_params(save: bool = True):
 
     return dict(
         input_distance_file=distance_file,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=analysis_file,
         percent_lies_plot=KMEDOIDS_PERCENT_LIES_PLOT if save else None,
         dwell_times_plot=KMEDOIDS_DWELL_TIMES_PLOT if save else None,
         n_transitions_plot=KMEDOIDS_N_TRANSITIONS_PLOT if save else None,
@@ -137,10 +154,9 @@ def get_kmedoids_analysis_params(save: bool = True):
 
 def get_dbscan_analysis_params(save: bool = True):
 
-
     return dict(
         input_distance_file=distance_file,
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
+        input_aoi_analysis_file=analysis_file,
         percent_lies_plot=DBSCAN_PERCENT_LIES_PLOT if save else None,
         dwell_times_plot=DBSCAN_DWELL_TIMES_PLOT if save else None,
         n_transitions_plot=DBSCAN_N_TRANSITIONS_PLOT if save else None,
@@ -151,8 +167,6 @@ def get_dbscan_analysis_params(save: bool = True):
     )
 
 
-    
-
 def get_proximal_analysis_params(save: bool = False):
     return dict(
         input_distance_file=distance_file
@@ -161,22 +175,32 @@ def get_proximal_analysis_params(save: bool = False):
 
 def get_distribution_analysis_params(save: bool = False):
     return dict(
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV,
-        input_dwell_timeline_file=DWELL_TIMELINE_CSV,
+        input_aoi_analysis_file=analysis_file,
+        input_dwell_timeline_file=DWELL_TIMELINE_V2_CSV,
         dwell_distribution_plot=DWELL_DISTRIBUTION_PLOT if save else None,
         rt_distribution_plot=RT_DISTRIBUTION_PLOT if save else None,
         n_transition_distribution_plot=N_TRANSITIONS_DISTRIBUTION_PLOT if save else None
-    ) 
+    )
 
 
 def get_descriptives_params(save: bool = False):
     return dict(
-        input_aoi_analysis_file=AOI_ANALYSIS_CSV
+        input_aoi_analysis_file=analysis_file
     )
+
 
 def main(args):
     plt.ioff() if args.no_plt else plt.ion()
-
+    # plt.style.use('ggplot')
+    # plt.rcParams.update({
+    #     'figure.figsize': (6, 4),  # Default figure size
+    #     'axes.titlesize': 14,      # Title font size
+    #     'axes.labelsize': 12,      # Label font size
+    #     'xtick.labelsize': 10,     # X-tick label size
+    #     'ytick.labelsize': 10,      # Y-tick label size
+    #     'patch.edgecolor': 'black',         # Default edge color for bars
+    #     'patch.linewidth': 1
+    # })
     do_analyses(
         do_save=args.save,
         pid_dtw=get_pid_dtw_analysis_params,
@@ -189,7 +213,8 @@ def main(args):
         ts_kmeans=get_time_series_kmeans_params,
         kmedoids=get_kmedoids_analysis_params,
         dbscan=get_dbscan_analysis_params,
-        descriptives=get_descriptives_params
+        descriptives=get_descriptives_params,
+        pid_dtw_per_gain=get_pid_dtw_per_gain_analysis_params
     )
 
 

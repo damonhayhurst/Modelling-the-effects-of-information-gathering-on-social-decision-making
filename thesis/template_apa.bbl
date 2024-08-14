@@ -72,6 +72,215 @@
       \verb /Users/damon/Zotero/storage/G6LBB7EQ/Brandstätter et al. - 2006 - The priority heuristic Making choices without tra.pdf
       \endverb
     \endentry
+    \entry{costa-gomesCognitionBehaviorNormalForm2001}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=749d750a497aac456f756aa6448dfe4d}{%
+           family={Costa-Gomes},
+           familyi={C\bibinithyphendelim G\bibinitperiod},
+           given={Miguel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e5bf700d755385231967a0a94b05f925}{%
+           family={Crawford},
+           familyi={C\bibinitperiod},
+           given={Vincent\bibnamedelima P.},
+           giveni={V\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f6f8dcc2715039a468010f2a12847a02}{%
+           family={Broseta},
+           familyi={B\bibinitperiod},
+           given={Bruno},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1e476e76f38e35841d30abb834eee118}
+      \strng{fullhash}{296da9eb96d358ea87d4a0057db989f0}
+      \strng{bibnamehash}{296da9eb96d358ea87d4a0057db989f0}
+      \strng{authorbibnamehash}{296da9eb96d358ea87d4a0057db989f0}
+      \strng{authornamehash}{1e476e76f38e35841d30abb834eee118}
+      \strng{authorfullhash}{296da9eb96d358ea87d4a0057db989f0}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This paper reports experiments designed to study strategic sophistication, the extent to which behavior in games reflects attempts to predict others’ decisions, taking their incentives into account. We study subjects’ initial responses to normal-form games with various patterns of iterated dominance and unique pure-strategy equilibria without dominance, using a computer interface that allowed them to search for hidden payoff information, while recording their searches. Monitoring subjects’ information searches along with their decisions allows us to better understand how their decisions are determined, and subjects’ deviations from the search patterns suggested by equilibrium analysis help to predict their deviations from equilibrium decisions.}
+      \field{issn}{0012-9682, 1468-0262}
+      \field{journaltitle}{Econometrica}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{5}
+      \field{shortjournal}{Econometrica}
+      \field{shorttitle}{Cognition and {{Behavior}} in {{Normal-Form Games}}}
+      \field{title}{Cognition and {{Behavior}} in {{Normal-Form Games}}: {{An Experimental Study}}}
+      \field{urlday}{7}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{volume}{69}
+      \field{year}{2001}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1193\bibrangedash 1235}
+      \range{pages}{43}
+      \verb{doi}
+      \verb 10.1111/1468-0262.00239
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/2H2DQDB4/Costa-Gomes et al. - 2001 - Cognition and Behavior in Normal-Form Games An Ex.pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://doi.wiley.com/10.1111/1468-0262.00239
+      \endverb
+      \verb{url}
+      \verb http://doi.wiley.com/10.1111/1468-0262.00239
+      \endverb
+    \endentry
+    \entry{dicarloHowDoesBrain2012}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=f5adec38464788debb31fcaf69a9337b}{%
+           family={DiCarlo},
+           familyi={D\bibinitperiod},
+           given={James\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=246bac659c370e85ed35de07b3d760a7}{%
+           family={Zoccolan},
+           familyi={Z\bibinitperiod},
+           given={Davide},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=91799a2d9d07b24da04bfd673878519c}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={Nicole\bibnamedelima C.},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{dfdff7e170fdcc2e6314251002197391}
+      \strng{fullhash}{c064d1b9511b45dfb8c03e5892582511}
+      \strng{bibnamehash}{c064d1b9511b45dfb8c03e5892582511}
+      \strng{authorbibnamehash}{c064d1b9511b45dfb8c03e5892582511}
+      \strng{authornamehash}{dfdff7e170fdcc2e6314251002197391}
+      \strng{authorfullhash}{c064d1b9511b45dfb8c03e5892582511}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Mounting evidence suggests that “core object recognition,” the ability to rapidly recognize objects despite substantial appearance variation, is solved in the brain via a cascade of reflexive, largely feedforward computations that culminate in a powerful neuronal representation in the inferior temporal cortex. However, the algorithm that produces this solution remains little-understood. Here we review evidence ranging from individual neurons, to neuronal populations, to behavior, to computational models. We propose that understanding this algorithm will require using neuronal and psychophysical data to sift through many computational models, each based on building blocks of small, canonical sub-networks with a common functional goal.}
+      \field{day}{9}
+      \field{eprinttype}{pmid}
+      \field{issn}{0896-6273}
+      \field{journaltitle}{Neuron}
+      \field{month}{2}
+      \field{number}{3}
+      \field{shortjournal}{Neuron}
+      \field{title}{How Does the Brain Solve Visual Object Recognition?}
+      \field{urlday}{4}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{volume}{73}
+      \field{year}{2012}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{415\bibrangedash 434}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1016/j.neuron.2012.01.010
+      \endverb
+      \verb{eprint}
+      \verb 22325196
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/2GMIRRQH/DiCarlo et al. - 2012 - How does the brain solve visual object recognition.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3306444/
+      \endverb
+      \verb{url}
+      \verb https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3306444/
+      \endverb
+    \endentry
+    \entry{fordProcessTracingMethods1989}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=91a6e371ad53b4b1cc5a671b648c5086}{%
+           family={Ford},
+           familyi={F\bibinitperiod},
+           given={J.Kevin},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d5fb631984b88db728b4328ff4a31ec}{%
+           family={Schmitt},
+           familyi={S\bibinitperiod},
+           given={Neal},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=48eb04326f2693ce5c6371437e165a2b}{%
+           family={Schechtman},
+           familyi={S\bibinitperiod},
+           given={Susan\bibnamedelima L},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=957dcdad79349576712c51f6f01b8a6f}{%
+           family={Hults},
+           familyi={H\bibinitperiod},
+           given={Brian\bibnamedelima M},
+           giveni={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=738cf49efaf784a4b0894f3260944ce4}{%
+           family={Doherty},
+           familyi={D\bibinitperiod},
+           given={Mary\bibnamedelima L},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{85a54ffda4ab1ceb3a61f9998969dac9}
+      \strng{fullhash}{9d90dd318ece9f6f88ead8bed04c825b}
+      \strng{bibnamehash}{9d90dd318ece9f6f88ead8bed04c825b}
+      \strng{authorbibnamehash}{9d90dd318ece9f6f88ead8bed04c825b}
+      \strng{authornamehash}{85a54ffda4ab1ceb3a61f9998969dac9}
+      \strng{authorfullhash}{9d90dd318ece9f6f88ead8bed04c825b}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{07495978}
+      \field{journaltitle}{Organizational Behavior and Human Decision Processes}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{number}{1}
+      \field{shortjournal}{Organizational Behavior and Human Decision Processes}
+      \field{shorttitle}{Process Tracing Methods}
+      \field{title}{Process Tracing Methods: {{Contributions}}, Problems, and Neglected Research Questions}
+      \field{urlday}{22}
+      \field{urlmonth}{7}
+      \field{urlyear}{2024}
+      \field{volume}{43}
+      \field{year}{1989}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{75\bibrangedash 117}
+      \range{pages}{43}
+      \verb{doi}
+      \verb 10.1016/0749-5978(89)90059-9
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/IU4Z79ZM/Ford et al. - 1989 - Process tracing methods Contributions, problems, .pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/0749597889900599
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/0749597889900599
+      \endverb
+    \endentry
     \entry{MouselabWEBa}{online}{}
       \field{sortinit}{M}
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}

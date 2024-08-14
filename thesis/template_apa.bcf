@@ -2796,15 +2796,23 @@
     <bcf:citekey order="3">simonBehavioralModelRational1955</bcf:citekey>
     <bcf:citekey order="4">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
     <bcf:citekey order="5">willemsenVisitingDecisionFactory2011</bcf:citekey>
-    <bcf:citekey order="6">MouselabWEBa</bcf:citekey>
-    <bcf:citekey order="7">reeckSearchPredictsChanges2017b</bcf:citekey>
-    <bcf:citekey order="8">payneTaskComplexityContingent1976</bcf:citekey>
-    <bcf:citekey order="9">simonRationalChoiceStructure1956d</bcf:citekey>
-    <bcf:citekey order="10">simonBehavioralModelRational1955</bcf:citekey>
-    <bcf:citekey order="11">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
+    <bcf:citekey order="6">fordProcessTracingMethods1989</bcf:citekey>
+    <bcf:citekey order="7">MouselabWEBa</bcf:citekey>
+    <bcf:citekey order="8">costa-gomesCognitionBehaviorNormalForm2001</bcf:citekey>
+    <bcf:citekey order="9">costa-gomesCognitionBehaviorNormalForm2001</bcf:citekey>
+    <bcf:citekey order="10">reeckSearchPredictsChanges2017b</bcf:citekey>
+    <bcf:citekey order="11">dicarloHowDoesBrain2012</bcf:citekey>
     <bcf:citekey order="12">willemsenVisitingDecisionFactory2011</bcf:citekey>
-    <bcf:citekey order="13">MouselabWEBa</bcf:citekey>
-    <bcf:citekey order="14">reeckSearchPredictsChanges2017b</bcf:citekey>
+    <bcf:citekey order="13">payneTaskComplexityContingent1976</bcf:citekey>
+    <bcf:citekey order="14">simonRationalChoiceStructure1956d</bcf:citekey>
+    <bcf:citekey order="15">simonBehavioralModelRational1955</bcf:citekey>
+    <bcf:citekey order="16">brandstatterPriorityHeuristicMaking2006</bcf:citekey>
+    <bcf:citekey order="17">willemsenVisitingDecisionFactory2011</bcf:citekey>
+    <bcf:citekey order="18">fordProcessTracingMethods1989</bcf:citekey>
+    <bcf:citekey order="19">MouselabWEBa</bcf:citekey>
+    <bcf:citekey order="20">costa-gomesCognitionBehaviorNormalForm2001</bcf:citekey>
+    <bcf:citekey order="21">reeckSearchPredictsChanges2017b</bcf:citekey>
+    <bcf:citekey order="22">dicarloHowDoesBrain2012</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
