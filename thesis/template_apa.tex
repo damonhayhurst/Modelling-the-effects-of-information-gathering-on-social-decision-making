@@ -4,6 +4,7 @@
 \usepackage{tabularray}
 \usepackage{multirow}
 \usepackage[american]{babel}
+\usepackage{subcaption} 
 
 \usepackage{csquotes}
 \usepackage[style=apa,backend=biber,doi=false,url=false]{biblatex}
@@ -68,7 +69,6 @@
 
 % Abstract which includes: completeness, clarity and succinctness
 
-\section{Introduction}
 
 % Introduction which includes: breadth of the review, understanding of the literature, description of aims or hypotheses, organization and structure and clarity
 
@@ -82,20 +82,21 @@
 
 %The background to the study should be provided here including a review of relevant literature and theory and clear statements about the aims and objectives of the study.
 
-\subsection{Background}
-
 Are decisions made in our own self-interest influenced by the manner in which we form our conclusions? Previous work in the study of decision making has shown that the way in which we gather information can influence the final outcome. In a social setting, self interested and other facing motives have been shown to have their value tracked independently by specific neural circuitry. Using mouse tracking data from a similar experiment we ask whether the manner in which we gather information can predict which one of these motives we are likely to pursue. 
 
-\subsection{Aims/Objectives}
+\section{Aims}
 
-The aims of this study is to gain an insight into how the effects of information gathering influence our decision making in a social context.  Using process tracing, we hope to observe and characterise strategies that are used in order to arrive at these decisions. Such an approach hopes to shed light further on the processes that underlie decision making in human behaviour.
+The aims of this study is to gain an insight into how the effects of information gathering influence our decision making in a pro-social context.  Using process tracing, we hope to observe and characterise strategies that are used in order to arrive at these decisions. Such an approach hopes to shed light further on the processes that underlie decision making in human behaviour.
 
+\section{Objectives}
 
 \begin{itemize}
-	\item Ask whether information gathering strategy can be used a predictor in social decision making
-	\item Understand whether perceived monetary outcomes to self and another have an affect on the way we gather information
 	\item Determine if information gathering strategy in social decision making reflects an individual preference
+	\item Understand whether perceived monetary outcomes to self and another have an affect on the way we gather information
+	\item Ask whether information gathering strategy can be used a predictor in social decision making
 \end{itemize}
+
+\section{Background}
 
 \subsection{Understanding decision making in humans}
 
@@ -103,51 +104,41 @@ Present day understanding of decision making in humans takes it's inspiration fr
 
 %Herbert A Simon first outlined the idea that human behaviour in decision making was not to be defined by the decisions taken but that of the information surrounding the decision. This concept of 'Bounded Rationality' suggested an approach that took consideration of the contextual information regarding the decision as well as the computational capacities available to the decision maker. The concept sought to defy prior notions that human behaviour in decision making could be understood through a global notion of homo economius; Where decisions taken by agents were always perfectly rational, seeking to maximise their own self interests, and, instead, suggested that a human's capability to be perfectly rational was constrained by internal and external constraints.
 
-Bounded Rationality places as much of an emphasis on the processing of information during the decision making as the decision itself. Pivotal to the concept, it was suggested that human's mental capacity to make choices is subject to heuristics or mental simplifications that contend with it's ability to be a perfectly rational agent but aid it's ability to make decisions in the face of increasing complexity (\cite{payneTaskComplexityContingent1976}).  Simon outlined Satisficing as a key mechanism employed in the face of decisional complexity. Such a model of process attempts to define the appropriate option amongst choices as being the first option to surpass pre conceived threshhold. Rather than cope with the cognitive overhead of comparing every option against all of the others in a perfectly rational manner, humans will opt for the first choice that is deemed sufficient and satisfactory (\cite{simonRationalChoiceStructure1956d}, \citeyear{simonBehavioralModelRational1955}).
+Bounded Rationality places as much of an emphasis on the processing of information during the decision making as the decision itself. Pivotal to the concept, it was suggested that human's mental capacity to make choices is subject to heuristics or mental simplifications that contend with it's ability to be a perfectly rational agent but aid it's ability to make decisions in the face of increasing complexity (\cite{payneTaskComplexityContingent1976}).  Simon outlined Satisficing as a key mechanism employed in the face of decisional complexity. Such a model of process attempts to define the appropriate option amongst choices as being the first option to surpass pre conceived threshhold. Rather than cope with the cognitive overhead of comparing every option against all of the others in a perfectly rational manner, humans will opt for the first choice that is deemed sufficient and satisfactory (\cite{simonBehavioralModelRational1955},\citeyear{simonRationalChoiceStructure1956d}).
 
-Early work into the mechanisms that perpetrate the notion of Bounded Rationality revealed the necessity for capturing process data. The Priority Heuristic attempted to explain choices within the context of simple monetary gambles using an ordered list of criteria. While the mechanism was shown to be significant at the aggregate level, the model failed to capture differences at the individual level. Further research into the manifestation of the Priority Heuristic, using process data, uncovered that in actual fact the underlying process did not mimic the priority ordering set out by the heuristic. The data, however, revealed that choice could be predicted significantly by the number of transitions into and out of a choice. The uncovering of such mechanisms highlights the need for processing data in explaining how humans make decisions. Process data can provide the explanatory power for decision making differences and inform the development of heuristics that can be applied at the individual level ((\cite{brandstatterPriorityHeuristicMaking2006}, (\cite{willemsenVisitingDecisionFactory2011})).
+Early work into the mechanisms that perpetrate the notion of Bounded Rationality revealed the necessity for capturing process data. The Priority Heuristic attempted to explain choices within the context of simple monetary gambles using an ordered list of criteria. While the mechanism was shown to be significant at the aggregate level, the model failed to capture differences at the individual level. Further research into the manifestation of the Priority Heuristic, using process data, uncovered that in actual fact the underlying process did not mimic the priority ordering set out by the heuristic. The data, however, revealed that choice could be predicted significantly by the number of transitions into and out of a choice. The uncovering of such mechanisms highlights the need for processing data in explaining how humans make decisions. Process data can provide the explanatory power for decision making differences and inform the development of heuristics that can be applied at the individual level (\cite{brandstatterPriorityHeuristicMaking2006}), (\cite{willemsenVisitingDecisionFactory2011}).
+
+\subsubsection{Decision making as a cognitive process}
+
+The deliberation between two option does not represent two discrete states in cognition. Mental activity occurs throughout the decision making process. In this sense, cognition is best viewed as a continuous system with a set of intermediary states representing a graded spectrum between both options. The two classifications acting as attractor basins for which the decision making process finally rests in (\cite{spiveyContinuousDynamicsRealTime2006}).
+
 
 %It is important to note that it is widely believed that human's decision making strategy is constructed contingent on the task demands and individual preferences. Decision making strategies have been shown to vary widely based on the number of choices at hand and the task complexity (\cite{payneWalkingScarecrowInformation2004}). Human's have a 'toolbox' of strategies which can be utilised in the cwhen it comes to information gathering and the choice reflects task demands and individual preferences. Such strat
 
-\subsection{Capturing the decision making process }
+\subsection{Capturing the decision making process}
 
 Process tracing is a methodology used to gain insight into the decision-making process by extracting data that reveals the underlying cognitive mechanisms. This involves various techniques, ranging from simple verbal protocol analysis, where participants articulate their thoughts aloud, to advanced methods like neural tracing using MRI machines (\cite{fordProcessTracingMethods1989}). The goal of these methods is to capture detailed data from different stages of the decision-making process and use that information to inform and develop process models.
+	
 
-Studying decision-making involves analyzing different stages, such as problem identification, information gathering, alternative evaluation, and decision selection. Each stage requires specific methods of data extraction to effectively capture the nuances of decision-making. For instance, in the information gathering stage, researchers might employ eye-tracking to see where attention is focused, or they might use tools like MouseLabWeb to observe how individuals search for and process information. The choice of instrumentation is crucial, as insights into decision making are limited by the resolution and representation of the output data. Efforts must be made to consolidate these representations with process models in order to enhance their development and applicability.
+Studying decision-making involves analysing different stages, such as problem identification, information gathering and decision selection. Each stage requires specific methods of data extraction to effectively capture the nuances of decision-making. For instance, in the information gathering stage, researchers might employ eye-tracking to see where attention is focused, or they might use tools like MouseLabWeb to observe how individuals search for and process information. The choice of instrumentation is crucial, as insights into decision making are limited by the resolution and representation of the output data. Efforts must be made to consolidate these representations with process models in order to enhance their development and applicability.
 
 \subsubsection{MouseLabWeb}
 
-MouseLabWeb (and offline counterpart, MouseLab) is one such development in process tracing that fosters an environment fit for observing the information gathering stage in decision making. Utilising the dynamic properties of Javascript in the context of a web page, MouseLabWeb describes an interactive framework that tracks users' attentional focus on decision-making elements as they engage with different options. MouseLabWeb experiments consist of a browser page containing adjacent pairs of hidden view boxes. Each pair represents an option and the make up of each pair is a hidden view box containing a piece of information relevant to that particular option. Positioning the mouse cursor over one of these boxes reveals the concealed information. The mouse cursor movements are tracked and then stored on a trial by trial basis. Such data can be used to observe where a participant's focus lies. The simplistic design of a MouseLab experiment reduces the cognitive load on the participant. Affording them simple cursor movements instead of lookup to memory (\cite{MouselabWEBa}). 
+MouseLabWeb (and offline counterpart, MouseLab) is one such development in process tracing that fosters an environment fit for observing the information gathering stage in decision making. Utilising the dynamic properties of Javascript in the context of a web page, MouseLabWeb describes an interactive framework that tracks users' attentional focus on decision-making elements as they engage with different options. MouseLabWeb experiments consist of a browser page containing adjacent pairs of hidden view boxes. Each pair represents an option and the make up of each pair is a  box containing a piece of information relevant to that particular option. Positioning the mouse cursor over one of these boxes reveals the concealed information. The mouse cursor movements are tracked and then stored on a trial by trial basis. Such data can be used to observe where a participant's focus lies. The simplistic design of a MouseLab experiment reduces the cognitive load on the participant, affording them simple cursor movements instead of lookup to memory (\cite{MouselabWEBa}). 
 
-\subsection{Interpreting the data}
+\subsection{Interpreting information gathering data}
 
-Interpreting results from a MouseLab experiment involves discerning attributional qualities from a given trace. \citeauthor{costa-gomesCognitionBehaviorNormalForm2001} define two events in a process trace that can provide insight into the underlying characteristics of a trace. Occurence, being that a particular piece of information has occurred within a process trace and therefore, that piece of information can be considered as part of the overall strategy underlying the trace. An absence of an occurrence of a particular piece of information suggests a strategy that is made without considering the full picture and could be conceived as impulsive. And Adjacency, if two adjacent pieces of information occur sequentially within a trace then it means a comparison has likely to have taken place. An absence of adjacency could represent a disregard for certain aspects underlying the decision such as in social preference based choices, where the adjacent pairs show to be payoffs related to you or the other participant. An absence of adjacency in this case suggests motives that are wholly self concerned. The decisional lookups and their contextual information can together help attach a type to a specific process trace (\cite{costa-gomesCognitionBehaviorNormalForm2001}).
+Interpreting results from a MouseLab experiment involves discerning attributional qualities from a given trace. \citeauthor{costa-gomesCognitionBehaviorNormalForm2001} define two events in a process trace that can provide insight into the underlying characteristics of a trace. Occurrence, being that a particular piece of information has occurred within a process trace and therefore, that piece of information can be considered as part of the overall strategy underlying the trace. An absence of an occurrence of a particular piece of information suggests a strategy that is made without considering the full picture and could be conceived as impulsive. And Adjacency, if two adjacent pieces of information occur sequentially within a trace then it means a comparison has likely to have taken place. An absence of adjacency could represent a disregard for certain aspects underlying the decision such as in social preference based choices, where the adjacent pairs show to be payoffs related to you or the other participant. An absence of adjacency in this case suggests motives that are wholly self concerned. The decisional lookups and their contextual information can together help attach a type to a specific process trace (\cite{costa-gomesCognitionBehaviorNormalForm2001}).
 
-
-
-
-Defining the type of search strategy employed and being able to predict that information has shown success before.
-
-Reeck and all found success in showing a link between the underlying type of a search strategy and a decisional outcome. Using the Intertemporal Choice Task as the vehicle for observing search strategy, wherein participants had to choose between small reward at an earlier date or a larger one at a late date. They observed that search strategies which exhibited a patient type, as in had qualities that showed large quantities of adjacency, were significantly more likely to result in outcomes that represented the more patient choice. 
-
-\subsection{Understanding decision making as a cognitive process}
-
-Our cognition can be seen as a continuous dynamic system
+\citeauthor{reeckSearchPredictsChanges2017b} found success through observing both the acquisition of information and the duration within which they looked at said pieces of information. Using the Intertemporal Choice task as options in the MouseLab experiment, they were able to disseminate two underlying search strategies and showed success in linking their use to the decisional outcome. Using K-means clustering, two types of strategy emerged. Comparative searchers, who exhibited a more patient approach involving large proportions of adjacency and integrative searchers who showed fewer occurrences of each piece of information and shorter durations of observation in their process trace before deciding. Success was found in observing that comparative searchers were significantly more likely to pick the more patent option in the Intertemporal choice task (\cite{reeckSearchPredictsChanges2017b}). 
 
 
+\subsection{The neurobiology of social decision making}
 
 
+Evidence suggests that neural circuitry involved in social decision making does not distinguish itself from that of the circuitry involved in other forms of  decision making. Value based processing found in ventromedial prefrontal cortex (vmPFC) supposedly integrates signals from other areas of the brain during the decision making process, feeding signals back based on value representation change. This understanding, known as the extended common currency schema, directly contrasts prior theories that suggested our social decision making skills evolved as part of a separate adaptive system (\cite{ruffNeurobiologyRewardsValues2014}).
 
-% occurence and adjacency
-% intertemporal choice task
-% cognition dynamic system
-
-
-
-
-% paragraph on contingency
-
-
+The specificity in social decision making comes from the neural circuits that the vmPFC tracks during social dilemma is faced. The lateral prefrontal cortex (LPFC) which tracks value to self and the right temporoparietal junction (rTPJ) which tracks value to others. It was suggested that these two circuits were involved in the social decision making process within a study that used the Message Game (further elaborated upon in the Methods section) as it's stimuli. Using neuroimaging technology, \citeauthor{shusterContributionSelfOtherregarding2020} observed the two neural circuits independently tracking their respective motives by modifying trial parameters specific to the Message game that altered the perceived social outcomes. The vmPFC representing the value computation between the two varied on an individual level (\cite{shusterContributionSelfOtherregarding2020}).
 
 \section{Methods}
 
@@ -163,24 +154,41 @@ Our cognition can be seen as a continuous dynamic system
 
 A secondary analysis was carried out from the results of pre existing experiment. The primary stimuli, of which, was a variation of The Message Game that was carried out within a MouseLabWeb environment. 
 
-\subsubsection{The Message Game}
+\subsection{The Message Game}
+
 The Message Game is a form of experimental game that models a particular complexity faced by individuals in pro-social environments. The game uses honesty to illustrate how decision making can be affected by value judgements that pit our own self interest against our altruistic sensitivities. 
 The game involves two roles. The Sender and the Receiver. The Sender must send a message to the Receiver informing them of a particular box to open from a choice of four. Each of the boxes contains differing amounts of money for the Sender and the Receiver should that box be chosen. The Sender can ultimately see what's inside each of the boxes in terms of how much money they will receive versus the amount that the Receiver will. Only the Receiver opens the box, however. A message is sent by the Sender to the Receiver with words to the affect of 'Box X is best for you'. The dishonesty comes from the Sender being able to suggest a box that might not necessarily represent the truth and instead picking a box that contains a larger amount of money for themselves and less money for the Receiver. With the Receiver unable to see the quantity of money they potentially missed, they must decide whether to trust the Sender's recommendation and open the suggested box.
 
-This variation has the focus placed entirely on the Sender. Two of the boxes are blank meaning that the Receiver has no choice but to pick the Sender's recommendation or risk a 2 in 3 chance of getting no monetary income. The participant plays as the Sender for the majority, however, does get to have a go at playing at the Receiver role only to understand the dilemma faced. The participant then spends 80 trials in the Sender role where the process data is tracked. The position of the monetary rewards in the boxes are then altered on a trial by trial basis so that decisions are encouraged to be deliberate and do not succumb to laziness. 
+\subsubsection{Experimental Variation}
 
-The values held in each of the two boxes vary on a trial by trial basis. Each of the two boxes consists of two values representing a profit for the Sender and Receiver. These boxes always contain differing amounts for the Receiver and Sender. The box with the higher amount for the Receiver, if chosen, represents the Sender telling the truth to the Receiver. Likewise, the box with the lower amount represents the Sender making a dishonest claim to the Receiver about the potential profits that could've been earned.
+In this variation, focus is placed entirely on the Sender. Two of the boxes are blank meaning that the Receiver has no choice but to pick the Sender's recommendation or risk a 2 in 3 chance of getting no monetary income. The participant plays as the Sender for the majority, however, does get to have a go at playing at the Receiver role only to understand the dilemma faced. The participant then spends 80 trials in the Sender role where the process data is tracked. The position of the monetary rewards in the boxes are then altered on a trial by trial basis so that decisions are encouraged to be deliberate and do not succumb to laziness. 
 
-Being that the trials are carried out in a MouseLabWeb environment, we then correspond each of the two amounts contained within the boxes to Areas of Interest (AOIs). The AOI representing what amount the Sender receives for the truth telling box is SELF TRUE and the one representing the amount for the Receiver is OTHER TRUTH. AOIs corresponding to the amounts for the dishonest box are SELF LIE for what the Sender receives and OTHER LIE for the receiver. Theses AOIs are the pieces of information hidden from view that can only be revealed by hovering a mouse cursor over the panel. Horizontally adjacent lookups correspond to comparisons of amount awarded to one particular role and vertical adjacency compares values awarded for the both roles for a given option. The vertical position of the AOIs swaps as well in order to encourage deliberate choices.
+The values held in each of the two boxes vary on a trial by trial basis. Each of the two boxes consists of two values representing a profit for the Sender and Receiver. These boxes always contain differing amounts for the Receiver and Sender. The box with the higher amount for the Receiver, if chosen, represents the Sender telling the truth to the Receiver. Likewise, the box with the lower amount represents the Sender making a dishonest claim to the Receiver.
 
-With the values and positioning of each AOI altering on a trial basis, one can gain an insight into the process and circumstances that inhibit a participant from acting in a rational manner. The game theoretic viewpoint of suggests that the Sender should always choose to act in their own self interest by picking the option that represents the maximum utility to themselves ie. the box with the most value to them. As ultimately their are no repercussions for lying. Using human participants and recording process data, we can observe when a human's altruistic sensitivities take over.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/NOT HIDDEN.png}
+	%\figurenote{This is a great figure.}
+	\label{fig:AOIs}
+	\caption{Layout of boxes and AOIs for one specific trial. Door 2 represents the Sender choosing to lie. Door 3 represents the truth. The 2 AOIs inside door 2 are SELF LIE (top) and OTHER LIE (bottom). Door 3 hold the AOIs, SELF TRUE (top) and OTHER TRUTH (bottom).}
+\end{figure}
 
-% OVer experiement was found no difference mouse vs vision
-% Look into the idea of dwelling on something by looking at it.
+
+Being that the trials were carried out in a MouseLabWeb environment, the amounts contained within the boxes shall be referred to as Areas of Interest (AOIs). The AOI representing what amount the Sender receives for the truth telling box is SELF TRUE and the one representing the amount for the Receiver is OTHER TRUTH. AOIs corresponding to the amounts for the dishonest box are SELF LIE for what the Sender receives and OTHER LIE for the receiver. Theses AOIs are the pieces of information hidden from view that can only be revealed by hovering a mouse cursor over the panel. Horizontally adjacent lookups correspond to comparisons of amount awarded to one particular role and vertical adjacency compares values awarded for both roles for a given option. The vertical order of the AOIs swaps as well in order to encourage deliberate observations.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/HIDDEN.png}
+	%\figurenote{This is a great figure.}
+	\label{fig:HiddenAOIs}
+	\caption{What the participant sees during experimental trials. The top AOI of door 2 is currently being hovered over with the mouse.}
+\end{figure}
+
+With the values and positioning of each AOI altering on a trial basis, one can gain an insight into the process and circumstances that inhibit a participant from acting in a rational manner. The game theoretic viewpoint suggests that the Sender should always choose to act in their own self interest by picking the option that represents the maximum utility to themselves ie. the box with the most value to them. Ultimately there are no repercussions for lying and therefore rational agents only need to seek value from profit. Using human participants and recording process data, we can observe when a humans' s show aversion to self interest and their altruistic sensitivities take over.
 
 \subsection{Procedure}
 
-Results for the experiment were spread across two CSVs which resulted in a collective total of 89 participants. Rows represented a single trial for each participant. The rows provided information such as the values that were in each AOI, the selected box number, reaction time and process trace.
+Results for the experiment carried using the primary stimuli, the variation of the the Message game, recorded a collective total of 89 participants. Rows represented a single trial for each participant. The rows provided information such as the values that were in each AOI, the selected box number, reaction time and a process trace.
 
 Since trial order was randomised, an index number was assigned to each trial. That number was based upon every unique set of values contained within the AOIs. Trials that shared the same amounts were assigned the same index value. See Figure \ref{fig:Gains} and \ref{fig:Losses}. The trials could then be aggregated across participants based on the profits and losses earned by the Sender and Receiver per trial.
 
@@ -194,14 +202,20 @@ Using the newly created timeline, the average dwell for each of the four AOIs wa
 
 \subsection{Cluster Analysis}
 
-An extra measure of similarity was calculated between all timelines in order to 
+The timelines were assessed under a further notion of similarity. By taking into account a point by point comparison between each of the timelines on the millisecond level, underlying trends can be uncovered that forgo the detection of average calculation. The consolidation of such point data provides the affordance of perceiving time series similarity under a single distance measure. This output can then be used to inform the formation of clusters and classification.
 
+\subsubsection{Dynamic Time Warping}
 
-\subsubsection{Creating time series sequences}
+Dynamic Time Warping (DTW) is a length-invariant measure of distance between two time series. It takes the minimum cost alignment between two sequences using a one to many comparison of each point. Where the Euclidean measure only takes into account a point to point mapping using equal length time series, the DTW measure doesn't abide by such strictness in it's comparison. Using a many to many approach means that a DTW measure can factor in patterns of activity that are approximate both series and realise they're similarity. In this way, DTW can perceive relationships in time series that are shifted and subject to noise.
 
-\subsubsection{Measuring the distance between trials}
+A pairwise comparison was drawn between each individual trial for each participant using  DTW as a measure of similarity. Each trial's timeline was represented in a n x 4 array where n was the quantity of milliseconds in the trial and 4 elements representing the binary state of each AOI describing whether the cursor was within it's bounds or not. Prior to comparison, each time series was subject to z normalisation. Thus, ensuring that greater variation in longer length series was accounted for and comparison could focus on the shape of the data.
 
 \subsubsection{Clustering}
+
+Hierarchical clustering was then used with the calculated DTW metric to achieve a desired number of clusters. The clustering mechanism used in this instance, Agglomerative, recursively merges clusters using a bottom up approach. Each cluster represents a single trial at the beginning and then trials are merged based on the comparison that represents the smallest distance. Clusters are then recursively merged with a cluster's proximity to another cluster being defined by the maximum distance that can be described based on the cluster's constituent trials. The process repeats until the number of desired clusters is reached.
+
+In the analysis, the desired number of clusters was defined as the number that returned the highest value from the pseudo F statistic. The statistic identifies well-fitting clusters by maximising between-cluster variance while minimising within-cluster variance. By evaluating this measure up to 20 clusters, the resulting clusters were expected to represent a level of classification that avoids overfitting.
+
 
 
 \section{Results/Findings}
@@ -250,7 +264,8 @@ Across trials the propensity to lie displayed a high degree of variance. The ave
 Reaction time (or the time it takes to make a decision) showed a large amount of range. The average reaction time was 6513 ms $(SD = 3050$ms$)$ with an interquartile range of 4393 (Q1) - 7871 ms (Q3).
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../plots/Dwell/RTDistPlot.png}
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/Dwell/RTDistPlot.png}
 	%\figurenote{This is a great figure.}
 	\label{fig:RTDistPlot}
 	\caption{Distribution of reaction time ie. time taken to make a decision.}
@@ -259,6 +274,7 @@ Reaction time (or the time it takes to make a decision) showed a large amount of
 The amount of spent dwelling on one of the four AOIs on the screen was considered. The AOIs, SELF LIE ($M = 470$ms, $SD = 428$ms), SELF TRUE ($M = 420$ms, $SD = 343$ms), OTHER LIE ($M = 571$ms, $SD = 423$ms) and OTHER TRUTH ($M = 604$ms, $SD = 472$ms) all recorded means within 150ms of one another. A large proportion of the trials reported no dwell time for at least one of the given AOIs. Both SELF TRUE and SELF LIE were absent from the dwell timelines of 450 trials, representing an omission rate of 18\%. OTHER TRUE and OTHER LIE were omitted from 221 and 240 respectively representing around 10\% each, of all trials.
 
 \begin{figure}[H]
+	\centering
 	\caption{Distribution of average dwell time for each AOI. The distribution only accounts for average dwell time of each AOI that were under 1000ms. Each AOI also had a proportion of average dwell times that were 0, which were also omitted.}
 	\includegraphics[width=\linewidth]{../plots/Dwell/DwellDistPlot.png}
 	%\figurenote{This is a great figure.}
@@ -266,8 +282,9 @@ The amount of spent dwelling on one of the four AOIs on the screen was considere
 \end{figure}
 
 \begin{figure}[H]
+	\centering
 	\caption{Distribution of number of transitions between AOIs across trials.}
-	\includegraphics[width=\linewidth]{../plots/Dwell/N_TransitionsDistPlot.png}
+	\includegraphics[width=0.65\linewidth]{../plots/Dwell/N_TransitionsDistPlot.png}
 	%\figurenote{This is a great figure.}
 	\label{fig:NTransitionsDistPlot}
 \end{figure}
@@ -275,13 +292,13 @@ The amount of spent dwelling on one of the four AOIs on the screen was considere
 The number of transitions is marked by where a participant would move the cursor from one AOI to another was also observed across all trials. The mean number of transitions between AOIs was ($M = 5.6$, $SD = 4.1$) with an interquartile range of 3 (Q1) - 8 (Q3).
 
 
-\subsection{Task Analysis}
+\subsection{Task Condition Analysis}
 
 \subsubsection{Lie Percentage}
 
 \begin{figure}[H]
-	\caption{Bar chart showing the amount gained by the Sender should they choose to lie in the corresponding trial.}
 	\includegraphics[width=\linewidth]{../plots/TrialIndex/Gains.png}
+	\caption{Bar chart showing the amount gained by the Sender should they choose to lie in the corresponding trial.}
 	%\figurenote{This is a great figure.}
 	\label{fig:Gains}
 \end{figure}
@@ -304,7 +321,7 @@ The percentage of senders that chose to lie in the experiment increased as the n
 	\label{fig:NetGainLie}
 \end{figure}
 
-A significant difference in the proportion of lies was observed across trials where the sender gained less than 10 and when they received more than 10, $\chi^2(1,$ $N=2489) = 248,$ $p<.001$. 
+A significant difference in the proportion of lies was observed across trials where the sender gained less than 10 and when they received more than 10, $\chi^2(1,$ $N=2489) = 248,$ $p<.001$. A significant difference was also observed across trials where gain was under 30 and over 30 $\chi^2(1,$ $N=2489) = 167,$ $p<.001$.
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/NetLossLie.png}
@@ -320,6 +337,7 @@ The difference in lie percentage between trials where losses to the receiver wer
 \subsubsection{Dwell Time}
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerGain.png}
 	\caption{Average Dwell Time for each AOI comparison between trials where net gain to the Sender was less than 10 and trials where the net gain was more than 10}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
@@ -346,6 +364,7 @@ The difference in lie percentage between trials where losses to the receiver wer
 Table \ref{tab:NetGainDwell} shows that there was an no significant difference between the average dwell time of the four AOIs across trials where the net gain to the Sender was less than 10 versus when it was more than 10.
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerLossPlot.png}
 	\caption{Average Dwell Time for each AOI comparison between trials where net loss to the Receiver was less than 10 and trials where the net loss was more than 10}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
@@ -371,6 +390,7 @@ Table \ref{tab:NetGainDwell} shows that there was an no significant difference b
 Similarly, in Table \ref{tab:NetLossDwell}, there was no significant difference between the dwell times in trials where the loss to the Receiver was above 10 versus trials where it was below 10.
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerGain30.png}
 	\caption{Average Dwell Time for each AOI comparison between trials where net gain to the Sender was less than 30 and trials where the net gain was more than 30}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
@@ -393,9 +413,10 @@ Similarly, in Table \ref{tab:NetLossDwell}, there was no significant difference 
 	\label{tab:NetGainDwell30}
 \end{table}
 
-Across trials where the net gain to Sender and the net loss to the Receiver was at larger quantities there was found to be no significant difference in dwell times.
+Across trials where the net gain to Sender and the net loss to the Receiver was at larger quantities there was found to be no significant difference in dwell times as seen in Table \ref{tab:NetGainDwell30} and \ref{tab:NetLossPerDwell30}.
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerLossPlot30.png}
 	\caption{Average Dwell Time for each AOI comparison between trials where net loss to the Receiver was less than 30 and trials where the net loss was more than 30}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
@@ -421,7 +442,8 @@ Across trials where the net gain to Sender and the net loss to the Receiver was 
 \subsubsection{Number of Transitions}
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/NTransitionPerGain.png}
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/RESPONSE/NTransitionPerGain.png}
 	\caption{Comparison of average number of transitions between trials where the net gain to the Sender was less than 10 and trials where the net gain was more than 10}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NTransitionPerGain}
@@ -430,7 +452,8 @@ Across trials where the net gain to Sender and the net loss to the Receiver was 
 The difference in number of transitions proved not to be significant when comparing trials where the net gain to the Sender is above $(M = 5.5\%$, $SD = 4.1\%)$ or below 10 $(M = 5.6\%$, $SD = 4.1\%)$, $t(2487)=-0.5$, $p=.617$.
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/NTransitionPerLossPlot.png}
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/RESPONSE/NTransitionPerLossPlot.png}
 	\caption{Comparison of average number of transitions between trials where net loss to the Receiver was less than 10 and trials where the net loss was more than 10}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NTransitionPerLoss}
@@ -438,23 +461,9 @@ The difference in number of transitions proved not to be significant when compar
 
 Similarly the difference in number of transitions showed to be insignificant when comparing trials where the Receiver made a loss of above $(M = 5.5\%$, $SD = 4.1\%)$  or below 10 $(M = 5.6\%$, $SD = 4.1\%)$ from lying, $t(2491)=-0.66$, $p=.617$.
 
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/NTransitionPerGain30.png}
-	\caption{Comparison of average number of transitions between trials where the net gain to the Sender was less than 30 and trials where the net gain was more than 30}
-	\label{fig:NTransitionPerGain30}
-\end{figure}
+Across trials where the net gain to sender was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.6\%$, $SD = 4.2\%)$ there showed to be no significant difference either, $t(2487)=1.9$, $p=.241$. This was also the case for when net loss to the receiver was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.1\%$, $SD = 3.6\%)$, $t(2487)=1.3$, $p=.376$.
 
-Across trails where the net gain to sender was above $(M = 5.1\%$, $SD = 3.6\%)$ or below 30  $(M = 5.6\%$, $SD = 4.2\%)$  there showed to be no significant difference, $t(2487)=1.9$, $p=.241$.
-
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/NTransitionPerLossPlot30.png}
-	\caption{Comparison of average number of transitions between trials where the net loss to the Sender was less than 30 and trials where the net loss was more than 30}
-	\label{fig:NTransitionPerLoss30}
-\end{figure}
-
-Where the net loss to the receiver was above $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.1\%$, $SD = 3.6\%)$ there was no significant difference found, $t(2487)=1.3$, $p=.376$.
-
-\section{Cluster Analysis}
+\subsection{Cluster Analysis}
 
 Hierarchical clustering was used to fit suitable clusters based on the pairwise distance measure calculated between trials using Dynamic Time Warping. Using the Pseudo F statistic and a cluster limit of 20, it was deemed that two clusters represented the best degree of separation and internal cohesiveness. The two clusters, cluster 1 and 2 were made up of 1006 and 1483 trials, respectively.
 
@@ -462,24 +471,26 @@ Hierarchical clustering was used to fit suitable clusters based on the pairwise 
 \subsubsection{Lie Percentage}
 
 \begin{figure}[H]
-	\caption{Average percent lies across clusters formed from hierarchical clustering using Euclidean distance measure.}
-	\includegraphics[width=\linewidth]{../plots/ALLTRIAL/PercentLies.png}
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/ALLTRIAL/PercentLies.png}
+		\caption{Average percent lies across clusters formed from hierarchical clustering based on DTW measure}
 	%\figurenote{This is a great figure.}
 	\label{fig:PercentLiePerCluster}
 \end{figure}
 
-There was a significant difference in the proportion of lies across clusters $\chi^2(1,$ $N=2489) = 24,$ $p<.001$.
+There was a significant difference in the proportion of lies across clusters $\chi^2(1,$ $N=2489) = 24,$ $p=<.001$.
 
 \subsubsection{Dwell Times}
 
 \begin{figure}[H]
 	\caption{Average dwell time across clusters for each AOI.}
-	\includegraphics[width=\linewidth]{../plots/ALLTRIAL/DwellTimes.png}
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/ALLTRIAL/DwellTimes.png}
 	%\figurenote{This is a great figure.}
 	\label{fig:DwellTimesPerCluster}
 \end{figure}
 
-Each of the AOIs showed significant differences across clusters, as seen in Table \ref{tab:DwellPerCluster}.
+Each of the AOIs showed significant differences across clusters, as seen in Table \ref{tab:DwellTimesPerCluster}.
 
 \begin{table}[H]
 	\centering
@@ -502,26 +513,83 @@ Each of the AOIs showed significant differences across clusters, as seen in Tabl
 \subsubsection{Number of Transitions}
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{../plots/ALLTRIAL/NTransitions.png}
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/ALLTRIAL/NTransitions.png}
 	\caption{Average number of transitions calculated per cluster for each participant.}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NTransitionsPerCluster}
 \end{figure}
 
-The average number of transitions across clusters also showed significant differences. With cluster 1 showing a mean level of 8.5 $(SD = 4.1)$ and cluster 2 showing a smaller average of 3.5 $(SD = 2.6)$.
+The average number of transitions across clusters also showed significant differences. With cluster 1 showing a mean level of 8.5 $(SD = 4.1)$ and cluster 2 showing a smaller average of 3.5 $(SD = 2.6)$, $\chi^2(1,$ $N=2027) = 24,$ $p<.001$.
 
 \begin{figure}[H]
+	\centering
 	\includegraphics[width=\linewidth]{../plots/ALLTRIAL/NTrialsByPID.png}
-	\caption{The number of trials per cluster for each participant. Clusters were calculated using hierarchical clustering based on Euclidean distance.}
+	\caption{The number of trials per cluster for each participant. Clusters were calculated using hierarchical clustering based on DTW measure}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NTrialsByPIDPerCluster}
 \end{figure}
 
 
-It was observed that every participant had trials belonging to each of the cluster memberships, as seen in Figure \ref{fig:NTrialsByPIDPerCluster}. The mean amount of trials for a given participant that belonged to cluster 1 was 31 trials $(SD = 18)$ with a 12 (Q1) - 45 (Q3) trial interquartile range. Cluster 2 had a mean of 46 trials $(SD = 19)$ per participant and a 32 (Q1) - 64 (Q3) trial interquartile range. 
+It was observed that every participant had trials belonging to each of the cluster memberships, as seen in Figure \ref{fig:NTrialsByPIDPerCluster}. The mean amount of trials for a given participant that belonged to cluster 1 was 31 trials $(SD = 18)$ with a 12 (Q1) - 45 (Q3) interquartile range. Cluster 2 had a mean of 46 trials $(SD = 19)$ per participant and a 32 (Q1) - 64 (Q3) interquartile range. 
+
+\subsection{Regression Analysis}
+
+A hierarchical logistic regression model was built to evaluate the usefulness of task condition and cluster membership in predicting whether a given trial was likely to result in the Sender choosing to lie. The model assessed gain to Sender, loss to Receiver and cluster membership as predictors using random intercepts for participants. It also assessed whether there was any interaction between the two task conditions and cluster.
+
+In the resulting model, gain to sender showed to have a significant positive effect on lie probability, $\beta = 0.14$, $SE = 0.01$, $p = < .001$ Each unit of increase in self-gain resulted in the odds of lying increasing by approximately 15.5\% $(OR=1.15)$. Loss to receiver showed to have a significant negative effect on lie probability $\beta = -0.09$, $SE = 0.01$, $p = < .001$ with the odds of lying decreasing by approximately 8.5\% for each unit of increased loss $(OR=0.91)$. Cluster showed to, also, have a significant effect on lie probability $\beta = 0.58$, $SE = 0.20$, $p = < .001$. Cluster 2 participants were 78.2\% more likely to lie than Cluster 1 participants $(OR=1.78)$
+
+
+The interaction between self gain and cluster was shown to be significant, $\beta = -0.04$, $SE = 0.01$, $p = < .001$. This suggests that the effect of self-gain on the likelihood of lying was weaker in Cluster 2, where each unit increase in gain to Sender was associated with a decrease in the odds of lying by approximately 4.4\% $(OR=0.96)$. In Figure \ref{fig:InteractionEffects}, it can be seen that the probability of a lie is lower for cluster 1 than it is for cluster 2, however, at very high values cluster 1 showed the greater likelihood.
+
+The interaction between other loss and cluster was found not to be significant, $\beta = -0.02$, $SE = 0.01$, $p = .115$.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/R_selfgain/effects.png}
+	\caption{The probability that lie will be the response as self gain increases for both clusters.}
+	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
+	\label{fig:InteractionEffects}
+\end{figure}
+
+\subsubsection{Model Diagnostics}
 
 
 
+\begin{figure}[H]
+	\centering
+	
+	% First subfigure
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../plots/R/residuals}
+%		\caption{Caption for the first image (Residuals).}
+		\label{fig:residuals}
+	\end{subfigure}
+	\hfill
+	% Second subfigure
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../plots/R/pearson_residuals_vs_fitted}
+%		\caption{Caption for the second image (Pearson Residuals vs Fitted).}
+		\label{fig:pearsonresidualsvsfitted}
+	\end{subfigure}
+	
+	\caption{(left) Residuals plot with index of observation on x-axis (right) Pearson residuals plot}
+	\label{fig:Residuals}
+\end{figure}
+
+The plots in Figure \ref{fig:Residuals} show some noticeable outliers. The Pearson residuals plot reflects attributes associated with heteroscedasticity around probabilities that represent almost certainty.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../plots/R/qqline}
+	\caption{Q-Q plot mapping the theoretical normal distribution of quantities on to the sample ones}
+	\label{fig:qqline}
+\end{figure}
+
+The Q-Q plot echoes similar aspects of the model with outliers at the upper and lower most quantiles. The model shows a better fit above the central tendency, suggesting that it is better at predicting lies than truths.
 
 % Results/Findings which includes: analyses performed, reporting of analyses, use of graphs/tables/diagrams, organization and structure, and clarity
 % analyses performed:
@@ -659,7 +727,6 @@ It was observed that every participant had trials belonging to each of the clust
 %The analyses are presented in this section. These analyses may be quantitative or qualitative. Feel free to use as many graphs, tables and diagrams as you think necessary for presenting the analyses clearly.  Do not comment on the meaning of the results here. Extrapolating from your results will happen in your Discussion section
 
 
-\section{Discussion}
 
 % Discussion which includes: summary of results/findings, understanding of results/findings, critical perspective and insight, indication of future research, organization and structure, and clarity
 

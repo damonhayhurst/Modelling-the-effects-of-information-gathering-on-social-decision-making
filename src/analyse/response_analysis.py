@@ -262,7 +262,7 @@ def plot_dwell_time_by_gain_for_clusters(gain_under_ten_responses_df: DataFrame,
     plot_response_stats_for_clusters(ax, gain_under_ten_responses_df, [GAIN_OF_TEN, GAIN_UNDER_TEN], colors, to_file)
 
 
-def plot_n_trials_by_gain_for_clusters(gain_under_ten_responses_df: DataFrame, gain_of_ten_responses_df: DataFrame, aoi: str, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
+def plot_n_trials_by_gain_for_clusters(gain_under_ten_responses_df: DataFrame, gain_of_ten_responses_df: DataFrame, colors: list[str] = XKCD_COLORS_LIST, to_file: str = None):
     gain_under_ten_responses_df[GAIN_OF_TEN] = gain_of_ten_responses_df[TRIAL_COUNT]
     gain_under_ten_responses_df[GAIN_UNDER_TEN] = gain_under_ten_responses_df[TRIAL_COUNT]
     fig, ax = plt.subplots(figsize=(12, 9))

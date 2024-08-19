@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.25)  13 AUG 2024 16:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.25)  16 AUG 2024 14:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -829,14 +829,19 @@ Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
 (babel)             (\language21). Reported on input line 108.
 )))
+(/usr/local/texlive/2022/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
+\c@subfigure=\count343
+\c@subtable=\count344
+)
 (/usr/local/texlive/2022/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
-\csq@reset=\count343
-\csq@gtype=\count344
-\csq@glevel=\count345
-\csq@qlevel=\count346
-\csq@maxlvl=\count347
-\csq@tshold=\count348
+\csq@reset=\count345
+\csq@gtype=\count346
+\csq@glevel=\count347
+\csq@qlevel=\count348
+\csq@maxlvl=\count349
+\csq@tshold=\count350
 \csq@ltx@everypar=\toks32
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/csquotes/csquotes.def
@@ -853,7 +858,7 @@ Package: biblatex 2022/02/02 v3.17 programmable bibliographies (PK/MW)
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count349
+\lrq@indent=\count351
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
@@ -861,48 +866,48 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 (/usr/local/texlive/2022/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@tabx@nest=\count350
-\c@listtotal=\count351
-\c@listcount=\count352
-\c@liststart=\count353
-\c@liststop=\count354
-\c@citecount=\count355
-\c@citetotal=\count356
-\c@multicitecount=\count357
-\c@multicitetotal=\count358
-\c@instcount=\count359
-\c@maxnames=\count360
-\c@minnames=\count361
-\c@maxitems=\count362
-\c@minitems=\count363
-\c@citecounter=\count364
-\c@maxcitecounter=\count365
-\c@savedcitecounter=\count366
-\c@uniquelist=\count367
-\c@uniquename=\count368
-\c@refsection=\count369
-\c@refsegment=\count370
-\c@maxextratitle=\count371
-\c@maxextratitleyear=\count372
-\c@maxextraname=\count373
-\c@maxextradate=\count374
-\c@maxextraalpha=\count375
-\c@abbrvpenalty=\count376
-\c@highnamepenalty=\count377
-\c@lownamepenalty=\count378
-\c@maxparens=\count379
-\c@parenlevel=\count380
-\blx@tempcnta=\count381
-\blx@tempcntb=\count382
-\blx@tempcntc=\count383
-\c@blx@maxsection=\count384
-\c@blx@maxsegment@0=\count385
-\blx@notetype=\count386
-\blx@parenlevel@text=\count387
-\blx@parenlevel@foot=\count388
-\c@blx@sectionciteorder@0=\count389
-\blx@entrysetcounter=\count390
-\blx@biblioinstance=\count391
+\c@tabx@nest=\count352
+\c@listtotal=\count353
+\c@listcount=\count354
+\c@liststart=\count355
+\c@liststop=\count356
+\c@citecount=\count357
+\c@citetotal=\count358
+\c@multicitecount=\count359
+\c@multicitetotal=\count360
+\c@instcount=\count361
+\c@maxnames=\count362
+\c@minnames=\count363
+\c@maxitems=\count364
+\c@minitems=\count365
+\c@citecounter=\count366
+\c@maxcitecounter=\count367
+\c@savedcitecounter=\count368
+\c@uniquelist=\count369
+\c@uniquename=\count370
+\c@refsection=\count371
+\c@refsegment=\count372
+\c@maxextratitle=\count373
+\c@maxextratitleyear=\count374
+\c@maxextraname=\count375
+\c@maxextradate=\count376
+\c@maxextraalpha=\count377
+\c@abbrvpenalty=\count378
+\c@highnamepenalty=\count379
+\c@lownamepenalty=\count380
+\c@maxparens=\count381
+\c@parenlevel=\count382
+\blx@tempcnta=\count383
+\blx@tempcntb=\count384
+\blx@tempcntc=\count385
+\c@blx@maxsection=\count386
+\c@blx@maxsegment@0=\count387
+\blx@notetype=\count388
+\blx@parenlevel@text=\count389
+\blx@parenlevel@foot=\count390
+\c@blx@sectionciteorder@0=\count391
+\blx@entrysetcounter=\count392
+\blx@biblioinstance=\count393
 \labelnumberwidth=\skip84
 \labelalphawidth=\skip85
 \biblabelsep=\skip86
@@ -914,9 +919,9 @@ Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 \blx@bcfin=\read4
 \blx@bcfout=\write6
 \blx@langwohyphens=\language88
-\c@mincomprange=\count392
-\c@maxcomprange=\count393
-\c@mincompwidth=\count394
+\c@mincomprange=\count394
+\c@maxcomprange=\count395
+\c@mincompwidth=\count396
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -931,84 +936,84 @@ File: apa.dbx 2021/12/24 v9.15 APA biblatex style data model
 )
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count395
-\c@savedafterword=\count396
-\c@annotator=\count397
-\c@savedannotator=\count398
-\c@author=\count399
-\c@savedauthor=\count400
-\c@bookauthor=\count401
-\c@savedbookauthor=\count402
-\c@commentator=\count403
-\c@savedcommentator=\count404
-\c@editor=\count405
-\c@savededitor=\count406
-\c@editora=\count407
-\c@savededitora=\count408
-\c@editorb=\count409
-\c@savededitorb=\count410
-\c@editorc=\count411
-\c@savededitorc=\count412
-\c@foreword=\count413
-\c@savedforeword=\count414
-\c@holder=\count415
-\c@savedholder=\count416
-\c@introduction=\count417
-\c@savedintroduction=\count418
-\c@namea=\count419
-\c@savednamea=\count420
-\c@nameb=\count421
-\c@savednameb=\count422
-\c@namec=\count423
-\c@savednamec=\count424
-\c@translator=\count425
-\c@savedtranslator=\count426
-\c@shortauthor=\count427
-\c@savedshortauthor=\count428
-\c@shorteditor=\count429
-\c@savedshorteditor=\count430
-\c@narrator=\count431
-\c@savednarrator=\count432
-\c@execproducer=\count433
-\c@savedexecproducer=\count434
-\c@execdirector=\count435
-\c@savedexecdirector=\count436
-\c@with=\count437
-\c@savedwith=\count438
-\c@labelname=\count439
-\c@savedlabelname=\count440
-\c@institution=\count441
-\c@savedinstitution=\count442
-\c@lista=\count443
-\c@savedlista=\count444
-\c@listb=\count445
-\c@savedlistb=\count446
-\c@listc=\count447
-\c@savedlistc=\count448
-\c@listd=\count449
-\c@savedlistd=\count450
-\c@liste=\count451
-\c@savedliste=\count452
-\c@listf=\count453
-\c@savedlistf=\count454
-\c@location=\count455
-\c@savedlocation=\count456
-\c@organization=\count457
-\c@savedorganization=\count458
-\c@origlocation=\count459
-\c@savedoriglocation=\count460
-\c@origpublisher=\count461
-\c@savedorigpublisher=\count462
-\c@publisher=\count463
-\c@savedpublisher=\count464
-\c@language=\count465
-\c@savedlanguage=\count466
-\c@origlanguage=\count467
-\c@savedoriglanguage=\count468
-\c@citation=\count469
-\c@savedcitation=\count470
-\c@pageref=\count471
-\c@savedpageref=\count472
+\c@afterword=\count397
+\c@savedafterword=\count398
+\c@annotator=\count399
+\c@savedannotator=\count400
+\c@author=\count401
+\c@savedauthor=\count402
+\c@bookauthor=\count403
+\c@savedbookauthor=\count404
+\c@commentator=\count405
+\c@savedcommentator=\count406
+\c@editor=\count407
+\c@savededitor=\count408
+\c@editora=\count409
+\c@savededitora=\count410
+\c@editorb=\count411
+\c@savededitorb=\count412
+\c@editorc=\count413
+\c@savededitorc=\count414
+\c@foreword=\count415
+\c@savedforeword=\count416
+\c@holder=\count417
+\c@savedholder=\count418
+\c@introduction=\count419
+\c@savedintroduction=\count420
+\c@namea=\count421
+\c@savednamea=\count422
+\c@nameb=\count423
+\c@savednameb=\count424
+\c@namec=\count425
+\c@savednamec=\count426
+\c@translator=\count427
+\c@savedtranslator=\count428
+\c@shortauthor=\count429
+\c@savedshortauthor=\count430
+\c@shorteditor=\count431
+\c@savedshorteditor=\count432
+\c@narrator=\count433
+\c@savednarrator=\count434
+\c@execproducer=\count435
+\c@savedexecproducer=\count436
+\c@execdirector=\count437
+\c@savedexecdirector=\count438
+\c@with=\count439
+\c@savedwith=\count440
+\c@labelname=\count441
+\c@savedlabelname=\count442
+\c@institution=\count443
+\c@savedinstitution=\count444
+\c@lista=\count445
+\c@savedlista=\count446
+\c@listb=\count447
+\c@savedlistb=\count448
+\c@listc=\count449
+\c@savedlistc=\count450
+\c@listd=\count451
+\c@savedlistd=\count452
+\c@liste=\count453
+\c@savedliste=\count454
+\c@listf=\count455
+\c@savedlistf=\count456
+\c@location=\count457
+\c@savedlocation=\count458
+\c@organization=\count459
+\c@savedorganization=\count460
+\c@origlocation=\count461
+\c@savedoriglocation=\count462
+\c@origpublisher=\count463
+\c@savedorigpublisher=\count464
+\c@publisher=\count465
+\c@savedpublisher=\count466
+\c@language=\count467
+\c@savedlanguage=\count468
+\c@origlanguage=\count469
+\c@savedoriglanguage=\count470
+\c@citation=\count471
+\c@savedcitation=\count472
+\c@pageref=\count473
+\c@savedpageref=\count474
 \shorthandwidth=\skip92
 \shortjournalwidth=\skip93
 \shortserieswidth=\skip94
@@ -1034,19 +1039,19 @@ Package biblatex Info: ... file 'biblatex.def' found.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 2022/02/02 v3.17 biblatex compatibility (PK/MW)
-\c@textcitecount=\count473
-\c@textcitetotal=\count474
-\c@textcitemaxnames=\count475
-\c@biburlbigbreakpenalty=\count476
-\c@biburlbreakpenalty=\count477
-\c@biburlnumpenalty=\count478
-\c@biburlucpenalty=\count479
-\c@biburllcpenalty=\count480
+\c@textcitecount=\count475
+\c@textcitetotal=\count476
+\c@textcitemaxnames=\count477
+\c@biburlbigbreakpenalty=\count478
+\c@biburlbreakpenalty=\count479
+\c@biburlnumpenalty=\count480
+\c@biburlucpenalty=\count481
+\c@biburllcpenalty=\count482
 \biburlbigskip=\muskip17
 \biburlnumskip=\muskip18
 \biburlucskip=\muskip19
 \biburllcskip=\muskip20
-\c@smartand=\count481
+\c@smartand=\count483
 )
 Package biblatex Info: Trying to load bibliography style 'apa'...
 Package biblatex Info: ... file 'apa.bbx' found.
@@ -1058,8 +1063,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2022/02/02 v3.17 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count482
-\c@bbx:relatedtotal=\count483
+\c@bbx:relatedcount=\count484
+\c@bbx:relatedtotal=\count485
 )
 Package biblatex Info: Delimiter 'nameyeardelim' in context 'bib' already defin
 ed, overwriting.
@@ -1120,8 +1125,8 @@ Package: xparse 2022-01-12 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2022/02/02 v3.17 expl3 case changing code for biblatex
 ))
-\c@NumberOfAuthors=\count484
-\c@NumberOfSuperscripts=\count485
+\c@NumberOfAuthors=\count486
+\c@NumberOfSuperscripts=\count487
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -1130,24 +1135,24 @@ Package csquotes Info: Redefining alias 'default' -> 'american'.
 (./template_apa.aux)
 \openout1 = `template_apa.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1185,16 +1190,16 @@ LaTeX Font Info:    ... okay on input line 61.
 
 (/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count486
+\scratchcounter=\count488
 \scratchdimen=\dimen328
 \scratchbox=\box92
-\nofMPsegments=\count487
-\nofMParguments=\count488
+\nofMPsegments=\count489
+\nofMParguments=\count490
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count489
+\MPscratchCnt=\count491
 \MPscratchDim=\dimen329
-\MPnumerator=\count490
-\makeMPintoPDFobject=\count491
+\MPnumerator=\count492
+\makeMPintoPDFobject=\count493
 \everyMPtoPDFconversion=\toks34
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1205,7 +1210,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 61.
+Package hyperref Info: Link coloring OFF on input line 62.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1217,11 +1222,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count492
+\c@section@level=\count494
 )
-LaTeX Info: Redefining \ref on input line 61.
-LaTeX Info: Redefining \pageref on input line 61.
-LaTeX Info: Redefining \nameref on input line 61.
+LaTeX Info: Redefining \ref on input line 62.
+LaTeX Info: Redefining \pageref on input line 62.
+LaTeX Info: Redefining \nameref on input line 62.
  (./template_apa.out) (./template_apa.out)
 \@outlinefile=\write7
 \openout7 = `template_apa.out'.
@@ -1290,8 +1295,8 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'template_apa.bbl' found.
 
 (./template_apa.bbl)
-Package biblatex Info: Reference section=0 on input line 61.
-Package biblatex Info: Reference segment=0 on input line 61.
+Package biblatex Info: Reference section=0 on input line 62.
+Package biblatex Info: Reference segment=0 on input line 62.
  [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -1307,7 +1312,7 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
-5.
+4.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1340,9 +1345,6 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
 (fancyhdr)                Make it at least 27.11652pt, for example:
@@ -1352,10 +1354,6 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [6]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 166.
-
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
 (fancyhdr)                Make it at least 27.11652pt, for example:
@@ -1374,6 +1372,17 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
 [8]
+<figures/NOT HIDDEN.png, id=199, 1346.02875pt x 516.93124pt>
+File: figures/NOT HIDDEN.png Graphic file (type png)
+<use figures/NOT HIDDEN.png>
+Package pdftex.def Info: figures/NOT HIDDEN.png  used on input line 170.
+(pdftex.def)             Requested size: 352.31625pt x 135.30603pt.
+<figures/HIDDEN.png, id=201, 1464.47125pt x 610.28pt>
+File: figures/HIDDEN.png Graphic file (type png)
+<use figures/HIDDEN.png>
+Package pdftex.def Info: figures/HIDDEN.png  used on input line 181.
+(pdftex.def)             Requested size: 352.31625pt x 146.81473pt.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -1385,7 +1394,7 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[9]
+[9 <./figures/NOT HIDDEN.png>]
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
 (fancyhdr)                Make it at least 27.11652pt, for example:
@@ -1394,67 +1403,103 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[10]
-<../plots/RESPONSE/NTrialsByPID.png, id=197, 1445.4pt x 433.62pt>
+[10 <./figures/HIDDEN.png>]
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[12]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[13]
+<../plots/RESPONSE/NTrialsByPID.png, id=235, 1445.4pt x 433.62pt>
 File: ../plots/RESPONSE/NTrialsByPID.png Graphic file (type png)
 <use ../plots/RESPONSE/NTrialsByPID.png>
 Package pdftex.def Info: ../plots/RESPONSE/NTrialsByPID.png  used on input line
- 222.
+ 236.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-32.
+46.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-32.
+46.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-232.
+246.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-232.
+246.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 232.
+(Font)              <12> on input line 246.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 232.
+(Font)              <8> on input line 246.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 232.
-
-
-Package fancyhdr Warning: \headheight is too small (15.2pt): 
-(fancyhdr)                Make it at least 27.11652pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11652pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
-
-[11 <../plots/RESPONSE/NTrialsByPID.png>]
-<../plots/RESPONSE/PIDPercentLiesPlot.png, id=209, 1445.4pt x 433.62pt>
+(Font)              <6> on input line 246.
+<../plots/RESPONSE/PIDPercentLiesPlot.png, id=236, 1445.4pt x 433.62pt>
 File: ../plots/RESPONSE/PIDPercentLiesPlot.png Graphic file (type png)
 <use ../plots/RESPONSE/PIDPercentLiesPlot.png>
 Package pdftex.def Info: ../plots/RESPONSE/PIDPercentLiesPlot.png  used on inpu
-t line 235.
+t line 249.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
-<../plots/RESPONSE/TRIALIDPercentLies.png, id=210, 1084.05pt x 433.62pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[14 <../plots/RESPONSE/NTrialsByPID.png>]
+<../plots/RESPONSE/TRIALIDPercentLies.png, id=245, 1084.05pt x 433.62pt>
 File: ../plots/RESPONSE/TRIALIDPercentLies.png Graphic file (type png)
 <use ../plots/RESPONSE/TRIALIDPercentLies.png>
 Package pdftex.def Info: ../plots/RESPONSE/TRIALIDPercentLies.png  used on inpu
-t line 242.
+t line 256.
 (pdftex.def)             Requested size: 469.75502pt x 187.90198pt.
+<../plots/Dwell/RTDistPlot.png, id=246, 722.7pt x 433.62pt>
+File: ../plots/Dwell/RTDistPlot.png Graphic file (type png)
+<use ../plots/Dwell/RTDistPlot.png>
+Package pdftex.def Info: ../plots/Dwell/RTDistPlot.png  used on input line 268.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+(pdftex.def)             Requested size: 352.31625pt x 211.39055pt.
 
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
@@ -1464,20 +1509,17 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[12 <../plots/RESPONSE/PIDPercentLiesPlot.png> <../plots/RESPONSE/TRIALIDPercen
+[15 <../plots/RESPONSE/PIDPercentLiesPlot.png> <../plots/RESPONSE/TRIALIDPercen
 tLies.png>]
-<../plots/Dwell/RTDistPlot.png, id=219, 722.7pt x 433.62pt>
-File: ../plots/Dwell/RTDistPlot.png Graphic file (type png)
-<use ../plots/Dwell/RTDistPlot.png>
-Package pdftex.def Info: ../plots/Dwell/RTDistPlot.png  used on input line 253.
-
-(pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
-<../plots/Dwell/DwellDistPlot.png, id=220, 867.24pt x 650.43pt>
+<../plots/Dwell/DwellDistPlot.png, id=255, 867.24pt x 650.43pt>
 File: ../plots/Dwell/DwellDistPlot.png Graphic file (type png)
 <use ../plots/Dwell/DwellDistPlot.png>
 Package pdftex.def Info: ../plots/Dwell/DwellDistPlot.png  used on input line 2
-63.
+79.
 (pdftex.def)             Requested size: 469.75502pt x 352.31868pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
@@ -1487,13 +1529,13 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[13 <../plots/Dwell/RTDistPlot.png>]
-<../plots/Dwell/N_TransitionsDistPlot.png, id=228, 722.7pt x 433.62pt>
+[16 <../plots/Dwell/RTDistPlot.png>]
+<../plots/Dwell/N_TransitionsDistPlot.png, id=262, 722.7pt x 433.62pt>
 File: ../plots/Dwell/N_TransitionsDistPlot.png Graphic file (type png)
 <use ../plots/Dwell/N_TransitionsDistPlot.png>
 Package pdftex.def Info: ../plots/Dwell/N_TransitionsDistPlot.png  used on inpu
-t line 270.
-(pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
+t line 287.
+(pdftex.def)             Requested size: 305.33789pt x 183.20425pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1506,15 +1548,15 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[14 <../plots/Dwell/DwellDistPlot.png>]
-<../plots/TrialIndex/Gains.png, id=235, 1445.4pt x 433.62pt>
+[17 <../plots/Dwell/DwellDistPlot.png>]
+<../plots/TrialIndex/Gains.png, id=269, 1445.4pt x 433.62pt>
 File: ../plots/TrialIndex/Gains.png Graphic file (type png)
 <use ../plots/TrialIndex/Gains.png>
-Package pdftex.def Info: ../plots/TrialIndex/Gains.png  used on input line 284.
+Package pdftex.def Info: ../plots/TrialIndex/Gains.png  used on input line 300.
 
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2726) has occurred while \output is active []
 
 
 
@@ -1525,34 +1567,21 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[15 <../plots/Dwell/N_TransitionsDistPlot.png>]
-<../plots/TrialIndex/Losses.png, id=242, 1445.4pt x 433.62pt>
+[18 <../plots/Dwell/N_TransitionsDistPlot.png> <../plots/TrialIndex/Gains.png>]
+<../plots/TrialIndex/Losses.png, id=277, 1445.4pt x 433.62pt>
 File: ../plots/TrialIndex/Losses.png Graphic file (type png)
 <use ../plots/TrialIndex/Losses.png>
-Package pdftex.def Info: ../plots/TrialIndex/Losses.png  used on input line 293
+Package pdftex.def Info: ../plots/TrialIndex/Losses.png  used on input line 310
 .
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (15.2pt): 
-(fancyhdr)                Make it at least 27.11652pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11652pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
-
-[16 <../plots/TrialIndex/Gains.png>]
-<../plots/RESPONSE/NetGainLie.png, id=248, 1445.4pt x 433.62pt>
+<../plots/RESPONSE/NetGainLie.png, id=278, 1445.4pt x 433.62pt>
 File: ../plots/RESPONSE/NetGainLie.png Graphic file (type png)
 <use ../plots/RESPONSE/NetGainLie.png>
 Package pdftex.def Info: ../plots/RESPONSE/NetGainLie.png  used on input line 3
-01.
+18.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
 
-Underfull \vbox (badness 1231) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -1563,46 +1592,40 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[17 <../plots/TrialIndex/Losses.png> <../plots/RESPONSE/NetGainLie.png>]
-<../plots/RESPONSE/NetLossLie.png, id=256, 1445.4pt x 433.62pt>
+[19 <../plots/TrialIndex/Losses.png>]
+<../plots/RESPONSE/NetLossLie.png, id=285, 1445.4pt x 433.62pt>
 File: ../plots/RESPONSE/NetLossLie.png Graphic file (type png)
 <use ../plots/RESPONSE/NetLossLie.png>
 Package pdftex.def Info: ../plots/RESPONSE/NetLossLie.png  used on input line 3
-10.
+27.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
-<../plots/RESPONSE/AvgDwellPerGain.png, id=257, 1806.75pt x 433.62pt>
+
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[20 <../plots/RESPONSE/NetGainLie.png> <../plots/RESPONSE/NetLossLie.png>]
+<../plots/RESPONSE/AvgDwellPerGain.png, id=295, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/AvgDwellPerGain.png Graphic file (type png)
 <use ../plots/RESPONSE/AvgDwellPerGain.png>
 Package pdftex.def Info: ../plots/RESPONSE/AvgDwellPerGain.png  used on input l
-ine 323.
+ine 341.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-Package fancyhdr Warning: \headheight is too small (15.2pt): 
-(fancyhdr)                Make it at least 27.11652pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11652pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
-
-[18 <../plots/RESPONSE/NetLossLie.png>]
-Overfull \hbox (2.89853pt too wide) in paragraph at lines 331--341
+Overfull \hbox (2.89853pt too wide) in paragraph at lines 349--359
  [][] 
  []
 
-<../plots/RESPONSE/AvgDwellPerLossPlot.png, id=266, 1806.75pt x 433.62pt>
+<../plots/RESPONSE/AvgDwellPerLossPlot.png, id=297, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/AvgDwellPerLossPlot.png Graphic file (type png)
 <use ../plots/RESPONSE/AvgDwellPerLossPlot.png>
 Package pdftex.def Info: ../plots/RESPONSE/AvgDwellPerLossPlot.png  used on inp
-ut line 349.
+ut line 368.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
-
-Underfull \vbox (badness 4479) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
 (fancyhdr)                Make it at least 27.11652pt, for example:
@@ -1611,16 +1634,16 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[19 <../plots/RESPONSE/AvgDwellPerGain.png>]
-Overfull \hbox (2.89853pt too wide) in paragraph at lines 357--367
+[21 <../plots/RESPONSE/AvgDwellPerGain.png>]
+Overfull \hbox (2.89853pt too wide) in paragraph at lines 376--386
  [][] 
  []
 
-<../plots/RESPONSE/AvgDwellPerGain30.png, id=276, 1806.75pt x 433.62pt>
+<../plots/RESPONSE/AvgDwellPerGain30.png, id=306, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/AvgDwellPerGain30.png Graphic file (type png)
 <use ../plots/RESPONSE/AvgDwellPerGain30.png>
 Package pdftex.def Info: ../plots/RESPONSE/AvgDwellPerGain30.png  used on input
- line 374.
+ line 394.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1634,16 +1657,16 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[20 <../plots/RESPONSE/AvgDwellPerLossPlot.png>]
-Overfull \hbox (2.89853pt too wide) in paragraph at lines 382--392
+[22 <../plots/RESPONSE/AvgDwellPerLossPlot.png>]
+Overfull \hbox (2.89853pt too wide) in paragraph at lines 402--412
  [][] 
  []
 
-<../plots/RESPONSE/AvgDwellPerLossPlot30.png, id=284, 1806.75pt x 433.62pt>
+<../plots/RESPONSE/AvgDwellPerLossPlot30.png, id=316, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/AvgDwellPerLossPlot30.png Graphic file (type png)
 <use ../plots/RESPONSE/AvgDwellPerLossPlot30.png>
 Package pdftex.def Info: ../plots/RESPONSE/AvgDwellPerLossPlot30.png  used on i
-nput line 399.
+nput line 420.
 (pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1657,17 +1680,17 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[21 <../plots/RESPONSE/AvgDwellPerGain30.png>]
-Overfull \hbox (2.89853pt too wide) in paragraph at lines 407--417
+[23 <../plots/RESPONSE/AvgDwellPerGain30.png>]
+Overfull \hbox (2.89853pt too wide) in paragraph at lines 428--438
  [][] 
  []
 
-<../plots/RESPONSE/NTransitionPerGain.png, id=292, 1806.75pt x 433.62pt>
+<../plots/RESPONSE/NTransitionPerGain.png, id=325, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/NTransitionPerGain.png Graphic file (type png)
 <use ../plots/RESPONSE/NTransitionPerGain.png>
 Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerGain.png  used on inpu
-t line 424.
-(pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
+t line 446.
+(pdftex.def)             Requested size: 352.31625pt x 84.55225pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1680,22 +1703,13 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[22 <../plots/RESPONSE/AvgDwellPerLossPlot30.png>]
-<../plots/RESPONSE/NTransitionPerLossPlot.png, id=300, 1806.75pt x 433.62pt>
+[24 <../plots/RESPONSE/AvgDwellPerLossPlot30.png>]
+<../plots/RESPONSE/NTransitionPerLossPlot.png, id=333, 1806.75pt x 433.62pt>
 File: ../plots/RESPONSE/NTransitionPerLossPlot.png Graphic file (type png)
 <use ../plots/RESPONSE/NTransitionPerLossPlot.png>
 Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerLossPlot.png  used on 
-input line 433.
-(pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
-<../plots/RESPONSE/NTransitionPerGain30.png, id=301, 1806.75pt x 433.62pt>
-File: ../plots/RESPONSE/NTransitionPerGain30.png Graphic file (type png)
-<use ../plots/RESPONSE/NTransitionPerGain30.png>
-Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerGain30.png  used on in
-put line 442.
-(pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
-
-Underfull \vbox (badness 2269) has occurred while \output is active []
-
+input line 456.
+(pdftex.def)             Requested size: 352.31625pt x 84.55225pt.
 
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
@@ -1705,41 +1719,20 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[23 <../plots/RESPONSE/NTransitionPerGain.png> <../plots/RESPONSE/NTransitionPe
+[25 <../plots/RESPONSE/NTransitionPerGain.png> <../plots/RESPONSE/NTransitionPe
 rLossPlot.png>]
-<../plots/RESPONSE/NTransitionPerLossPlot30.png, id=311, 1806.75pt x 433.62pt>
-File: ../plots/RESPONSE/NTransitionPerLossPlot30.png Graphic file (type png)
-<use ../plots/RESPONSE/NTransitionPerLossPlot30.png>
-Package pdftex.def Info: ../plots/RESPONSE/NTransitionPerLossPlot30.png  used o
-n input line 450.
-(pdftex.def)             Requested size: 469.75502pt x 112.73854pt.
-
-
-Package fancyhdr Warning: \headheight is too small (15.2pt): 
-(fancyhdr)                Make it at least 27.11652pt, for example:
-(fancyhdr)                \setlength{\headheight}{27.11652pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
-
-[24 <../plots/RESPONSE/NTransitionPerGain30.png> <../plots/RESPONSE/NTransition
-PerLossPlot30.png>]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 462.
-
-<../plots/ALLTRIAL/PercentLies.png, id=320, 722.7pt x 433.62pt>
+<../plots/ALLTRIAL/PercentLies.png, id=344, 722.7pt x 433.62pt>
 File: ../plots/ALLTRIAL/PercentLies.png Graphic file (type png)
 <use ../plots/ALLTRIAL/PercentLies.png>
 Package pdftex.def Info: ../plots/ALLTRIAL/PercentLies.png  used on input line 
-466.
-(pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
-<../plots/ALLTRIAL/DwellTimes.png, id=321, 722.7pt x 433.62pt>
+475.
+(pdftex.def)             Requested size: 352.31625pt x 211.39055pt.
+<../plots/ALLTRIAL/DwellTimes.png, id=345, 722.7pt x 433.62pt>
 File: ../plots/ALLTRIAL/DwellTimes.png Graphic file (type png)
 <use ../plots/ALLTRIAL/DwellTimes.png>
 Package pdftex.def Info: ../plots/ALLTRIAL/DwellTimes.png  used on input line 4
-77.
-(pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
+88.
+(pdftex.def)             Requested size: 352.31625pt x 211.39055pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1752,58 +1745,53 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[25 <../plots/ALLTRIAL/PercentLies.png>]
-
-LaTeX Warning: Reference `tab:DwellPerCluster' on page 26 undefined on input li
-ne 482.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 489--489
+[26 <../plots/ALLTRIAL/PercentLies.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 500--500
 []$\OML/lmm/m/it/12 M$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 489--489
+Underfull \hbox (badness 10000) in paragraph at lines 500--500
 []$\OML/lmm/m/it/12 SD$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 489--489
+Underfull \hbox (badness 10000) in paragraph at lines 500--500
 []$\OML/lmm/m/it/12 M$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 489--489
+Underfull \hbox (badness 10000) in paragraph at lines 500--500
 []$\OML/lmm/m/it/12 SD$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 490--490
+Underfull \hbox (badness 10000) in paragraph at lines 501--501
 []\T1/lmr/m/n/10.95 SELF
  []
 
 
-Overfull \hbox (1.57521pt too wide) in paragraph at lines 490--490
+Overfull \hbox (1.57521pt too wide) in paragraph at lines 501--501
 []\T1/lmr/m/n/12 <.001| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 491--491
+Underfull \hbox (badness 10000) in paragraph at lines 502--502
 []\T1/lmr/m/n/10.95 SELF
  []
 
 
-Overfull \hbox (1.57521pt too wide) in paragraph at lines 491--491
+Overfull \hbox (1.57521pt too wide) in paragraph at lines 502--502
 []\T1/lmr/m/n/12 <.001| 
  []
 
 
-Overfull \hbox (1.57521pt too wide) in paragraph at lines 492--492
+Overfull \hbox (1.57521pt too wide) in paragraph at lines 503--503
 []\T1/lmr/m/n/12 <.001| 
  []
 
 
-Overfull \hbox (1.57521pt too wide) in paragraph at lines 493--493
+Overfull \hbox (1.57521pt too wide) in paragraph at lines 504--504
 []\T1/lmr/m/n/12 <.001| 
  []
 
@@ -1819,13 +1807,13 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[26 <../plots/ALLTRIAL/DwellTimes.png>]
-<../plots/ALLTRIAL/NTransitions.png, id=336, 722.7pt x 433.62pt>
+[27 <../plots/ALLTRIAL/DwellTimes.png>]
+<../plots/ALLTRIAL/NTransitions.png, id=360, 722.7pt x 433.62pt>
 File: ../plots/ALLTRIAL/NTransitions.png Graphic file (type png)
 <use ../plots/ALLTRIAL/NTransitions.png>
 Package pdftex.def Info: ../plots/ALLTRIAL/NTransitions.png  used on input line
- 505.
-(pdftex.def)             Requested size: 469.75502pt x 281.85628pt.
+ 517.
+(pdftex.def)             Requested size: 352.31625pt x 211.39055pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1838,13 +1826,29 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[27]
-<../plots/ALLTRIAL/NTrialsByPID.png, id=344, 1445.4pt x 433.62pt>
+[28]
+<../plots/ALLTRIAL/NTrialsByPID.png, id=367, 1445.4pt x 433.62pt>
 File: ../plots/ALLTRIAL/NTrialsByPID.png Graphic file (type png)
 <use ../plots/ALLTRIAL/NTrialsByPID.png>
 Package pdftex.def Info: ../plots/ALLTRIAL/NTrialsByPID.png  used on input line
- 514.
+ 527.
 (pdftex.def)             Requested size: 469.75502pt x 140.92482pt.
+
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[29 <../plots/ALLTRIAL/NTransitions.png> <../plots/ALLTRIAL/NTrialsByPID.png>]
+<../plots/R_selfgain/effects.png, id=378, 481.8pt x 481.8pt>
+File: ../plots/R_selfgain/effects.png Graphic file (type png)
+<use ../plots/R_selfgain/effects.png>
+Package pdftex.def Info: ../plots/R_selfgain/effects.png  used on input line 55
+0.
+(pdftex.def)             Requested size: 352.31625pt x 352.32861pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1857,7 +1861,22 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[28 <../plots/ALLTRIAL/NTransitions.png>]
+[30]
+<../plots/R/residuals.png, id=384, 481.8pt x 481.8pt>
+File: ../plots/R/residuals.png Graphic file (type png)
+<use ../plots/R/residuals.png>
+Package pdftex.def Info: ../plots/R/residuals.png  used on input line 566.
+(pdftex.def)             Requested size: 211.38832pt x 211.38246pt.
+<../plots/R/pearson_residuals_vs_fitted.png, id=385, 481.8pt x 481.8pt>
+File: ../plots/R/pearson_residuals_vs_fitted.png Graphic file (type png)
+<use ../plots/R/pearson_residuals_vs_fitted.png>
+Package pdftex.def Info: ../plots/R/pearson_residuals_vs_fitted.png  used on in
+put line 574.
+(pdftex.def)             Requested size: 211.38832pt x 211.38246pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
 (fancyhdr)                Make it at least 27.11652pt, for example:
@@ -1866,8 +1885,16 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[29 <../plots/ALLTRIAL/NTrialsByPID.png>]
-AED endfloat: Processing end Figures and Tables
+[31 <../plots/R_selfgain/effects.png>]
+<../plots/R/qqline.png, id=393, 481.8pt x 481.8pt>
+File: ../plots/R/qqline.png Graphic file (type png)
+<use ../plots/R/qqline.png>
+Package pdftex.def Info: ../plots/R/qqline.png  used on input line 587.
+(pdftex.def)             Requested size: 234.8775pt x 234.87839pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 Package fancyhdr Warning: \headheight is too small (15.2pt): 
 (fancyhdr)                Make it at least 27.11652pt, for example:
@@ -1876,23 +1903,47 @@ Package fancyhdr Warning: \headheight is too small (15.2pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
-[30
+[32 <../plots/R/residuals.png> <../plots/R/pearson_residuals_vs_fitted.png>]
 
-] (./template_apa.aux)
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
 
-LaTeX Warning: There were undefined references.
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
 
+[33 <../plots/R/qqline.png>]
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[34
+
+] AED endfloat: Processing end Figures and Tables
+
+Package fancyhdr Warning: \headheight is too small (15.2pt): 
+(fancyhdr)                Make it at least 27.11652pt, for example:
+(fancyhdr)                \setlength{\headheight}{27.11652pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-11.91652pt}.
+
+[35] (./template_apa.aux)
 Package rerunfilecheck Info: File `template_apa.out' has not changed.
-(rerunfilecheck)             Checksum: 16D22420C4FC5ECA008488E47E05B596;4588.
+(rerunfilecheck)             Checksum: 9AF9210984A2B90ECD31108C3DF70C6D;4931.
 Package logreq Info: Writing requests to 'template_apa.run.xml'.
 \openout1 = `template_apa.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34950 strings out of 478268
- 690823 string characters out of 5846347
- 1550251 words of memory out of 5000000
- 52514 multiletter control sequences out of 15000+600000
+ 35148 strings out of 478268
+ 695559 string characters out of 5846347
+ 1553464 words of memory out of 5000000
+ 52686 multiletter control sequences out of 15000+600000
  525585 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,12n,103p,2950b,5221s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1909,10 +1960,10 @@ dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/
 type1/public/lm/lmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public
 /lm/lmri10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmri12
 .pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on template_apa.pdf (30 pages, 870517 bytes).
+Output written on template_apa.pdf (35 pages, 1061046 bytes).
 PDF statistics:
- 441 PDF objects out of 1000 (max. 8388607)
- 339 compressed objects within 4 object streams
- 99 named destinations out of 1000 (max. 500000)
- 363 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 496 PDF objects out of 1000 (max. 8388607)
+ 381 compressed objects within 4 object streams
+ 112 named destinations out of 1000 (max. 500000)
+ 399 words of extra memory for PDF output out of 10000 (max. 10000000)
 

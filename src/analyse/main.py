@@ -2,7 +2,7 @@ from typing import List
 from pandas import DataFrame
 from analyse.dtw_analysis import create_big_matrix, create_pid_matrix, create_trial_count_matrix, create_trial_id_matrix, get_dbscan_clusters, get_heirarchical_clusters_by_pid, get_heirarchical_clusters_by_trial, get_heirarchical_clusters_by_trial_count, get_heirarchical_clusters_by_trial_id, get_kmedoids_clusters, kmedoids, plot_distance_distribution, plot_nearest_neighbour_points, plot_pid_matrix_with_clusters, plot_trial_count_matrix_with_clusters, plot_trial_id_matrix_with_clusters, get_proximal_and_distal_distances, set_diagonal
 from analyse.get_response_stats import get_gains_response_stats, get_trials_by_condition
-from analyse.glmm import do_categorical_heirarchical_logistical_regression, do_gam_analysis, do_heirarchical_logistical_regression, do_transformed_heirarchical_logistical_regression, do_weighted_heirarchical_logistical_regression
+from analyse.glmm import do_categorical_heirarchical_logistical_regression, do_gam_analysis, do_heirarchical_logistical_regression, do_weighted_heirarchical_logistical_regression
 from analyse.kmeans_analysis import cluster_analysis, get_kmeans_clusters, merge_components, plot_correlation_matrix, prepare_data
 from analyse.n_cluster_analysis import get_best_fit_heirarchical_clusters, get_best_fit_partitional_clusters, get_best_fit_partitional_clusters_from_features, get_best_fit_partitional_clusters_from_matrix
 from analyse.response_analysis import XKCD_COLORS_LIST, calculate_mean_response_stat, do_anova_by_lie_percentage, do_anova_by_variable, do_cluster_by_trial_t_test, do_clustered_pid_t_test, do_gains_t_test, do_lie_percentage_by_cluster_chi_squared_tests, do_lie_percentage_by_condition_chi_squared_tests, do_clustered_by_pid_mean_t_test, get_confidence_intervals, get_pid_response_stats_for_clusters_by_gain_label, get_pid_response_stats_no_clusters, get_trial_id_response_stats_no_clusters, get_trial_response_stats_by_pid, get_trial_response_stats_for_clusters_by_gain_label, get_trial_response_stats_no_clusters, get_trials_by_cluster, plot_aoi_by_pid, plot_dwell_time_by_gain_for_clusters, plot_avg_dwell_time_distributions, get_pid_response_stats_for_clusters, get_response_stats_by_pid, get_response_stats_by_trial_id, get_trial_count_response_stats_for_clusters, get_trial_id_response_stats_for_clusters, get_trial_response_stats_for_clusters, plot_dwell_time_distribution, plot_dwell_times_for_clusters, plot_gain_of_ten_by_pid, plot_gain_for_clusters, plot_gain_under_ten_by_pid, plot_gains_avg_dwell_time, plot_gains_by_trial_id, plot_gains_mean_percent_lie, plot_gains_n_transitions, plot_losses_avg_dwell_time, plot_losses_by_trial_id, plot_losses_n_transitions, plot_n_transitions_by_gain_for_clusters, plot_n_transitions_by_pid, plot_n_transitions_distributions, plot_n_transitions_for_clusters, plot_n_trials_by_gain_for_clusters, plot_n_trials_for_clusters, plot_n_trials_for_clusters_by_pid, plot_percent_lie_by_gain_for_clusters, plot_percent_lies_by_pid, plot_percent_lies_by_trial_id, plot_percent_lies_for_clusters, plot_response_stats_for_clusters, plot_rt_distributions, simple_plot, sort_response_df_by_pid_lie_percent, sort_response_df_by_pid_lie_percent_in_cluster
@@ -265,28 +265,27 @@ def all_trial_dtw_analysis(input_distance_file: str = None,
     cluster_df = get_best_fit_heirarchical_clusters(big_matrix_df, get_heirarchical_clusters_by_trial,
                                                     max_clusters=max_clusters) if not n_clusters else get_heirarchical_clusters_by_trial(big_matrix_df, n_clusters)
     responses_df = get_trial_response_stats_for_clusters(cluster_df, aoi_analysis_df)
-    display(get_trial_response_stats_for_clusters(cluster_df, aoi_analysis_df, with_error_bounds=False), max_cols=10)
+    # display(get_trial_response_stats_for_clusters(cluster_df, aoi_analysis_df, with_error_bounds=False), max_cols=10)
     plot_percent_lies_for_clusters(responses_df, TRIAL, colors, to_file=all_trial_percent_lies_plot)
     plot_dwell_times_for_clusters(responses_df, TRIAL, colors, to_file=all_trial_dwell_times_plot)
     plot_n_transitions_for_clusters(responses_df, TRIAL, colors, to_file=all_trial_n_transitions_plot)
     plot_n_trials_for_clusters(responses_df, TRIAL, colors, to_file=all_trial_n_trials_plot)
     responses_by_pid_df = get_trial_response_stats_by_pid(cluster_df, aoi_analysis_df)
     sorted_responses_by_pid_df = sort_response_df_by_pid_lie_percent(responses_by_pid_df, aoi_analysis_df)
-    display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).sum()), max_rows=None)
-    display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).mean()), max_rows=None)
-    display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).std()), max_rows=None)
-    display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).quantile(0.25)), max_rows=None)
-    display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).quantile(0.75)), max_rows=None)
+    # display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).sum()), max_rows=None)
+    # display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).mean()), max_rows=None)
+    # display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).std()), max_rows=None)
+    # display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).quantile(0.25)), max_rows=None)
+    # display(responses_by_pid_df.groupby(CLUSTER).apply(lambda x: x[TRIAL_COUNT].apply(lambda x: x[0]).quantile(0.75)), max_rows=None)
     # plot_percent_lies_by_pid(sorted_responses_by_pid_df, colors, to_file=all_trial_percent_lie_by_pid_plot)
     plot_n_trials_for_clusters_by_pid(sorted_responses_by_pid_df, TRIAL, colors, to_file=all_trial_n_trials_by_pid_plot)
-    display(sorted_responses_by_pid_df)
     plot_gain_of_ten_by_pid(sorted_responses_by_pid_df, colors, to_file=all_trial_gain_of_ten_by_pid_plot)
     plot_gain_under_ten_by_pid(sorted_responses_by_pid_df, colors, to_file=all_trial_gain_under_ten_by_pid_plot)
 
     gain_under_ten_responses_df = get_trial_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_UNDER_TEN, aoi_analysis_df)
-    display(get_trial_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_UNDER_TEN, aoi_analysis_df, with_error_bounds=False), max_cols=None, title=GAIN_UNDER_TEN)
+    # display(get_trial_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_UNDER_TEN, aoi_analysis_df, with_error_bounds=False), max_cols=None, title=GAIN_UNDER_TEN)
     gain_of_ten_responses_df = get_trial_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_OF_TEN, aoi_analysis_df)
-    display(get_trial_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_OF_TEN, aoi_analysis_df, with_error_bounds=False), max_cols=None, title=GAIN_OF_TEN)
+    # display(get_trial_response_stats_for_clusters_by_gain_label(cluster_df, GAIN_OF_TEN, aoi_analysis_df, with_error_bounds=False), max_cols=None, title=GAIN_OF_TEN)
 
     plot_percent_lie_by_gain_for_clusters(gain_under_ten_responses_df, gain_of_ten_responses_df, colors, to_file=percent_lies_gain_cluster_plot)
     plot_n_trials_by_gain_for_clusters(gain_under_ten_responses_df, gain_of_ten_responses_df, colors, to_file=None)
@@ -297,12 +296,14 @@ def all_trial_dtw_analysis(input_distance_file: str = None,
     # plot_dwell_time_by_gain_for_clusters(gain_under_ten_responses_df, gain_of_ten_responses_df, OTHER_TRUTH, colors=colors, to_file=other_truth_gain_cluster_plot)
 
     do_lie_percentage_by_cluster_chi_squared_tests(aoi_analysis_df, cluster_df)
-    display(do_cluster_by_trial_t_test(aoi_analysis_df, cluster_df))
+    # display(do_cluster_by_trial_t_test(aoi_analysis_df, cluster_df))
     # do_anova_by_lie_percentage(aoi_analysis_df, cluster_df)
-    do_categorical_heirarchical_logistical_regression(aoi_analysis_df, cluster_df, plotFolder=CATEGORICAL_REGRESSION_FOLDER)
-    do_weighted_heirarchical_logistical_regression(aoi_analysis_df, cluster_df, plotFolder=WEIGHTED_REGRESSION_FOLDER)
-    do_transformed_heirarchical_logistical_regression(aoi_analysis_df, cluster_df, plotFolder=TRANSFORMED_REGRESSION_FOLDER)
-    do_heirarchical_logistical_regression(aoi_analysis_df, cluster_df, plotFolder=HIERARCHICAL_REGRESSION_FOLDER)
+    do_heirarchical_logistical_regression('(SELFGAIN + OTHERLOSS) * CLUSTER', aoi_analysis_df, cluster_df, test=False, plotFolder=HIERARCHICAL_REGRESSION_FOLDER)
+    # do_heirarchical_logistical_regression('SELFGAIN * CLUSTER', aoi_analysis_df, cluster_df, colors=['#acc2d9', '#56ae57'], test=False, multiline=True, plotFolder=SELFGAIN_REGRESSION_FOLDER)
+    # do_heirarchical_logistical_regression('CLUSTER', aoi_analysis_df, cluster_df, test=False, vif=False, plotFolder=CLUSTER_REGRESSION_FOLDER)
+    # do_categorical_heirarchical_logistical_regression(aoi_analysis_df, cluster_df,test=True,plotFolder=CATEGORICAL_REGRESSION_FOLDER)
+    # do_weighted_heirarchical_logistical_regression(aoi_analysis_df, cluster_df, test=True, plotFolder=WEIGHTED_REGRESSION_FOLDER)
+    # do_heirarchical_logistical_regression('(SELFGAIN + I(OTHERLOSS^2)) * CLUSTER', aoi_analysis_df, cluster_df, test=True, plotFolder=TRANSFORMED_REGRESSION_FOLDER)
     # do_anova_by_variable(aoi_analysis_df, cluster_df)
     # do_gam_analysis(aoi_analysis_df, cluster_df)
 

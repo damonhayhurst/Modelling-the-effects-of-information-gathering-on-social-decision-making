@@ -208,8 +208,8 @@ def get_proximal_and_distal_distances(big_matrix_df: DataFrame, window_size: int
 def plot_distance_distribution(df: DataFrame, title_suffix: str = ''):
     plt.figure(figsize=(10, 6))
     sns.histplot(df, kde=True)
-    plt.title('Distribution of Euclidean Distances between Trials %s' % title_suffix)
-    plt.xlabel('Euclidean Distance')
+    plt.title('Distribution of DTW Distances between Trials %s' % title_suffix)
+    plt.xlabel('DTW Distance measure')
     plt.ylabel('Frequency')
     plt.show()
 
