@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from analyse.get_response_stats import get_is_lie, get_trials_by_condition
-from utils.columns import CLUSTER, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, OTHER_LOSS, PID, POSITIVE_GAIN, SELF_GAIN
+from utils.columns import CLUSTER, FIRST_AOI, GAIN_OF_TEN, GAIN_OF_THIRTY, GAIN_UNDER_TEN, GAIN_UNDER_THIRTY, LAST_AOI, LIE, LOSS_OF_TEN, LOSS_OF_THIRTY, LOSS_UNDER_TEN, LOSS_UNDER_THIRTY, OTHER_LOSS, PID, POSITIVE_GAIN, SELF_GAIN
 from utils.display import display
 import rpy2.robjects as ro
 from rpy2.robjects import pandas2ri
@@ -68,14 +68,14 @@ def plot_effects(glmm_model, plotFolder, multiline=True, line_colors=None):
     else:
         line_colors_r = ro.StrVector(line_colors)
         ro.globalenv['line_colors'] = line_colors_r
-        line_colors_string = 'colors = line_colors,'
+        line_colors_string = 'colors = line_colors'
     
     ro.r(f'''
     library(effects)
     model_effects <- allEffects(glmm_model)
     png("{plotFolder}/effects.png")
     print(model_effects)
-    plot(model_effects, multiline={multiline}, {line_colors_string} lwd=3, main="")
+    plot(model_effects, multiline={multiline}, lwd=3, main="", {line_colors_string})
     dev.off()
     ''')
 
@@ -136,9 +136,13 @@ def plot_residuals_vs_selgain(glmm_model, df_r, plotFolder):
 
 def prepare_dataframe(analysis_df: DataFrame, cluster_df: DataFrame, compute_weights: bool = False) -> DataFrame:
     analysis_df[CLUSTER] = cluster_df[CLUSTER].astype('category')
+    analysis_df[FIRST_AOI] = analysis_df[FIRST_AOI].astype('category')
+    analysis_df[LAST_AOI] = analysis_df[LAST_AOI].astype('category')
     analysis_df[LIE] = get_is_lie(analysis_df).astype('int')
     analysis_df["SELFGAIN"] = analysis_df[SELF_GAIN]
-    analysis_df["OTHERLOSS"] = analysis_df.get(OTHER_LOSS, None)  # Handle cases where OTHER_LOSS might not be present
+    analysis_df["OTHERLOSS"] = analysis_df[OTHER_LOSS]
+    analysis_df["FIRSTAOI"] = analysis_df[FIRST_AOI]
+    analysis_df["LASTAOI"] = analysis_df[LAST_AOI]
     analysis_df = analysis_df.reset_index()
     display(analysis_df[[CLUSTER, PID, SELF_GAIN, LIE]])
     if compute_weights:
