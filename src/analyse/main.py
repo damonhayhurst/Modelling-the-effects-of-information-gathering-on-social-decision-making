@@ -298,7 +298,8 @@ def all_trial_dtw_analysis(input_distance_file: str = None,
     do_lie_percentage_by_cluster_chi_squared_tests(aoi_analysis_df, cluster_df)
     # display(do_cluster_by_trial_t_test(aoi_analysis_df, cluster_df))
     # do_anova_by_lie_percentage(aoi_analysis_df, cluster_df)
-    do_heirarchical_logistical_regression('(SELFGAIN + OTHERLOSS) * CLUSTER', aoi_analysis_df, cluster_df, test=False, plotFolder=HIERARCHICAL_REGRESSION_FOLDER)
+    do_heirarchical_logistical_regression('(SELFGAIN + OTHERLOSS) * CLUSTER + (1|PID)', aoi_analysis_df, cluster_df, test=False, plotFolder=HIERARCHICAL_REGRESSION_FOLDER)
+    do_heirarchical_logistical_regression('(SELFGAIN + OTHERLOSS) * CLUSTER + (1|SELFGAIN)', aoi_analysis_df, cluster_df, test=False, plotFolder="plots/R_selfgain_random")
     # do_heirarchical_logistical_regression('(SELFGAIN + OTHERLOSS + LASTAOI) * CLUSTER', aoi_analysis_df, cluster_df, test=False, vif=False, plotFolder="plots/first_last_aoi_regression")
 
     # do_heirarchical_logistical_regression('SELFGAIN * CLUSTER', aoi_analysis_df, cluster_df, colors=['#acc2d9', '#56ae57'], test=False, multiline=True, plotFolder=SELFGAIN_REGRESSION_FOLDER)

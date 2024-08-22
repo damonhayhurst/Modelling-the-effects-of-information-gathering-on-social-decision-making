@@ -11,6 +11,9 @@
 \addbibresource{bibliography.bib}
 \usepackage{float}
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+
 \graphicspath{{./figures}}
 \title{Modelling the effects of information gathering on social decision making}
 \shorttitle{Modelling the effects of information gathering on social decision making}
@@ -41,7 +44,7 @@
 			\end{center}
 		}
 		{\Large Signed and dated\par}
-		\vspace{1in}
+		\includegraphics[width=0.5\linewidth]{figures/sig.png}
 	\end{titlepage}
 }
 \makeatother
@@ -52,7 +55,7 @@
 	\null
 	\vspace*{0.4in}
 	\begin{center}
-		This is the abstract
+		 Are decisions made in our own self-interest influenced by the manner in which we form our conclusions? Using a modified version of the Message game, we looked at the way in which potential profits to self and losses to others modulated dishonest behaviour. In a secondary data analysis, we looked at whether individual differences in mouse tracking data could be used to predict dishonest choices. Using Dynamic Time Warping and heirarchical clustering, we found that process data from the trials could be clustered in to two groups revealing differing information gathering strategies. One group that characterises a more patient and comparative approach forgo small profits to themselves more to engage in altruistic behaviour. The other group share traits that could be defined in terms of sequential search with shorter dwell periods and show more of an aversion to lying when profits greater. Findings corroborate similar models found in non-social decision making contexts.
 	\end{center}
 	
 	\vfill\null
@@ -60,7 +63,7 @@
 }
 
 \begin{document}
-
+\raggedbottom
 \maketitle
 
 % Project execution which includes: originality of ideas, independence, ability to act on advice and time and effort expended
@@ -82,19 +85,8 @@
 
 %The background to the study should be provided here including a review of relevant literature and theory and clear statements about the aims and objectives of the study.
 
-Are decisions made in our own self-interest influenced by the manner in which we form our conclusions? Previous work in the study of decision making has shown that the way in which we gather information can influence the final outcome. In a social setting, self interested and other facing motives have been shown to have their value tracked independently by specific neural circuitry. Using mouse tracking data from a similar experiment we ask whether the manner in which we gather information can predict which one of these motives we are likely to pursue. 
 
-\section{Aims}
 
-The aims of this study is to gain an insight into how the effects of information gathering influence our decision making in a pro-social context.  Using process tracing, we hope to observe and characterise strategies that are utilised in order to arrive at these decisions. Such an approach hopes to shed light further on the processes that underlie decision making in human behaviour.
-
-\section{Objectives}
-
-\begin{itemize}
-	\item Understand whether perceived monetary outcomes to self and another have an affect on the way we gather information
-	\item Determine if information gathering strategy in social decision making reflects an individual preference
-	\item Ask whether information gathering strategy can be used a predictor in social decision making
-\end{itemize}
 
 \section{Background}
 
@@ -139,6 +131,12 @@ Interpreting results from a MouseLab experiment involves discerning attributiona
 Evidence suggests that neural circuitry involved in social decision making does not distinguish itself from that of the circuitry involved in other forms of  decision making. Value based processing found in ventromedial prefrontal cortex (vmPFC) supposedly integrates signals from other areas of the brain during the decision making process, feeding signals back based on value representation change. This understanding, known as the extended common currency schema, directly contrasts prior theories that suggested our social decision making skills evolved as part of a separate adaptive system (\cite{ruffNeurobiologyRewardsValues2014}).
 
 The specificity in social decision making comes from the neural circuits that the vmPFC tracks during social dilemma is faced. The lateral prefrontal cortex (LPFC) which tracks value to self and the right temporoparietal junction (rTPJ) which tracks value to others. It was suggested that these two circuits were involved in the social decision making process within a study that used the Message Game (further elaborated upon in the Methods section) as it's stimuli. Using neuroimaging technology, \citeauthor{shusterContributionSelfOtherregarding2020} observed the two neural circuits independently tracking their respective motives by modifying trial parameters specific to the Message game that altered the perceived social outcomes. The vmPFC representing the value computation between the two varied on an individual level (\cite{shusterContributionSelfOtherregarding2020}).
+
+\section{Aims}
+
+The aims of this study is to gain an insight into how the effects of information gathering influence our decision making in a pro-social context.  Using process tracing, we hope to observe and characterise strategies that are utilised in order to arrive at these decisions. Such an approach hopes to shed light further on the processes that underlie decision making in human behaviour.
+
+In this study, we hypothesise that there are individual differences between information gathering strategies and that strategy can be used as a predictor in social decision making. By exploring the relationship between task condition and information gathering strategy we look at whether differences in own profit's and other's losses, which have previously shown to alter likelihood of lie, contribute to alterations in strategy. And, using clustering techniques, we look across the whole population of trials to see whether differences in strategy reveal. Finally, we ask to what extent differences in strategy drive dishonest behaviour in social contexts.
 
 \section{Methods}
 
@@ -249,37 +247,21 @@ Across trials the propensity to lie displayed a high degree of variance. The ave
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/PIDPercentLiesPlot.png}
 	%\figurenote{This is a great figure.}
 	\label{fig:PIDPercentLiesPlot}
-	\caption{Bar graph representing the percentage amount of lies across participants}
+	\caption{The percentage proportion of lie options chosen across participants}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/TRIALIDPercentLies.png}
 	%\figurenote{This is a great figure.}
 	\label{fig:TRIALIDPercentLies}
-	\caption{Bar graph showing the percentage of lies for each trial condition.}
+	\caption{The percentage of lies per trial. Trial ID delineates each set of values that make up the condition of a trial ie. the values found in each of the AOIs. The set of 80 trial conditions were randomised for each participant.}
 \end{figure}
 
 \subsubsection{Dwell Time Distribution}
 
 Reaction time (or the time it takes to make a decision) showed a large amount of range. The average reaction time was 6513 ms $(SD = 3050$ms$)$ with an interquartile range of 4393 (Q1) - 7871 ms (Q3).
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{../plots/Dwell/RTDistPlot.png}
-	%\figurenote{This is a great figure.}
-	\label{fig:RTDistPlot}
-	\caption{Distribution of reaction time ie. time taken to make a decision.}
-\end{figure}
-
-The amount of time spent dwelling on one of the four AOIs on the screen was considered. The AOIs, SELF LIE ($M = 470$ms, $SD = 428$ms), SELF TRUE ($M = 420$ms, $SD = 343$ms), OTHER LIE ($M = 571$ms, $SD = 423$ms) and OTHER TRUTH ($M = 604$ms, $SD = 472$ms) all recorded means within 150ms of one another. A large proportion of the trials reported no dwell time for at least one of the given AOIs. Both SELF TRUE and SELF LIE were absent from the dwell timelines of 450 trials, representing an omission rate of 18\%. OTHER TRUE and OTHER LIE were omitted from 221 and 240 respectively representing around 10\% each, of all trials.
-
-\begin{figure}[H]
-	\centering
-	\caption{Distribution of average dwell time for each AOI. The distribution only accounts for average dwell time of each AOI that were under 1000ms. Each AOI also had a proportion of average dwell times that were 0, which were also omitted.}
-	\includegraphics[width=\linewidth]{../plots/Dwell/DwellDistPlot.png}
-	%\figurenote{This is a great figure.}
-	\label{fig:DwellDistPlot}
-\end{figure}
+The amount of time spent dwelling on one of the four AOIs on the screen was observed. The AOIs, SELF LIE ($M = 470$ms, $SD = 428$ms), SELF TRUE ($M = 420$ms, $SD = 343$ms), OTHER LIE ($M = 571$ms, $SD = 423$ms) and OTHER TRUTH ($M = 604$ms, $SD = 472$ms) all recorded means within 150ms of one another. 
 
 \begin{figure}[H]
 	\centering
@@ -291,10 +273,7 @@ The amount of time spent dwelling on one of the four AOIs on the screen was cons
 
 The number of transitions is marked by where a participant would move the cursor from one AOI to another was also observed across all trials. The mean number of transitions between AOIs was ($M = 5.6$, $SD = 4.1$) with an interquartile range of 3 (Q1) - 8 (Q3).
 
-
-\subsection{Task Condition Analysis}
-
-\subsubsection{Lie Percentage}
+\subsubsection{Trial Condition}
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../plots/TrialIndex/Gains.png}
@@ -312,12 +291,14 @@ Each of the trials involved giving differing amounts to the sender and the recei
 	\label{fig:Losses}
 \end{figure}
 
+\subsubsection{Lie proportion by trial condition}
+
 The percentage that chose to lie in the experiment increased as the net gain to the Sender did.  Senders lied the least when they incurred a net loss by lying. Only choosing to lie 6\% $(N = 63)$ of the time. From net gains below 10 to above 10 the percentage who chose to lie increased, from 24\% $(N = 1336)$ to 55\% $(N = 1153)$. When gains were above 20, the percentage who chose to lie in this task scenario grew to 70\% $(N = 560)$ and when they were above 30 the amount who decided to lie showed further increase but to a lesser extent 76\% $(N = 250)$.
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/NetGainLie.png}
 	\caption{Percentage who chose to lie based on the amount gained by lying.}
-%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
+	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NetGainLie}
 \end{figure}
 
@@ -326,7 +307,7 @@ A significant difference in the proportion of lies was observed across trials wh
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{../plots/RESPONSE/NetLossLie.png}
 	\caption{Percentage of senders who chose to lie based on how much the receiver would lose.}
-%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
+	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NetLossLie}
 \end{figure}
 
@@ -334,162 +315,55 @@ Senders were less likely to lie when the losses to the receiver were great. When
 
 The difference in lie percentage between trials where losses to the receiver were over 10 and trials where losses to the receiver were under 10 was shown to be significant $\chi^2(1,$ $N=2027) = 45,$ $p<.001$ as well as in trials where losses to the receiver were over and under 30 $\chi^2(1,$ $N=2489) = 4.2,$ $p=.042$.
 
-\subsubsection{Dwell Time}
+\subsection{Differences in information gathering strategy}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerGain.png}
-	\caption{Average Dwell Time for each AOI comparison between trials where net gain to the Sender was less than 10 and trials where the net gain was more than 10}
-	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
-	\label{fig:AvgDwellPerGain}
-\end{figure}
+\subsubsection{By trial condition}
+
+\paragraph{Dwell Time}
+Observing Table \ref{tab:CombinedNetDwell}, it can be seen that no differences in dwell are observed across trial conditions that were found to have significant proportional differences in lie outcomes.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|c|p{1.5cm}|p{2cm}|p{1.5cm}|p{2cm}|p{2cm}|p{1.5cm}|}
-		\hline
-		\multirow{2}{*}{} & \multicolumn{2}{c|}{<10 Gain to Sender} & \multicolumn{2}{c|}{>10 Gain to Sender} & \multicolumn{2}{c|}{T-test result} \\ \cline{2-7}
+	\begin{tabular}{ccccccc}
+		\multirow{2}{*}{} & \multicolumn{2}{c}{<10 Gain to Sender} & \multicolumn{2}{c}{>10 Gain to Sender} & \multicolumn{2}{c}{} \\ \cline{2-5}
 		& $M$ (ms) &$SD$ (ms) & $M$ (ms) & $SD$ (ms) & $t(2487)$ & $p$ \\ \hline
-		SELF LIE& 463 & 441 & 478 & 413 & 0.84 & .798  \\ \hline
+		SELF LIE & 463 & 441 & 478 & 413 & 0.84 & .798  \\ \hline
 		SELF TRUE & 430 & 354 & 408 & 329 & -1.6 & .460  \\ \hline
 		OTHER LIE & 555 & 398 & 590 & 448 & 2.0 & .173 \\ \hline
 		OTHER TRUTH & 598 & 455 & 611 & 492 & 0.66 & .511 \\ \hline
-	\end{tabular}
-	\vspace{0.3cm}
-	\caption{Comparison of mean and standard deviation of dwell times for each AOI across trials where the net gain to Sender was less than 10 versus trials where the net gain was more than 10. (FDR Corrected)}
-	\label{tab:NetGainDwell}
-\end{table}
-
-
-Table \ref{tab:NetGainDwell} shows that there was an no significant difference between the average dwell time of the four AOIs across trials where the net gain to the Sender was less than 10 versus when it was more than 10.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerLossPlot.png}
-	\caption{Average Dwell Time for each AOI comparison between trials where net loss to the Receiver was less than 10 and trials where the net loss was more than 10}
-	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
-	\label{fig:AvgDwellPerLoss}
-\end{figure}
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|p{1.5cm}|p{2cm}|p{1.5cm}|p{2cm}|p{2cm}|p{1.5cm}|}
-		\hline
-		\multirow{2}{*}{} & \multicolumn{2}{c|}{<10 Loss to Receiver} & \multicolumn{2}{c|}{>10 Loss to Receiver} & \multicolumn{2}{c|}{T-test result} \\ \cline{2-7}
-		& $M$ (ms) &$SD$ (ms) & $M$ (ms) & $SD$ (ms) & $t(2491)$ & $p$ \\ \hline
-		SELF LIE& 475 & 417 & 478 & 413 & 0.15 & .880  \\ \hline
-		SELF TRUE & 418 & 328 & 408 & 329 & -0.71 & .476  \\ \hline
-		OTHER LIE & 566 & 410 & 590 & 448 & 1.4 & .224 \\ \hline
-		OTHER TRUTH & 594 & 441 & 611 & 492 & 0.92 & .511 \\ \hline
-	\end{tabular}
-	\vspace{0.3cm}
-	\caption{Comparison of mean and standard deviation of dwell times for each AOI across trials where the net loss to the Receiver was less than 10 versus trials where the net loss to the Receiver was more than 10. (FDR Corrected)}
-	\label{tab:NetLossDwell}
-\end{table}
-
-Similarly, in Table \ref{tab:NetLossDwell}, there was no significant difference between the dwell times in trials where the loss to the Receiver was above 10 versus trials where it was below 10.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerGain30.png}
-	\caption{Average Dwell Time for each AOI comparison between trials where net gain to the Sender was less than 30 and trials where the net gain was more than 30}
-	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
-	\label{fig:AvgDwellPerGain30}
-\end{figure}
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|p{1.5cm}|p{2cm}|p{1.5cm}|p{2cm}|p{2cm}|p{1.5cm}|}
-		\hline
-		\multirow{2}{*}{} & \multicolumn{2}{c|}{<30 Gain to Sender} & \multicolumn{2}{c|}{>30 Gain to Sender} & \multicolumn{2}{c|}{T-test result} \\ \cline{2-7}
-		& $M$ (ms) &$SD$ (ms) & $M$ (ms) & $SD$ (ms) & $t(2487)$ & $p$ \\ \hline
-		SELF LIE& 519 & 486 & 465 & 421 & -1.9 & .235  \\ \hline
+		\multirow{2}{*}{} & \multicolumn{2}{c}{<30 Gain to Sender} & \multicolumn{2}{c}{>30 Gain to Sender} & \multicolumn{2}{c}{} \\ \cline{2-5}
+		& $M$ (ms) &$SD$ (ms) & $M$ (ms) &$SD$ (ms) & $t(2487)$ & $p$ \\ \hline
+		SELF LIE & 519 & 486 & 465 & 421 & -1.9 & .235  \\ \hline
 		SELF TRUE & 399 & 329 & 422 & 345 & 1.0 & .476  \\ \hline
 		OTHER LIE & 610 & 424 & 567 & 422 & -1.5 & .224 \\ \hline
 		OTHER TRUTH & 582 & 428 & 607 & 477 & 0.79 & .511 \\ \hline
-	\end{tabular}
-	\vspace{0.3cm}
-	\caption{Comparison of mean and standard deviation of dwell times for each AOI across trials where the net gain to the Sender was less than 30 versus trials where the net gain was more than 30. (FDR Corrected)}
-	\label{tab:NetGainDwell30}
-\end{table}
-
-Across trials where the net gain to Sender and the net loss to the Receiver was at larger quantities there was found to be no significant difference in dwell times as seen in Table \ref{tab:NetGainDwell30} and \ref{tab:NetLossPerDwell30}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{../plots/RESPONSE/AvgDwellPerLossPlot30.png}
-	\caption{Average Dwell Time for each AOI comparison between trials where net loss to the Receiver was less than 30 and trials where the net loss was more than 30}
-	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
-	\label{fig:AvgDwellPerLoss30}
-\end{figure}
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{|c|p{1.5cm}|p{2cm}|p{1.5cm}|p{2cm}|p{2cm}|p{1.5cm}|}
-		\hline
-		\multirow{2}{*}{} & \multicolumn{2}{c|}{<30 Loss to Receiver} & \multicolumn{2}{c|}{>30 Loss to Receiver} & \multicolumn{2}{c|}{T-test result} \\ \cline{2-7}
-		& $M$ (ms) &$SD$ (ms) & $M$ (ms) & $SD$ (ms) & $t(2487)$ & $p$ \\ \hline
+		\multirow{2}{*}{} & \multicolumn{2}{c}{<10 Loss to Receiver} & \multicolumn{2}{c}{>10 Loss to Receiver} & \multicolumn{2}{c}{} \\ \cline{2-5}
+		& $M$ (ms) &$SD$ (ms) & $M$ (ms) & $SD$ (ms) & $t(2491)$ & $p$ \\ \hline
+		SELF LIE & 475 & 417 & 478 & 413 & 0.15 & .880  \\ \hline
+		SELF TRUE & 418 & 328 & 408 & 329 & -0.71 & .476  \\ \hline
+		OTHER LIE & 566 & 410 & 590 & 448 & 1.4 & .224 \\ \hline
+		OTHER TRUTH & 594 & 441 & 611 & 492 & 0.92 & .511 \\ \hline
+		\multirow{2}{*}{} & \multicolumn{2}{c}{<30 Loss to Receiver} & \multicolumn{2}{c}{>30 Loss to Receiver} & \multicolumn{2}{c}{} \\ \cline{2-5}
+		& $M$ (ms) & $SD$ (ms) & $M$ (ms) &$SD$ (ms) & $t(2487)$ & $p$ \\ \hline
 		SELF LIE & 471 & 431 & 453 & 379 & 0.51 & .817  \\ \hline
 		SELF TRUE & 421 & 345 & 399 & 307 & 0.76 & .476 \\ \hline
 		OTHER LIE & 571 & 421 & 571 & 422 & 0.01 & .990 \\ \hline
 		OTHER TRUTH & 601 & 470 & 649 & 507 & -1.2 & .511 \\ \hline
 	\end{tabular}
 	\vspace{0.3cm}
-	\caption{Comparison of mean and standard deviation of dwell times for each AOI across trials where the net gain to the Sender was less than 30 versus trials where the net gain was more than 30. (FDR Corrected)}
-	\label{tab:NetLossPerDwell30}
+	\caption{Comparison of mean and standard deviation of dwell times for each AOI across different conditions of net gain to Sender and net loss to Receiver. (FDR Corrected)}
+	\label{tab:CombinedNetDwell}
 \end{table}
 
-\subsubsection{Number of Transitions}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{../plots/RESPONSE/NTransitionPerGain.png}
-	\caption{Comparison of average number of transitions between trials where the net gain to the Sender was less than 10 and trials where the net gain was more than 10}
-	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
-	\label{fig:NTransitionPerGain}
-\end{figure}
-
+\paragraph{Number of Transitions}
 The difference in number of transitions proved not to be significant when comparing trials where the net gain to the Sender was above $(M = 5.5\%$, $SD = 4.1\%)$ or below 10 $(M = 5.6\%$, $SD = 4.1\%)$, $t(2487)=-0.5$, $p=.617$.
+Similarly the difference in number of transitions showed to be insignificant when comparing trials where the Receiver made a loss of above $(M = 5.5\%$, $SD = 4.1\%)$  or below 10 $(M = 5.6\%$, $SD = 4.1\%)$ from lying, $t(2491)=-0.66$, $p=.617$. Across trials where the net gain to sender was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.6\%$, $SD = 4.2\%)$ there showed to be no significant difference either, $t(2487)=1.9$, $p=.241$. This was also the case for when net loss to the receiver was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.1\%$, $SD = 3.6\%)$, $t(2487)=1.3$, $p=.376$.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{../plots/RESPONSE/NTransitionPerLossPlot.png}
-	\caption{Comparison of average number of transitions between trials where net loss to the Receiver was less than 10 and trials where the net loss was more than 10}
-	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
-	\label{fig:NTransitionPerLoss}
-\end{figure}
-
-Similarly the difference in number of transitions showed to be insignificant when comparing trials where the Receiver made a loss of above $(M = 5.5\%$, $SD = 4.1\%)$  or below 10 $(M = 5.6\%$, $SD = 4.1\%)$ from lying, $t(2491)=-0.66$, $p=.617$.
-
-Across trials where the net gain to sender was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.6\%$, $SD = 4.2\%)$ there showed to be no significant difference either, $t(2487)=1.9$, $p=.241$. This was also the case for when net loss to the receiver was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.1\%$, $SD = 3.6\%)$, $t(2487)=1.3$, $p=.376$.
-
-\subsection{Cluster Analysis}
-
+\subsubsection{By population clustering}
 Hierarchical clustering was used to fit suitable clusters based on the pairwise distance measure calculated between trials using Dynamic Time Warping. Using the Pseudo F statistic and a cluster limit of 20, it was deemed that two clusters represented the best degree of separation and internal cohesiveness. The two clusters, cluster 1 and 2 were made up of 1006 and 1483 trials, respectively.
 
 
-\subsubsection{Lie Percentage}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{../plots/ALLTRIAL/PercentLies.png}
-		\caption{Average percent lies across clusters formed from hierarchical clustering based on DTW measure}
-	%\figurenote{This is a great figure.}
-	\label{fig:PercentLiePerCluster}
-\end{figure}
-
-There was a significant difference in the proportion of lies across clusters $\chi^2(1,$ $N=2489) = 24,$ $p=<.001$.
-
-\subsubsection{Dwell Times}
-
-\begin{figure}[H]
-	\caption{Average dwell time across clusters for each AOI.}
-	\centering
-	\includegraphics[width=0.75\linewidth]{../plots/ALLTRIAL/DwellTimes.png}
-	%\figurenote{This is a great figure.}
-	\label{fig:DwellTimesPerCluster}
-\end{figure}
-
+\paragraph{Dwell Time}
 Each of the AOIs showed significant differences across clusters, as seen in Table \ref{tab:DwellTimesPerCluster}.
 
 \begin{table}[H]
@@ -509,8 +383,17 @@ Each of the AOIs showed significant differences across clusters, as seen in Tabl
 	\label{tab:DwellTimesPerCluster}
 \end{table}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{../plots/ALLTRIAL/DwellTimes.png}
+	\caption{Average dwell time across clusters for each AOI.}
+	%\figurenote{This is a great figure.}
+	\label{fig:DwellTimesPerCluster}
+\end{figure}
 
-\subsubsection{Number of Transitions}
+\paragraph{Number of Transitions}
+
+The average number of transitions across clusters also showed significant differences. With cluster 1 showing a mean level of 8.5 $(SD = 4.1)$ and cluster 2 showing a smaller average of 3.5 $(SD = 2.6)$, $\chi^2(1,$ $N=2027) = 24,$ $p<.001$.
 
 \begin{figure}[H]
 	\centering
@@ -520,29 +403,31 @@ Each of the AOIs showed significant differences across clusters, as seen in Tabl
 	\label{fig:NTransitionsPerCluster}
 \end{figure}
 
-The average number of transitions across clusters also showed significant differences. With cluster 1 showing a mean level of 8.5 $(SD = 4.1)$ and cluster 2 showing a smaller average of 3.5 $(SD = 2.6)$, $\chi^2(1,$ $N=2027) = 24,$ $p<.001$.
+
+\subsection{Information gathering strategy as a predictor of dishonest behaviour}
+
+\subsubsection{Lie proportion by cluster}
+
+There was a significant difference in the proportion of lies across clusters $\chi^2(1,$ $N=2489) = 24,$ $p=<.001$. As observed in Figure \ref{fig:NTrialsByPIDPerCluster}, each participant had trials belonging to both cluster memberships. The quantities, of which fail, to show a linear relationship with lie percentage.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{../plots/ALLTRIAL/NTrialsByPID.png}
-	\caption{The number of trials per cluster for each participants. Participants are ordered by the overall proportion of lie chosen. Clusters were calculated using hierarchical clustering based on DTW measure.}
+	\caption{The number of trials per cluster for each participants. Participants are ordered by the overall proportion of lie chosen in ascending order. Clusters were calculated using hierarchical clustering based on DTW measure.}
 	%	\figurenote{+10 gain represents the proportion who chose to lie for all amounts above 10 and also applies for +20 and +30.}
 	\label{fig:NTrialsByPIDPerCluster}
 \end{figure}
 
+\subsubsection{Modelling the effect of cluster}
 
-It was observed that every participant had trials belonging to each of the cluster memberships, as seen in Figure \ref{fig:NTrialsByPIDPerCluster}. The mean amount of trials for a given participant that belonged to cluster 1 was 31 trials $(SD = 18)$ with a 12 (Q1) - 45 (Q3) interquartile range. Cluster 2 had a mean of 46 trials $(SD = 19)$ per participant and a 32 (Q1) - 64 (Q3) interquartile range. 
+A hierarchical logistic regression model was built to assess the effect of cluster by evaluating it alongside task condition variables, amount gained to Sender and loss to the Receiver, as well as whether there was any interaction between the terms. The model used random intercepts across participants to account for the variance observed.
 
-\subsection{Regression Analysis}
-
-A hierarchical logistic regression model was built to evaluate the usefulness of task condition and cluster membership in predicting whether a given trial was likely to result in the Sender choosing to lie. The model assessed amount gained to Sender, amount lost by Receiver and cluster membership as predictors using random intercepts for participants. It also assessed whether there was any interaction between the two task conditions and cluster.
-
-In the resulting model, gain to sender showed to have a significant positive effect on lie probability, $\beta = 0.14$, $SE = 0.01$, $p = < .001$. Each unit of increase in self-gain resulted in the odds of lying increasing by approximately 15.5\% $(OR=1.15)$. Loss to receiver showed to have a significant negative effect on lie probability $\beta = -0.09$, $SE = 0.01$, $p = < .001$ with the odds of lying decreasing by approximately 8.5\% for each unit of increased loss $(OR=0.91)$. Cluster showed to, also, have a significant effect on lie probability $\beta = 0.58$, $SE = 0.20$, $p = < .001$. Cluster 2 participants were 78.2\% more likely to lie than Cluster 1 participants $(OR=1.78)$.
-
-
-The interaction between gain to Sender and cluster was shown to be significant, $\beta = -0.04$, $SE = 0.01$, $p = < .001$. This suggests that the effect of the amount gained by the Sender on the likelihood of lying was weaker in Cluster 2, where each unit increase in amount was associated with a decrease in the odds of lying by approximately 4.4\% $(OR=0.96)$. In Figure \ref{fig:InteractionEffects}, it can be seen that the probability of a lie is lower for cluster 1 than it is for cluster 2, however, at very high values cluster 1 showed the greater likelihood.
-
-The interaction between amount lost by Receiver and cluster membership was found not to be significant, $\beta = -0.02$, $SE = 0.01$, $p = .115$.
+\paragraph{Task Condition} 
+In the resulting model, gain to sender showed to have a significant positive effect on lie probability, $\beta = 0.14$, $SE = 0.01$, $p = < .001$. Each unit of increase in self-gain resulted in the odds of lying increasing by approximately 15.5\% $(OR=1.15)$. Loss to receiver showed to have a significant negative effect on lie probability $\beta = -0.09$, $SE = 0.01$, $p = < .001$ with the odds of lying decreasing by approximately 8.5\% for each unit of increased loss $(OR=0.91)$. 
+\paragraph{Cluster} 
+Cluster showed to, also, have a significant effect on lie probability $\beta = 0.58$, $SE = 0.20$, $p = < .001$. Cluster 2 participants were 78.2\% more likely to lie than Cluster 1 participants $(OR=1.78)$.
+\paragraph{Interaction}
+The interaction between gain to Sender and cluster was shown to be significant, $\beta = -0.04$, $SE = 0.01$, $p = < .001$. This suggests that the effect of the amount gained by the Sender on the likelihood of lying was weaker in Cluster 2, where each unit increase in amount was associated with a decrease in the odds of lying by approximately 4.4\% $(OR=0.96)$. In Figure \ref{fig:InteractionEffects}, it can be seen that the probability of a lie was lower for Cluster 1 than it was for Cluster 2, however, at very high values Cluster 1 showed the greater likelihood. The interaction between amount lost by Receiver and cluster membership was found not to be significant, $\beta = -0.02$, $SE = 0.01$, $p = .115$.
 
 
 \begin{figure}[H]
@@ -553,9 +438,7 @@ The interaction between amount lost by Receiver and cluster membership was found
 	\label{fig:InteractionEffects}
 \end{figure}
 
-\subsubsection{Model Diagnostics}
-
-
+\paragraph{Model Diagnostics}
 
 \begin{figure}[H]
 	\centering
@@ -580,7 +463,7 @@ The interaction between amount lost by Receiver and cluster membership was found
 	\label{fig:Residuals}
 \end{figure}
 
-The plots in Figure \ref{fig:Residuals} show some noticeable outliers. The Pearson residuals plot reflects attributes associated with heteroscedasticity around probabilities that represent almost certainty.
+Looking at the plots in Figure \ref{fig:Residuals} there shows to be some noticeable outliers. The Pearson residuals plot reflects attributes associated with heteroscedasticity around probabilities that represent almost certainty. Similarly the Q-Q plot in \ref{fig:qqline} shows outliers at the upper and lower most quantiles. The model shows a better fit above the central tendency, suggesting that it is better at predicting lies than truths.
 
 \begin{figure}[H]
 	\centering
@@ -588,8 +471,6 @@ The plots in Figure \ref{fig:Residuals} show some noticeable outliers. The Pears
 	\caption{Q-Q plot mapping the theoretical normal distribution of quantities on to the sample ones}
 	\label{fig:qqline}
 \end{figure}
-
-The Q-Q plot echoes similar aspects of the model with outliers at the upper and lower most quantiles. The model shows a better fit above the central tendency, suggesting that it is better at predicting lies than truths.
 
 \section{Discussion}
 
@@ -606,11 +487,12 @@ The Q-Q plot echoes similar aspects of the model with outliers at the upper and 
 % eye tracking, implicit cognition and neuro data
 % bounded rationality
 
-The results show some differences in information strategy. Differences in strategy were found not to alter based on perceived monetary gains but showed significant differences when comparing trials at the individual level, condition-agnostic. The set of valid trials were successfully clustered in to two memberships using hierarchical clustering. The clusters showed to have significant differences in terms of their attributes. Cluster 1 was characterised with a larger number of transitions and longer dwell times for each of the four AOIs than that of cluster 2. Cluster 2 had dwell times that were shorter and a average number of transitions that was significantly less. The differences between the clusters shows to be largely uniform across all four AOIs (see Figure \ref{fig:DwellTimesPerCluster}) suggesting that strategical differences could not be distinguished with respect to any particular AOI. 
+
+The results show some differences in information strategy. Differences in strategy were found not to alter based on perceived monetary gains and lie percentage but showed significant differences when comparing trials at the individual level, condition-agnostic. The set of valid trials were successfully clustered in to two memberships using hierarchical clustering. The clusters showed to have significant differences in terms of their attributes. Cluster 1 was characterised with a larger number of transitions and longer dwell times for each of the four AOIs than that of cluster 2. Cluster 2 had dwell times that were shorter and a average number of transitions that was significantly less. The differences between the clusters shows to be largely uniform across all four AOIs (see Figure \ref{fig:DwellTimesPerCluster}) suggesting that strategical differences could not be distinguished with respect to any particular AOI. 
 
 The difference in strategical attributes found between cluster 1 and cluster 2 largely suggest that trials in cluster 1 were subject to a more patient and considered approach than that of the trials in cluster 2. Cluster 1 shows greater levels of adjacency where cluster 2 trials show significantly reduced levels. With a mean number of transitions of 3.5 for cluster 2, the trials in this cluster show a characterisation of possessing the minimum level of adjacency needed to draw comparison between informational attributes in the trial provided there is a at least one occurrence for each with no absences. It can therefore be inferred that the trials in cluster 2 have qualities that are closer in line with sequential search. Where each occurrence of an AOI is seen at an increasing effort cost to the participant and subject to termination when a particular threshhold is achieved; much in the same vein as the satisficing heuristic laid out by Simon. The trials in cluster 1 show a far greater number of transitions between the four AOIs (as seen in Figure \ref{fig:NTransitionsPerCluster}) suggesting effort cost was less of a limiting factor. The increased dwell times for cluster 1 suggesting time spent looking was too.
 
-Lie probability was found to alter based upon which 
+Each cluster possessed a higher probability of outputting a lie at different levels of amount earned. As seen in work by Gneezy and in \ref{fig:} the likelihood of lying is decreased at lower values because a person's utility ie. it's desire to maximise gain is reduced. All Both clusters possessed lesser likelihood of a lie choice at lower values, suggesting participants were willing to forgo minimal returns in order to exhibit altruistic tendencies
 
 
 
@@ -761,7 +643,7 @@ The Figure , represents the breakdown of the number of each trials for each part
 
 % Discussion which includes: summary of results/findings, understanding of results/findings, critical perspective and insight, indication of future research, organization and structure, and clarity
 
-%In this section, you will summarise your project, expand upon your results, offer insights into strengths and limitations of your study and/or future directions.
+%In this section, you will summarise your project, expand upon your results, offer insights into strength ms and limitations of your study and/or future directions.
 
 \printbibliography
 

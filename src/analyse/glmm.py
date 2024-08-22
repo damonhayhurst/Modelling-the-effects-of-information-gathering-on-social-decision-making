@@ -143,8 +143,12 @@ def prepare_dataframe(analysis_df: DataFrame, cluster_df: DataFrame, compute_wei
     analysis_df["OTHERLOSS"] = analysis_df[OTHER_LOSS]
     analysis_df["FIRSTAOI"] = analysis_df[FIRST_AOI]
     analysis_df["LASTAOI"] = analysis_df[LAST_AOI]
+    analysis_df["GAINOFTEN"] = (analysis_df[SELF_GAIN] > 9).astype('int')
+    analysis_df["GAINOFTHIRTY"] = analysis_df[SELF_GAIN] > 29
+    analysis_df["LOSSOFTEN"] = analysis_df[OTHER_LOSS] > 9
+    analysis_df["LOSSOFTHIRTY"] = analysis_df[OTHER_LOSS] > 29
     analysis_df = analysis_df.reset_index()
-    display(analysis_df[[CLUSTER, PID, SELF_GAIN, LIE]])
+    display(analysis_df[[CLUSTER, PID, SELF_GAIN, LIE, "GAINOFTEN"]])
     if compute_weights:
         analysis_df = compute_self_gain_weights(analysis_df)
     return analysis_df
@@ -222,6 +226,35 @@ def print_odds_ratios(glmm_model):
     print("\n")
 
 
+def print_random_effects_sd_and_ci(glmm_model):
+    """
+    This function extracts and prints the standard deviations (SDs) and 
+    confidence intervals (CIs) for the random effects from a fitted GLMM model in R.
+
+    Parameters:
+    glmm_model (rpy2.robjects.environments.Environment): The fitted GLMM model in R.
+    """
+
+    # Transfer the GLMM model from Python to R's environment
+    ro.globalenv['glmm_model'] = glmm_model
+
+    # Extract the standard deviations of the random effects
+    random_effects_sd = ro.r('as.data.frame(VarCorr(glmm_model))$sdcor')
+
+    # Extract the names of the random effects
+    random_effects_names = ro.r('rownames(as.data.frame(VarCorr(glmm_model)))')
+
+    # Calculate confidence intervals using profile likelihood method
+    conf_intervals = ro.r('confint(glmm_model, method = "profile", parm = "theta_", oldNames = FALSE)')
+
+    # Print the SDs and their confidence intervals
+    print("Random Effects - Standard Deviations and Confidence Intervals:\n")
+    for i, sd in enumerate(random_effects_sd):
+        ci_lower = conf_intervals[i][0]
+        ci_upper = conf_intervals[i][1]
+        print(f"{random_effects_names[i]}: SD = {sd}, 95% CI = ({ci_lower}, {ci_upper})")
+    print("\n")
+
 def activate_r_packages():
     pandas2ri.activate()
     lme4 = importr('lme4')
@@ -257,7 +290,7 @@ def do_heirarchical_logistical_regression(terms: str, analysis_df: DataFrame, cl
     ro.r('df_r$CLUSTER <- as.factor(df_r$CLUSTER)')
 
     # Fit the GLMM model using the training data
-    ro.r(f"glmm_model <- glmer(LIE ~ {terms} + (1|PID), data = df_r, family='binomial')")
+    ro.r(f"glmm_model <- glmer(LIE ~ {terms}, data = df_r, family='binomial')")
     glmm_model = ro.globalenv['glmm_model']
     print(ro.r('summary(glmm_model)'))
 
@@ -271,6 +304,7 @@ def do_heirarchical_logistical_regression(terms: str, analysis_df: DataFrame, cl
         print_vif_stats(glmm_model)
 
     print_odds_ratios(glmm_model)
+    print_random_effects_sd_and_ci(glmm_model)
 
     # Calculate influence measures and plot
     plot_influence_measures(glmm_model, plotFolder)

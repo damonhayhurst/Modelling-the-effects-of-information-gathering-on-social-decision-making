@@ -1,15 +1,15 @@
 [0] Config.pm:307> INFO - This is Biber 2.17
 [0] Config.pm:310> INFO - Logfile is 'template_apa.blg'
-[57] biber-darwin:340> INFO - === Tue Aug 20, 2024, 17:05:07
-[69] Biber.pm:418> INFO - Reading 'template_apa.bcf'
-[149] Biber.pm:972> INFO - Found 13 citekeys in bib section 0
-[162] Biber.pm:4383> INFO - Processing section 0
-[170] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[173] bibtex.pm:1713> INFO - LaTeX decoding ...
-[204] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
-[298] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[298] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[298] Biber.pm:4203> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
-[299] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[313] bbl.pm:654> INFO - Writing 'template_apa.bbl' with encoding 'UTF-8'
-[321] bbl.pm:757> INFO - Output to template_apa.bbl
+[53] biber-darwin:340> INFO - === Thu Aug 22, 2024, 10:32:35
+[65] Biber.pm:418> INFO - Reading 'template_apa.bcf'
+[144] Biber.pm:972> INFO - Found 13 citekeys in bib section 0
+[158] Biber.pm:4383> INFO - Processing section 0
+[166] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[169] bibtex.pm:1713> INFO - LaTeX decoding ...
+[211] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
+[306] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[306] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[307] Biber.pm:4203> INFO - Sorting list 'apa/global//global/global' of type 'entry' with template 'apa' and locale 'en-US'
+[307] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[320] bbl.pm:654> INFO - Writing 'template_apa.bbl' with encoding 'UTF-8'
+[328] bbl.pm:757> INFO - Output to template_apa.bbl

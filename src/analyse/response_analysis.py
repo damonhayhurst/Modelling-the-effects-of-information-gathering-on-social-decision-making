@@ -345,7 +345,7 @@ def plot_response_stats(ax: Axes, responses_df: DataFrame, stats: list[str], gro
         plt.xticks(((bar_width/2 * len(responses_df.index)) + indices) - bar_width/2, stats, rotation=0)
     else:
         ax.set_xticks((bar_width/2) * (np.array(range(0, len(responses_df.index))) * 2))
-        ax.set_xticklabels(responses_df.index, fontsize=7)
+        ax.set_xticklabels(responses_df.index, fontsize=10)
 
     if group_col == GROUP:
         plt.legend(title='Group', bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -423,7 +423,7 @@ def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, s
         current_position += (len(pid_df) * bar_width) + gap_width
 
     ax.set_xticks(pid_positions)
-    ax.set_xticklabels(pids, fontsize=7)
+    ax.set_xticklabels(pids, fontsize=10)
 
     ax.tick_params(axis='both', which='both', length=0)
 
@@ -619,7 +619,7 @@ def simple_plot(x, xlabel, title, ylabel, yticks=[], colors: list[str] = XKCD_CO
     plt.title(title)
     plt.ylabel(ylabel)
     plt.bar(xlabel, vals, yerr=yerr, capsize=5, color=colors)
-    plt.xticks(xlabel, fontsize=7)
+    plt.xticks(xlabel, fontsize=10)
     plt.tight_layout()
     if to_file:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
@@ -851,7 +851,7 @@ def plot_gains_by_trial_id(gains_df, to_file: str = None):
     # plt.title('Net Gain to Sender by Trial ID')
     plt.ylabel('Net Gain to Sender')
     plt.bar(gains_df.index, gains_df[SELF_GAIN])
-    plt.xticks(gains_df.index, fontsize=7)
+    plt.xticks(gains_df.index, fontsize=10)
     plt.tight_layout()
     if to_file:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
@@ -863,7 +863,7 @@ def plot_losses_by_trial_id(gains_df, colors: list[str] = XKCD_COLORS_LIST, to_f
     fig, ax = plt.subplots(figsize=(20, 6))
     plt.ylabel('Net Loss to Receiver')
     plt.bar(gains_df.index, gains_df[OTHER_LOSS], color=colors[0])
-    plt.xticks(gains_df.index, fontsize=7)
+    plt.xticks(gains_df.index, fontsize=10)
     plt.tight_layout()
     if to_file:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)
