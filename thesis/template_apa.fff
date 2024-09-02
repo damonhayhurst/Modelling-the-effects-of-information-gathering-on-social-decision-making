@@ -1,8 +1,0 @@
-\begin{figure*}[hbt]
-\ifnextchar[{\eatarg}{}
-[HT!]
-\caption{This is my first figure caption.}
-\includegraphics[width=1cm]{NTrialsByPID.png}
-%\figurenote{This is a great figure.}
-\label{fig:NTrialsByPID}
-\end{figure*}
