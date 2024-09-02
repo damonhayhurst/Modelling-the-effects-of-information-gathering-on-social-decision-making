@@ -345,7 +345,7 @@ def plot_response_stats(ax: Axes, responses_df: DataFrame, stats: list[str], gro
         plt.xticks(((bar_width/2 * len(responses_df.index)) + indices) - bar_width/2, stats, rotation=0)
     else:
         ax.set_xticks((bar_width/2) * (np.array(range(0, len(responses_df.index))) * 2))
-        ax.set_xticklabels(responses_df.index, fontsize=10)
+        ax.set_xticklabels(responses_df.index, fontsize=8)
 
     if group_col == GROUP:
         plt.legend(title='Group', bbox_to_anchor=(1.05, 1), loc='upper left')
@@ -423,7 +423,7 @@ def plot_response_stats_for_clusters_by_pid(ax: Axes, responses_df: DataFrame, s
         current_position += (len(pid_df) * bar_width) + gap_width
 
     ax.set_xticks(pid_positions)
-    ax.set_xticklabels(pids, fontsize=10)
+    ax.set_xticklabels(pids, fontsize=15)
 
     ax.tick_params(axis='both', which='both', length=0)
 
@@ -619,7 +619,7 @@ def simple_plot(x, xlabel, title, ylabel, yticks=[], colors: list[str] = XKCD_CO
     plt.title(title)
     plt.ylabel(ylabel)
     plt.bar(xlabel, vals, yerr=yerr, capsize=5, color=colors)
-    plt.xticks(xlabel, fontsize=10)
+    plt.xticks(xlabel, fontsize=15)
     plt.tight_layout()
     if to_file:
         os.makedirs(os.path.dirname(to_file), exist_ok=True)

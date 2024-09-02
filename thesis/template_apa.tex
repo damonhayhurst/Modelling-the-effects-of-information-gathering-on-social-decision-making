@@ -8,7 +8,7 @@
 
 \usepackage{csquotes}
 \usepackage[style=apa,backend=biber,doi=false,url=false]{biblatex}
-\addbibresource{bibliography.bib}
+\addbibresource{ThesisForReal.bib}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -55,7 +55,7 @@
 	\null
 	\vspace*{0.4in}
 	\begin{center}
-		 Are decisions made in our own self-interest influenced by the manner in which we form our conclusions? Using a modified version of the Message game, we looked at the way in which potential profits to self and losses to others modulated dishonest behaviour. In a secondary data analysis, we looked at whether individual differences in mouse tracking data could be used to predict dishonest choices. Using Dynamic Time Warping and heirarchical clustering, we found that process data from the trials could be clustered in to two groups revealing differing information gathering strategies. One group that characterises a more patient and comparative approach forgo small profits to themselves more to engage in altruistic behaviour. The other group share traits that could be defined in terms of sequential search with shorter dwell periods and show more of an aversion to lying when profits greater. Findings corroborate similar models found in non-social decision making contexts.
+		 Are decisions made in our own self-interest influenced by the manner in which we form our conclusions? Using a modified version of the Message game, we looked at the way in which potential profits to self and losses to others modulated dishonest behaviour. In a secondary data analysis, we looked at whether individual differences in mouse tracking data could be used to predict dishonest choices. Using Dynamic Time Warping and heirarchical clustering, we found that process data from trials could be clustered in to two groups revealing differing information gathering strategies. One group that characterises a more patient and comparative approach that forgo small profits to themselves more to engage in altruistic behaviour. The other group share traits that could be defined in terms of sequential search with shorter dwell periods and show more of an aversion to lying when profits are greater. Findings corroborate similar models found in non-social decision making contexts.
 	\end{center}
 	
 	\vfill\null
@@ -88,56 +88,49 @@
 
 
 
-\section{Background}
+\section{Introduction}
 
 \subsection{Understanding decision making in humans}
 
-Present day understanding of decision making in humans takes it's inspiration from Herbert A Simon's approach of Bounded Rationality. Where prior understanding suggested that human beings act as  rational agents always seeking to maximise self interest. Bounded Rationality suggested that humans capability to act in a perfectly rational manner was constrained by internal and external factors.
-
-%Herbert A Simon first outlined the idea that human behaviour in decision making was not to be defined by the decisions taken but that of the information surrounding the decision. This concept of 'Bounded Rationality' suggested an approach that took consideration of the contextual information regarding the decision as well as the computational capacities available to the decision maker. The concept sought to defy prior notions that human behaviour in decision making could be understood through a global notion of homo economius; Where decisions taken by agents were always perfectly rational, seeking to maximise their own self interests, and, instead, suggested that a human's capability to be perfectly rational was constrained by internal and external constraints.
+Herbert A Simon was credited as outlining the idea that human behaviour in decision making was not to be defined by the decisions taken but that of the information surrounding the decision.  This concept of 'Bounded Rationality' suggested an approach that took consideration of the contextual information regarding the decision as well as the computational capacities available to the decision maker.  Bounded Rationality suggested that humans capability to act in a perfectly rational manner was constrained by internal and external factors.
 
 Bounded Rationality places as much of an emphasis on the processing of information during the decision making as the decision itself. Pivotal to the concept, it was suggested that human's mental capacity to make choices is subject to heuristics or mental simplifications that contend with it's ability to be a perfectly rational agent but aid it's ability to make decisions in the face of increasing complexity (\cite{payneTaskComplexityContingent1976}).  Simon outlined Satisficing as a key mechanism employed in the face of decisional complexity. Such a model of process attempts to define the appropriate option amongst choices as being the first option to surpass a pre conceived threshold. Rather than cope with the cognitive overhead of comparing every option against all of the others in a perfectly rational manner, humans will opt for the first choice that is deemed sufficient and satisfactory (\cite{simonBehavioralModelRational1955},\citeyear{simonRationalChoiceStructure1956d}).
 
 Early work into the mechanisms that perpetrate the notion of Bounded Rationality revealed the necessity for capturing process data. The Priority Heuristic attempted to explain choices within the context of simple monetary gambles using an ordered list of criteria. While the mechanism was shown to be significant at the aggregate level, the model failed to capture differences at the individual level. Further research into the manifestation of the Priority Heuristic, using process data, uncovered that in actual fact the underlying process did not mimic the priority ordering set out by the heuristic. The data, however, revealed that choice could be predicted significantly by the number of transitions into and out of a choice. The uncovering of such mechanisms highlights the need for processing data in explaining how humans make decisions. Process data can provide the explanatory power for decision making differences and inform the development of heuristics that can be applied at the individual level (\cite{brandstatterPriorityHeuristicMaking2006}), (\cite{willemsenVisitingDecisionFactory2011}).
 
-\subsubsection{Decision making as a cognitive process}
-
-The deliberation between two option does not represent two discrete states in cognition. Mental activity occurs throughout the decision making process. In this sense, cognition is best viewed as a continuous system with a set of intermediary states representing a graded spectrum between both options. The two classifications acting as attractor basins for which the decision making process finally rests in (\cite{spiveyContinuousDynamicsRealTime2006}).
-
-
-%It is important to note that it is widely believed that human's decision making strategy is constructed contingent on the task demands and individual preferences. Decision making strategies have been shown to vary widely based on the number of choices at hand and the task complexity (\cite{payneWalkingScarecrowInformation2004}). Human's have a 'toolbox' of strategies which can be utilised in the cwhen it comes to information gathering and the choice reflects task demands and individual preferences. Such strat
-
 \subsection{Capturing the decision making process}
 
 Process tracing is a methodology used to gain insight into the decision-making process by extracting data that reveals the underlying cognitive mechanisms. This involves various techniques, ranging from simple verbal protocol analysis, where participants articulate their thoughts aloud, to advanced methods like neural tracing using MRI machines (\cite{fordProcessTracingMethods1989}). The goal of these methods is to capture detailed data from different stages of the decision-making process and use that information to inform and develop process models.
-	
 
 Studying decision-making involves analysing different stages, such as problem identification, information gathering and decision selection. Each stage requires specific methods of data extraction to effectively capture the nuances of decision-making. For instance, in the information gathering stage, researchers might employ eye-tracking to see where attention is focused, or they might use tools like MouseLabWeb to observe how individuals search for and process information. The choice of instrumentation is crucial, as insights into decision making are limited by the resolution and representation of the output data. Efforts must be made to consolidate these representations with process models in order to enhance their development and applicability.
 
-\subsubsection{MouseLabWeb}
+\subsubsection{Mouse Tracking}
 
-MouseLabWeb (and offline counterpart, MouseLab) is one such development in process tracing that fosters an environment fit for observing the information gathering stage in decision making. Utilising the dynamic properties of Javascript in the context of a web page, MouseLabWeb describes an interactive framework that tracks users' attentional focus on decision-making elements as they engage with different options. MouseLabWeb experiments consist of a browser page containing adjacent pairs of hidden view boxes. Each pair represents an option and the make up of each pair is a  box containing a piece of information relevant to that particular option. Positioning the mouse cursor over one of these boxes reveals the concealed information. The mouse cursor movements are tracked and then stored on a trial by trial basis. Such data can be used to observe where a participant's focus lies. The simplistic design of a MouseLab experiment reduces the cognitive load on the participant, affording them simple cursor movements instead of lookup to memory (\cite{MouselabWEBa}). 
+Mouse tracking has become a prevalent mechanism in process tracing. It's use of sequential processing in decision making has given it weight against other highly specialised instrumentation such as eye tracking or electroencephalography (EEG). Where these processes obfuscate the underlying decisional conflict through behavioural noise such as that of accuracy concerns and perceptual delay. Mouse tracking offers insight through a simplified delivery of sequential processes. Mouse tracking has been shown to quantify conflict in decisions using cursor trajectories. The direct mapping of motor movements has been shown to provide an insight into the intermediary states of decision making (\cite{stillmanHowMousetrackingCan2018}).
 
-\subsection{Interpreting information gathering data}
+\subsection{Decision making as a cognitive process}
 
-Interpreting results from a MouseLab experiment involves discerning attributional qualities from a given trace. \citeauthor{costa-gomesCognitionBehaviorNormalForm2001} define two events in a process trace that can provide insight into the underlying characteristics of a trace. Occurrence, being that a particular piece of information has occurred within a process trace and therefore, that piece of information can be considered as part of the overall strategy underlying the trace. An absence of an occurrence of a particular piece of information suggests a strategy that is made without considering the full picture and could be conceived as impulsive. And Adjacency, if two adjacent pieces of information occur sequentially within a trace then it means a comparison has likely to have taken place. An absence of adjacency could represent a disregard for certain aspects underlying the decision such as in social preference based choices, where the adjacent pairs show to be payoffs related to you or the other participant. An absence of adjacency in this case suggests motives that are wholly self concerned. The decisional lookups and their contextual information can together help attach a type to a specific process trace (\cite{costa-gomesCognitionBehaviorNormalForm2001}).
-
-\citeauthor{reeckSearchPredictsChanges2017b} found success through observing both the acquisition of information and the duration within which they looked at said pieces of information. Using the Intertemporal Choice task as options in the MouseLab experiment, they were able to disseminate two underlying search strategies and showed success in linking their use to the decisional outcome. Using K-means clustering, two types of strategy emerged. Comparative searchers, who exhibited a more patient approach involving large proportions of adjacency and integrative searchers who showed fewer occurrences of each piece of information and shorter durations of observation in their process trace before deciding. Success was found in observing that comparative searchers were significantly more likely to pick the more patent option in the Intertemporal choice task (\cite{reeckSearchPredictsChanges2017b}). 
-
+Through the use of mouse tracking in process tracing, evidence that points towards cognition as a dynamical system has gained weight. Prior theories of decision making in cognition offer a dual systems theory, in which, two systems of processing that can be attributed to different types of control act in conflict. System I, which represents gut reaction and the primary response and System II that offers top down control to inhibit that response of the first system.  Insights into decisional mechanisms observed using verbal protocol analysis and reaction times provided weight to this theory. However, through studies in mouse tracking, the perception that the deliberation between two option does not represent two discrete states in cognition has been suggested. This has been observed in mouse cursor trajectories where their underlying shape has been better predicted with competitive non linear dynamics than with sequential inhibitory steering. Dynamical systems offer that inhibitory mechanisms are more gradually applied. Decision making is, therefore, best viewed as through the understanding that cognition is continuous system with a set of intermediary states representing a graded spectrum between both options ((\cite{spiveyContinuousDynamicsRealTime2006}), (\cite{stillmanHowMousetrackingCan2018})).
 
 \subsection{The neurobiology of social decision making}
 
+The study of the underlying representation of brain regions involved in social decisions echoes similar notions. A prior dual systems theory that represented an over simplification. Past research has implicated distinct brain regions in social decision making.  The lateral prefrontal cortex (LPFC) which tracks value to self and the right temporoparietal junction (rTPJ) which tracks value to others. However, using a modified version of the Message and neuroimaging technology, \citeauthor{shusterContributionSelfOtherregarding2020} observed the two neural circuits act independently on their respective motives. With another area of the brain, the ventromedial prefrontal cortex (vmPFC) tracking a balance between the two regions that varied on an individual level. Evidence suggests that the value based processing found in ventromedial prefrontal cortex (vmPFC) supposedly integrates signals from other different areas of the brain and that this neural circuitry does not distinguish itself from that of the circuitry involved in other forms of decision making (\cite{shusterContributionSelfOtherregarding2020}). 
 
-Evidence suggests that neural circuitry involved in social decision making does not distinguish itself from that of the circuitry involved in other forms of  decision making. Value based processing found in ventromedial prefrontal cortex (vmPFC) supposedly integrates signals from other areas of the brain during the decision making process, feeding signals back based on value representation change. This understanding, known as the extended common currency schema, directly contrasts prior theories that suggested our social decision making skills evolved as part of a separate adaptive system (\cite{ruffNeurobiologyRewardsValues2014}).
+\subsection{The neurobiology of information gathering strategy}
 
-The specificity in social decision making comes from the neural circuits that the vmPFC tracks during social dilemma is faced. The lateral prefrontal cortex (LPFC) which tracks value to self and the right temporoparietal junction (rTPJ) which tracks value to others. It was suggested that these two circuits were involved in the social decision making process within a study that used the Message Game (further elaborated upon in the Methods section) as it's stimuli. Using neuroimaging technology, \citeauthor{shusterContributionSelfOtherregarding2020} observed the two neural circuits independently tracking their respective motives by modifying trial parameters specific to the Message game that altered the perceived social outcomes. The vmPFC representing the value computation between the two varied on an individual level (\cite{shusterContributionSelfOtherregarding2020}).
+The independence of brain regions in the decision making process has implicated simplifying strategies in the mechanisms dependent on complexity and context of the task at hand. Observations in risky choice scenarios have shown that distinct neural mechanisms are involved in the decision-making process, with different brain regions being activated depending on the strategy employed. For instance, the dorsolateral prefrontal cortex (dlPFC) and posterior parietal cortex (PPC) are associated with simplifying strategies that focus on maximising the overall probability of a positive outcome, whereas the anterior insula and vmPFC are more involved in compensatory strategies that weigh potential gains and losses. This suggests that individuals may employ different strategies based on the complexity and context of the task, and these strategies are supported by different neural circuits. The involvement of these distinct brain regions highlights the nuanced nature of decision-making processes, which cannot be fully captured by a dual-systems theory but rather reflect a dynamic interplay of various neural mechanisms that vary across individuals and situations (\cite{venkatramanSeparateNeuralMechanisms2009})
+
+\subsection{Information gathering strategy in process tracing}
+
+Simplifying strategies have been identified within the scope of previous research. It has been suggested that individuals often rely on heuristic-based decision rules when faced with complex tasks, allowing them to make efficient decisions without needing to process all available information.  In sequential search tasks, decision-makers may use threshold-based strategies, which involve setting a predetermined level of acceptability and stopping the search once an option meets or exceeds this threshold. A pattern that agrees with Simon's notion of the Satisficing heuristic. The extent of such a search has been shown to vary on a individual level but share characteristics of risk aversion and Gaussian error in risky choice scenarios (\cite{bhatiaCognitiveModelsOptimal2021}). \citeauthor{reeckSearchPredictsChanges2017b} found agreeable notions of sequential search in the context of the Intertemporal choice task. Using K-means clustering, a set of searchers were found that exhibited lesser degrees of patience and comparative assessments than their counterparts. These searchers were significantly more likely to avoid delayed gratification in their choices (\cite{reeckSearchPredictsChanges2017b}).
+
 
 \section{Aims}
 
-The aims of this study is to gain an insight into how the effects of information gathering influence our decision making in a pro-social context.  Using process tracing, we hope to observe and characterise strategies that are utilised in order to arrive at these decisions. Such an approach hopes to shed light further on the processes that underlie decision making in human behaviour.
+Using clustering methods, the aims of this study is to gain an insight into differences in a social decision making context. By performing a secondary analysis on process traces taken from a variation of the Message Game, first introduced by \cite{shusterContributionSelfOtherregarding2020}, we hope to observe and characterise strategies that are utilised in context that involve dishonest behaviour.
 
-In this study, we hypothesise that there are individual differences between information gathering strategies and that strategy can be used as a predictor in social decision making. By exploring the relationship between task condition and information gathering strategy we look at whether differences in own profit's and other's losses, which have previously shown to alter likelihood of lie, contribute to alterations in strategy. And, using clustering techniques, we look across the whole population of trials to see whether differences in strategy reveal. Finally, we ask to what extent differences in strategy drive dishonest behaviour in social contexts.
-
+We hypothesise that there are individual differences between information gathering strategies and, also, that strategy can be used as a predictor in social decision making. By exploring the relationship between task condition and information gathering strategy we look at whether differences in own profit's and other's losses, which have previously shown to alter likelihood of lie, contribute to alterations in strategy. And, we look across the whole population of trials to see whether further differences reveal. Finally, we ask to what extent differences in search strategy affect outcomes in social decision making contexts.
+ 
 \section{Methods}
 
 % Methods which includes: completeness, justification of choices/decisions made, organization and structure, clarity, reference to ethics
@@ -149,8 +142,6 @@ In this study, we hypothesise that there are individual differences between info
 %Materials and Stimuli (all stimuli involved in your project, including software, questionnaires, programmes, interview schedules, for example). Feel free to include pictures of your stimuli. Describe everything.
 %
 %Design and Procedure (this section should be detailed enough that someone not familiar with your project should be able to run it themselves/understand how you recruited participants, collected data and so on). 
-
-A secondary analysis was carried out from the results of pre existing experiment. The primary stimuli, of which, was a variation of The Message Game that was carried out within a MouseLabWeb environment. 
 
 \subsection{The Message Game}
 
@@ -172,7 +163,7 @@ The values held in each of the two boxes vary on a trial by trial basis. Each of
 \end{figure}
 
 
-Being that the trials were carried out in a MouseLabWeb environment, the amounts contained within the boxes shall be referred to as Areas of Interest (AOIs). The AOI representing what amount the Sender receives for the truth telling box is SELF TRUE and the one representing the amount for the Receiver is OTHER TRUTH. AOIs corresponding to the amounts for the dishonest box are SELF LIE for what the Sender receives and OTHER LIE for the receiver. Theses AOIs are the pieces of information hidden from view that can only be revealed by hovering a mouse cursor over the panel. Horizontally adjacent lookups correspond to comparisons of amount awarded to one particular role and vertical adjacency compares values awarded for both roles for a given option. The vertical order of the AOIs swaps as well in order to encourage deliberate observations.
+The amounts contained within the boxes shall be referred to as Areas of Interest (AOIs). The AOI representing what amount the Sender receives for the truth telling box is SELF TRUE and the one representing the amount for the Receiver is OTHER TRUTH. AOIs corresponding to the amounts for the dishonest box are SELF LIE for what the Sender receives and OTHER LIE for the receiver. Theses AOIs are the pieces of information hidden from view that can only be revealed by hovering a mouse cursor over the panel. Horizontally adjacent lookups correspond to comparisons of amount awarded to one particular role and vertical adjacency compares values awarded for both roles for a given option. The vertical order of the AOIs swaps as well in order to encourage deliberate observations.
 
 \begin{figure}[H]
 	\centering
@@ -293,6 +284,8 @@ Each of the trials involved giving differing amounts to the sender and the recei
 
 \subsubsection{Lie proportion by trial condition}
 
+Our results closely align with that of  \citeauthor{gneezyDeceptionRoleConsequences2005} (\citeyear{gneezyDeceptionRoleConsequences2005}) in their Deception game and \citeauthor{shusterContributionSelfOtherregarding2020}. Where participants tend to lie more as the difference in profits to themselves and the other increases. Using these differences looked at whether search strategy alters across trial condition.
+
 The percentage that chose to lie in the experiment increased as the net gain to the Sender did.  Senders lied the least when they incurred a net loss by lying. Only choosing to lie 6\% $(N = 63)$ of the time. From net gains below 10 to above 10 the percentage who chose to lie increased, from 24\% $(N = 1336)$ to 55\% $(N = 1153)$. When gains were above 20, the percentage who chose to lie in this task scenario grew to 70\% $(N = 560)$ and when they were above 30 the amount who decided to lie showed further increase but to a lesser extent 76\% $(N = 250)$.
 
 \begin{figure}[H]
@@ -360,7 +353,7 @@ The difference in number of transitions proved not to be significant when compar
 Similarly the difference in number of transitions showed to be insignificant when comparing trials where the Receiver made a loss of above $(M = 5.5\%$, $SD = 4.1\%)$  or below 10 $(M = 5.6\%$, $SD = 4.1\%)$ from lying, $t(2491)=-0.66$, $p=.617$. Across trials where the net gain to sender was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.6\%$, $SD = 4.2\%)$ there showed to be no significant difference either, $t(2487)=1.9$, $p=.241$. This was also the case for when net loss to the receiver was above 30 $(M = 5.1\%$, $SD = 3.6\%)$ and below 30 $(M = 5.1\%$, $SD = 3.6\%)$, $t(2487)=1.3$, $p=.376$.
 
 \subsubsection{By population clustering}
-Hierarchical clustering was used to fit suitable clusters based on the pairwise distance measure calculated between trials using Dynamic Time Warping. Using the Pseudo F statistic and a cluster limit of 20, it was deemed that two clusters represented the best degree of separation and internal cohesiveness. The two clusters, cluster 1 and 2 were made up of 1006 and 1483 trials, respectively.
+Using hierarchical clustering we looked at whether individual differences in strategy we found across the population, condition agnostic. We fit suitable clusters based on the pairwise distance measure calculated between trials using Dynamic Time Warping. Using the Pseudo F statistic and a cluster limit of 20, it was deemed that two clusters represented the best degree of separation and internal cohesiveness. The two clusters, cluster 1 and 2 were made up of 1006 and 1483 trials, respectively.
 
 
 \paragraph{Dwell Time}
@@ -368,9 +361,9 @@ Each of the AOIs showed significant differences across clusters, as seen in Tabl
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|p{1.4cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}
-			\hline
-			\multirow{2}{*}{} & \multicolumn{2}{c|}{Cluster 1} & \multicolumn{2}{c|}{Cluster 2} & \multicolumn{3}{c|}{Between} \\ \cline{2-8}
+	\begin{tabular}{cccccccccc}
+
+			\multirow{2}{*}{} & \multicolumn{2}{c}{Cluster 1} & \multicolumn{2}{c}{Cluster 2} & \multicolumn{3}{c}{} \\ \cline{2-5}
 			& $M$ (ms) &$SD$ (ms) & $M$ (ms) & $SD$ (ms)  & $t$ & d.o.f. & $p$   \\ \hline
 			\small{SELF LIE}& 551 & 392 & 415 & 345 & 8.1 & 2321 & <.001  \\ \hline
 			\small{SELF TRUE} & 530 & 309 & 345 & 345& 14 & 2305  &  <.001 \\ \hline
@@ -404,7 +397,7 @@ The average number of transitions across clusters also showed significant differ
 \end{figure}
 
 
-\subsection{Information gathering strategy as a predictor of dishonest behaviour}
+\subsection{Information gathering strategy is a predictor of dishonest behaviour}
 
 \subsubsection{Lie proportion by cluster}
 
@@ -422,7 +415,7 @@ There was a significant difference in the proportion of lies across clusters $\c
 
 A hierarchical logistic regression model was built to assess the effect of cluster by evaluating it alongside task condition variables, amount gained to Sender and loss to the Receiver, as well as whether there was any interaction between the terms. The model used random intercepts across participants to account for the variance observed.
 
-\paragraph{Task Condition} 
+\paragraph{Trial Condition} 
 In the resulting model, gain to sender showed to have a significant positive effect on lie probability, $\beta = 0.14$, $SE = 0.01$, $p = < .001$. Each unit of increase in self-gain resulted in the odds of lying increasing by approximately 15.5\% $(OR=1.15)$. Loss to receiver showed to have a significant negative effect on lie probability $\beta = -0.09$, $SE = 0.01$, $p = < .001$ with the odds of lying decreasing by approximately 8.5\% for each unit of increased loss $(OR=0.91)$. 
 \paragraph{Cluster} 
 Cluster showed to, also, have a significant effect on lie probability $\beta = 0.58$, $SE = 0.20$, $p = < .001$. Cluster 2 participants were 78.2\% more likely to lie than Cluster 1 participants $(OR=1.78)$.
@@ -487,21 +480,29 @@ Looking at the plots in Figure \ref{fig:Residuals} there shows to be some notice
 % eye tracking, implicit cognition and neuro data
 % bounded rationality
 
+\subsection{Answering Hypotheses}
 
-The results show some differences in information strategy. Differences in strategy were found not to alter based on perceived monetary gains and lie percentage but showed significant differences when comparing trials at the individual level, condition-agnostic. The set of valid trials were successfully clustered in to two memberships using hierarchical clustering. The clusters showed to have significant differences in terms of their attributes. Cluster 1 was characterised with a larger number of transitions and longer dwell times for each of the four AOIs than that of cluster 2. Cluster 2 had dwell times that were shorter and a average number of transitions that was significantly less. The differences between the clusters shows to be largely uniform across all four AOIs (see Figure \ref{fig:DwellTimesPerCluster}) suggesting that strategical differences could not be distinguished with respect to any particular AOI. 
+\subsubsection{Individual differences in information gathering strategy}
 
-The difference in strategical attributes found between cluster 1 and cluster 2 largely suggest that trials in cluster 1 were subject to a more patient and considered approach than that of the trials in cluster 2. Cluster 1 shows greater levels of adjacency where cluster 2 trials show significantly reduced levels. With a mean number of transitions of 3.5 for cluster 2, the trials in this cluster show a characterisation of possessing the minimum level of adjacency needed to draw comparison between informational attributes in the trial provided there is a at least one occurrence for each with no absences. It can therefore be inferred that the trials in cluster 2 have qualities that are closer in line with sequential search. Where each occurrence of an AOI is seen at an increasing effort cost to the participant and subject to termination when a particular threshhold is achieved; much in the same vein as the satisficing heuristic laid out by Simon. The trials in cluster 1 show a far greater number of transitions between the four AOIs (as seen in Figure \ref{fig:NTransitionsPerCluster}) suggesting effort cost was less of a limiting factor. The increased dwell times for cluster 1 suggesting time spent looking was too.
+\paragraph{Trial Condition} 
+Trial condition proved to show no significant differences amongst strategic variables,  meaning we can't reject the hypotheses that trial condition does not affect differences in strategy.   
 
-Each cluster possessed a higher probability of outputting a lie at different levels of amount earned. As seen in work by Gneezy and in \ref{fig:} the likelihood of lying is decreased at lower values because a person's utility ie. it's desire to maximise gain is reduced. All Both clusters possessed lesser likelihood of a lie choice at lower values, suggesting participants were willing to forgo minimal returns in order to exhibit altruistic tendencies
+\paragraph{Cluster}
+Time series analysis and hierarchical clustering successfully produced differing strategies that showed significant differences across their dwell times associated with each AOI and transition attributes. Cluster 1 was characterised with a larger number of transitions and longer dwell times than that of cluster 2. Cluster 2 had dwell times that were shorter and a average number of transitions that was significantly less. The differences between the clusters shows to be largely uniform across all four AOIs (see Figure \ref{fig:DwellTimesPerCluster}) suggesting that strategical differences could not be distinguished with respect to any particular AOI. 
+
+Differences between cluster 1 and cluster 2 largely suggest that trials in cluster 1 were subject to a more patient and considered approach than that of the trials in cluster 2. Cluster 1 shows greater a greater number of transitions where cluster 2 trials show significantly reduced levels. With a mean number of transitions of 3.5 for cluster 2, the trials in this cluster show a characterisation of possessing the minimum number of transitions needed to draw comparison between all informational attributes in the trial. This suggest that the trials in cluster 2 have qualities that align closer with sequential search. The trials in cluster 1 show a far greater number of transitions between the four AOIs (as seen in Figure \ref{fig:NTransitionsPerCluster}) suggesting effort cost was less of a limiting factor. The increased dwell times for cluster 1 suggesting time spent looking was too.
+
+\subsubsection{Information gathering strategy is a predictor of dishonest behaviour}
+
+Cluster membership is a predictor of dishonest behaviour and the best amongst those that were in the model. The odds ratio for cluster (1.78) was the largest among the predictors and meant that cluster 2 trials were 78\% more likely to return a lie outcome. Despite this, however, there showed to be little evidence of a positive linear relationship between the number of cluster 2 trials carried out by each participant and their resulting percentage lies, as seen in Figure \ref{fig:NTrialsByPIDPerCluster}. This suggests that, while cluster membership can be predictor, the greatest amount of variance in lying behaviour is still attributable to individual differences among participants.
+
+A significant interaction between cluster and profits to self showed further the extent to which information gathering strategy alone is a predictor of dishonest behaviour. Looking at Figure \ref{fig:InteractionEffects}, it is not for every value in potential profits that cluster 2 trials prove to show the highest probability of a lie outcome. At high levels of potential profits to self, cluster 1 shows to have the greater probability. This pattern corroborates existing notions expressed in the behavioural characteristics of sequential search with cluster 2 participants showing greater risk-aversity to lying at greater amounts and committing altruism at small levels
 
 
+It is easy to question the data however, particularly at high levels of potential profits and losses. Looking at the figure \ref{fig:qqline}, that the model does not provide a great fit at the extremes of potential profits. The experiment driven by a greater data set could validate the outliers found at the extreme. Such a confirmation is needed to properly characterise the behaviour of cluster 2 participants as risk-averse. 
+\subsection{Concluding Remarks}
 
-
-Each participant were shown to have a proportion of their trials belonging to either membership, as per \ref{fig:NTrialsByPIDPerCluster}. 
-
-
-The Figure , represents the breakdown of the number of each trials for each participant, ordered by percentage lies. As can be seen
-
+There is evidence information gathering strategy in social decision making echoes the use of simplifying strategies found in other non-social decision making contexts. Cluster 2 participants can be characterised with the use of this simplification strategy that has been observed in both intertemporal choice tasks and risky choice scenarios. Using neuroimaging technology, it would be worth observing whether the neural circuitry involved with the use of cluster 2 strategies reflects similarly that of which is implicated in the simplification strategies observed in risky choice scenarios, namely the dlPFC and PPC. Further investigation is required in order to understand what prompts individual use of sequential search and simplification strategies.
 
 
 % Results/Findings which includes: analyses performed, reporting of analyses, use of graphs/tables/diagrams, organization and structure, and clarity
@@ -650,6 +651,10 @@ The Figure , represents the breakdown of the number of each trials for each part
 % References which includes correct use of APA/BPS conventions
 
 \appendix
+
+\section{Code}
+
+All python files can be viewed at: \url{https://github.com/damonhayhurst/ModellingTheEffectsOfInformationGatheringOnSocialDecisionMaking} 
 
 %This section should contain details which are not essential to understanding the essence of the report. Lists of stimuli, tables of raw data, details of statistical analyses should be included here. The section must be neatly presented and clearly labelled. If you have a very large amount of data, such as might arise in qualitative studies you should consult with your supervisor about what should be included and how.
 

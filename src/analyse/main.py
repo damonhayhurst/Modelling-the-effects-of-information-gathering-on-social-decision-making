@@ -484,12 +484,12 @@ class SaveToFileFn:
 def do_analyses(do_save: bool = False, **params):
     with SaveToFileFn(do_save) as save:
         # pid_dtw_analysis(**save(params['pid_dtw']))
-        # response_analysis(**save(params["response"]))
+        response_analysis(**save(params["response"]))
         # distribution_analysis(**save(params["distribution"]))
         # proximal_analysis(**save(params["proximal"]))
         # trial_id_dtw_analysis(**save(params["trial_id_dtw"]))
         # descriptives_analysis(**save(params["descriptives"]))
         # kmedoids_dtw_analysis(**save(params["kmedoids"]))
-        all_trial_dtw_analysis(**save(params["all_trials_dtw"]))
+        # all_trial_dtw_analysis(**save(params["all_trials_dtw"]))
         # dbscan_dtw_analysis(**save(params["dbscan"]))
         # kmeans_analysis(**save(params["kmeans"]))

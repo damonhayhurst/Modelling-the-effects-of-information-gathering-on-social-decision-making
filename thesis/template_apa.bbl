@@ -19,6 +19,76 @@
 
 \refsection{0}
   \datalist[entry]{apa/global//global/global}
+    \entry{bhatiaCognitiveModelsOptimal2021}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=7ecacaa0830832f8f24271135d7f6b2d}{%
+           family={Bhatia},
+           familyi={B\bibinitperiod},
+           given={Sudeep},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2f1387e86427cbc66b270270da367b45}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Lisheng},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=15b20bdf87a56e9acab19dbaeddff7e8}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Wenjia\bibnamedelima Joyce},
+           giveni={W\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=26be7b73ce9c9661240a07ee1cdfdc3e}{%
+           family={Analytis},
+           familyi={A\bibinitperiod},
+           given={Pantelis\bibnamedelima P.},
+           giveni={P\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{21abbae8d72434a242ed7deebcdeae36}
+      \strng{fullhash}{527174d601be62057bc0bc77a142f390}
+      \strng{bibnamehash}{527174d601be62057bc0bc77a142f390}
+      \strng{authorbibnamehash}{527174d601be62057bc0bc77a142f390}
+      \strng{authornamehash}{21abbae8d72434a242ed7deebcdeae36}
+      \strng{authorfullhash}{527174d601be62057bc0bc77a142f390}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Many everyday decisions require sequential search, according to which available choice options are observed one at a time, with each observation involving some cost to the decision maker. In these tasks, decision makers need to trade-off the chances of finding better options with the cost of search. Optimal strategies in such tasks involve threshold decision rules, which terminate the search as soon as an option exceeding a reward value is found. Threshold rules can be seen as special cases of well-known algorithmic decision processes, such as the satisficing heuristic. Prior work has found that decision makers do use threshold rules, however the stopping thresholds observed in data are typically smaller than the (expected value maximizing) optimal threshold. We put forward an array of cognitive models and use parametric model fits on participant-level search data to examine why decision makers adopt seemingly suboptimal thresholds. We find that people's behavior is consistent with optimal search if we allow participants to display risk aversion, psychological effort cost, and decision error. Thus, decision makers appear to be able to search in a resource-rational manner that maximizes stochastic risk averse utility. Our findings shed light on the psychological factors that guide sequential decision making, and show how threshold models can be used to describe both computational and algorithmic aspects of search behavior.}
+      \field{day}{1}
+      \field{issn}{0010-0277}
+      \field{journaltitle}{Cognition}
+      \field{month}{5}
+      \field{shortjournal}{Cognition}
+      \field{title}{Cognitive Models of Optimal Sequential Search with Recall}
+      \field{urlday}{20}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{volume}{210}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{104595}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.cognition.2021.104595
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/I3CCFFTC/Bhatia et al. - 2021 - Cognitive models of optimal sequential search with.pdf;/Users/damon/Zotero/storage/4F63JIDW/S0010027721000147.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0010027721000147
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0010027721000147
+      \endverb
+      \keyw{Cognitive modeling,Model fitting,Optimal stopping,Risk preference,Sequential search}
+    \endentry
     \entry{brandstatterPriorityHeuristicMaking2006}{article}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=892b788b8b3cedcced1385cfa6c0ceac}{%
@@ -70,71 +140,6 @@
       \endverb
       \verb{file}
       \verb /Users/damon/Zotero/storage/G6LBB7EQ/Brandstätter et al. - 2006 - The priority heuristic Making choices without tra.pdf
-      \endverb
-    \endentry
-    \entry{costa-gomesCognitionBehaviorNormalForm2001}{article}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=749d750a497aac456f756aa6448dfe4d}{%
-           family={Costa-Gomes},
-           familyi={C\bibinithyphendelim G\bibinitperiod},
-           given={Miguel},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=e5bf700d755385231967a0a94b05f925}{%
-           family={Crawford},
-           familyi={C\bibinitperiod},
-           given={Vincent\bibnamedelima P.},
-           giveni={V\bibinitperiod\bibinitdelim P\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=f6f8dcc2715039a468010f2a12847a02}{%
-           family={Broseta},
-           familyi={B\bibinitperiod},
-           given={Bruno},
-           giveni={B\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{1e476e76f38e35841d30abb834eee118}
-      \strng{fullhash}{296da9eb96d358ea87d4a0057db989f0}
-      \strng{bibnamehash}{296da9eb96d358ea87d4a0057db989f0}
-      \strng{authorbibnamehash}{296da9eb96d358ea87d4a0057db989f0}
-      \strng{authornamehash}{1e476e76f38e35841d30abb834eee118}
-      \strng{authorfullhash}{296da9eb96d358ea87d4a0057db989f0}
-      \field{sortinit}{C}
-      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{abstract}{This paper reports experiments designed to study strategic sophistication, the extent to which behavior in games reflects attempts to predict others’ decisions, taking their incentives into account. We study subjects’ initial responses to normal-form games with various patterns of iterated dominance and unique pure-strategy equilibria without dominance, using a computer interface that allowed them to search for hidden payoff information, while recording their searches. Monitoring subjects’ information searches along with their decisions allows us to better understand how their decisions are determined, and subjects’ deviations from the search patterns suggested by equilibrium analysis help to predict their deviations from equilibrium decisions.}
-      \field{issn}{0012-9682, 1468-0262}
-      \field{journaltitle}{Econometrica}
-      \field{langid}{english}
-      \field{month}{9}
-      \field{number}{5}
-      \field{shortjournal}{Econometrica}
-      \field{shorttitle}{Cognition and {{Behavior}} in {{Normal-Form Games}}}
-      \field{title}{Cognition and {{Behavior}} in {{Normal-Form Games}}: {{An Experimental Study}}}
-      \field{urlday}{7}
-      \field{urlmonth}{8}
-      \field{urlyear}{2024}
-      \field{volume}{69}
-      \field{year}{2001}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{1193\bibrangedash 1235}
-      \range{pages}{43}
-      \verb{doi}
-      \verb 10.1111/1468-0262.00239
-      \endverb
-      \verb{file}
-      \verb /Users/damon/Zotero/storage/2H2DQDB4/Costa-Gomes et al. - 2001 - Cognition and Behavior in Normal-Form Games An Ex.pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://doi.wiley.com/10.1111/1468-0262.00239
-      \endverb
-      \verb{url}
-      \verb http://doi.wiley.com/10.1111/1468-0262.00239
       \endverb
     \endentry
     \entry{dicarloHowDoesBrain2012}{article}{}
@@ -281,24 +286,57 @@
       \verb https://linkinghub.elsevier.com/retrieve/pii/0749597889900599
       \endverb
     \endentry
-    \entry{MouselabWEBa}{online}{}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labeldatesource}{nodate}
-      \field{labeltitlesource}{title}
-      \field{title}{Mouselab {{WEB}}}
-      \field{urlday}{2}
-      \field{urlmonth}{8}
+    \entry{gneezyDeceptionRoleConsequences2005}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=854085327c48d8e153675ac883f29b52}{%
+           family={Gneezy},
+           familyi={G\bibinitperiod},
+           given={Uri},
+           giveni={U\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{854085327c48d8e153675ac883f29b52}
+      \strng{fullhash}{854085327c48d8e153675ac883f29b52}
+      \strng{bibnamehash}{854085327c48d8e153675ac883f29b52}
+      \strng{authorbibnamehash}{854085327c48d8e153675ac883f29b52}
+      \strng{authornamehash}{854085327c48d8e153675ac883f29b52}
+      \strng{authorfullhash}{854085327c48d8e153675ac883f29b52}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{1}
+      \field{issn}{0002-8282}
+      \field{journaltitle}{American Economic Review}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{number}{1}
+      \field{shortjournal}{American Economic Review}
+      \field{shorttitle}{Deception}
+      \field{title}{Deception: {{The Role}} of {{Consequences}}}
+      \field{urlday}{8}
+      \field{urlmonth}{7}
       \field{urlyear}{2024}
+      \field{volume}{95}
+      \field{year}{2005}
+      \field{dateera}{ce}
       \field{urldateera}{ce}
+      \field{pages}{384\bibrangedash 394}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1257/0002828053828662
+      \endverb
       \verb{file}
-      \verb /Users/damon/Zotero/storage/42IXL5NE/www.mouselabweb.org.html
+      \verb /Users/damon/Zotero/storage/NXYDNYAQ/Gneezy - 2005 - Deception The Role of Consequences.pdf
       \endverb
       \verb{urlraw}
-      \verb https://www.mouselabweb.org/
+      \verb https://pubs.aeaweb.org/doi/10.1257/0002828053828662
       \endverb
       \verb{url}
-      \verb https://www.mouselabweb.org/
+      \verb https://pubs.aeaweb.org/doi/10.1257/0002828053828662
       \endverb
     \endentry
     \entry{payneTaskComplexityContingent1976}{article}{}
@@ -417,64 +455,6 @@
       \endverb
       \verb{url}
       \verb https://pnas.org/doi/full/10.1073/pnas.1707040114
-      \endverb
-    \endentry
-    \entry{ruffNeurobiologyRewardsValues2014}{article}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=265a5ff6f8c7f0fe431589f563d93478}{%
-           family={Ruff},
-           familyi={R\bibinitperiod},
-           given={Christian\bibnamedelima C.},
-           giveni={C\bibinitperiod\bibinitdelim C\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=91ed91d8a80667277e10cbdf3b0585db}{%
-           family={Fehr},
-           familyi={F\bibinitperiod},
-           given={Ernst},
-           giveni={E\bibinitperiod},
-           givenun=0}}%
-      }
-      \strng{namehash}{27dfa917d1bae8abc7c9dfe50aea232f}
-      \strng{fullhash}{27dfa917d1bae8abc7c9dfe50aea232f}
-      \strng{bibnamehash}{27dfa917d1bae8abc7c9dfe50aea232f}
-      \strng{authorbibnamehash}{27dfa917d1bae8abc7c9dfe50aea232f}
-      \strng{authornamehash}{27dfa917d1bae8abc7c9dfe50aea232f}
-      \strng{authorfullhash}{27dfa917d1bae8abc7c9dfe50aea232f}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{How does our brain choose the best course of action? Choices between material goods are thought to be steered by neural value signals that encode the rewarding properties of the choice options. Social decisions, by contrast, are traditionally thought to rely on neural representations of the self and others. However, recent studies show that many types of social decisions may also involve neural value computations. This suggests a unified mechanism for motivational control of behaviour that may incorporate both social and non-social factors. In this Review, we outline a theoretical framework that may help to identify possible overlaps and differences between the neural processes that guide social and non-social decision making.}
-      \field{issn}{1471-003X, 1471-0048}
-      \field{journaltitle}{Nature Reviews Neuroscience}
-      \field{langid}{english}
-      \field{month}{8}
-      \field{number}{8}
-      \field{shortjournal}{Nat Rev Neurosci}
-      \field{title}{The Neurobiology of Rewards and Values in Social Decision Making}
-      \field{urlday}{6}
-      \field{urlmonth}{2}
-      \field{urlyear}{2024}
-      \field{volume}{15}
-      \field{year}{2014}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \field{pages}{549\bibrangedash 562}
-      \range{pages}{14}
-      \verb{doi}
-      \verb 10.1038/nrn3776
-      \endverb
-      \verb{file}
-      \verb /Users/damon/Zotero/storage/S72TKXL4/Ruff and Fehr - 2014 - The neurobiology of rewards and values in social d.pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://www.nature.com/articles/nrn3776
-      \endverb
-      \verb{url}
-      \verb https://www.nature.com/articles/nrn3776
       \endverb
     \endentry
     \entry{shusterContributionSelfOtherregarding2020}{article}{}
@@ -699,6 +679,155 @@
       \verb{url}
       \verb http://journals.sagepub.com/doi/10.1111/j.1467-8721.2006.00437.x
       \endverb
+    \endentry
+    \entry{stillmanHowMousetrackingCan2018}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=28c9d8025d3b610f6d8beed8e2acb315}{%
+           family={Stillman},
+           familyi={S\bibinitperiod},
+           given={Paul\bibnamedelima E.},
+           giveni={P\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=35daeb16d4f476168e663b0c1cbee0cb}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Xi},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=54d94701d4abd088db41b1ddedce6d25}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={Melissa\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{00dcd1bfff5868aee027353f2bb0589f}
+      \strng{fullhash}{a918ef254a3afa72be3725aef552372c}
+      \strng{bibnamehash}{a918ef254a3afa72be3725aef552372c}
+      \strng{authorbibnamehash}{a918ef254a3afa72be3725aef552372c}
+      \strng{authornamehash}{00dcd1bfff5868aee027353f2bb0589f}
+      \strng{authorfullhash}{a918ef254a3afa72be3725aef552372c}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Mouse-tracking – measuring computer-mouse movements made by participants while they choose between response options – is an emerging tool that offers an accessible, data-rich, and real-time window into how people categorize and make decisions. In the present article we review recent research in social cognition that uses mouse-tracking to test models and advance theory. In particular, mouse-tracking allows examination of nuanced predictions about both the nature of conflict (e.g., its antecedents and consequences) as well as how this conflict is resolved (e.g., how decisions evolve). We demonstrate how mouse-tracking can further our theoretical understanding by highlighting research in two domains − social categorization and self-control. We conclude with future directions and a discussion of the limitations of mouse-tracking as a method.}
+      \field{day}{1}
+      \field{issn}{1364-6613}
+      \field{journaltitle}{Trends in Cognitive Sciences}
+      \field{month}{6}
+      \field{number}{6}
+      \field{shortjournal}{Trends in Cognitive Sciences}
+      \field{title}{How {{Mouse-tracking Can Advance Social Cognitive Theory}}}
+      \field{urlday}{21}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{volume}{22}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{531\bibrangedash 543}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/j.tics.2018.03.012
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/24ZNM9FK/httpspaulstillman.comwp-contentuploads20190.pdf;/Users/damon/Zotero/storage/ENU5LM6K/S1364661318300731.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S1364661318300731
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S1364661318300731
+      \endverb
+      \keyw{mouse-tracking,process tracing,real-time methods,self-control,social categorization}
+    \endentry
+    \entry{venkatramanSeparateNeuralMechanisms2009}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=5ea27450083ffbc276b72ac82f1c480f}{%
+           family={Venkatraman},
+           familyi={V\bibinitperiod},
+           given={Vinod},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dcfa76e26fef1aa7758ec7d579a35a2e}{%
+           family={Payne},
+           familyi={P\bibinitperiod},
+           given={John\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=540f307a38e6db04ca5ace9932b5452b}{%
+           family={Bettman},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d96199be5ec99bbcf4a51def73ae7164}{%
+           family={Luce},
+           familyi={L\bibinitperiod},
+           given={Mary\bibnamedelima Frances},
+           giveni={M\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5a4f53d6dafc0ead0fb9fb0761f41d4a}{%
+           family={Huettel},
+           familyi={H\bibinitperiod},
+           given={Scott\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{dede43f651a3bb9a679f7e8552eb86bb}
+      \strng{fullhash}{734d25f580aea270d14f57268055f1f5}
+      \strng{bibnamehash}{734d25f580aea270d14f57268055f1f5}
+      \strng{authorbibnamehash}{734d25f580aea270d14f57268055f1f5}
+      \strng{authornamehash}{dede43f651a3bb9a679f7e8552eb86bb}
+      \strng{authorfullhash}{734d25f580aea270d14f57268055f1f5}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{28}
+      \field{eprinttype}{pmid}
+      \field{issn}{0896-6273}
+      \field{journaltitle}{Neuron}
+      \field{langid}{english}
+      \field{month}{5}
+      \field{number}{4}
+      \field{shortjournal}{Neuron}
+      \field{title}{Separate {{Neural Mechanisms Underlie Choices}} and {{Strategic Preferences}} in {{Risky Decision Making}}}
+      \field{urlday}{21}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{volume}{62}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{593\bibrangedash 602}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1016/j.neuron.2009.04.007
+      \endverb
+      \verb{eprint}
+      \verb 19477159
+      \endverb
+      \verb{file}
+      \verb /Users/damon/Zotero/storage/KZEALXGB/Venkatraman et al. - 2009 - Separate Neural Mechanisms Underlie Choices and St.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cell.com/neuron/abstract/S0896-6273(09)00288-8
+      \endverb
+      \verb{url}
+      \verb https://www.cell.com/neuron/abstract/S0896-6273(09)00288-8
+      \endverb
+      \keyw{SYSBIO}
     \endentry
     \entry{willemsenVisitingDecisionFactory2011}{inbook}{}
       \name{author}{2}{}{%

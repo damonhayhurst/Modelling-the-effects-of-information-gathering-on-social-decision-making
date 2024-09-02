@@ -83,7 +83,7 @@
       <file>template_apa.bcf</file>
     </requires>
     <requires type="editable">
-      <file>bibliography.bib</file>
+      <file>ThesisForReal.bib</file>
     </requires>
   </external>
 </requests>
